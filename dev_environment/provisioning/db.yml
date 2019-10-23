@@ -1,0 +1,22 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: Add postgres repository
+      lineinfile:
+          path: /etc/apt/sources.list.d/pgdg.list
+          line: deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main
+          create: yes
+    - name: Add postgres signing key
+      apt_key:
+        url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
+        state: present
+    - name: Install postgres
+      apt:
+        name: postgresql-12
+        state: present
+        update_cache: yes
+    - name: Upgrade packages
+      apt:
+        upgrade: full
+
