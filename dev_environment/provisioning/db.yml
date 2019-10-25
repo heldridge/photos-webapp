@@ -36,7 +36,7 @@
           - "postgresql-{{ postgresql_version }}"
           - postgresql-contrib
           - python-psycopg2
-        state: present
+        state: latest
         update_cache: yes
   
     - name: Upgrade packages
