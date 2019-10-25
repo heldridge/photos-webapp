@@ -2,8 +2,15 @@
 - hosts: all
   become: yes
   tasks:
+    - name: Set hostname
+      hostname:
+        name: web
+  
     - name: Install nginx
       apt:
         name: nginx
         state: present
  
+    - name: Upgrade packages
+      apt:
+        upgrade: full
