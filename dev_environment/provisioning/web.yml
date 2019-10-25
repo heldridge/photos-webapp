@@ -6,10 +6,15 @@
       hostname:
         name: web
   
+    - name: add nginx repository
+      apt_repository:
+        repo: ppa:nginx/stable
+
     - name: Install nginx
       apt:
         name: nginx
         state: present
+        update_cache: yes
  
     - name: Upgrade packages
       apt:
