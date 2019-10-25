@@ -1,6 +1,10 @@
 ---
 - hosts: all
   become: yes
+
+  vars:
+    python_version: 3.8
+
   tasks:
     - name: Set hostname
       hostname:
@@ -10,12 +14,22 @@
       apt_repository:
         repo: ppa:nginx/stable
 
+    - name: Add deadsnakes repository
+      apt_repository:
+          repo: ppa:deadsnakes/ppa
+
     - name: Install nginx
       apt:
         name: nginx
         state: present
         update_cache: yes
  
+    - name: Install python
+      apt:
+        name: "python{{ python_version }}"
+        state: present
+        update_cache: yes
+
     - name: Upgrade packages
       apt:
         upgrade: full
