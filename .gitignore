@@ -1,5 +1,15 @@
+###########
+# VAGRANT #
+###########
+
 # General
 dev_environment/.vagrant/
 
 # Log files (if you are creating logs in debug mode, uncomment this)
 # *.log
+
+###########
+# SECRETS #
+###########
+
+secrets/*

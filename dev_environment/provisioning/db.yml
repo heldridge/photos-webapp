@@ -1,22 +1,89 @@
 ---
 - hosts: all
   become: yes
+
+  vars:
+    dbname: photos
+    dbuser: django
+    dbpassword: YVPFfABjFUCbtQMC4uT8QRyxdjWu4i8X43mxbM29yGFfN33g
+    postgresql_version: 12
+
+  handlers:
+    - name: restart postgres
+      service:
+        name: postgresql
+        state: restarted
+
   tasks:
+    - name: Set hostname
+      hostname:
+        name: db
+  
     - name: Add postgres repository
       lineinfile:
           path: /etc/apt/sources.list.d/pgdg.list
           line: deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main
           create: yes
+  
     - name: Add postgres signing key
       apt_key:
         url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
         state: present
-    - name: Install postgres
+  
+    - name: Install postgres and requirements
       apt:
-        name: postgresql-12
+        name: 
+          - "postgresql-{{ postgresql_version }}"
+          - postgresql-contrib
+          - python-psycopg2
         state: present
         update_cache: yes
+  
     - name: Upgrade packages
       apt:
         upgrade: full
+  
+    - name: ensure database is created
+      become_user: postgres
+      postgresql_db: 
+        name: "{{ dbname }}"
 
+    - name: Create django user
+      user:
+        name: django
+
+    - name: ensure user has access to database
+      become_user: postgres
+      postgresql_user: 
+        db: "{{ dbname }}"
+        name: "{{ dbuser }}"
+        password: "{{ lookup('file', '../../secrets/postgres_django_password.txt') }}"
+        priv: ALL
+
+    - name: ensure user does not have unnecessary privilege
+      become_user: postgres
+      postgresql_user: 
+        name: "{{ dbuser }}"
+        role_attr_flags: NOSUPERUSER,NOCREATEDB
+    
+    - name: ensure no other user can access the database
+      become_user: postgres
+      postgresql_privs: 
+        db: "{{ dbname }}"
+        role: PUBLIC
+        type: database 
+        priv: ALL
+        state: absent
+
+    - name: Change postgres to listen for public connections
+      lineinfile:
+        path: "/etc/postgresql/{{ postgresql_version }}/main/postgresql.conf"
+        regexp: '^#?listen_address'
+        line: listen_addresses = '*'
+      notify: restart postgres
+    
+    - name: Add webserver to trusted postgres host
+      lineinfile:
+        path: "/etc/postgresql/{{ postgresql_version }}/main/pg_hba.conf"
+        line: host  all all 0.0.0.0/0  md5
+      notify: restart postgres
