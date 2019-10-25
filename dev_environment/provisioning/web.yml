@@ -18,16 +18,12 @@
       apt_repository:
           repo: ppa:deadsnakes/ppa
 
-    - name: Install nginx
+    - name: Install packages
       apt:
-        name: nginx
-        state: present
-        update_cache: yes
- 
-    - name: Install python
-      apt:
-        name: "python{{ python_version }}"
-        state: present
+        name: 
+          - nginx
+          - "python{{ python_version }}"
+        state: latest
         update_cache: yes
 
     - name: Upgrade packages
