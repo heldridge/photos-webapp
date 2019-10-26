@@ -22,10 +22,51 @@
       apt:
         name: 
           - nginx
-          - "python{{ python_version }}"
         state: latest
         update_cache: yes
 
     - name: Upgrade packages
       apt:
         upgrade: full
+
+    - name: create django user
+      user:
+        name: django
+        shell: /bin/bash
+        comment: User for django to run as
+
+    - name: create django ssh directory
+      file:
+        path: /home/django/.ssh
+        state: directory
+        owner: django
+        group: django
+
+    - name: Add github ssh key
+      copy:
+        src: ~/.ssh/ansible
+        dest: /home/django/.ssh/id_rsa
+        mode: '0600'
+        owner: django
+        group: django
+
+    - name: Add ssh config
+      copy:
+        src: web_ssh_config
+        dest: /home/django/.ssh/config
+        owner: django
+        group: django
+
+    - name: Add known hosts file
+      copy:
+        src: web_known_hosts
+        dest: /home/django/.ssh/known_hosts
+        owner: django
+        group: django
+
+    - name: create checkouts directory
+      file:
+        path: /home/django/checkouts
+        owner: django
+        group: django
+        state: directory
