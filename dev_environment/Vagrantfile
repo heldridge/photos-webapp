@@ -4,7 +4,8 @@ Vagrant.configure("2") do |config|
         web.vm.box = "hashicorp/bionic64"
         web.vm.network "private_network", ip: "10.0.0.2"
         web.vm.network "forwarded_port", guest: 80, host: 8080
-        web.vm.network "forwarded_port", guest: 8080, host: 8081
+
+	config.vm.synced_folder ".", "/vagrant", disabled: true
 
         web.vm.provision "ansible" do |ansible|
             ansible.playbook = "provisioning/web.yml"
@@ -14,6 +15,9 @@ Vagrant.configure("2") do |config|
     config.vm.define "db" do |db|
         db.vm.box = "hashicorp/bionic64"
         db.vm.network "private_network", ip: "10.0.0.3"
+
+	config.vm.synced_folder ".", "/vagrant", disabled: true
+
         
         db.vm.provision "ansible" do |ansible|
             ansible.playbook = "provisioning/db.yml"
