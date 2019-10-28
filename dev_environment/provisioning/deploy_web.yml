@@ -1,0 +1,11 @@
+___
+- hosts: all
+  become: yes
+
+  vars:
+          timestamp:
+
+  tasks:
+          - name: Create directory
+            file:
+                    path: /home/django/checkouts/
