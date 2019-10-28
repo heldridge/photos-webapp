@@ -1,11 +1,28 @@
-___
-- hosts: all
+---
+- hosts: web
   become: yes
 
-  vars:
-          timestamp:
-
   tasks:
-          - name: Create directory
-            file:
-                    path: /home/django/checkouts/
+    - name: Get timestamp from the system
+      shell: "date --utc +%F_%H-%M-%S-%Z"
+      register: timestamp
+
+    - name: Clone repository
+      become_user: django
+      git:
+        name: "git@github.com:heldridge/photos-webapp.git"
+        dest: "/home/django/checkouts/{{ timestamp.stdout }}"
+    
+    - name: install requirements requirements
+      pip:
+        name:
+          - virtualenv
+          - setuptools
+
+    - name: Install requirements
+      become_user: django
+      pip:
+        virtualenv: "/home/django/checkouts/{{ timestamp.stdout }}/venv"
+        virtualenv_command: "/usr/bin/python3 -m virtualenv"
+        virtualenv_python: python3.8
+        requirements: "/home/django/checkouts/{{ timestamp.stdout }}/requirements.txt"
