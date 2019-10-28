@@ -23,6 +23,9 @@
         name: 
           - nginx
           - python3-pip
+          - python3.8
+          - python3-distutils
+          - python3.8-distutils
         state: latest
         update_cache: yes
 
