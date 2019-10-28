@@ -22,7 +22,52 @@
     - name: Install requirements
       become_user: django
       pip:
-        virtualenv: "/home/django/checkouts/{{ timestamp.stdout }}/venv"
+        virtualenv: "/home/django/checkouts/{{ timestamp.stdout }}/django/venv"
         virtualenv_command: "/usr/bin/python3 -m virtualenv"
         virtualenv_python: python3.8
         requirements: "/home/django/checkouts/{{ timestamp.stdout }}/requirements.txt"
+
+    - name: Create deployment symlink
+      file:
+        state: link
+        path: /home/django/current_deployment
+        src: /home/django/checkouts/{{ timestamp.stdout }}/django
+        follow: false
+
+    - name: Upload gunicorn service config
+      copy:
+        src: gunicorn.service
+        dest: /etc/systemd/system/gunicorn.service
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Start gunicorn service
+      systemd:
+        state: restarted
+        enabled: yes
+        name: gunicorn
+
+    - name: Upload nginx config
+      copy: 
+        src: photos
+        dest: /etc/nginx/sites-available/photos
+        owner: root
+        group: root
+        mode: '0644'
+    
+    - name: Symlink stie to sites-enabled
+      file:
+        state: link
+        path: /etc/nginx/sites-enabled/photos
+        src: /etc/nginx/sites-available/photos
+
+    - name: restart nginx
+      systemd:
+        state: restarted
+        name: nginx
+
+    - name: open nginx to world
+      ufw:
+        rule: allow
+        name: "Nginx Full"
