@@ -10,16 +10,16 @@
     - name: clone repository
       become_user: django
       git:
-        name: "git@github.com:heldridge/photos-webapp.git"
+        name: git@github.com:heldridge/photos-webapp.git
         dest: "/home/django/checkouts/{{ timestamp.stdout }}"
     
-    - name: install requirements requirements
+    - name: install virtualenv requirements
       pip:
         name:
           - virtualenv
           - setuptools
 
-    - name: install requirements
+    - name: install application requirements
       become_user: django
       pip:
         virtualenv: "/home/django/checkouts/{{ timestamp.stdout }}/django/venv"
@@ -31,7 +31,7 @@
       file:
         state: link
         path: /home/django/current_deployment
-        src: /home/django/checkouts/{{ timestamp.stdout }}/django
+        src: "/home/django/checkouts/{{ timestamp.stdout }}/django"
         follow: false
 
     - name: upload gunicorn service config
