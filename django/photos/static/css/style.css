@@ -2,3 +2,9 @@
     /* background-color: #101619; */
     font-size: 1.5rem;
 }
+
+.landing-page > .ui.huge.header {
+    font-size: 3rem;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+}
