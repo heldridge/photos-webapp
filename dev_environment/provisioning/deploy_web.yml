@@ -3,11 +3,11 @@
   become: yes
 
   tasks:
-    - name: Get timestamp from the system
+    - name: get timestamp from the system
       shell: "date --utc +%F_%H-%M-%S-%Z"
       register: timestamp
 
-    - name: Clone repository
+    - name: clone repository
       become_user: django
       git:
         name: "git@github.com:heldridge/photos-webapp.git"
@@ -19,7 +19,7 @@
           - virtualenv
           - setuptools
 
-    - name: Install requirements
+    - name: install requirements
       become_user: django
       pip:
         virtualenv: "/home/django/checkouts/{{ timestamp.stdout }}/django/venv"
@@ -27,14 +27,14 @@
         virtualenv_python: python3.8
         requirements: "/home/django/checkouts/{{ timestamp.stdout }}/requirements.txt"
 
-    - name: Create deployment symlink
+    - name: create deployment symlink
       file:
         state: link
         path: /home/django/current_deployment
         src: /home/django/checkouts/{{ timestamp.stdout }}/django
         follow: false
 
-    - name: Upload gunicorn service config
+    - name: upload gunicorn service config
       copy:
         src: gunicorn.service
         dest: /etc/systemd/system/gunicorn.service
@@ -42,13 +42,13 @@
         group: root
         mode: '0644'
 
-    - name: Start gunicorn service
+    - name: start gunicorn service
       systemd:
         state: restarted
         enabled: yes
         name: gunicorn
 
-    - name: Upload nginx config
+    - name: upload nginx config
       copy: 
         src: photos
         dest: /etc/nginx/sites-available/photos
@@ -56,7 +56,7 @@
         group: root
         mode: '0644'
     
-    - name: Symlink stie to sites-enabled
+    - name: symlink site to sites-enabled
       file:
         state: link
         path: /etc/nginx/sites-enabled/photos

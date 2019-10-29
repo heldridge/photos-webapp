@@ -14,11 +14,11 @@
       apt_repository:
         repo: ppa:nginx/stable
 
-    - name: Add deadsnakes repository
+    - name: add deadsnakes repository
       apt_repository:
           repo: ppa:deadsnakes/ppa
 
-    - name: Install packages
+    - name: install packages
       apt:
         name: 
           - nginx
@@ -29,7 +29,7 @@
         state: latest
         update_cache: yes
 
-    - name: Upgrade packages
+    - name: upgrade packages
       apt:
         upgrade: full
 
@@ -46,7 +46,7 @@
         owner: django
         group: django
 
-    - name: Add github ssh key
+    - name: add github ssh key
       copy:
         src: ~/.ssh/ansible
         dest: /home/django/.ssh/id_rsa
@@ -54,14 +54,14 @@
         owner: django
         group: django
 
-    - name: Add ssh config
+    - name: add ssh config
       copy:
         src: web_ssh_config
         dest: /home/django/.ssh/config
         owner: django
         group: django
 
-    - name: Add known hosts file
+    - name: add known hosts file
       copy:
         src: web_known_hosts
         dest: /home/django/.ssh/known_hosts
