@@ -1,11 +1,144 @@
 {% extends 'base.html.j2' %}
 
+{% load static %}
+
 {% block content %}
 
 <div class="landing-page ui container">
     <h1 class="ui center aligned huge header">
         Latest Uploads
     </h1>
+    <div class="images-grid ui grid">
+        <div class="row">
+            <div class="ui stackable grid">
+                <div class="doubling four column row">
+                    {% for filename in "1234" %}
+
+                        <div class="column">
+                            <div class="picture-card">
+                                <a href="/">
+                                    <div class="ui link card">
+                                        <div class="image">
+                                            <img src="/static/img/{{ filename }}.jpg" alt="">
+                                        </div>
+                                    </div>
+                                </a>
+                                <h2 class="ui header">Image {{ filename }}</h2>
+                                <div class="ui labels">
+                                    <a href="/" class="ui label">tag1</a>
+                                    <a href="/" class="ui label">tag2</a>
+                                    <a href="/" class="ui label">tag3</a>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    {% endfor %}  
+                </div>
+
+                <div class="doubling four column row">
+                    {% for filename in "5678" %}
+
+                        <div class="column">
+                            <div class="picture-card">
+                                <a href="/">
+                                    <div class="ui link card">
+                                        <div class="image">
+                                            <img src="/static/img/{{ filename }}.jpg" alt="">
+                                        </div>
+                                    </div>
+                                </a>
+                                <h2 class="ui header">Image {{ filename }}</h2>
+                                <div class="ui labels">
+                                    <a href="/" class="ui label">tag1</a>
+                                    <a href="/" class="ui label">tag2</a>
+                                    <a href="/" class="ui label">tag3</a>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    {% endfor %}  
+                </div>
+                <div class="doubling four column row">
+                    <div class="column">
+                        <div class="picture-card">
+                            <a href="/">
+                                <div class="ui link card">
+                                    <div class="image">
+                                        <img src="/static/img/9.jpg" alt="">
+                                    </div>
+                                </div>
+                            </a>
+                            <h2 class="ui header">Image 9</h2>
+                            <div class="ui labels">
+                                <a href="/" class="ui label">tag1</a>
+                                <a href="/" class="ui label">tag2</a>
+                                <a href="/" class="ui label">tag3</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% for filename in "012" %}
+
+                        <div class="column">
+                            <div class="picture-card">
+                                <a href="/">
+                                    <div class="ui link card">
+                                        <div class="image">
+                                            <img src="/static/img/1{{ filename }}.jpg" alt="">
+                                        </div>
+                                    </div>
+                                </a>
+                                <h2 class="ui header">Image 1{{ filename }}</h2>
+                                <div class="ui labels">
+                                    <a href="/" class="ui label">tag1</a>
+                                    <a href="/" class="ui label">tag2</a>
+                                    <a href="/" class="ui label">tag3</a>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    {% endfor %}  
+                </div>
+                <div class="doubling four column row">
+                    {% for filename in "3456" %}
+
+                        <div class="column">
+                            <div class="picture-card">
+                                <a href="/">
+                                    <div class="ui link card">
+                                        <div class="image">
+                                            <img src="/static/img/1{{ filename }}.jpg" alt="">
+                                        </div>
+                                    </div>
+                                </a>
+                                <h2 class="ui header">Image 1{{ filename }}</h2>
+                                <div class="ui labels">
+                                    <a href="/" class="ui label">tag1</a>
+                                    <a href="/" class="ui label">tag2</a>
+                                    <a href="/" class="ui label">tag3</a>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    {% endfor %}  
+                </div>
+            </div>
+        </div>
+        <div class="row images-grid-footer-paginate">
+            <div class="previous-page-button">
+                <a href="/" class="ui large left labeled icon button">
+                    <i class="left arrow icon"></i>
+                    previous
+                </a>
+            </div>
+            <div class="next-page-button">
+                <a href="/" class="ui large right labeled icon button">
+                    <i class="right arrow icon"></i>
+                    next
+                </a>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 {% endblock %}

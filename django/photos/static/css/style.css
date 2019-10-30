@@ -8,3 +8,57 @@
     padding-top: 2vh;
     padding-bottom: 2vh;
 }
+
+.ui.stackable.grid {
+    width: inherit;
+}
+
+.row.loading {
+    margin-top: 5vh;
+}
+
+.ui.grid > .row.images-grid-footer-scroll {
+    justify-content: center;
+}
+
+.next-page-button { 
+    margin-left: auto;
+} 
+
+/* Make the headers for card labels white */
+h2.ui.header {
+    /* color: white; */
+    margin-top: 1vh;
+}
+
+/* Fix the heights of cards */
+.ui.card {
+    min-height: 30vmin;
+    max-height: 30vmin;
+    overflow: hidden;
+    margin-bottom: 0px;
+}
+
+/* Make card background/box-shadow fit with inverted theme */
+.ui.card,
+.ui.cards>.card {
+    /* background-color: #101619; */
+    /* box-shadow: 0 0px 0px 0 #101619, 0 0 0 0px #101619; */
+}
+
+.ui.link.card:hover {
+    /* background-color: #101619; */
+    /* box-shadow: 0 1px 3px 0 blue, 0 0 0 1px white; */
+}
+
+/* Make the tags behave like links */
+.clickable.ui.label {
+    cursor: pointer;
+}
+
+.clickable.ui.label:hover {
+    background-color: #e0e0e0;
+    border-color: #e0e0e0;
+    background-image: none;
+    color: rgba(0,0,0,.8);
+}
