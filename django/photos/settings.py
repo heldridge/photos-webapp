@@ -78,8 +78,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'photos',
-        'USER': 'postgres',
-        'PASSWORD': 'xx',
+        'USER': 'django',
+        'PASSWORD': os.environ['DJANGO_POSTGRES_PASSWORD'],
         'HOST': 'localhost'
     }
 }
