@@ -1,3 +1,12 @@
+##########
+# CUSTOM #
+##########
+
+.vscode/*
+django/photos/static/img/*
+django/static/**/*
+django/photos/static/css/styles-tailwind.css
+
 ###########
 # VAGRANT #
 ###########
@@ -143,14 +152,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-
-##########
-# CUSTOM #
-##########
-
-.vscode/*
-django/photos/static/img/*
-django/static/**/*
 
 #######
 # NPM #
