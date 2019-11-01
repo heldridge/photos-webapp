@@ -25,3 +25,25 @@ function setNavSearchBorderBlue() {
     removeClass(searchBorder, 'border-gray-300');
     addClass(searchBorder, 'border-blue-300');
 }
+
+function setNavSearchIconOpacity50() {
+    let navSearchIcon = document.getElementById("navSearchIcon");
+    removeClass(navSearchIcon, 'opacity-100');
+    addClass(navSearchIcon, 'opacity-50');
+}
+
+function setNavSearchIconOpacity100() {
+    let navSearchIcon = document.getElementById("navSearchIcon");
+    removeClass(navSearchIcon, 'opacity-50');
+    addClass(navSearchIcon, 'opacity-100');
+}
+
+function navSearchFocus() {
+    setNavSearchBorderBlue();
+    setNavSearchIconOpacity100();
+}
+
+function navSearchFocusOut() {
+    setNavSearchBorderGray();
+    setNavSearchIconOpacity50();
+}
