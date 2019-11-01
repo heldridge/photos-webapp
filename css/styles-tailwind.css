@@ -3,3 +3,13 @@
 @tailwind components;
 
 @tailwind utilities;
+
+#navSearchIcon {
+    transition: opacity .3s;
+    -webkit-transition: opacity .3s;
+}
+
+#navSearchBorder {
+    transition: border-color .1s;
+    -webkit-transition: border-color .1s;
+}
