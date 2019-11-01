@@ -15,9 +15,9 @@
             <input 
               class="focus:outline-none focus:placeholder-gray-600 appearance-none py-3" 
               type="text" placeholder="Search Tags..." 
-              onfocus="setNavSearchBorderBlue()" onfocusout="setNavSearchBorderGray()"
+              onfocus="navSearchFocus()" onfocusout="navSearchFocusOut()"
             >
-            <i class="fas fa-search opacity-50"></i>
+            <i class="fas fa-search opacity-50" id="navSearchIcon"></i>
           </div> 
         </div>
 </nav>
