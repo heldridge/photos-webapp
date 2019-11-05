@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['django-local', 'django-local:8080', 'localhost', 'localhost:80
 
 INSTALLED_APPS = [
     'pages.apps.PagesConfig',
+    'pictures.apps.PicturesConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
