@@ -6,6 +6,7 @@
 django/photos/static/img/*
 django/static/**/*
 django/photos/static/css/styles-tailwind.css
+django/photos/user_uploads/*
 
 ###########
 # VAGRANT #
