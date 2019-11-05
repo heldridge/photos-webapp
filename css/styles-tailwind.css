@@ -48,3 +48,8 @@
     background-color: #ffffff;
     border-width: 1px;
 }
+
+.picture-card-width {
+    width: 17.5rem;
+    height: 1rem;
+}

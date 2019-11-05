@@ -27,273 +27,35 @@
   <h1 class="text-5xl font-semibold py-4">Latest Uploads</h1>
 
   <div class="flex flex-wrap w-4/5 justify-center">
-    
-    <div class="card-container mt-5 px-3">
-      <div class="full-card w-64-plus">
-        <a href="/">
-          <div class="picture-card-dims bg-white border rounded-lg overflow-hidden shadow link-image">
-            <img class="object-cover" src="{% static 'img/1.jpg' %}" alt="">
-          </div>
-        </a>
-        <h3 class="text-2xl font-semibold py-2">Image 1</h3>
-        <div class="card-tags flex flex-row flex-wrap">
-          <div class="tag bg-gray-300 rounded py-1 px-3 text-sm mr-2 font-medium mb-2">
-            tag1
-          </div>
-          <div class="tag bg-gray-300 rounded py-1 px-3 text-sm mr-2 font-medium mb-2">
-            wow this is long
-          </div>
-          <div class="tag bg-gray-300 rounded py-1 px-3 text-sm mr-2 font-medium mb-2">
-            tag1
-          </div>
-          <div class="tag bg-gray-300 rounded py-1 px-3 text-sm mr-2 font-medium mb-2">
-            tag1
-          </div>
-          <div class="tag bg-gray-300 rounded py-1 px-3 text-sm mr-2 font-medium mb-2">
-            tag1
-          </div>
-          <div class="tag bg-gray-300 rounded py-1 px-3 text-sm mr-2 font-medium mb-2">
-            tag1
-          </div>
-          <div class="tag bg-gray-300 rounded py-1 px-3 text-sm mr-2 font-medium mb-2">
-            tag1
+    {% if pictures %}
+      {% for picture in pictures %}
+        <div class="card-container mt-5 px-3">
+          <div class="full-card w-64-plus">
+            <a href="/">
+              <div class="picture-card-dims bg-white border rounded-lg overflow-hidden shadow link-image">
+                <img class="object-cover" src="{{ picture.photo.url }}" alt="">
+              </div>
+            </a>
+            <h3 class="text-2xl font-semibold py-2">{{ picture.title }}</h3>
+            <div class="card-tags flex flex-row flex-wrap">
+              {% for tag in picture.tags %}
+                <div class="tag bg-gray-300 rounded py-1 px-3 text-sm mr-2 font-medium mb-2">
+                  {{ tag }}
+                </div>
+              {% endfor %}
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      {% endfor %}
 
-    <div class="card-container mt-5 px-3">
-      <div class="full-card w-64-plus">
-        <a href="/">
-          <div class="picture-card-dims bg-white border rounded-lg overflow-hidden shadow link-image">
-            <img class=" object-cover" src="{% static 'img/2.jpg' %}" alt="">
-          </div>
-        </a>
-        <h3 class="text-2xl font-semibold py-2">Image 2</h3>
-        <div class="card-tags flex flex-row flex-wrap">
-          <div class="tag bg-gray-300 rounded py-1 px-3 text-sm mr-2 font-medium mb-2">
-            tag1
+      {% for placeholder in grid_placeholders %}
+        <div class="card-container mt-5 px-3">
+          <div class="full-card w-64-plus">
           </div>
         </div>
-      </div>
-    </div>
-
-    <div class="card-container mt-5 px-3">
-      <div class="full-card w-64-plus">
-        <a href="/">
-          <div class="picture-card-dims bg-white border rounded-lg overflow-hidden shadow link-image">
-            <img class=" object-cover" src="{% static 'img/3.jpg' %}" alt="">
-          </div>
-        </a>
-        <h3 class="text-2xl font-semibold py-2">Image 3</h3>
-        <div class="card-tags flex flex-row flex-wrap">
-          <div class="tag bg-gray-300 rounded py-1 px-3 text-sm mr-2 font-medium mb-2">
-            tag1
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card-container mt-5 px-3">
-      <div class="full-card w-64-plus">
-        <a href="/">
-          <div class="picture-card-dims bg-white border rounded-lg overflow-hidden shadow link-image">
-            <img class=" object-cover" src="{% static 'img/4.jpg' %}" alt="">
-          </div>
-        </a>
-        <h3 class="text-2xl font-semibold py-2">Image 4</h3>
-        <div class="card-tags flex flex-row flex-wrap">
-          <div class="tag bg-gray-300 rounded py-1 px-3 text-sm mr-2 font-medium mb-2">
-            tag1
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card-container mt-5 px-3">
-      <div class="full-card w-64-plus">
-        <a href="/">
-          <div class="picture-card-dims bg-white border rounded-lg overflow-hidden shadow link-image">
-            <img class=" object-cover" src="{% static 'img/5.jpg' %}" alt="">
-          </div>
-        </a>
-        <h3 class="text-2xl font-semibold py-2">Image 5</h3>
-        <div class="card-tags flex flex-row flex-wrap">
-          <div class="tag bg-gray-300 rounded py-1 px-3 text-sm mr-2 font-medium mb-2">
-            tag1
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card-container mt-5 px-3">
-      <div class="full-card w-64-plus">
-        <a href="/">
-          <div class="picture-card-dims bg-white border rounded-lg overflow-hidden shadow link-image">
-            <img class=" object-cover" src="{% static 'img/6.jpg' %}" alt="">
-          </div>
-        </a>
-        <h3 class="text-2xl font-semibold py-2">Image 6</h3>
-        <div class="card-tags flex flex-row flex-wrap">
-          <div class="tag bg-gray-300 rounded py-1 px-3 text-sm mr-2 font-medium mb-2">
-            tag1
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card-container mt-5 px-3">
-      <div class="full-card w-64-plus">
-        <a href="/">
-          <div class="picture-card-dims bg-white border rounded-lg overflow-hidden shadow link-image">
-            <img class=" object-cover" src="{% static 'img/7.jpg' %}" alt="">
-          </div>
-        </a>
-        <h3 class="text-2xl font-semibold py-2">Image 7</h3>
-        <div class="card-tags flex flex-row flex-wrap">
-          <div class="tag bg-gray-300 rounded py-1 px-3 text-sm mr-2 font-medium mb-2">
-            tag1
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card-container mt-5 px-3">
-      <div class="full-card w-64-plus">
-        <a href="/">
-          <div class="picture-card-dims bg-white border rounded-lg overflow-hidden shadow link-image">
-            <img class=" object-cover" src="{% static 'img/8.jpg' %}" alt="">
-          </div>
-        </a>
-        <h3 class="text-2xl font-semibold py-2">Image 8</h3>
-        <div class="card-tags flex flex-row flex-wrap">
-          <div class="tag bg-gray-300 rounded py-1 px-3 text-sm mr-2 font-medium mb-2">
-            tag1
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card-container mt-5 px-3">
-      <div class="full-card w-64-plus">
-        <a href="/">
-          <div class="picture-card-dims bg-white border rounded-lg overflow-hidden shadow link-image">
-            <img class=" object-cover" src="{% static 'img/9.jpg' %}" alt="">
-          </div>
-        </a>
-        <h3 class="text-2xl font-semibold py-2">Image 9</h3>
-        <div class="card-tags flex flex-row flex-wrap">
-          <div class="tag bg-gray-300 rounded py-1 px-3 text-sm mr-2 font-medium mb-2">
-            tag1
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card-container mt-5 px-3">
-      <div class="full-card w-64-plus">
-        <a href="/">
-          <div class="picture-card-dims bg-white border rounded-lg overflow-hidden shadow link-image">
-            <img class=" object-cover" src="{% static 'img/10.jpg' %}" alt="">
-          </div>
-        </a>
-        <h3 class="text-2xl font-semibold py-2">Image 10</h3>
-        <div class="card-tags flex flex-row flex-wrap">
-          <div class="tag bg-gray-300 rounded py-1 px-3 text-sm mr-2 font-medium mb-2">
-            tag1
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card-container mt-5 px-3">
-      <div class="full-card w-64-plus">
-        <a href="/">
-          <div class="picture-card-dims bg-white border rounded-lg overflow-hidden shadow link-image">
-            <img class=" object-cover" src="{% static 'img/11.jpg' %}" alt="">
-          </div>
-        </a>
-        <h3 class="text-2xl font-semibold py-2">Image 11</h3>
-        <div class="card-tags flex flex-row flex-wrap">
-          <div class="tag bg-gray-300 rounded py-1 px-3 text-sm mr-2 font-medium mb-2">
-            tag1
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card-container mt-5 px-3">
-      <div class="full-card w-64-plus">
-        <a href="/">
-          <div class="picture-card-dims bg-white border rounded-lg overflow-hidden shadow link-image">
-            <img class=" object-cover" src="{% static 'img/12.jpg' %}" alt="">
-          </div>
-        </a>
-        <h3 class="text-2xl font-semibold py-2">Image 12</h3>
-        <div class="card-tags flex flex-row flex-wrap">
-          <div class="tag bg-gray-300 rounded py-1 px-3 text-sm mr-2 font-medium mb-2">
-            tag1
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card-container mt-5 px-3">
-      <div class="full-card w-64-plus">
-        <a href="/">
-          <div class="picture-card-dims bg-white border rounded-lg overflow-hidden shadow link-image">
-            <img class=" object-cover" src="{% static 'img/13.jpg' %}" alt="">
-          </div>
-        </a>
-        <h3 class="text-2xl font-semibold py-2">Image 13</h3>
-        <div class="card-tags flex flex-row flex-wrap">
-          <div class="tag bg-gray-300 rounded py-1 px-3 text-sm mr-2 font-medium mb-2">
-            tag1
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card-container mt-5 px-3">
-      <div class="full-card w-64-plus">
-        <a href="/">
-          <div class="picture-card-dims bg-white border rounded-lg overflow-hidden shadow link-image">
-            <img class=" object-cover" src="{% static 'img/14.jpg' %}" alt="">
-          </div>
-        </a>
-        <h3 class="text-2xl font-semibold py-2">Image 14</h3>
-        <div class="card-tags flex flex-row flex-wrap">
-          <div class="tag bg-gray-300 rounded py-1 px-3 text-sm mr-2 font-medium mb-2">
-            tag1
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card-container mt-5 px-3">
-      <div class="full-card w-64-plus">
-        <a href="/">
-          <div class="picture-card-dims bg-white border rounded-lg overflow-hidden shadow link-image">
-            <img class=" object-cover" src="{% static 'img/15.jpg' %}" alt="">
-          </div>
-        </a>
-        <h3 class="text-2xl font-semibold py-2">Image 15</h3>
-        <div class="card-tags flex flex-row flex-wrap">
-          <div class="tag bg-gray-300 rounded py-1 px-3 text-sm mr-2 font-medium mb-2">
-            tag1
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card-container mt-5 px-3">
-    <div class="wow picture-card-dims">
-
-    </div>
-    </div>
-    
-    
-
+      {% endfor %}
+    {% else %}
+    {% endif %}
   </div>
 </div>
 
