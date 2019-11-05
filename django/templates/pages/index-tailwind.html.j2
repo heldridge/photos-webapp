@@ -11,13 +11,18 @@
   </a>
 
   <div class="py-2 pr-6 pl-6 border-r border-gray-300">
-    <div class="border border-gray-300 rounded px-4 flex items-center text-xl" id="navSearchBorder">
+    <div 
+      class="cursor-text border border-gray-300 rounded px-4 flex items-center text-xl" 
+      id="navSearchBorder"
+      onclick="focusNavSearch()"
+    >
       <input 
+        id="navSearch"
         class="focus:outline-none focus:placeholder-gray-600 appearance-none py-3" 
         type="text" placeholder="Search Tags..." 
         onfocus="navSearchFocus()" onfocusout="navSearchFocusOut()"
       >
-      <i class="fas fa-search opacity-50" id="navSearchIcon"></i>
+      <i class="fas fa-search opacity-50 pl-3" id="navSearchIcon"></i>
     </div> 
   </div>
 
