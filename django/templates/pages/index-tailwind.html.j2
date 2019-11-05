@@ -29,10 +29,10 @@
   <div class="flex flex-wrap w-4/5 justify-center">
     {% if pictures %}
       {% for picture in pictures %}
-        <div class="card-container mt-5 px-3">
-          <div class="full-card w-64-plus">
+        <div class="mt-5 px-3">
+          <div class="w-picture-card">
             <a href="/">
-              <div class="picture-card-dims bg-white border rounded-lg overflow-hidden shadow link-image">
+              <div class="h-picture-card bg-white border rounded-lg overflow-hidden shadow link-image">
                 <img class="object-cover" src="{{ picture.photo.url }}" alt="">
               </div>
             </a>
@@ -50,7 +50,7 @@
 
       {% for placeholder in grid_placeholders %}
         <div class="card-container mt-5 px-3">
-          <div class="full-card w-64-plus">
+          <div class="full-card w-picture-card">
           </div>
         </div>
       {% endfor %}

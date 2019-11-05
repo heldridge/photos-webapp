@@ -14,9 +14,12 @@
     -webkit-transition: border-color .1s;
 }
 
-.picture-card-dims {
-    height: 20rem;
+.w-picture-card {
     width: 17.5rem;
+}
+
+.h-picture-card {
+    height: 20rem;
 }
 
 .link-image {
@@ -27,28 +30,3 @@
     transform: translate(0rem, -.2rem);
 }
 
-.w-64-plus {
-    width: 17.5rem;
-}
-
-
-.picture-card {
-    margin-top: 1.25rem;
-    padding-right: 0.75rem;
-    padding-left: 0.75rem;
-}
-
-.picture-card-content {
-    width: 17.5rem;
-}
-
-.picture-card-image-container {
-    height: 20rem;
-    width: 17.5rem;
-    background-color: #ffffff;
-    border-width: 1px;
-}
-
-.picture-card-width {
-    width: 17.5rem;
-}
