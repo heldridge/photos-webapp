@@ -73,7 +73,7 @@ def main():
             sql = (f"INSERT INTO pictures_picture VALUES "
                    f"({image['id']}, '{format_title(image['title'])}', "
                    f"'{format_tags(image['tags'])}', "
-                   f"'user_uploads/{image['filename']}', "
+                   f"'photos/user_uploads/{image['filename']}', "
                    f"'description', '{format_timestamp(image['updated_at'])}', "
                    f"'{format_timestamp(image['uploaded_at'])}')")
             logger.debug('Executing query: %s', sql)
