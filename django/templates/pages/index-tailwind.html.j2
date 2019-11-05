@@ -31,7 +31,7 @@
 <div class="flex items-center flex-col">
   <h1 class="text-5xl font-semibold py-4">Latest Uploads</h1>
 
-  <div class="flex flex-wrap w-4/5 max-w-7xl justify-center">
+  <div class="flex flex-wrap w-4/5 max-w-7xl justify-center" id="cardsHolder">
     {% if pictures %}
       {% for picture in pictures %}
         <div class="mt-5 px-3">
@@ -63,16 +63,17 @@
     {% endif %}
   </div>
 
-  <div class="flex flex-row justify-between w-4/5 max-w-7xl mb-3">
-    <button class="bg-gray-300 hover:bg-gray-500 rounded py-2 pl-3 pr-4">
+
+  <div class="flex justify-between w-4/5 max-w-7xl my-3 text-lg">
+    <a href="/" id="previousButton" class="bg-gray-300 hover:bg-gray-500 rounded py-2 pl-3 pr-4">
       <i class="fas fa-arrow-left pr-2"></i>
       Previous
-    </button>
+    </a> 
 
-    <button class="bg-gray-300 hover:bg-gray-500 rounded py-2 pl-4 pr-3">
+    <a href="/" id="nextButton" class="bg-gray-300 hover:bg-gray-500 rounded py-2 pl-4 pr-3">
       Next
       <i class="fas fa-arrow-right pl-2"></i>
-    </button>
+    </a>
   </div>
 </div>
 
@@ -81,5 +82,6 @@
 
 
 <script type="text/javascript" src="{% static 'js/navbarControl.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/imagesGridFooterControl.js' %}"></script>
 
 {% endblock %}
