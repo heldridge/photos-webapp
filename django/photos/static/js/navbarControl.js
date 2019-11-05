@@ -32,3 +32,7 @@ function navSearchFocusOut() {
     removeClass(navSearchIcon, 'opacity-100');
     addClass(navSearchIcon, 'opacity-50');
 }
+
+function focusNavSearch() {
+    document.getElementById("navSearch").focus();
+}
