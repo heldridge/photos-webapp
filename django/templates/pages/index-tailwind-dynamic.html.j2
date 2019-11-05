@@ -1,0 +1,89 @@
+{% extends 'base-tailwind.html.j2' %}
+
+{% load static %}
+
+{% block content %}
+
+<nav class="flex items-center bg-white-500 border rounded shadow">
+    
+  <a href="/" class="py-5 pr-6 pl-6 border-r border-gray-300 hover:bg-gray-100 text-xl">
+      Home
+  </a>
+
+  <div class="py-2 pr-6 pl-6 border-r border-gray-300">
+    <div class="border border-gray-300 rounded px-4 flex items-center text-xl" id="navSearchBorder">
+      <input 
+        class="focus:outline-none focus:placeholder-gray-600 appearance-none py-3" 
+        type="text" placeholder="Search Tags..." 
+        onfocus="navSearchFocus()" onfocusout="navSearchFocusOut()"
+      >
+      <i class="fas fa-search opacity-50" id="navSearchIcon"></i>
+    </div> 
+  </div>
+
+</nav>
+
+<div class="flex items-center flex-col">
+  <h1 class="text-5xl font-semibold py-4">Latest Uploads</h1>
+
+  <div class="flex flex-wrap w-4/5 justify-center">
+    {% if pictures %}
+
+      {% for picture in pictures %}
+        <div class="card-container mt-5 px-3">
+          <a href="/">
+            <div class="picture-card-dims bg-white border rounded-lg overflow-hidden shadow link-image">
+              <img class="object-cover" src="{{ picture.photo.url }}" alt="">
+            </div>
+          </a>
+        </div>
+      {% endfor %}
+
+    {% else %}
+    {% endif %}
+
+    <!--
+    <div class="card-container mt-5 px-3">
+      <div class="full-card w-64-plus">
+        <a href="/">
+          <div class="picture-card-dims bg-white border rounded-lg overflow-hidden shadow link-image">
+            <img class="object-cover" src="{% static 'img/1.jpg' %}" alt="">
+          </div>
+        </a>
+        <h3 class="text-2xl font-semibold py-2">Image 1</h3>
+        <div class="card-tags flex flex-row flex-wrap">
+          <div class="tag bg-gray-300 rounded py-1 px-3 text-sm mr-2 font-medium mb-2">
+            tag1
+          </div>
+          <div class="tag bg-gray-300 rounded py-1 px-3 text-sm mr-2 font-medium mb-2">
+            wow this is long
+          </div>
+          <div class="tag bg-gray-300 rounded py-1 px-3 text-sm mr-2 font-medium mb-2">
+            tag1
+          </div>
+          <div class="tag bg-gray-300 rounded py-1 px-3 text-sm mr-2 font-medium mb-2">
+            tag1
+          </div>
+          <div class="tag bg-gray-300 rounded py-1 px-3 text-sm mr-2 font-medium mb-2">
+            tag1
+          </div>
+          <div class="tag bg-gray-300 rounded py-1 px-3 text-sm mr-2 font-medium mb-2">
+            tag1
+          </div>
+          <div class="tag bg-gray-300 rounded py-1 px-3 text-sm mr-2 font-medium mb-2">
+            tag1
+          </div>
+        </div>
+      </div>
+    </div>
+    -->
+  </div>
+</div>
+
+
+
+
+
+<script type="text/javascript" src="{% static 'js/navbarControl.js' %}"></script>
+
+{% endblock %}
