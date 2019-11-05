@@ -13,3 +13,38 @@
     transition: border-color .1s;
     -webkit-transition: border-color .1s;
 }
+
+.picture-card-dims {
+    height: 20rem;
+    width: 17.5rem;
+}
+
+.link-image {
+    transition: 0.1s ease;
+}
+
+.link-image:hover {
+    transform: translate(0rem, -.2rem);
+}
+
+.w-64-plus {
+    width: 17.5rem;
+}
+
+
+.picture-card {
+    margin-top: 1.25rem;
+    padding-right: 0.75rem;
+    padding-left: 0.75rem;
+}
+
+.picture-card-content {
+    width: 17.5rem;
+}
+
+.picture-card-image-container {
+    height: 20rem;
+    width: 17.5rem;
+    background-color: #ffffff;
+    border-width: 1px;
+}
