@@ -15,9 +15,11 @@ function processTailwind(cb) {
 function processJavascript(cb) {
   const terser = require('gulp-terser');
   const concat = require('gulp-concat');
+  const ts = require('gulp-typescript');
 
   return gulp
-    .src('js/*.js')
+    .src(['js/*.js', 'js/*.ts'])
+    .pipe(ts())
     .pipe(concat('all.js'))
     .pipe(terser())
     .pipe(gulp.dest('django/photos/static/js'));
