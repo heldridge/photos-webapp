@@ -4,10 +4,12 @@
 
 .vscode/*
 django/photos/static/img/*
+django/photos/static/js/*
 django/static/**/*
 django/photos/static/css/styles-tailwind.css
 django/photos/user_uploads/*
 django/media/**/*
+
 
 ###########
 # VAGRANT #
