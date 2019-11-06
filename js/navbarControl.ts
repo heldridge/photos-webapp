@@ -6,11 +6,11 @@ function hasClass(ele: HTMLElement, cls: string): boolean {
   return !!ele.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'));
 }
 
-function addClass(ele: HTMLElement, cls: string): void {
+function addClass(ele: any, cls: string): void {
   if (!hasClass(ele, cls)) ele.className += ' ' + cls;
 }
 
-function removeClass(ele: HTMLElement, cls: string): void {
+function removeClass(ele: any, cls: string): void {
   if (hasClass(ele, cls)) {
     var reg: RegExp = new RegExp('(\\s|^)' + cls + '(\\s|$)');
     ele.className = ele.className.replace(reg, ' ');
