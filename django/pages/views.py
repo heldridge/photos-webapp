@@ -32,3 +32,7 @@ def index(request):
         'grid_placeholders': [1, 2]
     }
     return render(request, 'pages/index.html.j2', context)
+
+
+def search(request):
+    return render(request, 'pages/search.html.j2')
