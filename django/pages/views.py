@@ -35,4 +35,10 @@ def index(request):
 
 
 def search(request):
-    return render(request, 'pages/search.html.j2')
+    context = {
+        'searchedTags': [
+            'forest', 'tag', 'ice-cream', 'sky', 'people', 'person'
+        ]
+    }
+    # context['searchedTags'] = []
+    return render(request, 'pages/search.html.j2', context)
