@@ -3,7 +3,8 @@ function expandTags(expander) {
     for (i = 0; i < hiddenTags.length; i ++) {
         removeClass(hiddenTags[i], 'hidden');
     }
-    addClass(expander, 'hidden');
+    expander.getElementsByClassName('fas')[0].className = 'fas fa-level-up-alt';
+    expander.onclick = () => { collapseTags(expander) };
 }
 
 function collapseTags(collapser) {
@@ -11,6 +12,6 @@ function collapseTags(collapser) {
     for (i = 0; i < hiddenTags.length; i ++) {
         addClass(hiddenTags[i], 'hidden');
     }
-    let expander = collapser.parentElement.getElementsByClassName('tag-expander')[0];
-    removeClass(expander, 'hidden');
+    collapser.getElementsByClassName('fas')[0].className = 'fas fa-level-down-alt';
+    collapser.onclick = () => { expandTags(collapser) };
 }

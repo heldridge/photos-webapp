@@ -51,17 +51,13 @@
                 </a>
               {% endfor %}
               {% if picture.below_tags %}
-                <button class="tag bg-gray-300 hover:bg-gray-400 rounded py-1 px-3 text-xs mr-2 mb-2 text-black tag-expander" onclick="expandTags(this)">
-                  <i class="fas fa-level-down-alt"></i>
-                </button>
-
                 {% for tag in picture.below_tags %}
                   <a href="/" class="tag bg-gray-300 hover:bg-gray-400 rounded py-1 px-2 text-xs mr-2 font-medium mb-2 text-gray-600 hover:text-black collapsed-tag hidden">
                     {{ tag }}
                   </a>
                 {% endfor %}
-                <button class="tag bg-gray-300 hover:bg-gray-400 rounded py-1 px-3 text-xs mr-2 mb-2 text-black collapsed-tag hidden" onclick="collapseTags(this)">
-                  <i class="fas fa-level-up-alt"></i>
+                <button class="tag bg-gray-300 hover:bg-gray-400 rounded py-1 px-3 text-xs mr-2 mb-2 text-black tag-expander" onclick="expandTags(this)">
+                  <i class="fas fa-level-down-alt"></i>
                 </button>
               {% endif %}
 
