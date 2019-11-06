@@ -38,13 +38,20 @@
           <div class="w-picture-card">
             <a href="/">
               <div class="h-picture-card bg-white border rounded-lg overflow-hidden shadow link-image">
-                <img class="object-cover" src="{{ picture.photo.url }}" alt="">
+                <img class="object-cover" src="{{ picture.original.photo.url }}" alt="">
               </div>
             </a>
-            <h3 class="text-2xl font-semibold py-2">{{ picture.title }}</h3>
+            <h3 class="text-2xl font-semibold py-2">{{ picture.original.title }}</h3>
             <div class="card-tags flex flex-row flex-wrap">
-              {% for tag in picture.tags %}
+              {% for tag in picture.above_tags %}
                 <a href="/" class="tag bg-gray-300 hover:bg-gray-400 rounded py-1 px-2 text-xs mr-2 font-medium mb-2 text-gray-600 hover:text-black">
+                  {{ tag }}
+                </a>
+              {% endfor %}
+            </div>
+            <div class="collapsed-tags flex flex-row flex-wrap hidden">
+              {% for tag in picture.below_tags %}
+                <a href="/" class="tag bg-blue-300 hover:bg-blue-400 rounded py-1 px-2 text-xs mr-2 font-medium mb-2 text-gray-600 hover:text-black">
                   {{ tag }}
                 </a>
               {% endfor %}
