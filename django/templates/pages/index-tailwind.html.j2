@@ -36,6 +36,7 @@
       {% for picture in pictures %}
         <div class="mt-5 px-3">
           <div class="w-picture-card">
+
             <a href="/">
               <div class="h-picture-card bg-white border rounded-lg overflow-hidden shadow link-image">
                 <img class="object-cover" src="{{ picture.original.photo.url }}" alt="">
@@ -60,8 +61,8 @@
                   <i class="fas fa-level-down-alt"></i>
                 </button>
               {% endif %}
-
             </div>
+
           </div>
         </div>
       {% endfor %}
