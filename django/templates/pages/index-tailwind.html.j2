@@ -53,21 +53,16 @@
               {% if picture.below_tags %}
                 <button class="tag bg-gray-300 hover:bg-gray-400 rounded py-1 px-3 text-xs mr-2 mb-2 text-black" onclick="expandTags(this)">
                   <i class="fas fa-level-down-alt"></i>
-                </button>           
-              {% endif %}
+                </button>
 
-            </div>
-
-            {% if picture.below_tags %}
-              <div class="collapsed-tags flex flex-row flex-wrap hidden">
                 {% for tag in picture.below_tags %}
-                  <a href="/" class="tag bg-blue-300 hover:bg-blue-400 rounded py-1 px-2 text-xs mr-2 font-medium mb-2 text-gray-600 hover:text-black">
+                  <a href="/" class="tag bg-blue-300 hover:bg-blue-400 rounded py-1 px-2 text-xs mr-2 font-medium mb-2 text-gray-600 hover:text-black collapsed-tag hidden">
                     {{ tag }}
                   </a>
                 {% endfor %}
-              </div>
-            {% endif %}
+              {% endif %}
 
+            </div>
           </div>
         </div>
       {% endfor %}
