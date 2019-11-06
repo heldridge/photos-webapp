@@ -1,4 +1,4 @@
-function expandTags(expander) {
+function expandTags(expander: HTMLElement) {
   let hiddenTags = expander.parentElement.getElementsByClassName(
     'collapsed-tag'
   );
@@ -11,7 +11,7 @@ function expandTags(expander) {
   };
 }
 
-function collapseTags(collapser) {
+function collapseTags(collapser: HTMLElement) {
   let hiddenTags = collapser.parentElement.getElementsByClassName(
     'collapsed-tag'
   );
