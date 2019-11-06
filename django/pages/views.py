@@ -4,7 +4,7 @@ from pictures.models import Picture
 
 
 # Create your views here.
-def tailwind(request):
+def index(request):
     pictures = Picture.objects.order_by('-uploaded_at')[:16]
 
     max_width = 85
@@ -31,8 +31,4 @@ def tailwind(request):
         'pictures': updated_pictures,
         'grid_placeholders': [1, 2]
     }
-    return render(request, 'pages/index-tailwind.html.j2', context)
-
-
-def index(request):
-    return render(request, 'pages/index.html.j2')
+    return render(request, 'pages/index.html.j2', context)
