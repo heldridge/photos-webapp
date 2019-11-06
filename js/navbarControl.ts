@@ -1,23 +1,23 @@
-let searchBorder = document.getElementById('navSearchBorder');
-let navSearchIcon = document.getElementById('navSearchIcon');
+let searchBorder: HTMLElement = document.getElementById('navSearchBorder');
+let navSearchIcon: HTMLElement = document.getElementById('navSearchIcon');
 
 // Class manipulation functions from: https://jaketrent.com/post/addremove-classes-raw-javascript/
-function hasClass(ele, cls) {
+function hasClass(ele: HTMLElement, cls: string): boolean {
   return !!ele.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'));
 }
 
-function addClass(ele, cls) {
+function addClass(ele: HTMLElement, cls: string): void {
   if (!hasClass(ele, cls)) ele.className += ' ' + cls;
 }
 
-function removeClass(ele, cls) {
+function removeClass(ele: HTMLElement, cls: string): void {
   if (hasClass(ele, cls)) {
-    var reg = new RegExp('(\\s|^)' + cls + '(\\s|$)');
+    var reg: RegExp = new RegExp('(\\s|^)' + cls + '(\\s|$)');
     ele.className = ele.className.replace(reg, ' ');
   }
 }
 
-function navSearchFocus() {
+function navSearchFocus(): void {
   removeClass(searchBorder, 'border-gray-300');
   addClass(searchBorder, 'border-blue-300');
 
@@ -25,7 +25,7 @@ function navSearchFocus() {
   addClass(navSearchIcon, 'opacity-100');
 }
 
-function navSearchFocusOut() {
+function navSearchFocusOut(): void {
   removeClass(searchBorder, 'border-blue-300');
   addClass(searchBorder, 'border-gray-300');
 
@@ -33,6 +33,6 @@ function navSearchFocusOut() {
   addClass(navSearchIcon, 'opacity-50');
 }
 
-function focusNavSearch() {
+function focusNavSearch(): void {
   document.getElementById('navSearch').focus();
 }
