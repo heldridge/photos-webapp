@@ -49,13 +49,17 @@
                 </a>
               {% endfor %}
             </div>
-            <div class="collapsed-tags flex flex-row flex-wrap hidden">
-              {% for tag in picture.below_tags %}
-                <a href="/" class="tag bg-blue-300 hover:bg-blue-400 rounded py-1 px-2 text-xs mr-2 font-medium mb-2 text-gray-600 hover:text-black">
-                  {{ tag }}
-                </a>
-              {% endfor %}
-            </div>
+
+            {% if picture.below_tags %}
+              <div class="collapsed-tags flex flex-row flex-wrap">
+                {% for tag in picture.below_tags %}
+                  <a href="/" class="tag bg-blue-300 hover:bg-blue-400 rounded py-1 px-2 text-xs mr-2 font-medium mb-2 text-gray-600 hover:text-black">
+                    {{ tag }}
+                  </a>
+                {% endfor %}
+              </div>
+            {% endif %}
+
           </div>
         </div>
       {% endfor %}
