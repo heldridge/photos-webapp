@@ -8,6 +8,7 @@ def tailwind(request):
     pictures = Picture.objects.order_by('-uploaded_at')[:16]
 
     max_width = 85
+    expander_length = 5
     static_width_addition = 4
     updated_pictures = []
     for picture in pictures:
@@ -16,7 +17,7 @@ def tailwind(request):
         above = True
         for tag in picture.tags:
             current_width += static_width_addition + len(tag)
-            if current_width > max_width:
+            if current_width + expander_length > max_width:
                 above = False
 
             if above:
