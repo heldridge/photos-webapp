@@ -40,6 +40,7 @@ def index(request):
 def search(request):
     context = {
         'pictures': getLatestPictures(),
+        'grid_placeholders': [1, 2],
         'searchedTags': [
             'forest', 'tag', 'ice-cream', 'sky', 'people', 'person'
         ]
