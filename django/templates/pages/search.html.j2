@@ -3,16 +3,21 @@
 {% load static %}
 
 {% block content %}
-    <div class="search-page flex justify-center mt-5">
-        <div class="search-sidebar w-1/5 max-w-xl mx-3">
-            <div class="tags-bar border border-gray-300 rounded px-8 flex flex-col py-3 shadow">
-                <div class="border border-gray-300 my-2 flex justify-between w-4/5 pl-2">
-                    <input type="text" class="appearance-none w-4/5" placeholder="Add Tags...">
-                    
+    <div class="search-page flex justify-center flex-wrap md:flex-no-wrap mt-5 mb-5">
+        <div class="search-sidebar md:w-1/5 max-w-xl ml-3">
+            <div class="tags-bar border border-gray-300 rounded px-5 flex flex-col py-3 shadow">
+
+                <div class="testo flex border justify-between border-gray-300 w-4/5 rounded overflow-hidden">
+                    <div class="my-2 pl-2">
+                        <input type="text" class="appearance-none w-full pr-2" placeholder="Add Tags...">
+                        
+                        
+                    </div>
                     <button class="bg-gray-300 hover:bg-gray-400 px-3 py-2" >
-                        <i class="fas fa-plus"></i>
-                    </button>
+                            <i class="fas fa-plus"></i>
+                        </button>
                 </div>
+                
                 
                 <h1 class="text-2xl font-semibold pb-3 pt-1">
                     Searched Tags
@@ -38,7 +43,7 @@
             </div>
         </div>
         
-        <div class="w-4/5 max-w-7xl mx-3 flex flex-wrap justify-center">
+        <div class="w-4/5 max-w-7xl flex flex-wrap justify-center">
             {% include "partials/_images_grid.html.j2" with pictures=pictures %}
         </div>
         
