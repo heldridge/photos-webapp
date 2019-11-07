@@ -43,9 +43,25 @@
             </div>
         </div>
         
-        <div class="w-4/5 max-w-7xl flex flex-wrap justify-center">
-            {% include "partials/_images_grid.html.j2" with pictures=pictures %}
+        <div class="w-4/5 max-w-7xl">
+            <div class="flex flex-wrap justify-center" id="cardsHolder">
+                {% include "partials/_images_grid.html.j2" with pictures=pictures %}
+            </div>
+
+            <div class="flex justify-between my-2 text-lg">
+                <a href="/" id="previousButton" class="bg-gray-300 hover:bg-gray-500 rounded py-2 pl-3 pr-4">
+                <i class="fas fa-arrow-left pr-2"></i>
+                Previous
+                </a> 
+
+                <a href="/" id="nextButton" class="bg-gray-300 hover:bg-gray-500 rounded py-2 pl-4 pr-3">
+                Next
+                <i class="fas fa-arrow-right pl-2"></i>
+                </a>
+            </div>
+
         </div>
+        
         
     </div>
 
