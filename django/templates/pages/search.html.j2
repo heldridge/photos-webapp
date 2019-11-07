@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block content %}
-    <div class="search-page flex justify-center flex-wrap mt-5">
+    <div class="search-page flex justify-center mt-5">
         <div class="search-sidebar w-1/5 max-w-xl mx-3">
             <div class="tags-bar border border-gray-300 rounded px-8 flex flex-col py-3 shadow">
                 <div class="border border-gray-300 my-2 flex justify-between w-4/5 pl-2">
@@ -38,11 +38,11 @@
             </div>
         </div>
         
-        <div class="border border-blue-200 w-4/5  max-w-7xl mx-3">
-            <div class="images-grid border border-red-200  max-w-7xl">
-                images grid
-            </div>
+        <div class="w-4/5 max-w-7xl mx-3 flex flex-wrap justify-center">
+            {% include "partials/_images_grid.html.j2" with pictures=pictures %}
         </div>
         
     </div>
+
+    <script type="text/javascript" src="{% static 'js/all.js' %}"></script>
 {% endblock %}
