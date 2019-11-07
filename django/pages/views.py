@@ -3,8 +3,7 @@ from django.shortcuts import render
 from pictures.models import Picture
 
 
-# Create your views here.
-def index(request):
+def getLatestPictures():
     pictures = Picture.objects.order_by('-uploaded_at')[:16]
 
     max_width = 85
@@ -26,9 +25,13 @@ def index(request):
                 data['below_tags'].append(tag)
 
         updated_pictures.append(data)
+    return updated_pictures
 
+
+# Create your views here.
+def index(request):
     context = {
-        'pictures': updated_pictures,
+        'pictures': getLatestPictures(),
         'grid_placeholders': [1, 2]
     }
     return render(request, 'pages/index.html.j2', context)
@@ -36,9 +39,9 @@ def index(request):
 
 def search(request):
     context = {
+        'pictures': getLatestPictures(),
         'searchedTags': [
             'forest', 'tag', 'ice-cream', 'sky', 'people', 'person'
         ]
     }
-    # context['searchedTags'] = []
     return render(request, 'pages/search.html.j2', context)
