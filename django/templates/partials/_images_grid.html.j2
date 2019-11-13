@@ -13,13 +13,13 @@
 
         <div class="card-tags flex flex-row flex-wrap">
             {% for tag in picture.above_tags %}
-            <a href="/" class="tag bg-gray-300 hover:bg-gray-400 rounded py-1 px-2 text-xs mr-2 font-medium mb-2 text-gray-600 hover:text-black">
+            <a href="{% url 'search'%}?q={{ tag }}" class="tag bg-gray-300 hover:bg-gray-400 rounded py-1 px-2 text-xs mr-2 font-medium mb-2 text-gray-600 hover:text-black">
                 {{ tag }}
             </a>
             {% endfor %}
             {% if picture.below_tags %}
             {% for tag in picture.below_tags %}
-                <a href="/" class="tag bg-gray-300 hover:bg-gray-400 rounded py-1 px-2 text-xs mr-2 font-medium mb-2 text-gray-600 hover:text-black collapsed-tag hidden">
+                <a href="{% url 'search'%}?q={{ tag }}" class="tag bg-gray-300 hover:bg-gray-400 rounded py-1 px-2 text-xs mr-2 font-medium mb-2 text-gray-600 hover:text-black collapsed-tag hidden">
                 {{ tag }}
                 </a>
             {% endfor %}
