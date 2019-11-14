@@ -54,6 +54,6 @@ def search(request):
         "pictures": getLatestPictures(),
         "grid_placeholders": [1, 2],
         "searchedTags": search_tags,
-        "defaultAddTagQuery": "+".join(search_tags),
+        "currentQuery": "+".join(search_tags),
     }
     return render(request, "pages/search.html.j2", context)
