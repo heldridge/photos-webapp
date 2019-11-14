@@ -9,7 +9,7 @@
 
                 <div class="flex border justify-between border-gray-300 w-4/5 rounded overflow-hidden">
                     <div class="my-2 pl-2">
-                        <input type="text" class="appearance-none w-full pr-2" placeholder="Add Tags..." id="addTagsInput" oninput=addTagsInputUpdated()>
+                        <input type="text" class="appearance-none w-full pr-2" placeholder="Add Tags..." id="addTagsInput" oninput="addTagsInputUpdated( '{{ current_query }}' )">
                     </div>
                     <a href="{% url 'search'%}?q={{ current_query }}" class="bg-gray-300 hover:bg-gray-400 active:bg-blue-300 px-3 py-2" id="addTagsButton">
                         <i class="fas fa-plus"></i>
@@ -24,7 +24,7 @@
                     <div class="flex flex-row flex-wrap w-4/5">
                     {% for tag_data in searched_tags_data %}
                         <div class="tag bg-gray-300 rounded py-1 px-2 text-xs mr-2 font-medium mb-2 text-gray-600">
-                            <a href="{% url 'search'%}?q={{ tagData.query }}">
+                            <a href="{% url 'search'%}?q={{ tag_data.query }}">
                                 <i class="fas fa-times pr-1 hover:text-black"></i>
                             </a>
                             {{ tag_data.tag }}

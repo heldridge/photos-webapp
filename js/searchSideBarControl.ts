@@ -2,11 +2,13 @@ let addTagsButton = <HTMLAnchorElement>document.getElementById('addTagsButton');
 let addTagsInput = <HTMLInputElement>document.getElementById('addTagsInput');
 let originalHREF = addTagsButton.href;
 
-function addTagsInputUpdated() {
+function addTagsInputUpdated(currentQuery: string) {
   let value = addTagsInput.value;
-  if (value !== '') {
-    addTagsButton.href = `${originalHREF}+${addTagsInput.value}`;
-  } else {
-    addTagsButton.href = originalHREF;
+
+  let newHREF = originalHREF;
+  if (currentQuery !== '' && value !== '') {
+    newHREF += '+';
   }
+  newHREF += value;
+  addTagsButton.href = newHREF;
 }
