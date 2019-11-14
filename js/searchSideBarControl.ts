@@ -1,6 +1,5 @@
 let addTagsButton = <HTMLAnchorElement>document.getElementById('addTagsButton');
 let addTagsInput = <HTMLInputElement>document.getElementById('addTagsInput');
-console.log(addTagsInput);
 let originalHREF = addTagsButton.href;
 
 function addTagsInputUpdated() {
