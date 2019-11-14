@@ -35,7 +35,7 @@ def getLatestPictures():
 def is_valid_tag(tag):
     return (
         len(tag) <= settings.MAX_TAG_LENGTH
-        and len(tag) > settings.MIN_TAG_LENGTH
+        and len(tag) >= settings.MIN_TAG_LENGTH
         and re.match(settings.VALID_TAG_REGEX, tag) is not None
     )
 
@@ -53,7 +53,10 @@ def search(request):
 
     searched_tags_query_parameter = request.GET.get("q", "")
 
-    searched_tags = list(filter(is_valid_tag, searched_tags_query_parameter.split()))
+    searched_tags = list(
+        set(filter(is_valid_tag, searched_tags_query_parameter.split()))
+    )
+    print(searched_tags)
 
     searched_tags_data = []
     for tag in searched_tags:
