@@ -34,7 +34,7 @@
   max-width: 80rem;
 }
 
-.add-tags-button:active {
+#addTagsButton:active {
   /* Tailwind default bg-gray-500 */
   background-color: #a0aec0;
 }
