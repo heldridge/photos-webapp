@@ -1,3 +1,4 @@
+import functools
 import re
 
 from django.conf import settings
@@ -44,16 +45,27 @@ def index(request):
     return render(request, "pages/index.html.j2", context)
 
 
+def stringsDoNotMatch(str1, str2):
+    return str1 != str2
+
+
 def search(request):
 
-    search_tags_query_parameter = request.GET.get("q", "")
+    searched_tags_query_parameter = request.GET.get("q", "")
 
-    search_tags = list(filter(is_valid_tag, search_tags_query_parameter.split()))
+    searched_tags = list(filter(is_valid_tag, searched_tags_query_parameter.split()))
+
+    searched_tags_data = []
+    for tag in searched_tags:
+        non_matches = functools.partial(stringsDoNotMatch, tag)
+        searched_tags_data.append(
+            {"tag": tag, "query": "+".join(filter(non_matches, searched_tags))}
+        )
 
     context = {
         "pictures": getLatestPictures(),
         "grid_placeholders": [1, 2],
-        "searchedTags": search_tags,
-        "currentQuery": "+".join(search_tags),
+        "searched_tags_data": searched_tags_data,
+        "current_query": "+".join(searched_tags),
     }
     return render(request, "pages/search.html.j2", context)
