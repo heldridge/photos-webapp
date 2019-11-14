@@ -56,6 +56,7 @@ def search(request):
     searched_tags = list(
         set(filter(is_valid_tag, searched_tags_query_parameter.split()))
     )
+    searched_tags.sort()
     print(searched_tags)
 
     searched_tags_data = []
