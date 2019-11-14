@@ -38,3 +38,8 @@
   /* Tailwind default bg-gray-500 */
   background-color: #a0aec0;
 }
+
+#addTagsInputContainer {
+  transition: border-color 0.1s;
+  -webkit-transition: border-color 0.1s;
+}

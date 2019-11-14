@@ -57,7 +57,6 @@ def search(request):
         set(filter(is_valid_tag, searched_tags_query_parameter.split()))
     )
     searched_tags.sort()
-    print(searched_tags)
 
     searched_tags_data = []
     for tag in searched_tags:
@@ -71,5 +70,8 @@ def search(request):
         "grid_placeholders": [1, 2],
         "searched_tags_data": searched_tags_data,
         "current_query": "+".join(searched_tags),
+        "max_tag_length": settings.MAX_TAG_LENGTH,
+        "min_tag_length": settings.MIN_TAG_LENGTH,
+        "valid_tag_regex": settings.VALID_TAG_REGEX,
     }
     return render(request, "pages/search.html.j2", context)
