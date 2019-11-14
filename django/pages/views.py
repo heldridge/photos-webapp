@@ -31,18 +31,17 @@ def getLatestPictures():
     return updated_pictures
 
 
-# Create your views here.
-def index(request):
-    context = {"pictures": getLatestPictures(), "grid_placeholders": [1, 2]}
-    return render(request, "pages/index.html.j2", context)
-
-
 def is_valid_tag(tag):
     return (
         len(tag) <= settings.MAX_TAG_LENGTH
         and len(tag) > settings.MIN_TAG_LENGTH
         and re.match(settings.VALID_TAG_REGEX, tag) is not None
     )
+
+
+def index(request):
+    context = {"pictures": getLatestPictures(), "grid_placeholders": [1, 2]}
+    return render(request, "pages/index.html.j2", context)
 
 
 def search(request):
