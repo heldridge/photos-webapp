@@ -9,7 +9,7 @@
 
                 <div class="flex border justify-between border-gray-300 w-4/5 rounded overflow-hidden">
                     <div class="my-2 pl-2">
-                        <input type="text" class="appearance-none w-full pr-2" placeholder="Add Tags..." id="addTagsInput">
+                        <input type="text" class="appearance-none w-full pr-2" placeholder="Add Tags..." id="addTagsInput" oninput=addTagsInputUpdated()>
                     </div>
                     <a href="{% url 'search'%}?q={{ defaultAddTagQuery }}" class="bg-gray-300 hover:bg-gray-400 active:bg-blue-300 px-3 py-2" id="addTagsButton">
                         <i class="fas fa-plus"></i>
