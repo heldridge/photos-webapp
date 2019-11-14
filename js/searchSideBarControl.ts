@@ -4,5 +4,10 @@ console.log(addTagsInput);
 let originalHREF = addTagsButton.href;
 
 function addTagsInputUpdated() {
-  addTagsButton.href = `${originalHREF}+${addTagsInput.value}`;
+  let value = addTagsInput.value;
+  if (value !== '') {
+    addTagsButton.href = `${originalHREF}+${addTagsInput.value}`;
+  } else {
+    addTagsButton.href = originalHREF;
+  }
 }
