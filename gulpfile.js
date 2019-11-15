@@ -1,28 +1,33 @@
 const gulp = require('gulp');
-const { series } = require('gulp');
+const { watch, series } = require('gulp');
 const cleanCSS = require('gulp-clean-css');
 
 function processTailwind(cb) {
-  const postcss = require('gulp-postcss');
+    const postcss = require('gulp-postcss');
 
-  return gulp
-    .src('css/styles-tailwind.css')
-    .pipe(postcss([require('tailwindcss'), require('autoprefixer')]))
-    .pipe(cleanCSS())
-    .pipe(gulp.dest('django/photos/static/css'));
+    return gulp
+        .src('css/styles-tailwind.css')
+        .pipe(postcss([require('tailwindcss'), require('autoprefixer')]))
+        .pipe(cleanCSS())
+        .pipe(gulp.dest('django/photos/static/css'));
 }
 
 function processJavascript(cb) {
-  const terser = require('gulp-terser');
-  const concat = require('gulp-concat');
-  const ts = require('gulp-typescript');
+    const terser = require('gulp-terser');
+    const concat = require('gulp-concat');
+    const ts = require('gulp-typescript');
 
-  return gulp
-    .src(['js/*.js', 'js/*.ts'])
-    .pipe(ts())
-    .pipe(concat('all.js'))
-    .pipe(terser())
-    .pipe(gulp.dest('django/photos/static/js'));
+    return gulp
+        .src(['js/*.js', 'js/*.ts'])
+        .pipe(ts())
+        .pipe(concat('all.js'))
+        .pipe(terser())
+        .pipe(gulp.dest('django/photos/static/js'));
 }
 
-exports.default = series(processTailwind, processJavascript);
+// exports.default = series(processTailwind, processJavascript);
+
+exports.default = function() {
+    watch('css/*.css', processTailwind);
+    watch('js/*.ts', processJavascript);
+};
