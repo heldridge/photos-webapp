@@ -44,6 +44,10 @@ function addTagsInputUpdated(
 ) {
     let value = addTagsInput.value;
 
+    if (value === '') {
+        addClass(addTagsButton, 'disabled-link');
+    }
+
     let validData = validateTag(
         value,
         maxTagLength,
@@ -63,8 +67,6 @@ function addTagsInputUpdated(
 
         if (value !== '') {
             removeClass(addTagsButton, 'disabled-link');
-        } else {
-            addClass(addTagsButton, 'disabled-link');
         }
     } else if (value !== '') {
         addTagsErrorMessage.innerHTML = validData.message;
