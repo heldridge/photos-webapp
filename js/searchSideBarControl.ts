@@ -60,7 +60,12 @@ function addTagsInputUpdated(
         }
         newHREF += value;
         addTagsButton.href = newHREF;
-        removeClass(addTagsButton, 'disabled-link');
+
+        if (value !== '') {
+            removeClass(addTagsButton, 'disabled-link');
+        } else {
+            addClass(addTagsButton, 'disabled-link');
+        }
     } else if (value !== '') {
         addTagsErrorMessage.innerHTML = validData.message;
         removeClass(addTagsInputContainer, 'border-gray-300');
