@@ -16,7 +16,7 @@
                                 id="addTagsInput" 
                                 oninput="addTagsInputUpdated( '{{ current_query }}', {{ max_tag_length }}, {{ min_tag_length }}, '{{ valid_tag_regex }}' )">
                         </div>
-                        <a href="{% url 'search'%}?q={{ current_query }}" class="bg-gray-300 hover:bg-gray-400 active:bg-blue-300 px-3 py-2" id="addTagsButton">
+                        <a href="{% url 'search'%}?q={{ current_query }}" class="bg-gray-300 hover:bg-gray-400 active:bg-blue-300 px-3 py-2 disabled-link" id="addTagsButton">
                             <i class="fas fa-plus"></i>
                         </a>
                     </div>
