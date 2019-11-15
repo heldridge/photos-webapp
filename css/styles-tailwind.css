@@ -5,41 +5,46 @@
 @tailwind utilities;
 
 #navSearchIcon {
-  transition: opacity 0.3s;
-  -webkit-transition: opacity 0.3s;
+    transition: opacity 0.3s;
+    -webkit-transition: opacity 0.3s;
 }
 
 #navSearchBorder {
-  transition: border-color 0.1s;
-  -webkit-transition: border-color 0.1s;
+    transition: border-color 0.1s;
+    -webkit-transition: border-color 0.1s;
 }
 
 .w-picture-card {
-  width: 17rem;
+    width: 17rem;
 }
 
 .h-picture-card {
-  height: 19.4rem;
+    height: 19.4rem;
 }
 
 .link-image {
-  transition: 0.1s ease;
+    transition: 0.1s ease;
 }
 
 .link-image:hover {
-  transform: translate(0rem, -0.2rem);
+    transform: translate(0rem, -0.2rem);
 }
 
 .max-w-7xl {
-  max-width: 80rem;
+    max-width: 80rem;
 }
 
 #addTagsButton:active {
-  /* Tailwind default bg-gray-500 */
-  background-color: #a0aec0;
+    /* Tailwind default bg-gray-500 */
+    background-color: #a0aec0;
 }
 
 #addTagsInputContainer {
-  transition: border-color 0.1s;
-  -webkit-transition: border-color 0.1s;
+    transition: border-color 0.1s;
+    -webkit-transition: border-color 0.1s;
+}
+
+.disabled-link {
+    opacity: 50%;
+    pointer-events: none;
 }
