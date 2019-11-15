@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ["django-local", "django-local:8080", "localhost", "localhost:80
 INSTALLED_APPS = [
     "pages.apps.PagesConfig",
     "pictures.apps.PicturesConfig",
+    "django_elasticsearch_dsl",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -130,3 +131,8 @@ MIN_TAG_LENGTH = 1
 
 # The characters allowed in a regex
 VALID_TAG_REGEX = r"^[a-zA-Z0-9\-]*$"
+
+# Elasticsearch
+ELASTICSEARCH_DSL = {
+    "default": {"hosts": "localhost:9200"},
+}

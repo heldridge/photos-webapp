@@ -5,17 +5,16 @@ from django.conf import settings
 from django.shortcuts import render
 
 from pictures.models import Picture
+from pictures.documents import PictureDocument
 
 
-def getLatestPictures():
-    pictures = Picture.objects.order_by("-uploaded_at")[:16]
-
+def split_tags(pictures):
     max_width = 85
     expander_length = 5
     static_width_addition = 4
     updated_pictures = []
     for picture in pictures:
-        data = {"original": picture, "above_tags": [], "below_tags": []}
+        data = {"above_tags": [], "below_tags": []}
         current_width = 0
         above = True
         for tag in picture.tags:
@@ -30,6 +29,13 @@ def getLatestPictures():
 
         updated_pictures.append(data)
     return updated_pictures
+
+
+def getLatestPictures():
+    # pictures = Picture.objects.order_by("-uploaded_at")[:16]
+    pictures = PictureDocument.search().sort("-id")[:16]
+    print([p.photo for p in pictures])
+    return split_tags(pictures)
 
 
 def is_valid_tag(tag):
@@ -50,6 +56,9 @@ def stringsDoNotMatch(str1, str2):
 
 
 def search(request):
+
+    # s = PictureDocument.search().query("term", tags="person").sort("-id")[:15]
+    s = PictureDocument.search().sort("-id")[:15]
 
     searched_tags_query_parameter = request.GET.get("q", "")
 
