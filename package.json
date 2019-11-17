@@ -1,0 +1,31 @@
+{
+  "name": "photos",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "gulp": "^4.0.2",
+    "gulp-clean-css": "^4.2.0",
+    "gulp-postcss": "^8.0.0",
+    "tailwindcss": "^1.1.3"
+  },
+  "devDependencies": {
+    "gulp-concat": "^2.6.1",
+    "gulp-terser": "^1.2.0",
+    "gulp-typescript": "^5.0.1",
+    "typescript": "^3.7.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/heldridge/photos-webapp.git"
+  },
+  "author": "Harry",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/heldridge/photos-webapp/issues"
+  },
+  "homepage": "https://github.com/heldridge/photos-webapp#readme"
+}
