@@ -20,3 +20,8 @@ Note, prompts beginning with `=#` indicate they should be done in psql
 1. cd into the `django` folder
 1. `python manage.py migrate`
 1. `python manage.py runserver`
+1. Download elasticsearch `7.4.2`: https://www.elastic.co/downloads/elasticsearch
+1. Run three elasticsearch nodes with:
+    - `./elasticsearch`
+    - `./elasticsearch -Epath.data=data2 -Epath.logs=log2`
+    - `./elasticsearch -Epath.data=data3 -Epath.logs=log3`
