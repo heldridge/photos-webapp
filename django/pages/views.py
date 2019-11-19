@@ -27,14 +27,16 @@ def split_tags(pictures):
             else:
                 data["below_tags"].append(tag)
 
+        data["photo"] = "media/" + str(picture.photo)
+        data["title"] = picture.title
         updated_pictures.append(data)
     return updated_pictures
 
 
 def getLatestPictures():
-    # pictures = Picture.objects.order_by("-uploaded_at")[:16]
-    pictures = PictureDocument.search().sort("-id")[:16]
-    print([p.photo for p in pictures])
+    pictures = Picture.objects.order_by("-uploaded_at")[:16]
+    # pictures = PictureDocument.search().sort("-id")[:16]
+    print(split_tags(pictures))
     return split_tags(pictures)
 
 
