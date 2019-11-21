@@ -7,6 +7,10 @@ from .models import Picture
 @registry.register_document
 class PictureDocument(Document):
     tags = fields.KeywordField()
+    public_id = fields.TextField()
+
+    def prepare_public_id(self, instance):
+        return str(instance.public_id)
 
     class Index:
         # Name of the Elasticsearch index
@@ -18,4 +22,11 @@ class PictureDocument(Document):
         model = Picture  # The model associated with this Document
 
         # The fields of the model you want to be indexed in Elasticsearch
-        fields = ["id", "title", "description", "photo", "uploaded_at", "updated_at"]
+        fields = [
+            "id",
+            "title",
+            "description",
+            "photo",
+            "uploaded_at",
+            "updated_at",
+        ]
