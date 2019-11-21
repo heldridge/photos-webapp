@@ -14,7 +14,7 @@ class Picture(models.Model):
     # uploaded_by = ForeignKey
     uploaded_at = models.DateTimeField()
     updated_at = models.DateTimeField()
-    public_id = models.UUIDField(default=uuid.uuid4, editable=False)
+    public_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
 
     # galleries = ForeignKey (many to many???)
 
