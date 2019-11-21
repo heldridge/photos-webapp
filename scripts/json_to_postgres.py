@@ -2,6 +2,7 @@ import argparse
 import datetime
 import json
 import logging
+import uuid
 
 import psycopg2
 
@@ -71,11 +72,16 @@ def main():
             logger.info("Inserting %s %s", image["id"], image["title"])
             sql = (
                 f"INSERT INTO pictures_picture VALUES "
-                f"({image['id']}, '{format_title(image['title'])}', "
-                f"'{format_tags(image['tags'])}', "
-                f"'photos/user_uploads/{image['filename']}', "
-                f"'description', '{format_timestamp(image['updated_at'])}', "
-                f"'{format_timestamp(image['uploaded_at'])}')"
+                f"("
+                f"{image['id']}, "  # id
+                f"'{format_title(image['title'])}', "  # title
+                f"'description', "  # description
+                f"'photos/user_uploads/{image['filename']}', "  # photo
+                f"'{format_tags(image['tags'])}', "  # tags
+                f"'{format_timestamp(image['uploaded_at'])}', "  # uploaded_at
+                f"'{format_timestamp(image['updated_at'])}', "  # updated_at
+                f"'{str(uuid.uuid4())}'"  # public_id
+                f")"
             )
             logger.debug("Executing query: %s", sql)
 
@@ -97,3 +103,15 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+"""
+ id          | integer                  |           | not null | nextval('pictures_picture_id_seq'::regclass)
+ title       | character varying(100)   |           | not null |
+ description | text                     |           | not null |
+ photo       | character varying(100)   |           | not null |
+ tags        | character varying(20)[]  |           | not null |
+ uploaded_at | timestamp with time zone |           | not null |
+ updated_at  | timestamp with time zone |           | not null |
+ public_id   | uuid                     |           | not null |
+ """
