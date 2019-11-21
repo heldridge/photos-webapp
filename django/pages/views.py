@@ -9,10 +9,19 @@ from pictures.documents import PictureDocument
 
 
 def get_split_tags(tags):
+    """
+    Splits an image's tags into "above" and "below" tags,
+    so they don't over-clutter the UI
+
+    Above and below are decided by estimating how wide
+    the resulting tag bar would be, and then putting a cap on
+    that width
+    """
     data = {"above_tags": [], "below_tags": []}
-    max_width = 85
-    expander_length = 5
-    static_width_addition = 4
+
+    max_width = 85  # Max width of the theoretical tag bar
+    expander_length = 5  # Width of the "click to expand" symbol
+    static_width_addition = 4  # How much to add in addition to each letter
     current_width = 0
     above = True
     for tag in tags:
@@ -28,6 +37,9 @@ def get_split_tags(tags):
 
 
 def clean_picture_data(picture, from_elastic_search):
+    """
+    Cleans the data from each picture, picking out the fields needed
+    """
     split_tags = get_split_tags(picture.tags)
 
     if from_elastic_search:
