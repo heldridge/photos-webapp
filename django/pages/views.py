@@ -63,9 +63,12 @@ def clean_pictures(pictures, from_elastic_search):
     return new_pictures
 
 
-def getLatestPictures(from_elastic_search=True):
+def getLatestPictures(from_elastic_search=True, tags=[]):
     if from_elastic_search:
-        pictures = PictureDocument.search().sort("-id")[:16]
+        pictures = PictureDocument.search()
+        for tag in tags:
+            pictures = pictures.query("term", tags=tag)
+        pictures = pictures.sort("-id")[:16]
     else:
         pictures = Picture.objects.order_by("-uploaded_at")[:16]
     return clean_pictures(pictures, from_elastic_search)
@@ -101,14 +104,23 @@ def search(request):
             {"tag": tag, "query": "+".join(filter(non_matches, searched_tags))}
         )
 
+    pictures = getLatestPictures(
+        tags=[tag_data["tag"] for tag_data in searched_tags_data]
+    )
+    if len(pictures) > 0:
+        last_picture = pictures[-1]
+    else:
+        last_picture = None
+
     context = {
-        "pictures": getLatestPictures(),
+        "pictures": pictures,
         "grid_placeholders": [1, 2],
         "searched_tags_data": searched_tags_data,
         "current_query": "+".join(searched_tags),
         "max_tag_length": settings.MAX_TAG_LENGTH,
         "min_tag_length": settings.MIN_TAG_LENGTH,
         "valid_tag_regex": settings.VALID_TAG_REGEX,
+        "last_picture": last_picture,
     }
     return render(request, "pages/search.html.j2", context)
 
