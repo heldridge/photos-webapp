@@ -52,6 +52,7 @@ def clean_picture_data(picture, from_elastic_search):
         "title": picture.title,
         "above_tags": split_tags["above_tags"],
         "below_tags": split_tags["below_tags"],
+        "public_id": str(picture.public_id),
     }
 
 
@@ -88,7 +89,6 @@ def stringsDoNotMatch(str1, str2):
 
 
 def search(request):
-
     searched_tags_query_parameter = request.GET.get("q", "")
     searched_tags = list(
         set(filter(is_valid_tag, searched_tags_query_parameter.split()))
@@ -111,3 +111,8 @@ def search(request):
         "valid_tag_regex": settings.VALID_TAG_REGEX,
     }
     return render(request, "pages/search.html.j2", context)
+
+
+def gallery(request):
+    context = {}
+    return render(request, "pages/gallery.html.j2", context)
