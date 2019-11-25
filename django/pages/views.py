@@ -63,12 +63,27 @@ def clean_pictures(pictures, from_elastic_search):
     return new_pictures
 
 
-def getLatestPictures(from_elastic_search=True, tags=[]):
+# Maybe just remove this?
+# Either you're in search or index, doesn't really need the intermediary
+def getLatestPictures(
+    from_elastic_search=True, tags=[], after_picture=None, before_picture=None
+):
     if from_elastic_search:
         pictures = PictureDocument.search()
+        if after_picture is not None:
+            pictures = pictures.query("range", id={"lt": after_picture.id})
+        if before_picture is not None:
+            pictures = pictures.query("range", id={"gt": before_picture.id})
+
         for tag in tags:
             pictures = pictures.query("term", tags=tag)
-        pictures = pictures.sort("-id")[:16]
+
+        if before_picture is None:
+            pictures = pictures.sort("-id")[:16]
+        else:
+            pictures = list(pictures.sort("id")[:16])
+            pictures.reverse()
+
     else:
         pictures = Picture.objects.order_by("-uploaded_at")[:16]
     return clean_pictures(pictures, from_elastic_search)
@@ -106,13 +121,29 @@ def search(request):
             {"tag": tag, "query": "+".join(filter(non_matches, searched_tags))}
         )
 
+    after = request.GET.get("after", "")
+    after_picture = None
+    if after != "":
+        # Grab the internal id from postgres
+        after_picture = Picture.objects.get(public_id=after)
+
+    before = request.GET.get("before", "")
+    before_picture = None
+    if before != "":
+        # Grab the internal id from postgres
+        before_picture = Picture.objects.get(public_id=before)
+
     pictures = getLatestPictures(
-        tags=[tag_data["tag"] for tag_data in searched_tags_data]
+        tags=[tag_data["tag"] for tag_data in searched_tags_data],
+        after_picture=after_picture,
+        before_picture=before_picture,
     )
     if len(pictures) > 0:
         last_picture = pictures[-1]
+        first_picture = pictures[0]
     else:
         last_picture = None
+        first_picture = None
 
     context = {
         "pictures": pictures,
@@ -123,6 +154,7 @@ def search(request):
         "min_tag_length": settings.MIN_TAG_LENGTH,
         "valid_tag_regex": settings.VALID_TAG_REGEX,
         "last_picture": last_picture,
+        "first_picture": first_picture,
     }
     return render(request, "pages/search.html.j2", context)
 

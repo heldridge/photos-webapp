@@ -52,10 +52,14 @@
             </div>
 
             <div class="flex justify-between my-2 text-lg">
-                <a href="/" id="previousButton" class="bg-gray-300 hover:bg-gray-500 rounded py-2 pl-3 pr-4">
-                    <i class="fas fa-arrow-left pr-2"></i>
-                    Previous
-                </a> 
+
+                {% if first_picture %}
+                    <a href="{% url 'search' %}?q={{ current_query }}&before={{ first_picture.public_id }}" id="nextButton" class="bg-gray-300 hover:bg-gray-500 rounded py-2 pl-4 pr-3">
+                        <i class="fas fa-arrow-left pr-2"></i>
+                        Previous
+                    </a>
+                {% endif %} 
+                
 
                 {% if last_picture %}
                     <a href="{% url 'search' %}?q={{ current_query }}&after={{ last_picture.public_id }}" id="nextButton" class="bg-gray-300 hover:bg-gray-500 rounded py-2 pl-4 pr-3">
