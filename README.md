@@ -10,8 +10,8 @@ Note, prompts beginning with `=#` indicate they should be done in psql
 1. Create your database: `sudo -u postgres createdb <username>`
 1. Create the photos database: `=# CREATE DATABASE photos;`
 1. Create the django user: `=# CREATE USER django;`
-1. Add the django user pw: `alter user django with encrypted password '<password>';`
-1. Give the django user permissions to access the database: `grant all privileges on database photos to django;`
+1. Add the django user pw: `=# alter user django with encrypted password '<password>';`
+1. Give the django user permissions to access the database: `=# grant all privileges on database photos to django;`
 1. Create a virtualenv: `python -m virtualenv venv`
 1. Install the requirements: `pip install -r requirements.txt -r requirements-dev.txt`
 1. Copy the `env_setup.sh` script outside of the git directory
@@ -27,3 +27,16 @@ Note, prompts beginning with `=#` indicate they should be done in psql
 1. `python manage.py search_index --rebuild`
 1. `python manage.py runserver`
 
+# Completely reset the database
+
+1. `=# DROP DATABASE photos`
+1. `=# CREATE DATABASE photos;`
+1. `=# grant all privileges on database photos to django;`
+1. `python manage.py migrate`
+1. `python manage.py search_index --rebuild`
+
+# Add photos to the database
+
+1. `cd scripts`
+1. `python json_to_postgres.py`
+1. `python manage.py search_index --rebuild`
