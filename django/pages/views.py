@@ -114,7 +114,7 @@ def search(request):
 
     context = {
         "pictures": pictures,
-        "grid_placeholders": [1, 2],
+        "grid_placeholders": [1]*(18 - len(pictures)),
         "searched_tags_data": searched_tags_data,
         "current_query": "+".join(searched_tags),
         "max_tag_length": settings.MAX_TAG_LENGTH,
