@@ -92,6 +92,8 @@ def stringsDoNotMatch(str1, str2):
 
 
 def search(request):
+    # Grab and validate tags
+    # Also remove duplicates
     searched_tags_query_parameter = request.GET.get("q", "")
     searched_tags = list(
         set(filter(is_valid_tag, searched_tags_query_parameter.split()))
@@ -114,7 +116,7 @@ def search(request):
 
     context = {
         "pictures": pictures,
-        "grid_placeholders": [1]*(18 - len(pictures)),
+        "grid_placeholders": [1] * (18 - len(pictures)),
         "searched_tags_data": searched_tags_data,
         "current_query": "+".join(searched_tags),
         "max_tag_length": settings.MAX_TAG_LENGTH,
