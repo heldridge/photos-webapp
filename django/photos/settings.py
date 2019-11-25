@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "cfs0m4_=of71)xv=e(7w&!#vf61jkiia@bml@z27g!j#)4ei!0"
+SECRET_KEY = os.environ["DJANGO_SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -82,7 +82,7 @@ DATABASES = {
         "NAME": "photos",
         "USER": "django",
         "PASSWORD": os.environ["DJANGO_POSTGRES_PASSWORD"],
-        "HOST": "localhost",
+        "HOST": os.environ["DJANGO_POSTGRES_HOST"],
     }
 }
 
