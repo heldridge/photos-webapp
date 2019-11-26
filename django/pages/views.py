@@ -79,13 +79,13 @@ def getLatestPictures(
             pictures = pictures.query("term", tags=tag)
 
         if before_picture is None:
-            pictures = pictures.sort("-id")[:16]
+            pictures = pictures.sort("-id")[:17]
         else:
-            pictures = list(pictures.sort("id")[:16])
+            pictures = list(pictures.sort("id")[:17])
             pictures.reverse()
 
     else:
-        pictures = Picture.objects.order_by("-uploaded_at")[:16]
+        pictures = Picture.objects.order_by("-uploaded_at")[:17]
     return clean_pictures(pictures, from_elastic_search)
 
 
@@ -138,7 +138,26 @@ def search(request):
         after_picture=after_picture,
         before_picture=before_picture,
     )
+
+    render_next_button = True
+    render_previous_button = True
+
+    # Raw fetch, no before / after
+    if before_picture is None and after_picture is None:
+        render_previous_button = False
+        if len(pictures) < 17:
+            render_next_button = False
+
+    # We have done a before / after, so disabling is done on the
+    # direction we're going
+    if len(pictures) < 17:
+        if before_picture is not None:
+            render_previous_button = False
+        elif after_picture is not None:
+            render_next_button = False
+
     if len(pictures) > 0:
+        pictures = pictures[:-1]
         last_picture = pictures[-1]
         first_picture = pictures[0]
     else:
@@ -155,8 +174,8 @@ def search(request):
         "valid_tag_regex": settings.VALID_TAG_REGEX,
         "last_picture": last_picture,
         "first_picture": first_picture,
-        "render_next_button": True,
-        "render_previous_button": False,
+        "render_next_button": render_next_button,
+        "render_previous_button": render_previous_button,
     }
     return render(request, "pages/search.html.j2", context)
 
