@@ -156,8 +156,9 @@ def search(request):
         elif after_picture is not None:
             render_next_button = False
 
+    pictures = pictures[:16]
+
     if len(pictures) > 0:
-        pictures = pictures[:-1]
         last_picture = pictures[-1]
         first_picture = pictures[0]
     else:
