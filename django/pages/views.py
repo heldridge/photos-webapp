@@ -94,9 +94,15 @@ def is_valid_tag(tag):
 
 def index(request):
     pictures = clean_pictures(Picture.objects.order_by("-uploaded_at")[:16], False)
+
+    last_picture = None
+    if len(pictures) > 0:
+        last_picture = pictures[-1]
+
     context = {
         "pictures": pictures,
         "grid_placeholders": [1] * (18 - len(pictures)),
+        "last_picture": last_picture,
     }
     return render(request, "pages/index.html.j2", context)
 
