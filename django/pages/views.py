@@ -65,28 +65,23 @@ def clean_pictures(pictures, from_elastic_search):
 
 # Maybe just remove this?
 # Either you're in search or index, doesn't really need the intermediary
-def getLatestPictures(
-    from_elastic_search=True, tags=[], after_picture=None, before_picture=None
-):
-    if from_elastic_search:
-        pictures = PictureDocument.search()
-        if after_picture is not None:
-            pictures = pictures.query("range", id={"lt": after_picture.id})
-        if before_picture is not None:
-            pictures = pictures.query("range", id={"gt": before_picture.id})
+def getLatestPictures(tags=[], after_picture=None, before_picture=None):
+    pictures = PictureDocument.search()
+    if after_picture is not None:
+        pictures = pictures.query("range", id={"lt": after_picture.id})
+    if before_picture is not None:
+        pictures = pictures.query("range", id={"gt": before_picture.id})
 
-        for tag in tags:
-            pictures = pictures.query("term", tags=tag)
+    for tag in tags:
+        pictures = pictures.query("term", tags=tag)
 
-        if before_picture is None:
-            pictures = pictures.sort("-id")[:17]
-        else:
-            pictures = list(pictures.sort("id")[:17])
-            pictures.reverse()
-
+    if before_picture is None:
+        pictures = pictures.sort("-id")[:17]
     else:
-        pictures = Picture.objects.order_by("-uploaded_at")[:17]
-    return clean_pictures(pictures, from_elastic_search)
+        pictures = list(pictures.sort("id")[:17])
+        pictures.reverse()
+
+    return clean_pictures(pictures, True)
 
 
 def is_valid_tag(tag):
@@ -98,7 +93,11 @@ def is_valid_tag(tag):
 
 
 def index(request):
-    context = {"pictures": getLatestPictures(False), "grid_placeholders": [1, 2]}
+    pictures = clean_pictures(Picture.objects.order_by("-uploaded_at")[:16], False)
+    context = {
+        "pictures": pictures,
+        "grid_placeholders": [1] * (18 - len(pictures)),
+    }
     return render(request, "pages/index.html.j2", context)
 
 
