@@ -155,6 +155,8 @@ def search(request):
         "valid_tag_regex": settings.VALID_TAG_REGEX,
         "last_picture": last_picture,
         "first_picture": first_picture,
+        "render_next_button": True,
+        "render_previous_button": False,
     }
     return render(request, "pages/search.html.j2", context)
 
