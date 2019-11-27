@@ -6,7 +6,10 @@ let addTagsInputContainer = <HTMLDivElement>(
 let addTagsErrorMessage = <HTMLParagraphElement>(
     document.getElementById('addTagsErrorMessage')
 );
-let originalHREF = addTagsButton.href;
+
+if (addTagsButton !== null) {
+    let originalHREF = addTagsButton.href;
+}
 
 interface validData {
     isValid: boolean;
