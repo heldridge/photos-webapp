@@ -63,9 +63,7 @@ def clean_pictures(pictures, from_elastic_search):
     return new_pictures
 
 
-# Maybe just remove this?
-# Either you're in search or index, doesn't really need the intermediary
-def getLatestPictures(tags=[], after_picture=None, before_picture=None):
+def search_pictures(tags=[], after_picture=None, before_picture=None):
     pictures = PictureDocument.search()
     if after_picture is not None:
         pictures = pictures.query("range", id={"lt": after_picture.id})
@@ -138,7 +136,7 @@ def search(request):
         # Grab the internal id from postgres
         before_picture = Picture.objects.get(public_id=before)
 
-    pictures = getLatestPictures(
+    pictures = search_pictures(
         tags=[tag_data["tag"] for tag_data in searched_tags_data],
         after_picture=after_picture,
         before_picture=before_picture,
