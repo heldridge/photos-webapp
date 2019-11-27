@@ -136,3 +136,6 @@ VALID_TAG_REGEX = r"^[a-zA-Z0-9\-]*$"
 ELASTICSEARCH_DSL = {
     "default": {"hosts": "localhost:9200"},
 }
+
+# How many pictures to put on a page
+PAGE_SIZE = 16

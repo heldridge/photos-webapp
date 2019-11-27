@@ -74,9 +74,9 @@ def search_pictures(tags=[], after_picture=None, before_picture=None):
         pictures = pictures.query("term", tags=tag)
 
     if before_picture is None:
-        pictures = pictures.sort("-id")[:17]
+        pictures = pictures.sort("-id")[: settings.PAGE_SIZE + 1]
     else:
-        pictures = list(pictures.sort("id")[:17])
+        pictures = list(pictures.sort("id")[: settings.PAGE_SIZE + 1])
         pictures.reverse()
 
     return clean_pictures(pictures, True)
@@ -91,8 +91,13 @@ def is_valid_tag(tag):
 
 
 def index(request):
-    pictures = clean_pictures(Picture.objects.order_by("-uploaded_at")[:16], False)
+    pictures = clean_pictures(
+        Picture.objects.order_by("-uploaded_at")[: settings.PAGE_SIZE + 1], False
+    )
 
+    render_continue_button = len(pictures) >= settings.PAGE_SIZE + 1
+
+    pictures = pictures[: settings.PAGE_SIZE]
     last_picture = None
     if len(pictures) > 0:
         last_picture = pictures[-1]
@@ -101,6 +106,7 @@ def index(request):
         "pictures": pictures,
         "grid_placeholders": [1] * (18 - len(pictures)),
         "last_picture": last_picture,
+        "render_continue_button": render_continue_button,
     }
     return render(request, "pages/index.html.j2", context)
 
@@ -148,18 +154,18 @@ def search(request):
     # Raw fetch, no before / after
     if before_picture is None and after_picture is None:
         render_previous_button = False
-        if len(pictures) < 17:
+        if len(pictures) < settings.PAGE_SIZE + 1:
             render_next_button = False
 
     # We have done a before / after, so disabling is done on the
     # direction we're going
-    if len(pictures) < 17:
+    if len(pictures) < settings.PAGE_SIZE + 1:
         if before_picture is not None:
             render_previous_button = False
         elif after_picture is not None:
             render_next_button = False
 
-    pictures = pictures[:16]
+    pictures = pictures[: settings.PAGE_SIZE]
 
     if len(pictures) > 0:
         last_picture = pictures[-1]
