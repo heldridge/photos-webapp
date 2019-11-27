@@ -57,6 +57,7 @@ def clean_picture_data(picture, from_elastic_search):
 
 
 def clean_pictures(pictures, from_elastic_search):
+    """ Cleans each picture in a dataset """
     new_pictures = []
     for picture in pictures:
         new_pictures.append(clean_picture_data(picture, from_elastic_search))
@@ -64,6 +65,7 @@ def clean_pictures(pictures, from_elastic_search):
 
 
 def search_pictures(tags=[], after_picture=None, before_picture=None):
+    """ Queries elastic search """
     pictures = PictureDocument.search()
     if after_picture is not None:
         pictures = pictures.query("range", id={"lt": after_picture.id})
@@ -79,15 +81,21 @@ def search_pictures(tags=[], after_picture=None, before_picture=None):
         pictures = list(pictures.sort("id")[: settings.PAGE_SIZE + 1])
         pictures.reverse()
 
-    return clean_pictures(pictures, True)
+    return [clean_picture_data(picture, True) for picture in pictures]
 
 
 def is_valid_tag(tag):
+    """ Verifies that a tag is valid """
     return (
         len(tag) <= settings.MAX_TAG_LENGTH
         and len(tag) >= settings.MIN_TAG_LENGTH
         and re.match(settings.VALID_TAG_REGEX, tag) is not None
     )
+
+
+def stringsDoNotMatch(str1, str2):
+    """ Dummy function to be used in a partial """
+    return str1 != str2
 
 
 def index(request):
@@ -109,10 +117,6 @@ def index(request):
         "render_continue_button": render_continue_button,
     }
     return render(request, "pages/index.html.j2", context)
-
-
-def stringsDoNotMatch(str1, str2):
-    return str1 != str2
 
 
 def search(request):
