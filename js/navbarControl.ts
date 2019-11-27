@@ -1,6 +1,3 @@
-let searchBorder: HTMLElement = document.getElementById('navSearchBorder');
-let navSearchIcon: HTMLElement = document.getElementById('navSearchIcon');
-
 // Class manipulation functions from: https://jaketrent.com/post/addremove-classes-raw-javascript/
 function hasClass(ele: HTMLElement, cls: string): boolean {
     return !!ele.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'));
@@ -18,6 +15,9 @@ function removeClass(ele: any, cls: string): void {
 }
 
 function navSearchFocus(): void {
+    let searchBorder: HTMLElement = document.getElementById('navSearchBorder');
+    let navSearchIcon: HTMLElement = document.getElementById('navSearchIcon');
+
     removeClass(searchBorder, 'border-gray-300');
     addClass(searchBorder, 'border-blue-300');
 
@@ -26,6 +26,9 @@ function navSearchFocus(): void {
 }
 
 function navSearchFocusOut(): void {
+    let searchBorder: HTMLElement = document.getElementById('navSearchBorder');
+    let navSearchIcon: HTMLElement = document.getElementById('navSearchIcon');
+
     removeClass(searchBorder, 'border-blue-300');
     addClass(searchBorder, 'border-gray-300');
 
