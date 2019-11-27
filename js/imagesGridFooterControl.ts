@@ -5,11 +5,16 @@ let nextButton: HTMLElement = document.getElementById('nextButton');
 positionFooterButtons();
 
 function positionFooterButtons(): void {
-    if (cards.length > 0 && nextButton !== null && previousButton !== null) {
+    if (cards.length > 0) {
         let margin: string = `${cards[0].getBoundingClientRect().left -
             cardsHolder.getBoundingClientRect().left}px`;
-        previousButton.style.marginLeft = margin;
-        nextButton.style.marginRight = margin;
+        if (previousButton !== null) {
+            previousButton.style.marginLeft = margin;
+        }
+
+        if (nextButton !== null) {
+            nextButton.style.marginRight = margin;
+        }
     }
 }
 
