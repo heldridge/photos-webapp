@@ -169,7 +169,13 @@ def search(request):
         elif after_picture is not None:
             render_next_button = False
 
+    # If we were going backwards we want to shave off the first
+    # pic, not the last, so reverse before and after the shave
+    if before_picture is not None:
+        pictures.reverse()
     pictures = pictures[: settings.PAGE_SIZE]
+    if before_picture is not None:
+        pictures.reverse()
 
     if len(pictures) > 0:
         last_picture = pictures[-1]
