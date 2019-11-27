@@ -5,12 +5,12 @@ let nextButton: HTMLElement = document.getElementById('nextButton');
 positionFooterButtons();
 
 function positionFooterButtons(): void {
-  if (cards.length > 0) {
-    let margin: string = `${cards[0].getBoundingClientRect().left -
-      cardsHolder.getBoundingClientRect().left}px`;
-    previousButton.style.marginLeft = margin;
-    nextButton.style.marginRight = margin;
-  }
+    if (cards.length > 0 && nextButton !== null && previousButton !== null) {
+        let margin: string = `${cards[0].getBoundingClientRect().left -
+            cardsHolder.getBoundingClientRect().left}px`;
+        previousButton.style.marginLeft = margin;
+        nextButton.style.marginRight = margin;
+    }
 }
 
 window.addEventListener('resize', positionFooterButtons);
