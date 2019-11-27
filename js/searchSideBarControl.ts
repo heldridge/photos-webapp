@@ -6,9 +6,9 @@ let addTagsInputContainer = <HTMLDivElement>(
 let addTagsErrorMessage = <HTMLParagraphElement>(
     document.getElementById('addTagsErrorMessage')
 );
-
+let originalHREF = '';
 if (addTagsButton !== null) {
-    let originalHREF = addTagsButton.href;
+    originalHREF = addTagsButton.href;
 }
 
 interface validData {
