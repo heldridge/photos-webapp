@@ -15,10 +15,12 @@
         class="focus:outline-none focus:placeholder-gray-600 appearance-none py-3" 
         type="text" placeholder="Search Tags..." 
         onfocus="navSearchFocus()" onfocusout="navSearchFocusOut()"
-        onkeyup="navSearchOnKeyUp(event, this)"
+        onkeyup="navSearchOnKeyUp(event, this, {{ max_tag_length }}, {{ min_tag_length }}, '{{ valid_tag_regex }}')"
+        oninput="navSearchOnInput(this, {{ max_tag_length }}, {{ min_tag_length }}, '{{ valid_tag_regex }}')"
       >
       <i class="fas fa-search opacity-50 pl-3" id="navSearchIcon"></i>
-    </div> 
+    </div>
+    <p class="text-red-500 pl-3 self-center max-w-xs hidden" id="navSearchErrorMessage"></p> 
   </div>
 
 </nav>

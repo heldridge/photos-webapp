@@ -40,11 +40,57 @@ function focusNavSearch(): void {
     document.getElementById('navSearch').focus();
 }
 
-function navSearchOnKeyUp(event, inputElement): void {
+function navSearchOnKeyUp(
+    event,
+    inputElement,
+    maxTagLength,
+    minTagLength,
+    validTagRegex
+): void {
     if (event.key === 'Enter') {
         let value = inputElement.value;
-        if (value !== '') {
+        if (
+            value !== '' &&
+            validateTag(
+                value,
+                maxTagLength,
+                minTagLength,
+                new RegExp(validTagRegex)
+            ).isValid
+        ) {
             window.location.href = `/search?q=${value}`;
         }
+    }
+}
+
+function navSearchOnInput(
+    navSearchInput,
+    maxTagLength: number,
+    minTagLength: number,
+    validTagRegex: string
+): void {
+    let searchBorder: HTMLElement = document.getElementById('navSearchBorder');
+    let navSearchErrorMessage = document.getElementById(
+        'navSearchErrorMessage'
+    );
+    let value = navSearchInput.value;
+
+    let valid = validateTag(
+        value,
+        maxTagLength,
+        minTagLength,
+        new RegExp(validTagRegex)
+    );
+
+    if (valid.isValid) {
+        addClass(searchBorder, 'border-blue-300');
+        removeClass(searchBorder, 'border-red-500');
+        addClass(navSearchErrorMessage, 'hidden');
+    } else {
+        navSearchErrorMessage.innerHTML = valid.message;
+        removeClass(navSearchErrorMessage, 'hidden');
+
+        addClass(searchBorder, 'border-red-500');
+        removeClass(searchBorder, 'border-blue-300');
     }
 }
