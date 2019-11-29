@@ -131,6 +131,7 @@ MIN_TAG_LENGTH = 1
 
 # The characters allowed in a regex
 VALID_TAG_REGEX = r"^[a-zA-Z0-9\-]*$"
+INVALID_TAG_CHAR_REGEX = r"[^a-zA-Z0-9\-]"
 
 # Elasticsearch
 ELASTICSEARCH_DSL = {

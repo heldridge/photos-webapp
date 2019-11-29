@@ -118,6 +118,7 @@ def index(request):
         "max_tag_length": settings.MAX_TAG_LENGTH,
         "min_tag_length": settings.MIN_TAG_LENGTH,
         "valid_tag_regex": settings.VALID_TAG_REGEX,
+        "invalid_tag_char_regex": settings.INVALID_TAG_CHAR_REGEX,
     }
     return render(request, "pages/index.html.j2", context)
 
@@ -195,6 +196,7 @@ def search(request):
         "max_tag_length": settings.MAX_TAG_LENGTH,
         "min_tag_length": settings.MIN_TAG_LENGTH,
         "valid_tag_regex": settings.VALID_TAG_REGEX,
+        "invalid_tag_char_regex": settings.INVALID_TAG_CHAR_REGEX,
         "last_picture": last_picture,
         "first_picture": first_picture,
         "render_next_button": render_next_button,

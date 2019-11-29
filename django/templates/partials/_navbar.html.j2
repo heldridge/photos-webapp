@@ -15,7 +15,9 @@
         type="text" placeholder="Search Tags..." 
         onfocus="navSearchOnFocus()" onfocusout="navSearchFocusOut()"
         onkeyup="navSearchOnKeyUp(event, this, {{ max_tag_length }}, {{ min_tag_length }}, '{{ valid_tag_regex }}')"
-        oninput="navSearchOnInput(this, {{ max_tag_length }}, {{ min_tag_length }}, '{{ valid_tag_regex }}')"
+        oninput="navSearchRestrictOnInput(this, '{{invalid_tag_char_regex}}')"
+        onchange="navSearchRestrictOnInput(this, '{{invalid_tag_char_regex}}')"
+        maxlength="{{ max_tag_length }}"
       >
       <i class="fas fa-search opacity-50 pl-3" id="navSearchIcon"></i>
     </div>
