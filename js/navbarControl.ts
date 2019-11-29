@@ -45,7 +45,7 @@ function focusNavSearch(): void {
 }
 
 function navSearchOnKeyUp(
-    event,
+    event: onKeyUpEvent,
     inputElement,
     maxTagLength,
     minTagLength,
@@ -67,34 +67,12 @@ function navSearchOnKeyUp(
     }
 }
 
-function navSearchOnInput(
-    navSearchInput,
-    maxTagLength: number,
-    minTagLength: number,
-    validTagRegex: string
-): void {
-    let searchBorder: HTMLElement = document.getElementById('navSearchBorder');
-    let navSearchErrorMessage = document.getElementById(
-        'navSearchErrorMessage'
+function navSearchRestrictOnInput(
+    navSearchInput: HTMLInputElement,
+    invalidCharRegex: string
+) {
+    navSearchInput.value = navSearchInput.value.replace(
+        new RegExp(invalidCharRegex, 'g'),
+        ''
     );
-    let value = navSearchInput.value;
-
-    let valid = validateTag(
-        value,
-        maxTagLength,
-        minTagLength,
-        new RegExp(validTagRegex)
-    );
-
-    if (valid.isValid) {
-        addClass(searchBorder, 'border-blue-300');
-        removeClass(searchBorder, 'border-red-500');
-        addClass(navSearchErrorMessage, 'hidden');
-    } else {
-        navSearchErrorMessage.innerHTML = valid.message;
-        removeClass(navSearchErrorMessage, 'hidden');
-
-        addClass(searchBorder, 'border-red-500');
-        removeClass(searchBorder, 'border-blue-300');
-    }
 }
