@@ -39,3 +39,12 @@ function navSearchFocusOut(): void {
 function focusNavSearch(): void {
     document.getElementById('navSearch').focus();
 }
+
+function navSearchOnKeyUp(event, inputElement): void {
+    if (event.key === 'Enter') {
+        let value = inputElement.value;
+        if (value !== '') {
+            window.location.href = `/search?q=${value}`;
+        }
+    }
+}
