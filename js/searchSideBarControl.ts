@@ -26,6 +26,7 @@ function validateTag(
     minTagLength: number,
     validTagRegex: RegExp
 ): validData {
+    console.log('HERE!!!', tag);
     // Returns whether an input tag is valid, and a message to display if it
     // is not
     if (tag.length > maxTagLength) {
@@ -45,6 +46,7 @@ function validateTag(
             message: `Tags must only contain alphanumeric characters and dashes`
         };
     } else {
+        console.log('donezo');
         return {
             isValid: true,
             message: ''

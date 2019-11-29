@@ -115,6 +115,9 @@ def index(request):
         "grid_placeholders": [1] * (18 - len(pictures)),
         "last_picture": last_picture,
         "render_continue_button": render_continue_button,
+        "max_tag_length": settings.MAX_TAG_LENGTH,
+        "min_tag_length": settings.MIN_TAG_LENGTH,
+        "valid_tag_regex": settings.VALID_TAG_REGEX,
     }
     return render(request, "pages/index.html.j2", context)
 
