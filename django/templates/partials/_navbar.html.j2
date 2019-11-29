@@ -1,17 +1,17 @@
 <nav class="flex items-center bg-white-500 border rounded shadow">
-  <a href="/" class="py-5 pr-6 pl-6 border-r border-gray-300 hover:bg-gray-100 text-xl">
+  <a href="/" class="py-5 pr-6 pl-6 hover:bg-gray-100 text-xl">
       Home
   </a>
 
-  <div class="py-2 pr-6 pl-6 border-r border-gray-300 flex flex-col md:flex-row justify-center">
+  <div class="py-2 pr-6 pl-6 border-r border-l border-gray-300 flex flex-col md:flex-row justify-center">
     <div 
-      class="cursor-text border border-gray-300 rounded px-4 flex items-center text-xl" 
+      class="cursor-text border border-gray-300 rounded px-4 flex items-center text-xl w-full justify-between" 
       id="navSearchBorder"
       onclick="focusNavSearch()"
     >
       <input 
         id="navSearch"
-        class="focus:outline-none focus:placeholder-gray-600 appearance-none py-3" 
+        class="focus:outline-none focus:placeholder-gray-600 appearance-none py-3 w-3/4 md:w-full" 
         type="text" placeholder="Search Tags..." 
         onfocus="navSearchOnFocus()" onfocusout="navSearchFocusOut()"
         onkeyup="navSearchOnKeyUp(event, this, {{ max_tag_length }}, {{ min_tag_length }}, '{{ valid_tag_regex }}')"
