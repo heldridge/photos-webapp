@@ -14,7 +14,7 @@
         id="navSearch"
         class="focus:outline-none focus:placeholder-gray-600 appearance-none py-3" 
         type="text" placeholder="Search Tags..." 
-        onfocus="navSearchFocus()" onfocusout="navSearchFocusOut()"
+        onfocus="navSearchOnFocus()" onfocusout="navSearchFocusOut()"
         onkeyup="navSearchOnKeyUp(event, this, {{ max_tag_length }}, {{ min_tag_length }}, '{{ valid_tag_regex }}')"
         oninput="navSearchOnInput(this, {{ max_tag_length }}, {{ min_tag_length }}, '{{ valid_tag_regex }}')"
       >

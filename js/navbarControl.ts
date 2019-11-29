@@ -14,26 +14,30 @@ function removeClass(ele: any, cls: string): void {
     }
 }
 
-function navSearchFocus(): void {
+function navSearchOnFocus(): void {
     let searchBorder: HTMLElement = document.getElementById('navSearchBorder');
     let navSearchIcon: HTMLElement = document.getElementById('navSearchIcon');
 
-    removeClass(searchBorder, 'border-gray-300');
-    addClass(searchBorder, 'border-blue-300');
+    if (!hasClass(searchBorder, 'border-red-500')) {
+        removeClass(searchBorder, 'border-gray-300');
+        addClass(searchBorder, 'border-blue-300');
 
-    removeClass(navSearchIcon, 'opacity-50');
-    addClass(navSearchIcon, 'opacity-100');
+        removeClass(navSearchIcon, 'opacity-50');
+        addClass(navSearchIcon, 'opacity-100');
+    }
 }
 
 function navSearchFocusOut(): void {
     let searchBorder: HTMLElement = document.getElementById('navSearchBorder');
     let navSearchIcon: HTMLElement = document.getElementById('navSearchIcon');
 
-    removeClass(searchBorder, 'border-blue-300');
-    addClass(searchBorder, 'border-gray-300');
+    if (!hasClass(searchBorder, 'border-red-500')) {
+        removeClass(searchBorder, 'border-blue-300');
+        addClass(searchBorder, 'border-gray-300');
 
-    removeClass(navSearchIcon, 'opacity-100');
-    addClass(navSearchIcon, 'opacity-50');
+        removeClass(navSearchIcon, 'opacity-100');
+        addClass(navSearchIcon, 'opacity-50');
+    }
 }
 
 function focusNavSearch(): void {
