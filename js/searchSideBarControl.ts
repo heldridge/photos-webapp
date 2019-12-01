@@ -11,47 +11,6 @@ if (addTagsButton !== null) {
     originalHREF = addTagsButton.href;
 }
 
-interface validData {
-    isValid: boolean;
-    message: string;
-}
-
-interface onKeyUpEvent {
-    key: string;
-}
-
-function validateTag(
-    tag: string,
-    maxTagLength: number,
-    minTagLength: number,
-    validTagRegex: RegExp
-): validData {
-    // Returns whether an input tag is valid, and a message to display if it
-    // is not
-    if (tag.length > maxTagLength) {
-        return {
-            isValid: false,
-            message: `Tags must be under ${maxTagLength} characters`
-        };
-    } else if (tag.length < minTagLength && tag.length !== 0) {
-        // Length of 0 doesn't count as invalid
-        return {
-            isValid: false,
-            message: `Tags must be at least ${minTagLength} characters`
-        };
-    } else if (!validTagRegex.test(tag)) {
-        return {
-            isValid: false,
-            message: `Tags must only contain alphanumeric characters and dashes`
-        };
-    } else {
-        return {
-            isValid: true,
-            message: ''
-        };
-    }
-}
-
 function addTagsInputOnKeyUp(
     e: onKeyUpEvent,
     currentQuery: string,
