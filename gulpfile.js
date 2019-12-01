@@ -16,13 +16,37 @@ function processJavascript(cb) {
     const terser = require('gulp-terser');
     const concat = require('gulp-concat');
     const ts = require('gulp-typescript');
+    const merge = require('merge-stream');
+    const jsFiles = [
+        {
+            outputFileName: 'index.js',
+            files: [
+                'js/imagesGridFooterControl.ts',
+                'js/navbarControl.ts',
+                'js/tagsControl.ts'
+            ]
+        },
+        {
+            outputFileName: 'search.js',
+            files: [
+                'js/imagesGridFooterControl.ts',
+                'js/navbarControl.ts',
+                'js/tagsControl.ts',
+                'js/searchSidebarControl.ts'
+            ]
+        }
+    ];
 
-    return gulp
-        .src(['js/*.js', 'js/*.ts'])
-        .pipe(ts())
-        .pipe(concat('all.js'))
-        .pipe(terser())
-        .pipe(gulp.dest('django/photos/static/js'));
+    let tasks = jsFiles.map(data =>
+        gulp
+            .src(data.files)
+            .pipe(ts())
+            .pipe(concat(data.outputFileName))
+            .pipe(terser())
+            .pipe(gulp.dest('django/photos/static/js'))
+    );
+
+    return merge(tasks);
 }
 
 // exports.default = series(processTailwind, processJavascript);
