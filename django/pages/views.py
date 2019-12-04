@@ -98,7 +98,7 @@ def index(request):
     return render(request, "pages/index.html.j2", context)
 
 
-def get_photos_data(tags=[], before=None, after=None):
+def get_photos_data(tags=None, before=None, after=None):
     """Given query parameters returns a photos dataset
 
     Args:
@@ -128,7 +128,7 @@ def get_photos_data(tags=[], before=None, after=None):
     first = None
     last = None
 
-    if tags == []:
+    if tags is None:
         query_set = Picture.objects
         if before is not None:
             query_set = list(
