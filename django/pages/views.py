@@ -218,56 +218,6 @@ def search(request):
             {"tag": tag, "query": "+".join(filter(non_matches, searched_tags))}
         )
 
-    after = request.GET.get("after", "")
-    after_picture = None
-    if after != "":
-        # Grab the internal id from postgres
-        after_picture = Picture.objects.get(public_id=after)
-
-    before = request.GET.get("before", "")
-    before_picture = None
-    if before != "":
-        # Grab the internal id from postgres
-        before_picture = Picture.objects.get(public_id=before)
-
-    pictures = search_pictures(
-        tags=[tag_data["tag"] for tag_data in searched_tags_data],
-        after_picture=after_picture,
-        before_picture=before_picture,
-    )
-
-    render_next_button = True
-    render_previous_button = True
-
-    # Raw fetch, no before / after
-    if before_picture is None and after_picture is None:
-        render_previous_button = False
-        if len(pictures) < settings.PAGE_SIZE + 1:
-            render_next_button = False
-
-    # We have done a before / after, so disabling is done on the
-    # direction we're going
-    if len(pictures) < settings.PAGE_SIZE + 1:
-        if before_picture is not None:
-            render_previous_button = False
-        elif after_picture is not None:
-            render_next_button = False
-
-    # If we were going backwards we want to shave off the first
-    # pic, not the last, so reverse before and after the shave
-    if before_picture is not None:
-        pictures.reverse()
-    pictures = pictures[: settings.PAGE_SIZE]
-    if before_picture is not None:
-        pictures.reverse()
-
-    if len(pictures) > 0:
-        last_picture = pictures[-1]
-        first_picture = pictures[0]
-    else:
-        last_picture = None
-        first_picture = None
-
     before_picture = request.GET.get("before")
     after_picture = request.GET.get("after")
 
