@@ -135,34 +135,32 @@ def get_photos_data(tags=None, before=None, after=None):
         if before is not None:
             # For before we want to go "backwards," to get the pictures
             # closest in id to before_picture, so order by id (increasing)
-            query_set = list(
-                query_set.filter(id__gt=before_picture.id).order_by("id")[
-                    : settings.PAGE_SIZE + 1
-                ]
-            )
+            query_set = list(query_set.filter(id__gt=before_picture.id).order_by("id"))
         elif after is not None:
-            query_set = query_set.filter(id__lt=after_picture.id).order_by("-id")[
-                : settings.PAGE_SIZE + 1
-            ]
+            query_set = query_set.filter(id__lt=after_picture.id).order_by("-id")
         else:
-            query_set = query_set.order_by("-id")[: settings.PAGE_SIZE + 1]
+            query_set = query_set.order_by("-id")
 
     # If there are tags we have to go to Elasticsearch
     else:
         query_set = PictureDocument.search()
 
-        if before is not None:
-            query_set = query_set.query("range", id={"gt": before_picture.id})
-        if after is not None:
-            query_set = query_set.query("range", id={"lt": after_picture.id})
-
         for tag in tags:
             query_set = query_set.query("term", tags=tag)
 
         if before is not None:
-            query_set = query_set.sort("id")[: settings.PAGE_SIZE + 1]
+            query_set = query_set.query("range", id={"gt": before_picture.id}).sort(
+                "id"
+            )
+        elif after is not None:
+            query_set = query_set.query("range", id={"lt": after_picture.id}).sort(
+                "-id"
+            )
         else:
-            query_set = query_set.sort("-id")[: settings.PAGE_SIZE + 1]
+            query_set = query_set.sort("-id")
+
+    # Squeeze to max page size + 1 (to check if there are any left)
+    query_set = query_set[: settings.PAGE_SIZE + 1]
 
     # Turn the query_set into a list
     query_set = list(query_set)
