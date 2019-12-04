@@ -64,26 +64,6 @@ def clean_pictures(pictures, from_elastic_search):
     return new_pictures
 
 
-def search_pictures(tags=[], after_picture=None, before_picture=None):
-    """ Queries elastic search """
-    pictures = PictureDocument.search()
-    if after_picture is not None:
-        pictures = pictures.query("range", id={"lt": after_picture.id})
-    if before_picture is not None:
-        pictures = pictures.query("range", id={"gt": before_picture.id})
-
-    for tag in tags:
-        pictures = pictures.query("term", tags=tag)
-
-    if before_picture is None:
-        pictures = pictures.sort("-id")[: settings.PAGE_SIZE + 1]
-    else:
-        pictures = list(pictures.sort("id")[: settings.PAGE_SIZE + 1])
-        pictures.reverse()
-
-    return [clean_picture_data(picture, True) for picture in pictures]
-
-
 def is_valid_tag(tag):
     """ Verifies that a tag is valid """
     return (
