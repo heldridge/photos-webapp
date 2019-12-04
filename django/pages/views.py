@@ -99,19 +99,16 @@ def stringsDoNotMatch(str1, str2):
 
 
 def index(request):
-    pictures = get_photos_data()["photos"]
+    data = get_photos_data()
 
-    render_continue_button = len(pictures) >= settings.PAGE_SIZE + 1
-
+    render_continue_button = data["more_left"]
+    pictures = data["photos"]
     pictures = pictures[: settings.PAGE_SIZE]
-    last_picture = None
-    if len(pictures) > 0:
-        last_picture = pictures[-1]
 
     context = {
         "pictures": pictures,
         "grid_placeholders": [1] * (18 - len(pictures)),
-        "last_picture": last_picture,
+        "last_picture": data["last"],
         "render_continue_button": render_continue_button,
         "max_tag_length": settings.MAX_TAG_LENGTH,
         "min_tag_length": settings.MIN_TAG_LENGTH,
