@@ -99,9 +99,10 @@ def stringsDoNotMatch(str1, str2):
 
 
 def index(request):
-    pictures = clean_pictures(
-        Picture.objects.order_by("-uploaded_at")[: settings.PAGE_SIZE + 1], False
-    )
+    # pictures = clean_pictures(
+    #     Picture.objects.order_by("-uploaded_at")[: settings.PAGE_SIZE + 1], False
+    # )
+    pictures = get_photos_data()["photos"]
 
     render_continue_button = len(pictures) >= settings.PAGE_SIZE + 1
 
@@ -121,6 +122,68 @@ def index(request):
         "invalid_tag_char_regex": settings.INVALID_TAG_CHAR_REGEX,
     }
     return render(request, "pages/index.html.j2", context)
+
+
+def get_photos_data(tags=[], before=None, after=None):
+    """Given query parameters returns a photos dataset
+
+    Args:
+        tags (``list`` of ``str``): The list of tags to search for
+        before (``str``): The id of the photo to fetch photos before
+        after (``str``): The id of the photo to fetch photos after
+    Returns:
+        {
+            "photos": (``list``) The photos returned by the query
+            "more_left": (``bool``) Whether there are more photos left in the current "direction"
+            "first": (``photo``) The first photo in the photos list, None if the list has no items
+            "last": (``photo``) The last photo in the photos list, None if the list has no items
+        }
+    """
+    if before is not None and after is not None:
+        # Can't have both
+        return {"photos": [], "more_left": false, "first": None, "last": None}
+
+    # Fetch the before or after ID
+    if before is not None and before != "":
+        before_picture = Picture.objects.get(public_id=before)
+    if after is not None and after != "":
+        after_picture = Picture.objects.get(public_id=after)
+
+    photos = []
+    more_left = False
+    first = None
+    last = None
+
+    if tags == []:
+        query_set = Picture.objects
+        if before is not None:
+            query_set = list(
+                query_set.filter(id__gt=before_picture.id).order_by("id")[
+                    : settings.PAGE_SIZE + 1
+                ]
+            )
+            if len(query_set) < settings.PAGE_SIZE + 1:
+                more_left = False
+            query_set = query_set[: settings.PAGE_SIZE]
+            query_set.reverse()
+
+        elif after is not None:
+            query_set = query_set.filter(id__lt=after_picture.id).order_by("-id")[
+                : settings.PAGE_SIZE + 1
+            ]
+        else:
+            query_set = query_set.order_by("-id")[: settings.PAGE_SIZE + 1]
+        query_set = list(query_set)
+        photos = [clean_picture_data(picture, False) for picture in query_set]
+        if len(photos) > 0:
+            first = photos[0]
+            last = photos[-1]
+
+    else:
+        x = ""
+        # fetch from elasticsearch
+
+    return {"photos": photos, "more_left": more_left, "first": first, "last": last}
 
 
 def search(request):
