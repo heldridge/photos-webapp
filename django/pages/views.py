@@ -99,9 +99,6 @@ def stringsDoNotMatch(str1, str2):
 
 
 def index(request):
-    # pictures = clean_pictures(
-    #     Picture.objects.order_by("-uploaded_at")[: settings.PAGE_SIZE + 1], False
-    # )
     pictures = get_photos_data()["photos"]
 
     render_continue_button = len(pictures) >= settings.PAGE_SIZE + 1
