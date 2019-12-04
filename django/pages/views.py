@@ -123,14 +123,18 @@ def get_photos_data(tags=None, before=None, after=None):
     if after is not None and after != "":
         after_picture = Picture.objects.get(public_id=after)
 
+    # Instantiate default values
     photos = []
     more_left = True
     first = None
     last = None
 
+    # If tags is None we can get everything from the database
     if tags is None:
         query_set = Picture.objects
         if before is not None:
+            # For before we want to go "backwards," to get the pictures
+            # closest in id to before_picture, so order by id (increasing)
             query_set = list(
                 query_set.filter(id__gt=before_picture.id).order_by("id")[
                     : settings.PAGE_SIZE + 1
@@ -140,11 +144,10 @@ def get_photos_data(tags=None, before=None, after=None):
             query_set = query_set.filter(id__lt=after_picture.id).order_by("-id")[
                 : settings.PAGE_SIZE + 1
             ]
-            if len(query_set) < settings.PAGE_SIZE + 1:
-                more_left = False
         else:
             query_set = query_set.order_by("-id")[: settings.PAGE_SIZE + 1]
 
+    # If there are tags we have to go to Elasticsearch
     else:
         query_set = PictureDocument.search()
 
@@ -161,11 +164,15 @@ def get_photos_data(tags=None, before=None, after=None):
         else:
             query_set = query_set.sort("-id")[: settings.PAGE_SIZE + 1]
 
+    # Turn the query_set into a list
     query_set = list(query_set)
+
+    # Check if there are any left to fetch, and squeeze to the max page size
     if len(query_set) < settings.PAGE_SIZE + 1:
         more_left = False
     query_set = query_set[: settings.PAGE_SIZE]
 
+    # We went "backwards" if we had a before, so reverse the list now
     if before is not None:
         query_set.reverse()
 
