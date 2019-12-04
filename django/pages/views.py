@@ -141,7 +141,7 @@ def get_photos_data(tags=[], before=None, after=None):
     """
     if before is not None and after is not None:
         # Can't have both
-        return {"photos": [], "more_left": false, "first": None, "last": None}
+        return {"photos": [], "more_left": False, "first": None, "last": None}
 
     # Fetch the before or after ID
     if before is not None and before != "":
