@@ -169,7 +169,7 @@ def get_photos_data(tags=None, before=None, after=None):
     if before is not None:
         query_set.reverse()
 
-    photos = [clean_picture_data(picture, tags != []) for picture in query_set]
+    photos = [clean_picture_data(picture, tags is not None) for picture in query_set]
     if len(photos) > 0:
         first = photos[0]
         last = photos[-1]
