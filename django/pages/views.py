@@ -160,10 +160,7 @@ def get_photos_data(tags=None, before=None, after=None):
             query_set = query_set.sort("-id")
 
     # Squeeze to max page size + 1 (to check if there are any left)
-    query_set = query_set[: settings.PAGE_SIZE + 1]
-
-    # Turn the query_set into a list
-    query_set = list(query_set)
+    query_set = list(query_set[: settings.PAGE_SIZE + 1])
 
     # Check if there are any left to fetch, and squeeze to the max page size
     if len(query_set) < settings.PAGE_SIZE + 1:
