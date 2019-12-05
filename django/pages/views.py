@@ -236,5 +236,11 @@ def search(request):
 
 
 def gallery(request):
-    context = {}
+    picture_id = request.GET.get("p", "")
+
+    picture = None
+    if picture_id != "":
+        picture = clean_picture_data(Picture.objects.get(public_id=picture_id), False)
+
+    context = {"picture": picture}
     return render(request, "pages/gallery.html.j2", context)
