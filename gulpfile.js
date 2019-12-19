@@ -32,7 +32,7 @@ function processJavascript(cb) {
                 'js/imagesGridFooterControl.ts',
                 'js/navbarControl.ts',
                 'js/tagsControl.ts',
-                'js/searchSidebarControl.ts'
+                'js/searchSideBarControl.ts'
             ]
         }
     ];
@@ -51,7 +51,7 @@ function processJavascript(cb) {
 
 // exports.default = series(processTailwind, processJavascript);
 
-exports.default = function() {
+exports.default = function () {
     watch('css/*.css', processTailwind);
     watch('js/*.ts', processJavascript);
 };
