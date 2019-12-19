@@ -79,7 +79,7 @@ WSGI_APPLICATION = "photos.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "photos",
+        "NAME": os.environ["DJANGO_DATABASE_NAME"],
         "USER": "django",
         "PASSWORD": os.environ["DJANGO_POSTGRES_PASSWORD"],
         "HOST": os.environ["DJANGO_POSTGRES_HOST"],
@@ -122,8 +122,8 @@ STATIC_URL = "/static/"
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "photos/static")]
 
 # Media Folder Settings
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, os.environ["DJANGO_MEDIA_FOLDER_NAME"])
+MEDIA_URL = "/" + os.environ["DJANGO_MEDIA_FOLDER_NAME"] + "/"
 
 # How many characters a tag is allowed to be
 MAX_TAG_LENGTH = 20
