@@ -11,15 +11,15 @@
         <img class="max-h-full" src="{{ picture.photo }}" alt="">
     </div>
     <div class="border border-red-300 w-2/6 flex flex-col" id="gallery-sidebar">
-        <div class="border border-green-300 mx-6 mt-20 flex justify-between" id="gallery-next-prev">
-            <button class="bg-gray-300 hover:bg-gray-500 rounded py-2 pl-4 pr-3">
+        <div class=" mx-6 mt-20 flex justify-between" id="gallery-next-prev">
+            <button class="bg-gray-300 hover:bg-gray-500 rounded-t py-2 pl-4 pr-3">
                 Previous
             </button>
-            <button class="bg-gray-300 hover:bg-gray-500 rounded py-2 pl-4 pr-3">
+            <button class="bg-gray-300 hover:bg-gray-500 rounded-t py-2 pl-4 pr-3">
                 Next
             </button>
         </div>
-        <div class="border-2 rounded border-gray-300 mx-6 pb-5 px-1 flex flex-row flex-wrap justify-around" id="gallery-next-images">
+        <div class="border-2 rounded-b border-gray-300 mx-6 pb-5 px-1 flex flex-row flex-wrap justify-around" id="gallery-next-images">
             {% if pictures %}
                 {% for picture in pictures %}
                     <div class="h-24 w-under-1-3 border rounded overflow-hidden mt-5">
