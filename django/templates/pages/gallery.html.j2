@@ -6,12 +6,12 @@
 
 {% if picture %}
 
-<div class="flex flex-row px-16 pt-4 border border-blue-300">
-    <div class="w-4/6 max-h-screen flex justify-center border border-green-300" id="gallery-image-container">
+<div class="flex flex-row justify-center md:justify-start px-16 pt-4 border border-blue-300">
+    <div class="md:w-4/6 max-h-screen flex justify-center border border-green-300" id="gallery-image-container">
         <img class="max-h-full object-contain" src="{{ picture.photo }}" alt="">
     </div>
-    <div class="border border-red-300 w-2/6 flex flex-col" id="gallery-sidebar">
-        <div class=" mx-6 mt-20 flex justify-between" id="gallery-next-prev">
+    <div class="border border-red-300 w-2/6 hidden md:flex flex-col" id="gallery-sidebar">
+        <div class="mx-6 mt-20 flex justify-between" id="gallery-next-prev">
             <button class="bg-gray-300 hover:bg-gray-500 rounded-t py-2 pl-4 pr-3">
                 Previous
             </button>
