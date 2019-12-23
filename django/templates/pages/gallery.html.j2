@@ -7,10 +7,24 @@
 {% if picture %}
 
 <div class="flex flex-row justify-around px-16 pt-4 border border-blue-300">
-    <div class="w-4/5 max-h-screen flex justify-center border border-green-300" id="gallery-image-container">
+    <div class="w-4/6 max-h-screen flex justify-center border border-green-300" id="gallery-image-container">
         <img class="max-h-full" src="{{ picture.photo }}" alt="">
     </div>
-    <div class="border border-red-300 w-1/5" id="gallery-sidebar">
+    <div class="border border-red-300 w-2/6 flex flex-col" id="gallery-sidebar">
+        <div class="border border-green-300 mx-6 mt-5 flex justify-between" id="gallery-next-prev">
+            <button class="bg-gray-300 hover:bg-gray-500 rounded py-2 pl-4 pr-3">
+                Previous
+            </button>
+            <button class="bg-gray-300 hover:bg-gray-500 rounded py-2 pl-4 pr-3">
+                Next
+            </button>
+        </div>
+        <div class="border border-orange-300 mx-6 h-40" id="gallery-next-images">
+            {% if pictures %}
+            
+            {% else %}
+            {% endif %}
+        </div>
     </div>
 </div>
 
