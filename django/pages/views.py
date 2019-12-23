@@ -218,6 +218,12 @@ def search(request):
     if after_picture is not None and not data["more_left"]:
         render_next_button = False
 
+    current_full_query = "+".join(searched_tags)
+    if before_picture is not None:
+        current_full_query += f"&before={before_picture}"
+    if after_picture is not None:
+        current_full_query += f"&after={after_picture}"
+
     context = {
         "pictures": pictures,
         "grid_placeholders": [1] * (18 - len(pictures)),
@@ -231,6 +237,7 @@ def search(request):
         "first_picture": first_picture,
         "render_next_button": render_next_button,
         "render_previous_button": render_previous_button,
+        "current_full_query": current_full_query,
     }
     return render(request, "pages/search.html.j2", context)
 
@@ -251,9 +258,10 @@ def gallery(request):
             {"tag": tag, "query": "+".join(filter(non_matches, searched_tags))}
         )
 
-    data = get_photos_data(
-        searched_tags, request.GET.get("before"), request.GET.get("after")
-    )
+    before = request.GET.get("before")
+    after = request.GET.get("after")
+
+    data = get_photos_data(searched_tags, before, after)
 
     # Get the gallery picture id query
     picture_id = request.GET.get("p", "")
@@ -279,6 +287,12 @@ def gallery(request):
         if picture["public_id"] == picture_id:
             current_picture_index = index
             break
+
+    current_full_query = "+".join(searched_tags)
+    if before is not None:
+        current_full_query += f"before={before}"
+    if after is not None:
+        current_full_query += f"after={after}"
 
     context = {
         "picture": current_picture,
