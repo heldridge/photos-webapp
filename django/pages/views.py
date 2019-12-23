@@ -274,5 +274,14 @@ def gallery(request):
     else:
         pictures = data["photos"][current_picture_index : current_picture_index + 9]
 
-    context = {"picture": current_picture, "pictures": pictures}
+    for index, picture in enumerate(pictures):
+        if picture["public_id"] == picture_id:
+            current_picture_index = index
+            break
+
+    context = {
+        "picture": current_picture,
+        "pictures": pictures,
+        "current_picture_index": current_picture_index,
+    }
     return render(request, "pages/gallery.html.j2", context)
