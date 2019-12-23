@@ -298,5 +298,6 @@ def gallery(request):
         "picture": current_picture,
         "pictures": pictures,
         "current_picture_index": current_picture_index,
+        "grid_placeholders": [1] * (9 - len(pictures)),
     }
     return render(request, "pages/gallery.html.j2", context)
