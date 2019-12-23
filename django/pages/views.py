@@ -274,6 +274,7 @@ def gallery(request):
     else:
         pictures = data["photos"][current_picture_index : current_picture_index + 9]
 
+    current_picture_index = -1
     for index, picture in enumerate(pictures):
         if picture["public_id"] == picture_id:
             current_picture_index = index
