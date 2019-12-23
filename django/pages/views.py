@@ -269,7 +269,10 @@ def gallery(request):
                 current_picture_index = index
                 break
 
-    pictures = data["photos"][current_picture_index : current_picture_index + 9]
+    if len(data["photos"]) - current_picture_index < 9:
+        pictures = data["photos"][-9:]
+    else:
+        pictures = data["photos"][current_picture_index : current_picture_index + 9]
 
     context = {"picture": current_picture, "pictures": pictures}
     return render(request, "pages/gallery.html.j2", context)
