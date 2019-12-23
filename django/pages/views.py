@@ -236,11 +236,40 @@ def search(request):
 
 
 def gallery(request):
+    # Grab and validate tags
+    # Also remove duplicates
+    # Duplicated code from Search, consolidate elsewhere probs
+    searched_tags_query_parameter = request.GET.get("q", "")
+    searched_tags = list(
+        set(filter(is_valid_tag, searched_tags_query_parameter.split()))
+    )
+    searched_tags.sort()
+    searched_tags_data = []
+    for tag in searched_tags:
+        non_matches = functools.partial(stringsDoNotMatch, tag)
+        searched_tags_data.append(
+            {"tag": tag, "query": "+".join(filter(non_matches, searched_tags))}
+        )
+
+    data = get_photos_data(
+        searched_tags, request.GET.get("before"), request.GET.get("after")
+    )
+
+    # Get the gallery picture id query
     picture_id = request.GET.get("p", "")
-
-    picture = None
+    current_picture = None
+    current_picture_index = 0
     if picture_id != "":
-        picture = clean_picture_data(Picture.objects.get(public_id=picture_id), False)
+        current_picture = clean_picture_data(
+            Picture.objects.get(public_id=picture_id), False
+        )
 
-    context = {"picture": picture}
+        for index, picture in enumerate(data["photos"]):
+            if picture["public_id"] == picture_id:
+                current_picture_index = index
+                break
+
+    pictures = data["photos"][current_picture_index : current_picture_index + 9]
+
+    context = {"picture": current_picture, "pictures": pictures}
     return render(request, "pages/gallery.html.j2", context)
