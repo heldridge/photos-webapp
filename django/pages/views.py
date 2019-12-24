@@ -277,6 +277,8 @@ def gallery(request):
                 current_picture_index = index
                 break
 
+    original_picture_index = current_picture_index
+
     if len(data["photos"]) - current_picture_index < 9:
         pictures = data["photos"][-9:]
     else:
@@ -294,8 +296,6 @@ def gallery(request):
     if after is not None:
         current_full_query += f"after={after}"
 
-    print(json.dumps(data["photos"]))
-
     all_pictures_safe_fields = list(
         map(
             lambda item: {"photo": item["photo"], "public_id": item["public_id"]},
@@ -306,6 +306,7 @@ def gallery(request):
     context = {
         "picture": current_picture,
         "pictures": pictures,
+        "original_picture_index": original_picture_index,
         "current_picture_index": current_picture_index,
         "grid_placeholders": [1] * (9 - len(pictures)),
         "all_pictures": all_pictures_safe_fields,
