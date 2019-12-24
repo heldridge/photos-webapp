@@ -34,6 +34,13 @@ function processJavascript(cb) {
                 'js/tagsControl.ts',
                 'js/searchSideBarControl.ts'
             ]
+        },
+        {
+            outputFileName: 'gallery.js',
+            files: [
+                'js/navbarControl.ts',
+                'js/galleryControl.ts'
+            ]
         }
     ];
 
