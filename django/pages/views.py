@@ -299,5 +299,6 @@ def gallery(request):
         "pictures": pictures,
         "current_picture_index": current_picture_index,
         "grid_placeholders": [1] * (9 - len(pictures)),
+        "all_pictures": data["photos"],
     }
     return render(request, "pages/gallery.html.j2", context)
