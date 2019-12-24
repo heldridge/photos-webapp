@@ -54,5 +54,9 @@
 </div>
 
 {% endif %}
+<script type="text/javascript">
+    var allPictures = {{ all_pictures| safe }};
+</script>
+<script type="text/javascript" src="{% static 'js/gallery.js' %}"></script>
 
 {% endblock %}

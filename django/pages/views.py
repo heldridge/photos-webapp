@@ -294,11 +294,20 @@ def gallery(request):
     if after is not None:
         current_full_query += f"after={after}"
 
+    print(json.dumps(data["photos"]))
+
+    all_pictures_safe_fields = list(
+        map(
+            lambda item: {"photo": item["photo"], "public_id": item["public_id"]},
+            data["photos"],
+        )
+    )
+
     context = {
         "picture": current_picture,
         "pictures": pictures,
         "current_picture_index": current_picture_index,
         "grid_placeholders": [1] * (9 - len(pictures)),
-        "all_pictures": data["photos"],
+        "all_pictures": all_pictures_safe_fields,
     }
     return render(request, "pages/gallery.html.j2", context)
