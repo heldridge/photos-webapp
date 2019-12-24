@@ -55,7 +55,8 @@
 
 {% endif %}
 <script type="text/javascript">
-    var allPictures = {{ all_pictures| safe }};
+    let allPictures = {{ all_pictures| safe }};
+    let originalPictureIndex = {{ original_picture_index }};
 </script>
 <script type="text/javascript" src="{% static 'js/gallery.js' %}"></script>
 
