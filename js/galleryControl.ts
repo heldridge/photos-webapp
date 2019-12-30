@@ -8,6 +8,25 @@ let galleryNextImages: HTMLElement = document.getElementById(
   "gallery-next-images"
 );
 
+let galleryImageContainer = <HTMLDivElement>(
+  document.getElementById("gallery-image-container")
+);
+
+function setImage(index: number) {
+  if (index < allPictures.length) {
+    // Remove children
+    while (galleryImageContainer.hasChildNodes()) {
+      galleryImageContainer.removeChild(galleryImageContainer.lastChild);
+    }
+    // Add new child
+    let image = document.createElement("img");
+    image.src = allPictures[index].photo;
+    galleryImageContainer.appendChild(image);
+  }
+}
+
+setImage(originalPictureIndex);
+
 let nextPictures = [];
 if (allPictures.length - originalPictureIndex < 9) {
   nextPictures = allPictures.slice(-9);
