@@ -7,7 +7,7 @@
 {% if picture %}
 
 <div class="flex flex-row justify-center md:justify-start px-8 md:px-16 pt-4">
-    <div class="md:w-4/6 max-h-screen flex flex-col" id="gallery-image-container">
+    <div class="md:w-4/6 max-h-screen flex flex-col" id="gallery-image-guide-container">
         <div class="flex md:hidden justify-between" id="gallery-next-prev">
             <button class="bg-gray-300 hover:bg-gray-500 rounded-t py-2 pl-4 pr-3">
                 Previous
@@ -16,7 +16,8 @@
                 Next
             </button>
         </div>
-        <img class="max-h-full object-contain" src="{{ picture.photo }}" alt="">
+        <div id="gallery-image-container">
+        </div>
     </div>
     <div class="w-2/6 hidden md:flex flex-col" id="gallery-sidebar">
         <div class="flex-grow">
