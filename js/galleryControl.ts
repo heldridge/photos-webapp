@@ -14,6 +14,21 @@ let galleryImageContainer = <HTMLDivElement>(
 let currentIndex = originalPictureIndex;
 setImage(originalPictureIndex);
 
+/*
+Next Images:
+
+<div id="gallery-next-images">
+
+  <button class="h-0 pb-1-3 w-under-1-3 rounded overflow-hidden mt-5 next-picture">
+    <img class="object-cover">
+  </button>
+  ...
+  <a class="h-0 pb-1-3 w-under-1-3 rounded overflow-hidden mt-5 bg-gray-300">
+  </a>
+
+</div>
+*/
+
 function setNextImages(index: number) {
   while (galleryNextImages.hasChildNodes()) {
     galleryNextImages.removeChild(galleryNextImages.lastChild);
@@ -58,7 +73,6 @@ function setNextImages(index: number) {
   });
 
   if (renderNextPageButton) {
-    console.log("here in render next page button");
     let nextPageButton = document.createElement("a");
     nextPageButton.className =
       "h-0 pb-1-3 w-under-1-3 rounded overflow-hidden mt-5 bg-gray-300";
