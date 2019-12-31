@@ -11,6 +11,8 @@ let galleryNextImages: HTMLElement = document.getElementById(
 let galleryImageContainer = <HTMLDivElement>(
   document.getElementById("gallery-image-container")
 );
+let currentIndex = originalPictureIndex;
+setImage(originalPictureIndex);
 
 function setNextImages(index: number) {
   while (galleryNextImages.hasChildNodes()) {
@@ -63,6 +65,17 @@ function setImage(index: number) {
     galleryImageContainer.appendChild(image);
   }
   setNextImages(index);
+  currentIndex = index;
 }
 
-setImage(originalPictureIndex);
+function nextPicture() {
+  if (currentIndex + 1 < allPictures.length) {
+    setImage(currentIndex + 1);
+  }
+}
+
+function previousPicture() {
+  if (currentIndex > 0) {
+    setImage(currentIndex - 1);
+  }
+}
