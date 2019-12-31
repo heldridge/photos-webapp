@@ -310,5 +310,7 @@ def gallery(request):
         "current_picture_index": current_picture_index,
         "grid_placeholders": [1] * (9 - len(pictures)),
         "all_pictures": all_pictures_safe_fields,
+        "max_tag_length": settings.MAX_TAG_LENGTH,
+        "min_tag_length": settings.MIN_TAG_LENGTH,
     }
     return render(request, "pages/gallery.html.j2", context)
