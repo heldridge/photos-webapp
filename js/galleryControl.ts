@@ -21,12 +21,14 @@ function setNextImages(index: number) {
 
   let nextPictures = [];
   let startingIndex = 0;
+  let renderNextPageButton = false;
   if (allPictures.length - index < 9) {
-    nextPictures = allPictures.slice(-9);
-    startingIndex = allPictures.length - 9;
+    nextPictures = allPictures.slice(-8);
+    startingIndex = allPictures.length - 8;
     if (startingIndex < 0) {
       startingIndex = 0;
     }
+    renderNextPageButton = true;
   } else {
     nextPictures = allPictures.slice(index, index + 9);
     startingIndex = index;
@@ -37,6 +39,10 @@ function setNextImages(index: number) {
     let pictureNode = document.createElement("button");
     pictureNode.className =
       "h-0 pb-1-3 w-under-1-3 rounded overflow-hidden mt-5 next-picture";
+
+    if (counter + startingIndex === index) {
+      pictureNode.className += " selected-picture";
+    }
 
     let imageNode = document.createElement("img");
     imageNode.className = "object-cover";
@@ -50,6 +56,14 @@ function setNextImages(index: number) {
     pictureNode.onclick = () => setImage(newIndex);
     counter += 1;
   });
+
+  if (renderNextPageButton) {
+    console.log("here in render next page button");
+    let nextPageButton = document.createElement("a");
+    nextPageButton.className =
+      "h-0 pb-1-3 w-under-1-3 rounded overflow-hidden mt-5 bg-gray-300";
+    galleryNextImages.appendChild(nextPageButton);
+  }
 }
 
 function setImage(index: number) {
