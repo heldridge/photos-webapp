@@ -23,7 +23,9 @@ Next Images:
     <img class="object-cover">
   </button>
   ...
-  <a class="h-0 pb-1-3 w-under-1-3 rounded overflow-hidden mt-5 bg-gray-300">
+  <a class="w-under-1-3 rounded overflow-hidden mt-5 bg-gray-300 hover:bg-gray-500 flex flex-col justify-center items-center text-xl cursor-pointer">
+    Next Page
+    <i class="fas fa-arrow-right"></i>
   </a>
 
 </div>
@@ -75,7 +77,15 @@ function setNextImages(index: number) {
   if (renderNextPageButton) {
     let nextPageButton = document.createElement("a");
     nextPageButton.className =
-      "h-0 pb-1-3 w-under-1-3 rounded overflow-hidden mt-5 bg-gray-300";
+      "w-under-1-3 rounded overflow-hidden mt-5 bg-gray-300 hover:bg-gray-500 flex flex-col justify-center items-center text-xl cursor-pointer";
+
+    let message = document.createTextNode("Next Page");
+    nextPageButton.appendChild(message);
+
+    let iconNode = document.createElement("i");
+    iconNode.className = "fas fa-arrow-right";
+    nextPageButton.appendChild(iconNode);
+
     galleryNextImages.appendChild(nextPageButton);
   }
 }
