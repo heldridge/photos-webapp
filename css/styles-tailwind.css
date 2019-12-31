@@ -68,3 +68,7 @@
 #gallery-sidebar {
   padding-top: 10vh;
 }
+
+.selected-picture {
+  box-shadow: 0 0 0 2px rgba(0, 204, 0, 1);
+}
