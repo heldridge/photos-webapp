@@ -44,7 +44,7 @@ function setNextImages(index: number) {
 
     galleryNextImages.appendChild(pictureNode);
 
-    pictureNode.onclick = () => console.log(startingIndex + counter);
+    pictureNode.onclick = () => setImage(counter + startingIndex);
     counter += 1;
   });
 }
