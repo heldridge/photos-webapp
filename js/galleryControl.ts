@@ -44,12 +44,14 @@ function setNextImages(index: number) {
 
     galleryNextImages.appendChild(pictureNode);
 
-    pictureNode.onclick = () => setImage(counter + startingIndex);
+    let newIndex = counter + startingIndex;
+    pictureNode.onclick = () => setImage(newIndex);
     counter += 1;
   });
 }
 
 function setImage(index: number) {
+  console.log(index);
   if (index < allPictures.length) {
     // Remove children
     while (galleryImageContainer.hasChildNodes()) {
