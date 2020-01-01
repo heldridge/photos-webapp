@@ -276,6 +276,9 @@ def gallery(request):
             if picture["public_id"] == picture_id:
                 current_picture_index = index
                 break
+    elif len(data["photos"]) > 0:
+        current_picture = data["photos"][0]
+        current_picture_index = 0
 
     original_picture_index = current_picture_index
 
@@ -312,5 +315,7 @@ def gallery(request):
         "all_pictures": all_pictures_safe_fields,
         "max_tag_length": settings.MAX_TAG_LENGTH,
         "min_tag_length": settings.MIN_TAG_LENGTH,
+        "current_query": "+".join(searched_tags),
+        "last_picture": data["last"],
     }
     return render(request, "pages/gallery.html.j2", context)

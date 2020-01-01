@@ -4,6 +4,9 @@ let allPictures: Array = allPicturesOutside;
 // @ts-ignore
 let originalPictureIndex = originalPictureIndexOutside;
 
+//@ts-ignore
+let nextPageLink = nextPageLinkOutside;
+
 let galleryNextImages: HTMLElement = document.getElementById(
   "gallery-next-images"
 );
@@ -77,22 +80,21 @@ function setNextImages(index: number) {
   if (renderNextPageButton) {
     let nextPageButton = document.createElement("a");
     nextPageButton.className =
-      "w-under-1-3 rounded overflow-hidden mt-5 bg-gray-300 hover:bg-gray-500 flex flex-col justify-center items-center text-xl cursor-pointer";
+      "w-under-1-3 rounded overflow-hidden mt-5 border-2 border-gray-500 bg-gray-300 hover:bg-gray-500 flex flex-col justify-center items-center text-xl cursor-pointer";
+    nextPageButton.href = nextPageLink;
 
     let message = document.createTextNode("Next Page");
     nextPageButton.appendChild(message);
-
     let iconNode = document.createElement("i");
     iconNode.className = "fas fa-arrow-right";
     nextPageButton.appendChild(iconNode);
-
     galleryNextImages.appendChild(nextPageButton);
   }
 }
 
 function setImage(index: number) {
   console.log(index);
-  if (index < allPictures.length) {
+  if (index < allPictures.length && galleryImageContainer) {
     // Remove children
     while (galleryImageContainer.hasChildNodes()) {
       galleryImageContainer.removeChild(galleryImageContainer.lastChild);
