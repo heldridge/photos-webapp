@@ -95,39 +95,41 @@ function setNextImages(index: number) {
 }
 
 function setImage(index: number, stateAction: string = "") {
-  if (index < allPictures.length && galleryImageContainer) {
-    // Remove children
-    while (galleryImageContainer.hasChildNodes()) {
-      galleryImageContainer.removeChild(galleryImageContainer.lastChild);
+  if (index < allPictures.length) {
+    if (galleryImageContainer) {
+      // Remove children
+      while (galleryImageContainer.hasChildNodes()) {
+        galleryImageContainer.removeChild(galleryImageContainer.lastChild);
+      }
+      // Add new child
+      let image = document.createElement("img");
+      image.src = allPictures[index].photo;
+      galleryImageContainer.appendChild(image);
     }
-    // Add new child
-    let image = document.createElement("img");
-    image.src = allPictures[index].photo;
-    galleryImageContainer.appendChild(image);
-  }
-  setNextImages(index);
-  currentIndex = index;
+    setNextImages(index);
+    currentIndex = index;
 
-  let query = getUrlParameter("q");
-  let after = getUrlParameter("after");
-  let before = getUrlParameter("before");
+    let query = getUrlParameter("q");
+    let after = getUrlParameter("after");
+    let before = getUrlParameter("before");
 
-  if (stateAction) {
-    let newState = `?p=${allPictures[index].public_id}`;
-    if (query) {
-      newState += `&q=${query}`;
-    }
-    if (after) {
-      newState += `&after=${after}`;
-    }
-    if (before) {
-      newState += `&before=${before}`;
-    }
+    if (stateAction) {
+      let newState = `?p=${allPictures[index].public_id}`;
+      if (query) {
+        newState += `&q=${query}`;
+      }
+      if (after) {
+        newState += `&after=${after}`;
+      }
+      if (before) {
+        newState += `&before=${before}`;
+      }
 
-    if (stateAction === "push") {
-      history.pushState({ index: index }, "", newState);
-    } else if (stateAction === "replace") {
-      history.replaceState({ index: index }, "", newState);
+      if (stateAction === "push") {
+        history.pushState({ index: index }, "", newState);
+      } else if (stateAction === "replace") {
+        history.replaceState({ index: index }, "", newState);
+      }
     }
   }
 }
