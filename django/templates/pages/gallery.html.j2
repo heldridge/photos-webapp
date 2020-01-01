@@ -40,6 +40,18 @@
     let allPicturesOutside = {{ all_pictures| safe }};
     let originalPictureIndexOutside = {{ original_picture_index }};
     let nextPageLinkOutside = "{% url 'gallery' %}?q={{ current_query }}&after={{ last_picture.public_id }}";
+
+    {% if render_next_button %}
+    let renderNextButtonOutside = true;
+    {% else %}
+    let renderNextButtonOutside = false;
+    {% endif %}
+
+    {% if render_previous_button %}
+    let renderPreviousButtonOutside = true
+    {% else %}
+    let renderPreviousButtonOutside = false;
+    {% endif %}
 </script>
 <script type="text/javascript" src="{% static 'js/gallery.js' %}"></script>
 

@@ -306,6 +306,23 @@ def gallery(request):
         )
     )
 
+    before_picture = request.GET.get("before")
+    after_picture = request.GET.get("after")
+
+    render_next_button = True
+    render_previous_button = True
+
+    if before_picture is None and after_picture is None:
+        render_previous_button = False
+        if not data["more_left"]:
+            render_next_button = False
+
+    if before_picture is not None and not data["more_left"]:
+        render_previous_button = False
+
+    if after_picture is not None and not data["more_left"]:
+        render_next_button = False
+
     context = {
         "picture": current_picture,
         "pictures": pictures,
@@ -317,5 +334,7 @@ def gallery(request):
         "min_tag_length": settings.MIN_TAG_LENGTH,
         "current_query": "+".join(searched_tags),
         "last_picture": data["last"],
+        "render_next_button": render_next_button,
+        "render_previous_button": render_previous_button,
     }
     return render(request, "pages/gallery.html.j2", context)

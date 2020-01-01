@@ -7,6 +7,12 @@ let originalPictureIndex = originalPictureIndexOutside;
 //@ts-ignore
 let nextPageLink = nextPageLinkOutside;
 
+//@ts-ignore
+let renderNextButton = renderNextButtonOutside;
+
+//@ts-ignore
+let renderPreviousButton = renderPreviousButtonOutside;
+
 let galleryNextImages: HTMLElement = document.getElementById(
   "gallery-next-images"
 );
@@ -44,12 +50,14 @@ function setNextImages(index: number) {
     let startingIndex = 0;
     let renderNextPageButton = false;
     if (allPictures.length - index < 9) {
-      nextPictures = allPictures.slice(-8);
-      startingIndex = allPictures.length - 8;
+      let numNextImages = renderNextButton ? 8 : 9;
+
+      nextPictures = allPictures.slice(-numNextImages);
+      startingIndex = allPictures.length - numNextImages;
       if (startingIndex < 0) {
         startingIndex = 0;
       }
-      renderNextPageButton = true;
+      renderNextPageButton = renderNextButton;
     } else {
       nextPictures = allPictures.slice(index, index + 9);
       startingIndex = index;
@@ -156,3 +164,6 @@ window.onpopstate = function(event: PopStateEvent) {
     // history.go(-1);
   }
 };
+
+console.log(renderNextButton);
+console.log(renderPreviousButton);
