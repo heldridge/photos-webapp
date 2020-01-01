@@ -115,13 +115,13 @@ function setImage(index: number, stateAction: string = "") {
   if (stateAction) {
     let newState = `?p=${allPictures[index].public_id}`;
     if (query) {
-      newState += `q=${query}`;
+      newState += `&q=${query}`;
     }
     if (after) {
-      newState += `q=${after}`;
+      newState += `&after=${after}`;
     }
     if (before) {
-      newState += `q=${before}`;
+      newState += `&before=${before}`;
     }
 
     if (stateAction === "push") {
