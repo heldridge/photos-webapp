@@ -23,7 +23,8 @@ function processJavascript(cb) {
       files: [
         "js/imagesGridFooterControl.ts",
         "js/navbarControl.ts",
-        "js/tagsControl.ts"
+        "js/tagsControl.ts",
+        "js/classUtils.ts"
       ]
     },
     {
@@ -32,7 +33,8 @@ function processJavascript(cb) {
         "js/imagesGridFooterControl.ts",
         "js/navbarControl.ts",
         "js/tagsControl.ts",
-        "js/searchSideBarControl.ts"
+        "js/searchSideBarControl.ts",
+        "js/classUtils.ts"
       ]
     },
     {
@@ -40,7 +42,8 @@ function processJavascript(cb) {
       files: [
         "js/navbarControl.ts",
         "js/galleryControl.ts",
-        "js/getUrlParameter.ts"
+        "js/getUrlParameter.ts",
+        "js/classUtils.ts"
       ]
     }
   ];
