@@ -99,6 +99,17 @@ function setNextImages(index: number) {
       nextPageButton.appendChild(iconNode);
       galleryNextImages.appendChild(nextPageButton);
     }
+
+    let totalNextImages = nextPictures.length;
+    if (renderNextPageButton) {
+      totalNextImages += 1;
+    }
+
+    for (let i = 0; i < 9 - totalNextImages; i++) {
+      let placeholderNode = document.createElement("div");
+      placeholderNode.className = "w-under-1-3";
+      galleryNextImages.appendChild(placeholderNode);
+    }
   }
 }
 
