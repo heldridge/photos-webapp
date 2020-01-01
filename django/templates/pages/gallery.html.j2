@@ -39,6 +39,7 @@
 <script type="text/javascript">
     let allPicturesOutside = {{ all_pictures| safe }};
     let originalPictureIndexOutside = {{ original_picture_index }};
+    let nextPageLinkOutside = "{% url 'gallery' %}?q={{ current_query }}&after={{ last_picture.public_id }}";
 </script>
 <script type="text/javascript" src="{% static 'js/gallery.js' %}"></script>
 
