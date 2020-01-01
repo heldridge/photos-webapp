@@ -144,7 +144,7 @@ function previousPicture() {
   }
 }
 
-window.onpopstate = function(event) {
+window.onpopstate = function(event: PopStateEvent) {
   console.log("HERE BOYS");
   if (event.state) {
     console.log("event had a state");
