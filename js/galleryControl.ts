@@ -15,7 +15,7 @@ let galleryImageContainer = <HTMLDivElement>(
   document.getElementById("gallery-image-container")
 );
 let currentIndex = originalPictureIndex;
-setImage(originalPictureIndex);
+setImage(originalPictureIndex, "replace");
 
 /*
 Next Images:
@@ -35,65 +35,66 @@ Next Images:
 */
 
 function setNextImages(index: number) {
-  while (galleryNextImages.hasChildNodes()) {
-    galleryNextImages.removeChild(galleryNextImages.lastChild);
-  }
-
-  let nextPictures = [];
-  let startingIndex = 0;
-  let renderNextPageButton = false;
-  if (allPictures.length - index < 9) {
-    nextPictures = allPictures.slice(-8);
-    startingIndex = allPictures.length - 8;
-    if (startingIndex < 0) {
-      startingIndex = 0;
-    }
-    renderNextPageButton = true;
-  } else {
-    nextPictures = allPictures.slice(index, index + 9);
-    startingIndex = index;
-  }
-
-  let counter = 0;
-  nextPictures.forEach(picture => {
-    let pictureNode = document.createElement("button");
-    pictureNode.className =
-      "h-0 pb-1-3 w-under-1-3 rounded overflow-hidden mt-5 next-picture";
-
-    if (counter + startingIndex === index) {
-      pictureNode.className += " selected-picture";
+  if (galleryNextImages) {
+    while (galleryNextImages.hasChildNodes()) {
+      galleryNextImages.removeChild(galleryNextImages.lastChild);
     }
 
-    let imageNode = document.createElement("img");
-    imageNode.className = "object-cover";
-    imageNode.src = picture.photo;
+    let nextPictures = [];
+    let startingIndex = 0;
+    let renderNextPageButton = false;
+    if (allPictures.length - index < 9) {
+      nextPictures = allPictures.slice(-8);
+      startingIndex = allPictures.length - 8;
+      if (startingIndex < 0) {
+        startingIndex = 0;
+      }
+      renderNextPageButton = true;
+    } else {
+      nextPictures = allPictures.slice(index, index + 9);
+      startingIndex = index;
+    }
 
-    pictureNode.appendChild(imageNode);
+    let counter = 0;
+    nextPictures.forEach(picture => {
+      let pictureNode = document.createElement("button");
+      pictureNode.className =
+        "h-0 pb-1-3 w-under-1-3 rounded overflow-hidden mt-5 next-picture";
 
-    galleryNextImages.appendChild(pictureNode);
+      if (counter + startingIndex === index) {
+        pictureNode.className += " selected-picture";
+      }
 
-    let newIndex = counter + startingIndex;
-    pictureNode.onclick = () => setImage(newIndex);
-    counter += 1;
-  });
+      let imageNode = document.createElement("img");
+      imageNode.className = "object-cover";
+      imageNode.src = picture.photo;
 
-  if (renderNextPageButton) {
-    let nextPageButton = document.createElement("a");
-    nextPageButton.className =
-      "w-under-1-3 rounded overflow-hidden mt-5 border-2 border-gray-500 bg-gray-300 hover:bg-gray-500 flex flex-col justify-center items-center text-xl cursor-pointer";
-    nextPageButton.href = nextPageLink;
+      pictureNode.appendChild(imageNode);
 
-    let message = document.createTextNode("Next Page");
-    nextPageButton.appendChild(message);
-    let iconNode = document.createElement("i");
-    iconNode.className = "fas fa-arrow-right";
-    nextPageButton.appendChild(iconNode);
-    galleryNextImages.appendChild(nextPageButton);
+      galleryNextImages.appendChild(pictureNode);
+
+      let newIndex = counter + startingIndex;
+      pictureNode.onclick = () => setImage(newIndex, "push");
+      counter += 1;
+    });
+
+    if (renderNextPageButton) {
+      let nextPageButton = document.createElement("a");
+      nextPageButton.className =
+        "w-under-1-3 rounded overflow-hidden mt-5 border-2 border-gray-500 bg-gray-300 hover:bg-gray-500 flex flex-col justify-center items-center text-xl cursor-pointer";
+      nextPageButton.href = nextPageLink;
+
+      let message = document.createTextNode("Next Page");
+      nextPageButton.appendChild(message);
+      let iconNode = document.createElement("i");
+      iconNode.className = "fas fa-arrow-right";
+      nextPageButton.appendChild(iconNode);
+      galleryNextImages.appendChild(nextPageButton);
+    }
   }
 }
 
-function setImage(index: number) {
-  console.log(index);
+function setImage(index: number, stateAction: string = "") {
   if (index < allPictures.length && galleryImageContainer) {
     // Remove children
     while (galleryImageContainer.hasChildNodes()) {
@@ -106,16 +107,50 @@ function setImage(index: number) {
   }
   setNextImages(index);
   currentIndex = index;
+
+  let query = getUrlParameter("q");
+  let after = getUrlParameter("after");
+  let before = getUrlParameter("before");
+
+  if (stateAction) {
+    let newState = `?p=${allPictures[index].public_id}`;
+    if (query) {
+      newState += `q=${query}`;
+    }
+    if (after) {
+      newState += `q=${after}`;
+    }
+    if (before) {
+      newState += `q=${before}`;
+    }
+
+    if (stateAction === "push") {
+      history.pushState({ index: index }, "", newState);
+    } else if (stateAction === "replace") {
+      history.replaceState({ index: index }, "", newState);
+    }
+  }
 }
 
 function nextPicture() {
   if (currentIndex + 1 < allPictures.length) {
-    setImage(currentIndex + 1);
+    setImage(currentIndex + 1, "push");
   }
 }
 
 function previousPicture() {
   if (currentIndex > 0) {
-    setImage(currentIndex - 1);
+    setImage(currentIndex - 1, "push");
   }
 }
+
+window.onpopstate = function(event) {
+  console.log("HERE BOYS");
+  if (event.state) {
+    console.log("event had a state");
+    setImage(event.state.index);
+  } else {
+    // console.log("event did not have a state");
+    // history.go(-1);
+  }
+};
