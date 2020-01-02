@@ -1,15 +1,13 @@
 // @ts-ignore
 let allPictures: Array = allPicturesOutside;
-
-// @ts-ignore
+//@ts-ignore
 let originalPictureIndex = originalPictureIndexOutside;
-
 //@ts-ignore
 let nextPageLink = nextPageLinkOutside;
-
+//@ts-ignore
+let previousPageLink = previousPageLinkOutside;
 //@ts-ignore
 let renderNextButton = renderNextButtonOutside;
-
 //@ts-ignore
 let renderPreviousButton = renderPreviousButtonOutside;
 
@@ -98,6 +96,25 @@ function setNextImages(index: number) {
       iconNode.className = "fas fa-arrow-right";
       nextPageButton.appendChild(iconNode);
       galleryNextImages.appendChild(nextPageButton);
+    }
+
+    if (renderPreviousButton && (nextPictures.length <= 7 || index === 0)) {
+      let previousPageButton = document.createElement("a");
+      previousPageButton.className =
+        "w-under-1-3 rounded overflow-hidden mt-5 border-2 border-gray-500 bg-gray-300 hover:bg-gray-500 flex flex-col justify-center items-center cursor-pointer";
+      previousPageButton.href = previousPageLink;
+      let message = document.createTextNode("Previous Page");
+      previousPageButton.appendChild(message);
+      let iconNode = document.createElement("i");
+      iconNode.className = "fas fa-arrow-left";
+      previousPageButton.appendChild(iconNode);
+      galleryNextImages.insertBefore(
+        previousPageButton,
+        galleryNextImages.firstChild
+      );
+      if (nextPictures.length >= 9) {
+        galleryNextImages.removeChild(galleryNextImages.lastChild);
+      }
     }
 
     let totalNextImages = nextPictures.length;
