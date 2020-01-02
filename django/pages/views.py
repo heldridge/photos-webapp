@@ -277,8 +277,13 @@ def gallery(request):
                 current_picture_index = index
                 break
     elif len(data["photos"]) > 0:
-        current_picture = data["photos"][0]
-        current_picture_index = 0
+        # We are coming in the "backwards" direction
+        if before is not None:
+            current_picture = data["photos"][-1]
+            current_picture_index = len(data["photos"]) - 1
+        else:
+            current_picture = data["photos"][0]
+            current_picture_index = 0
 
     original_picture_index = current_picture_index
 
@@ -306,21 +311,18 @@ def gallery(request):
         )
     )
 
-    before_picture = request.GET.get("before")
-    after_picture = request.GET.get("after")
-
     render_next_button = True
     render_previous_button = True
 
-    if before_picture is None and after_picture is None:
+    if before is None and after is None:
         render_previous_button = False
         if not data["more_left"]:
             render_next_button = False
 
-    if before_picture is not None and not data["more_left"]:
+    if before is not None and not data["more_left"]:
         render_previous_button = False
 
-    if after_picture is not None and not data["more_left"]:
+    if after is not None and not data["more_left"]:
         render_next_button = False
 
     context = {
