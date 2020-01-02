@@ -19,6 +19,11 @@ let galleryImageContainer = <HTMLDivElement>(
   document.getElementById("gallery-image-container")
 );
 let currentIndex = originalPictureIndex;
+let previousButtons = document.getElementsByClassName("previous-button");
+let nextButtons = document.getElementsByClassName("next-button");
+let previousLinks = document.getElementsByClassName("previous-link");
+let nextLinks = document.getElementsByClassName("next-link");
+
 setImage(originalPictureIndex, "replace");
 
 /*
@@ -101,10 +106,10 @@ function setNextImages(index: number) {
     if (renderPreviousButton && (nextPictures.length <= 7 || index === 0)) {
       let previousPageButton = document.createElement("a");
       previousPageButton.className =
-        "w-under-1-3 rounded overflow-hidden mt-5 border-2 border-gray-500 bg-gray-300 hover:bg-gray-500 flex flex-col justify-center items-center cursor-pointer";
+        "w-under-1-3 rounded overflow-hidden mt-5 border-2 border-gray-500 bg-gray-300 hover:bg-gray-500 flex flex-col justify-center items-center cursor-pointer texl-xl";
       previousPageButton.href = previousPageLink;
       let message = document.createTextNode("Previous Page");
-      previousPageButton.appendChild(message);
+      // previousPageButton.appendChild(message);
       let iconNode = document.createElement("i");
       iconNode.className = "fas fa-arrow-left";
       previousPageButton.appendChild(iconNode);
@@ -127,6 +132,8 @@ function setNextImages(index: number) {
       placeholderNode.className = "w-under-1-3";
       galleryNextImages.appendChild(placeholderNode);
     }
+
+    updateNextPrevActions(index);
   }
 }
 
@@ -170,15 +177,53 @@ function setImage(index: number, stateAction: string = "") {
   }
 }
 
-function nextPicture() {
+function nextPicture(): void {
   if (currentIndex + 1 < allPictures.length) {
     setImage(currentIndex + 1, "push");
   }
 }
 
-function previousPicture() {
+function previousPicture(): void {
   if (currentIndex > 0) {
     setImage(currentIndex - 1, "push");
+  }
+}
+
+function updateNextPrevActions(index: number): void {
+  if (index === 0) {
+    if (renderPreviousButton) {
+      for (let i = 0; i < previousButtons.length; i++) {
+        addClass(previousButtons[i], "hidden");
+      }
+      for (let i = 0; i < previousLinks.length; i++) {
+        removeClass(previousLinks[i], "hidden");
+      }
+    }
+  } else {
+    for (let i = 0; i < previousButtons.length; i++) {
+      removeClass(previousButtons[i], "hidden");
+    }
+    for (let i = 0; i < previousLinks.length; i++) {
+      addClass(previousLinks[i], "hidden");
+    }
+  }
+
+  if (index === allPictures.length - 1) {
+    if (renderNextButton) {
+      for (let i = 0; i < nextButtons.length; i++) {
+        addClass(nextButtons[i], "hidden");
+      }
+      for (let i = 0; i < nextLinks.length; i++) {
+        removeClass(nextLinks[i], "hidden");
+      }
+    }
+  } else {
+    for (let i = 0; i < nextButtons.length; i++) {
+      removeClass(nextButtons[i], "hidden");
+    }
+    for (let i = 0; i < nextLinks.length; i++) {
+      addClass(nextLinks[i], "hidden");
+    }
   }
 }
 
@@ -192,6 +237,3 @@ window.onpopstate = function(event: PopStateEvent) {
     // history.go(-1);
   }
 };
-
-console.log(renderNextButton);
-console.log(renderPreviousButton);
