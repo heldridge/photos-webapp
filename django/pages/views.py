@@ -334,6 +334,7 @@ def gallery(request):
         "min_tag_length": settings.MIN_TAG_LENGTH,
         "current_query": "+".join(searched_tags),
         "last_picture": data["last"],
+        "first_picture": data["first"],
         "render_next_button": render_next_button,
         "render_previous_button": render_previous_button,
     }

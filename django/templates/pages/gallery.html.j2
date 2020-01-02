@@ -40,6 +40,7 @@
     let allPicturesOutside = {{ all_pictures| safe }};
     let originalPictureIndexOutside = {{ original_picture_index }};
     let nextPageLinkOutside = "{% url 'gallery' %}?q={{ current_query }}&after={{ last_picture.public_id }}";
+    let previousPageLinkOutside = "{% url 'gallery' %}?q={{ current_query }}&before={{ first_picture.public_id }}"
 
     {% if render_next_button %}
     let renderNextButtonOutside = true;
