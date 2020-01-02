@@ -9,10 +9,23 @@
 <div class="flex flex-row justify-center md:justify-start px-8 md:px-16 pt-4">
     <div class="md:w-4/6 max-h-screen flex flex-col" id="gallery-image-guide-container">
         <div class="flex md:hidden justify-between" id="gallery-next-prev">
-            <button class="bg-gray-300 hover:bg-gray-500 rounded-t py-2 pl-4 pr-3" onclick=previousPicture()>
+            <a 
+                class="hidden bg-gray-300 hover:bg-gray-500 rounded-t py-2 pl-4 pr-3 previous-link" 
+                href="{% url 'gallery' %}?q={{ current_query }}&before={{ first_picture.public_id }}"
+            >
+                Previous
+            </a>
+            <button class="bg-gray-300 hover:bg-gray-500 rounded-t py-2 pl-4 pr-3 previous-button" onclick=previousPicture()>
                 Previous
             </button>
-            <button class="bg-gray-300 hover:bg-gray-500 rounded-t py-2 pl-4 pr-3" onclick=nextPicture()>
+
+            <a 
+                class="hidden bg-gray-300 hover:bg-gray-500 rounded-t py-2 pl-4 pr-3 next-link"
+                href="{% url 'gallery' %}?q={{ current_query }}&after={{ last_picture.public_id }}"
+            >
+                Next
+            </a>
+            <button class="bg-gray-300 hover:bg-gray-500 rounded-t py-2 pl-4 pr-3 next-button" onclick=nextPicture()>
                 Next
             </button>
         </div>
@@ -22,10 +35,23 @@
     <div class="w-2/6 hidden md:flex flex-col" id="gallery-sidebar">
         <div> 
             <div class="mx-6 flex justify-between" id="gallery-next-prev">
-                <button class="bg-gray-300 hover:bg-gray-500 rounded-t py-2 pl-4 pr-3" onclick=previousPicture()>
+                <a 
+                    class="hidden bg-gray-300 hover:bg-gray-500 rounded-t py-2 pl-4 pr-3 previous-link" 
+                    href="{% url 'gallery' %}?q={{ current_query }}&before={{ first_picture.public_id }}"
+                >
+                    Previous
+                </a>
+                <button class="bg-gray-300 hover:bg-gray-500 rounded-t py-2 pl-4 pr-3 previous-button" onclick=previousPicture()>
                     Previous
                 </button>
-                <button class="bg-gray-300 hover:bg-gray-500 rounded-t py-2 pl-4 pr-3" onclick=nextPicture()>
+
+                <a 
+                    class="hidden bg-gray-300 hover:bg-gray-500 rounded-t py-2 pl-4 pr-3 next-link"
+                    href="{% url 'gallery' %}?q={{ current_query }}&after={{ last_picture.public_id }}"
+                >
+                    Next
+                </a>
+                <button class="bg-gray-300 hover:bg-gray-500 rounded-t py-2 pl-4 pr-3 next-button" onclick=nextPicture()>
                     Next
                 </button>
             </div>
