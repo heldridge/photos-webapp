@@ -8,7 +8,7 @@
 
 <div class="flex flex-row justify-center md:justify-start px-8 md:px-16 pt-4">
     <div class="md:w-4/6 max-h-screen flex flex-col" id="gallery-image-guide-container">
-        <div class="flex md:hidden justify-between" id="gallery-next-prev">
+        <div class="flex md:hidden justify-between">
             {% include "partials/_gallery_next_prev.html.j2" %}
         </div>
         <div id="gallery-image-container">
@@ -16,7 +16,7 @@
     </div>
     <div class="w-2/6 hidden md:flex flex-col" id="gallery-sidebar">
         <div> 
-            <div class="mx-6 flex justify-between" id="gallery-next-prev">
+            <div class="mx-6 flex justify-between">
                 {% include "partials/_gallery_next_prev.html.j2" %}
             </div>
             <div class="border-2 rounded-b border-gray-300 mx-6 pb-5 px-1 flex flex-row flex-wrap justify-around" id="gallery-next-images">
