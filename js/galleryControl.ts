@@ -138,6 +138,7 @@ function setNextImages(index: number) {
 }
 
 function setImage(index: number, stateAction: string = "") {
+  console.log(allPictures);
   if (index < allPictures.length) {
     if (galleryImageContainer) {
       // Remove children
@@ -146,6 +147,7 @@ function setImage(index: number, stateAction: string = "") {
       }
       // Add new child
       let image = document.createElement("img");
+      console.log("HERE!!!");
       image.src = allPictures[index].photo;
       galleryImageContainer.appendChild(image);
     }
