@@ -7,14 +7,14 @@
 {% if picture %}
 
 <div class="flex flex-row justify-center md:justify-start px-8 md:px-16 pt-4">
-    <div class="md:w-4/6 max-h-screen flex flex-col" id="gallery-image-guide-container">
+    <div class="md:w-9/12 max-h-screen flex flex-col" id="gallery-image-guide-container">
         <div class="flex md:hidden justify-between">
             {% include "partials/_gallery_next_prev.html.j2" %}
         </div>
         <div id="gallery-image-container">
         </div>
     </div>
-    <div class="w-2/6 hidden md:flex flex-col" id="gallery-sidebar">
+    <div class="w-3/12 hidden md:flex flex-col" id="gallery-sidebar">
         <div> 
             <div class="mx-6 flex justify-between">
                 {% include "partials/_gallery_next_prev.html.j2" %}
