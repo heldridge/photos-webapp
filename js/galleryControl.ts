@@ -70,7 +70,6 @@ function setNextImages(index: number) {
 
     let counter = 0;
     nextPictures.forEach(picture => {
-      console.log("wowww");
       let pictureNode = document.createElement("button");
       pictureNode.className =
         "h-0 pb-1-3 w-under-1-3 rounded overflow-hidden mt-5 next-picture";
@@ -141,7 +140,6 @@ function setNextImages(index: number) {
 }
 
 function setImage(index: number, stateAction: string = "") {
-  console.log(allPictures);
   if (index < allPictures.length) {
     if (galleryImageContainer) {
       // Remove children
@@ -150,7 +148,6 @@ function setImage(index: number, stateAction: string = "") {
       }
       // Add new child
       let image = document.createElement("img");
-      console.log("HERE!!!");
       image.src = allPictures[index].photo;
       galleryImageContainer.appendChild(image);
     }
@@ -233,12 +230,7 @@ function updateNextPrevActions(index: number): void {
 }
 
 window.onpopstate = function(event: PopStateEvent) {
-  console.log("HERE BOYS");
   if (event.state) {
-    console.log("event had a state");
     setImage(event.state.index);
-  } else {
-    // console.log("event did not have a state");
-    // history.go(-1);
   }
 };
