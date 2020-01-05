@@ -24,7 +24,7 @@ let nextButtons = document.getElementsByClassName("next-button");
 let previousLinks = document.getElementsByClassName("previous-link");
 let nextLinks = document.getElementsByClassName("next-link");
 
-let sideBarSlots: number = 18;
+let sideBarSlots: number = 26;
 
 setImage(originalPictureIndex, "replace");
 
@@ -91,38 +91,38 @@ function setNextImages(index: number) {
       counter += 1;
     });
 
-    // if (renderNextPageButton) {
-    //   let nextPageButton = document.createElement("a");
-    //   nextPageButton.className =
-    //     "w-under-1-4 rounded overflow-hidden mt-5 border-2 border-gray-500 bg-gray-300 hover:bg-gray-500 flex flex-col justify-center items-center text-xl cursor-pointer";
-    //   nextPageButton.href = nextPageLink;
+    if (renderNextPageButton) {
+      let nextPageButton = document.createElement("a");
+      nextPageButton.className =
+        "w-under-1-4 rounded overflow-hidden mt-5 border-2 border-gray-500 bg-gray-300 hover:bg-gray-500 flex flex-col justify-center items-center text-xl cursor-pointer";
+      nextPageButton.href = nextPageLink;
 
-    //   let message = document.createTextNode("Next Page");
-    //   // nextPageButton.appendChild(message);
-    //   let iconNode = document.createElement("i");
-    //   iconNode.className = "fas fa-arrow-right";
-    //   nextPageButton.appendChild(iconNode);
-    //   galleryNextImages.appendChild(nextPageButton);
-    // }
+      let message = document.createTextNode("Next Page");
+      // nextPageButton.appendChild(message);
+      let iconNode = document.createElement("i");
+      iconNode.className = "fas fa-arrow-right";
+      nextPageButton.appendChild(iconNode);
+      galleryNextImages.appendChild(nextPageButton);
+    }
 
-    // if (renderPreviousButton && (nextPictures.length <= 7 || index === 0)) {
-    //   let previousPageButton = document.createElement("a");
-    //   previousPageButton.className =
-    //     "w-under-1-4 rounded overflow-hidden mt-5 border-2 border-gray-500 bg-gray-300 hover:bg-gray-500 flex flex-col justify-center items-center text-xl cursor-pointer";
-    //   previousPageButton.href = previousPageLink;
-    //   let message = document.createTextNode("Previous Page");
-    //   // previousPageButton.appendChild(message);
-    //   let iconNode = document.createElement("i");
-    //   iconNode.className = "fas fa-arrow-left";
-    //   previousPageButton.appendChild(iconNode);
-    //   galleryNextImages.insertBefore(
-    //     previousPageButton,
-    //     galleryNextImages.firstChild
-    //   );
-    //   if (nextPictures.length >= sideBarSlots) {
-    //     galleryNextImages.removeChild(galleryNextImages.lastChild);
-    //   }
-    // }
+    if (renderPreviousButton && (nextPictures.length <= 7 || index === 0)) {
+      let previousPageButton = document.createElement("a");
+      previousPageButton.className =
+        "w-under-1-4 rounded overflow-hidden mt-5 border-2 border-gray-500 bg-gray-300 hover:bg-gray-500 flex flex-col justify-center items-center text-xl cursor-pointer";
+      previousPageButton.href = previousPageLink;
+      let message = document.createTextNode("Previous Page");
+      // previousPageButton.appendChild(message);
+      let iconNode = document.createElement("i");
+      iconNode.className = "fas fa-arrow-left";
+      previousPageButton.appendChild(iconNode);
+      galleryNextImages.insertBefore(
+        previousPageButton,
+        galleryNextImages.firstChild
+      );
+      if (nextPictures.length >= sideBarSlots) {
+        galleryNextImages.removeChild(galleryNextImages.lastChild);
+      }
+    }
 
     let totalNextImages = nextPictures.length;
     if (renderNextPageButton) {
@@ -134,8 +134,6 @@ function setNextImages(index: number) {
       placeholderNode.className = "w-under-1-4";
       galleryNextImages.appendChild(placeholderNode);
     }
-
-    updateNextPrevActions(index);
   }
 }
 
@@ -151,7 +149,7 @@ function setImage(index: number, stateAction: string = "") {
       image.src = allPictures[index].photo;
       galleryImageContainer.appendChild(image);
     }
-    setNextImages(index);
+    updateNextPrevActions(index);
     currentIndex = index;
 
     let query = getUrlParameter("q");
