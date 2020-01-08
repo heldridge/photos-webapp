@@ -45,97 +45,97 @@ Next Images:
 </div>
 */
 
-function setNextImages(index: number) {
-  if (galleryNextImages) {
-    while (galleryNextImages.hasChildNodes()) {
-      galleryNextImages.removeChild(galleryNextImages.lastChild);
-    }
+// function setNextImages(index: number) {
+//   if (galleryNextImages) {
+//     while (galleryNextImages.hasChildNodes()) {
+//       galleryNextImages.removeChild(galleryNextImages.lastChild);
+//     }
 
-    let nextPictures = [];
-    let startingIndex = 0;
-    let renderNextPageButton = false;
-    if (allPictures.length - index < sideBarSlots) {
-      let numNextImages = renderNextButton ? sideBarSlots - 1 : sideBarSlots;
+//     let nextPictures = [];
+//     let startingIndex = 0;
+//     let renderNextPageButton = false;
+//     if (allPictures.length - index < sideBarSlots) {
+//       let numNextImages = renderNextButton ? sideBarSlots - 1 : sideBarSlots;
 
-      nextPictures = allPictures.slice(-numNextImages);
-      startingIndex = allPictures.length - numNextImages;
-      if (startingIndex < 0) {
-        startingIndex = 0;
-      }
-      renderNextPageButton = renderNextButton;
-    } else {
-      nextPictures = allPictures.slice(index, index + sideBarSlots);
-      startingIndex = index;
-    }
+//       nextPictures = allPictures.slice(-numNextImages);
+//       startingIndex = allPictures.length - numNextImages;
+//       if (startingIndex < 0) {
+//         startingIndex = 0;
+//       }
+//       renderNextPageButton = renderNextButton;
+//     } else {
+//       nextPictures = allPictures.slice(index, index + sideBarSlots);
+//       startingIndex = index;
+//     }
 
-    let counter = 0;
-    nextPictures.forEach(picture => {
-      let pictureNode = document.createElement("button");
-      pictureNode.className =
-        "h-0 pb-1-3 w-under-1-3 rounded overflow-hidden mt-5 next-picture";
+//     let counter = 0;
+//     nextPictures.forEach(picture => {
+//       let pictureNode = document.createElement("button");
+//       pictureNode.className =
+//         "h-0 pb-1-3 w-under-1-3 rounded overflow-hidden mt-5 next-picture";
 
-      if (counter + startingIndex === index) {
-        pictureNode.className += " selected-picture";
-      }
+//       if (counter + startingIndex === index) {
+//         pictureNode.className += " selected-picture";
+//       }
 
-      let imageNode = document.createElement("img");
-      imageNode.className = "object-cover";
-      imageNode.src = picture.photo;
+//       let imageNode = document.createElement("img");
+//       imageNode.className = "object-cover";
+//       imageNode.src = picture.photo;
 
-      pictureNode.appendChild(imageNode);
+//       pictureNode.appendChild(imageNode);
 
-      galleryNextImages.appendChild(pictureNode);
+//       galleryNextImages.appendChild(pictureNode);
 
-      let newIndex = counter + startingIndex;
-      pictureNode.onclick = () => setImage(newIndex, "push");
-      counter += 1;
-    });
+//       let newIndex = counter + startingIndex;
+//       pictureNode.onclick = () => setImage(newIndex, "push");
+//       counter += 1;
+//     });
 
-    if (renderNextPageButton) {
-      let nextPageButton = document.createElement("a");
-      nextPageButton.className =
-        "w-under-1-4 rounded overflow-hidden mt-5 border-2 border-gray-500 bg-gray-300 hover:bg-gray-500 flex flex-col justify-center items-center text-xl cursor-pointer";
-      nextPageButton.href = nextPageLink;
+//     if (renderNextPageButton) {
+//       let nextPageButton = document.createElement("a");
+//       nextPageButton.className =
+//         "w-under-1-4 rounded overflow-hidden mt-5 border-2 border-gray-500 bg-gray-300 hover:bg-gray-500 flex flex-col justify-center items-center text-xl cursor-pointer";
+//       nextPageButton.href = nextPageLink;
 
-      let message = document.createTextNode("Next Page");
-      // nextPageButton.appendChild(message);
-      let iconNode = document.createElement("i");
-      iconNode.className = "fas fa-arrow-right";
-      nextPageButton.appendChild(iconNode);
-      galleryNextImages.appendChild(nextPageButton);
-    }
+//       let message = document.createTextNode("Next Page");
+//       // nextPageButton.appendChild(message);
+//       let iconNode = document.createElement("i");
+//       iconNode.className = "fas fa-arrow-right";
+//       nextPageButton.appendChild(iconNode);
+//       galleryNextImages.appendChild(nextPageButton);
+//     }
 
-    if (renderPreviousButton && (nextPictures.length <= 7 || index === 0)) {
-      let previousPageButton = document.createElement("a");
-      previousPageButton.className =
-        "w-under-1-4 rounded overflow-hidden mt-5 border-2 border-gray-500 bg-gray-300 hover:bg-gray-500 flex flex-col justify-center items-center text-xl cursor-pointer";
-      previousPageButton.href = previousPageLink;
-      let message = document.createTextNode("Previous Page");
-      // previousPageButton.appendChild(message);
-      let iconNode = document.createElement("i");
-      iconNode.className = "fas fa-arrow-left";
-      previousPageButton.appendChild(iconNode);
-      galleryNextImages.insertBefore(
-        previousPageButton,
-        galleryNextImages.firstChild
-      );
-      if (nextPictures.length >= sideBarSlots) {
-        galleryNextImages.removeChild(galleryNextImages.lastChild);
-      }
-    }
+//     if (renderPreviousButton && (nextPictures.length <= 7 || index === 0)) {
+//       let previousPageButton = document.createElement("a");
+//       previousPageButton.className =
+//         "w-under-1-4 rounded overflow-hidden mt-5 border-2 border-gray-500 bg-gray-300 hover:bg-gray-500 flex flex-col justify-center items-center text-xl cursor-pointer";
+//       previousPageButton.href = previousPageLink;
+//       let message = document.createTextNode("Previous Page");
+//       // previousPageButton.appendChild(message);
+//       let iconNode = document.createElement("i");
+//       iconNode.className = "fas fa-arrow-left";
+//       previousPageButton.appendChild(iconNode);
+//       galleryNextImages.insertBefore(
+//         previousPageButton,
+//         galleryNextImages.firstChild
+//       );
+//       if (nextPictures.length >= sideBarSlots) {
+//         galleryNextImages.removeChild(galleryNextImages.lastChild);
+//       }
+//     }
 
-    let totalNextImages = nextPictures.length;
-    if (renderNextPageButton) {
-      totalNextImages += 1;
-    }
+//     let totalNextImages = nextPictures.length;
+//     if (renderNextPageButton) {
+//       totalNextImages += 1;
+//     }
 
-    for (let i = 0; i < sideBarSlots - totalNextImages; i++) {
-      let placeholderNode = document.createElement("div");
-      placeholderNode.className = "w-under-1-4";
-      galleryNextImages.appendChild(placeholderNode);
-    }
-  }
-}
+//     for (let i = 0; i < sideBarSlots - totalNextImages; i++) {
+//       let placeholderNode = document.createElement("div");
+//       placeholderNode.className = "w-under-1-4";
+//       galleryNextImages.appendChild(placeholderNode);
+//     }
+//   }
+// }
 
 function setImage(index: number, stateAction: string = "") {
   if (index < allPictures.length) {
@@ -190,6 +190,9 @@ function previousPicture(): void {
 }
 
 function updateNextPrevActions(index: number): void {
+  // Controls whether the "next" and "previous" buttons in the gallery sidebar are
+  // buttons or links. When index is 0 "previous" becomes a link. When index is at its
+  // maximum value "next" becomes a link. If either is not a link it is made a button.
   if (index === 0) {
     if (renderPreviousButton) {
       for (let i = 0; i < previousButtons.length; i++) {
