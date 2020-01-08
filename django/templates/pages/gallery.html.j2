@@ -21,9 +21,6 @@
             </div>
             <div class="border-2 rounded-b border-gray-300 mx-6 pb-5 px-1 flex flex-col items-center" id="gallery-next-images">
                 <div class="flex flex-row flex-wrap justify-around">
-                    <button class="w-under-1-3 rounded mt-5 bg-gray-300 hover:bg-gray-400 text-lg">
-                        <i class="fas fa-arrow-left"></i>
-                    </button>
                     {% for picture in pictures %}
                     <button 
                         class="h-0 pb-1-3 w-under-1-3 rounded overflow-hidden mt-5 next-picture"
@@ -32,9 +29,6 @@
                         <img src="{{ picture.photo }}" alt="TODO" class="object-cover">
                     </button>
                     {% endfor %}
-                    <button class="w-under-1-3 rounded mt-5 bg-gray-300 hover:bg-gray-400 text-lg">
-                        <i class="fas fa-arrow-right"></i>
-                    </button>
                     {% for placeholder in grid_placeholders %}
                     <div class="w-under-1-3"></div>
                     {% endfor %}
