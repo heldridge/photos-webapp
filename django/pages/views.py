@@ -287,15 +287,13 @@ def gallery(request):
 
     original_picture_index = current_picture_index
 
-    all_pictures_safe_fields = list(
+    context["original_picture_index"] = original_picture_index
+    context["all_pictures"] = list(
         map(
             lambda item: {"photo": item["photo"], "public_id": item["public_id"]},
             context["pictures"],
         )
     )
-
-    context["original_picture_index"] = original_picture_index
-    context["all_pictures"] = all_pictures_safe_fields
     context["grid_placeholders"] = [1] * (18 - len(context["pictures"]))
     context["picture"] = current_picture
 
