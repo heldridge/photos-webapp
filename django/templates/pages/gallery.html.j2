@@ -6,14 +6,31 @@
 
 {% if picture %}
 
-<div class="flex flex-row justify-center md:justify-start px-8 md:px-16 pt-4 pb-20">
+<div class="flex flex-row justify-center md:justify-start px-8 md:px-8 pt-4 pb-20">
     <div class="md:w-9/12 flex flex-col" id="gallery-image-guide-container">
-        <div class="flex md:hidden justify-between">
-            {% include "partials/_gallery_next_prev.html.j2" %}
+        <div class="flex justify-between">
+            <button class="bg-gray-300 rounded-t h-12 text-xl px-4 previous-button shadow">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <button class="bg-gray-300 rounded-t h-12 text-xl px-4 next-button shadow">
+                <i class="fas fa-arrow-right"></i>
+            </button>
         </div>
         <div id="gallery-image-container">
         </div>
     </div>
+    <!--
+    <div class="md:w-9/12 flex flex-row">
+        <button class="bg-gray-300 rounded-l h-12 text-xl px-4 previous-button shadow">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+        <div id="gallery-image-container">
+        </div>
+        <button class="bg-gray-300 rounded-r h-12 text-xl px-4 next-button shadow">
+            <i class="fas fa-arrow-right"></i>
+        </button>
+    </div>
+    -->
     <div class="w-3/12 hidden md:flex flex-col" id="gallery-sidebar">
         <div> 
             <div class="mx-6 flex justify-between">
