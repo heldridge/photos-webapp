@@ -179,6 +179,66 @@ def get_photos_data(tags=None, before=None, after=None):
     return {"photos": photos, "more_left": more_left, "first": first, "last": last}
 
 
+def get_render_next_prev(before_picture, after_picture, more_left):
+    render_next_button = True
+    render_previous_button = True
+
+    if before_picture is None and after_picture is None:
+        render_previous_button = False
+        if not more_left:
+            render_next_button = False
+
+    if before_picture is not None and not more_left:
+        render_previous_button = False
+
+    if after_picture is not None and not more_left:
+        render_next_button = False
+
+    return (render_next_button, render_previous_button)
+
+
+def get_baseline_context(request):
+    """
+    Returns the base context that is shared between views
+    """
+    """
+
+    Needed data:
+
+    Both:
+    - list of pictures
+    - max tag length
+    - min tag length
+    - valid tag regex
+    - invalid tag char regex
+    - first picture
+    - last picture
+    - render next button
+    - render previous button
+    - currently searched tags
+    - Data on currently searched tags
+
+    Search:
+    - Grid placeholders (up to page size)
+
+    gallery:
+    - The id of the currently selected picture
+    - The index of the currently selected picture in the pictures array
+
+    What should be returned by "get search results:"
+    - list of pictures (pre-split and cleaned. Goes to database instead of ES if possible)
+    - first picture in the list (None if list is empty)
+    - last picture in the list (None if list is empty)
+    - Whether to render the next button
+    - Whether to render the previous button
+
+    What work should be done inside of views:
+    - determining the currently searched tags and sending them again with the request.
+    - 
+    """
+    pass
+
+
 def search(request):
     # Grab and validate tags
     # Also remove duplicates
@@ -204,25 +264,9 @@ def search(request):
     first_picture = data["first"]
     pictures = data["photos"]
 
-    render_next_button = True
-    render_previous_button = True
-
-    if before_picture is None and after_picture is None:
-        render_previous_button = False
-        if not data["more_left"]:
-            render_next_button = False
-
-    if before_picture is not None and not data["more_left"]:
-        render_previous_button = False
-
-    if after_picture is not None and not data["more_left"]:
-        render_next_button = False
-
-    current_full_query = "+".join(searched_tags)
-    if before_picture is not None:
-        current_full_query += f"&before={before_picture}"
-    if after_picture is not None:
-        current_full_query += f"&after={after_picture}"
+    render_next_button, render_previous_button = get_render_next_prev(
+        before_picture, after_picture, data["more_left"]
+    )
 
     context = {
         "pictures": pictures,
@@ -237,7 +281,6 @@ def search(request):
         "first_picture": first_picture,
         "render_next_button": render_next_button,
         "render_previous_button": render_previous_button,
-        "current_full_query": current_full_query,
     }
     return render(request, "pages/search.html.j2", context)
 
