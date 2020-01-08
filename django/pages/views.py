@@ -201,47 +201,6 @@ def get_baseline_context(request):
     """
     Returns the base context that is shared between views
     """
-    """
-
-    Needed data:
-
-    Both:
-    - list of pictures
-    - max tag length
-    - min tag length
-    - valid tag regex
-    - invalid tag char regex
-    - first picture
-    - last picture
-    - render next button
-    - render previous button
-    - currently searched tags
-    - Data on currently searched tags
-
-    Search:
-    - Grid placeholders (up to page size)
-
-    gallery:
-    - The id of the currently selected picture
-    - The index of the currently selected picture in the pictures array
-
-    What should be returned by "get search results:"
-    - list of pictures (pre-split and cleaned. Goes to database instead of ES if possible)
-    - first picture in the list (None if list is empty)
-    - last picture in the list (None if list is empty)
-    - Whether to render the next button
-    - Whether to render the previous button
-
-    What work should be done inside of views:
-    - determining the currently searched tags and sending them again with the request.
-    - 
-    """
-    pass
-
-
-def search(request):
-    # Grab and validate tags
-    # Also remove duplicates
     searched_tags_query_parameter = request.GET.get("q", "")
     searched_tags = list(
         set(filter(is_valid_tag, searched_tags_query_parameter.split()))
@@ -268,43 +227,40 @@ def search(request):
         before_picture, after_picture, data["more_left"]
     )
 
-    context = {
-        "pictures": pictures,
-        "grid_placeholders": [1] * (settings.PAGE_SIZE - len(pictures)),
-        "searched_tags_data": searched_tags_data,
-        "current_query": "+".join(searched_tags),
+    current_full_query = "+".join(searched_tags)
+    if before_picture is not None:
+        current_full_query += f"before={before_picture}"
+    if after_picture is not None:
+        current_full_query += f"after={after_picture}"
+
+    return {
         "max_tag_length": settings.MAX_TAG_LENGTH,
         "min_tag_length": settings.MIN_TAG_LENGTH,
         "valid_tag_regex": settings.VALID_TAG_REGEX,
         "invalid_tag_char_regex": settings.INVALID_TAG_CHAR_REGEX,
+        "searched_tags_data": searched_tags_data,
+        "current_query": "+".join(searched_tags),
+        "current_full_query": current_full_query,
+        "pictures": pictures,
         "last_picture": last_picture,
         "first_picture": first_picture,
         "render_next_button": render_next_button,
         "render_previous_button": render_previous_button,
     }
+
+
+def search(request):
+    # Grab and validate tags
+    # Also remove duplicates
+    context = get_baseline_context(request)
+    context["grid_placeholders"] = [1] * (settings.PAGE_SIZE - len(context["pictures"]))
     return render(request, "pages/search.html.j2", context)
 
 
 def gallery(request):
-    # Grab and validate tags
-    # Also remove duplicates
-    # Duplicated code from Search, consolidate elsewhere probs
-    searched_tags_query_parameter = request.GET.get("q", "")
-    searched_tags = list(
-        set(filter(is_valid_tag, searched_tags_query_parameter.split()))
-    )
-    searched_tags.sort()
-    searched_tags_data = []
-    for tag in searched_tags:
-        non_matches = functools.partial(stringsDoNotMatch, tag)
-        searched_tags_data.append(
-            {"tag": tag, "query": "+".join(filter(non_matches, searched_tags))}
-        )
 
-    before = request.GET.get("before")
-    after = request.GET.get("after")
-
-    data = get_photos_data(searched_tags, before, after)
+    context = get_baseline_context(request)
+    before_picture = request.GET.get("before")
 
     # Get the gallery picture id query
     picture_id = request.GET.get("p", "")
@@ -315,72 +271,32 @@ def gallery(request):
             Picture.objects.get(public_id=picture_id), False
         )
 
-        for index, picture in enumerate(data["photos"]):
+        for i, picture in enumerate(context["pictures"]):
             if picture["public_id"] == picture_id:
-                current_picture_index = index
+                current_picture_index = i
                 break
-    elif len(data["photos"]) > 0:
+
+    elif len(context["pictures"]) > 0:
         # We are coming in the "backwards" direction
-        if before is not None:
-            current_picture = data["photos"][-1]
-            current_picture_index = len(data["photos"]) - 1
+        if before_picture is not None:
+            current_picture = context["pictures"][-1]
+            current_picture_index = len(context["pictures"]) - 1
         else:
-            current_picture = data["photos"][0]
+            current_picture = context["pictures"][0]
             current_picture_index = 0
 
     original_picture_index = current_picture_index
 
-    if len(data["photos"]) - current_picture_index < 9:
-        pictures = data["photos"][-9:]
-    else:
-        pictures = data["photos"][current_picture_index : current_picture_index + 9]
-
-    current_picture_index = -1
-    for index, picture in enumerate(pictures):
-        if picture["public_id"] == picture_id:
-            current_picture_index = index
-            break
-
-    current_full_query = "+".join(searched_tags)
-    if before is not None:
-        current_full_query += f"before={before}"
-    if after is not None:
-        current_full_query += f"after={after}"
-
     all_pictures_safe_fields = list(
         map(
             lambda item: {"photo": item["photo"], "public_id": item["public_id"]},
-            data["photos"],
+            context["pictures"],
         )
     )
 
-    render_next_button = True
-    render_previous_button = True
+    context["original_picture_index"] = original_picture_index
+    context["all_pictures"] = all_pictures_safe_fields
+    context["grid_placeholders"] = [1] * (18 - len(context["pictures"]))
+    context["picture"] = current_picture
 
-    if before is None and after is None:
-        render_previous_button = False
-        if not data["more_left"]:
-            render_next_button = False
-
-    if before is not None and not data["more_left"]:
-        render_previous_button = False
-
-    if after is not None and not data["more_left"]:
-        render_next_button = False
-
-    context = {
-        "picture": current_picture,
-        "pictures": pictures,
-        "original_picture_index": original_picture_index,
-        "current_picture_index": current_picture_index,
-        "grid_placeholders": [1] * (9 - len(pictures)),
-        "all_pictures": all_pictures_safe_fields,
-        "max_tag_length": settings.MAX_TAG_LENGTH,
-        "min_tag_length": settings.MIN_TAG_LENGTH,
-        "current_query": "+".join(searched_tags),
-        "last_picture": data["last"],
-        "first_picture": data["first"],
-        "render_next_button": render_next_button,
-        "render_previous_button": render_previous_button,
-    }
     return render(request, "pages/gallery.html.j2", context)
