@@ -11,9 +11,7 @@ let renderNextButton = renderNextButtonOutside;
 //@ts-ignore
 let renderPreviousButton = renderPreviousButtonOutside;
 
-let galleryNextImages: HTMLElement = document.getElementById(
-    'gallery-next-images'
-);
+let galleryNextImages = document.getElementById('gallery-next-images').children;
 
 let galleryImageContainer = <HTMLDivElement>(
     document.getElementById('gallery-image-container')
@@ -43,6 +41,12 @@ function setImage(index: number, stateAction: string = '') {
             galleryImageContainer.appendChild(image);
         }
         updateNextPrevActions(index);
+
+        console.log(galleryNextImages);
+
+        removeClass(galleryNextImages[currentIndex], 'selected-picture');
+        addClass(galleryNextImages[index], 'selected-picture');
+
         currentIndex = index;
 
         let query = getUrlParameter('q');
@@ -88,7 +92,6 @@ function updateNextPrevActions(index: number): void {
     // maximum value "next" becomes a link. If either is not a link it is made a button.
     if (index === 0) {
         if (renderPreviousButton) {
-            console.log("HERE!!!!");
             for (let i = 0; i < previousButtons.length; i++) {
                 addClass(previousButtons[i], 'hidden');
             }
