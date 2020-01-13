@@ -58,8 +58,8 @@
             <div class="mx-6 flex justify-between">
                 {% include "partials/_gallery_next_prev.html.j2" %}
             </div>
-            <div class="border-2 rounded-b border-gray-300 mx-6 pb-5 px-1 flex flex-col items-center" id="gallery-next-images">
-                <div class="flex flex-row flex-wrap justify-around">
+            <div class="border-2 rounded-b border-gray-300 mx-6 pb-5 px-1 flex flex-col items-center">
+                <div class="flex flex-row flex-wrap justify-around" id="gallery-next-images">
                     {% for picture in pictures %}
                     <button 
                         class="h-0 pb-1-3 w-under-1-3 rounded overflow-hidden mt-5 next-picture"
