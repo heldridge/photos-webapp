@@ -2,12 +2,15 @@
     class="bg-gray-300 hover:bg-gray-500 rounded-t py-2 pl-4 pr-3 previous-link" 
     href="{% url 'gallery' %}?q={{ current_query }}&before={{ first_picture.public_id }}"
 >
-    Previous
+    <i class="fas fa-angle-double-left"></i>
+    Previous Page
 </a>
 
 <a 
     class="bg-gray-300 hover:bg-gray-500 rounded-t py-2 pl-4 pr-3 next-link"
     href="{% url 'gallery' %}?q={{ current_query }}&after={{ last_picture.public_id }}"
 >
-    Next
+    Next Page
+    <i class="fas fa-angle-double-right"></i>
 </a>
+
