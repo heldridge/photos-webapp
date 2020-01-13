@@ -9,18 +9,34 @@
 <div class="flex flex-row justify-center md:justify-start px-8 md:px-8 pt-4 pb-20">
     <div class="md:w-9/12 flex flex-col" id="gallery-image-guide-container">
         <div class="flex justify-between">
+
+            <!--Previous Button/Link -->
             <button 
-                class="bg-gray-300 rounded-t h-12 text-xl px-4 previous-button shadow"
+                class="bg-gray-300 hover:bg-gray-500 rounded-t h-12 text-xl px-4 previous-button shadow"
                 onclick=previousPicture()
             >
                 <i class="fas fa-arrow-left"></i>
             </button>
+            <a 
+                href="{% url 'gallery' %}?q={{ current_query }}&before={{ first_picture.public_id }}"
+                class="hidden bg-gray-300 hover:bg-gray-500 rounded-t h-12 text-xl px-4 previous-link shadow flex flex-col justify-center"
+            >
+                <i class="fas fa-arrow-left"></i>
+            </a>
+
+            <!--Next Button/Link -->
             <button 
-                class="bg-gray-300 rounded-t h-12 text-xl px-4 next-button shadow"
+                class="bg-gray-300 hover:bg-gray-500 rounded-t h-12 text-xl px-4 next-button shadow"
                 onclick=nextPicture()
             >
                 <i class="fas fa-arrow-right"></i>
             </button>
+            <a 
+                href="{% url 'gallery' %}?q={{ current_query }}&after={{ last_picture.public_id }}"
+                class="hidden bg-gray-300 hover:bg-gray-500 rounded-t h-12 text-xl px-4 next-link shadow flex flex-col justify-center" 
+            >
+                <i class="fas fa-arrow-right"></i>
+            </a>
         </div>
         <div id="gallery-image-container">
         </div>

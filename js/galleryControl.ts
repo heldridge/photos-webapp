@@ -197,6 +197,7 @@ function updateNextPrevActions(index: number): void {
     // maximum value "next" becomes a link. If either is not a link it is made a button.
     if (index === 0) {
         if (renderPreviousButton) {
+            console.log("HERE!!!!");
             for (let i = 0; i < previousButtons.length; i++) {
                 addClass(previousButtons[i], 'hidden');
             }
