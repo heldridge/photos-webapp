@@ -10,7 +10,7 @@
     <div class="md:w-9/12 flex flex-col" id="gallery-image-guide-container">
         <div class="flex justify-between">
 
-            <!--Previous Button/Link -->
+            <!--Previous Button/Link 
             <button 
                 class="bg-gray-300 hover:bg-gray-500 rounded-t h-12 text-xl px-4 previous-button shadow"
                 onclick=previousPicture()
@@ -23,8 +23,9 @@
             >
                 <i class="fas fa-arrow-left"></i>
             </a>
+            -->
 
-            <!--Next Button/Link -->
+            <!--Next Button/Link 
             <button 
                 class="bg-gray-300 hover:bg-gray-500 rounded-t h-12 text-xl px-4 next-button shadow"
                 onclick=nextPicture()
@@ -37,14 +38,67 @@
             >
                 <i class="fas fa-arrow-right"></i>
             </a>
+            -->
         </div>
         <div id="gallery-image-container">
         </div>
     </div>
     <div class="w-3/12 hidden md:flex flex-col" id="gallery-sidebar">
         <div> 
+            <!--
             <div class="mx-6 flex justify-between">
                 {% include "partials/_gallery_next_prev.html.j2" %}
+            </div>
+            -->
+            <div class="flex mx-6 justify-between">
+
+                <div class="flex justify-between w-5/12 xl:w-2/5">
+                    <div>
+                        <a 
+                            href="{% url 'gallery' %}?q={{ current_query }}&before={{ first_picture.public_id }}"
+                            class="bg-gray-300 hover:bg-gray-500 rounded-t h-8 lg:h-10 xl:h-12 lg:text-xl px-2 lg:px-3 xl:px-4 flex items-center justify-center"
+                        >
+                            <i class="fas fa-angle-double-left"></i>
+                        </a>
+                    </div>
+                    <button 
+                        class="bg-gray-300 hover:bg-gray-500 rounded-t h-8 lg:h-10 xl:h-12 lg:text-xl px-2 lg:px-3 xl:px-4 ml-2 previous-button"
+                        onclick=previousPicture()
+                    >
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <a 
+                        href="{% url 'gallery' %}?q={{ current_query }}&before={{ first_picture.public_id }}"
+                        class="bg-gray-300 hover:bg-gray-500 rounded-t h-8 lg:h-10 xl:h-12 lg:text-xl px-2 lg:px-3 xl:px-4 flex items-center justify-center ml-2 previous-link"
+                    >
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                </div>
+                
+                <div class="flex justify-between w-5/12 xl:w-2/5">
+                    <button 
+                        class="bg-gray-300 hover:bg-gray-500 rounded-t h-8 lg:h-10 xl:h-12 lg:text-xl px-2 lg:px-3 xl:px-4 mr-2 next-button "
+                        onclick=nextPicture()
+                    >
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <a 
+                        href="{% url 'gallery' %}?q={{ current_query }}&after={{ last_picture.public_id }}"
+                        class="hidden bg-gray-300 hover:bg-gray-500 rounded-t h-8 lg:h-10 xl:h-12 lg:text-xl px-2 lg:px-3 xl:px-4 flex items-center justify-center mr-2 next-link"
+                    >
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <div>
+                        <a 
+                            class="bg-gray-300 hover:bg-gray-500 rounded-t h-8 lg:h-10 xl:h-12 lg:text-xl px-2 lg:px-3 xl:px-4 flex items-center justify-center"
+                            href="{% url 'gallery' %}?q={{ current_query }}&after={{ last_picture.public_id }}"
+                        >
+                            <i class="fas fa-angle-double-right"></i>
+                        </a>
+                    </div>
+                    
+                </div>
+                
             </div>
             <div class="border-2 rounded-b border-gray-300 mx-6 pb-5 px-1 flex flex-col items-center">
                 <div class="flex flex-row flex-wrap justify-around" id="gallery-next-images">
