@@ -20,7 +20,7 @@
                 {% if picture.below_tags %}
                 {% for tag in picture.below_tags %}
                 <a href="{% url 'search'%}?q={{ tag }}" class="tag bg-gray-300 hover:bg-gray-400 rounded py-1 px-2 text-xs mr-2 font-medium mb-2 text-gray-600 hover:text-black collapsed-tag hidden">
-                {{ tag }}
+                    {{ tag }}
                 </a>
                 {% endfor %}
                 <button class="tag bg-gray-300 hover:bg-gray-400 rounded py-1 px-3 text-xs mr-2 mb-2 text-black tag-expander" onclick="expandTags(this)">
