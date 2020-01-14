@@ -6,7 +6,7 @@
 
 {% if picture %}
 
-<div class="flex flex-row justify-center md:justify-start px-8 md:px-8 pt-4 pb-20">
+<div class="flex flex-row justify-center md:justify-start px-8 pt-4 pb-20">
     <div class="md:w-9/12 flex flex-col" id="gallery-image-guide-container">
     
         <div class="flex justify-between">
@@ -45,7 +45,10 @@
         </div>
         <div id="image-titles">
             {% for picture in pictures %}
-            <a class="hidden text-5xl font-semibold" id="title-{{ picture.public_id }}">
+            <a 
+                href="{% url 'picture' picture.public_id %}"
+                class="hidden text-5xl font-semibold hover:opacity-50" id="title-{{ picture.public_id }}"
+            >
                 {{ picture.title }}
             </a>
             {% endfor %}
