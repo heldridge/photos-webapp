@@ -12,6 +12,7 @@ let renderNextButton = renderNextButtonOutside;
 let renderPreviousButton = renderPreviousButtonOutside;
 
 let galleryNextImages = document.getElementById('gallery-next-images').children;
+let imageTitles = document.getElementById('image-titles').children;
 
 let galleryImageContainer = <HTMLDivElement>(
     document.getElementById('gallery-image-container')
@@ -46,6 +47,9 @@ function setImage(index: number, stateAction: string = '') {
 
         removeClass(galleryNextImages[currentIndex], 'selected-picture');
         addClass(galleryNextImages[index], 'selected-picture');
+
+        addClass(imageTitles[currentIndex], 'hidden');
+        removeClass(imageTitles[index], 'hidden');
 
         currentIndex = index;
 

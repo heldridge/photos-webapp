@@ -8,6 +8,7 @@
 
 <div class="flex flex-row justify-center md:justify-start px-8 md:px-8 pt-4 pb-20">
     <div class="md:w-9/12 flex flex-col" id="gallery-image-guide-container">
+    
         <div class="flex justify-between">
 
             <!--Previous Button/Link 
@@ -41,6 +42,13 @@
             -->
         </div>
         <div id="gallery-image-container">
+        </div>
+        <div id="image-titles">
+            {% for picture in pictures %}
+            <a class="hidden text-5xl font-semibold" id="title-{{ picture.public_id }}">
+                {{ picture.title }}
+            </a>
+            {% endfor %}
         </div>
     </div>
     <div class="w-3/12 hidden md:flex flex-col" id="gallery-sidebar">
