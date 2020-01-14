@@ -95,13 +95,11 @@ function updateNextPrevActions(index: number): void {
     // buttons or links. When index is 0 "previous" becomes a link. When index is at its
     // maximum value "next" becomes a link. If either is not a link it is made a button.
     if (index === 0) {
-        if (renderPreviousButton) {
-            for (let i = 0; i < previousButtons.length; i++) {
-                addClass(previousButtons[i], 'hidden');
-            }
-            for (let i = 0; i < previousLinks.length; i++) {
-                removeClass(previousLinks[i], 'hidden');
-            }
+        for (let i = 0; i < previousButtons.length; i++) {
+            addClass(previousButtons[i], 'hidden');
+        }
+        for (let i = 0; i < previousLinks.length; i++) {
+            removeClass(previousLinks[i], 'hidden');
         }
     } else {
         for (let i = 0; i < previousButtons.length; i++) {
@@ -113,13 +111,11 @@ function updateNextPrevActions(index: number): void {
     }
 
     if (index === allPictures.length - 1) {
-        if (renderNextButton) {
-            for (let i = 0; i < nextButtons.length; i++) {
-                addClass(nextButtons[i], 'hidden');
-            }
-            for (let i = 0; i < nextLinks.length; i++) {
-                removeClass(nextLinks[i], 'hidden');
-            }
+        for (let i = 0; i < nextButtons.length; i++) {
+            addClass(nextButtons[i], 'hidden');
+        }
+        for (let i = 0; i < nextLinks.length; i++) {
+            removeClass(nextLinks[i], 'hidden');
         }
     } else {
         for (let i = 0; i < nextButtons.length; i++) {
