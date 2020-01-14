@@ -1,6 +1,29 @@
 from django.shortcuts import render
 
+from pictures.models import Picture
+
+
+def clean_picture_data(picture, from_elastic_search):
+    """
+    TODO: Consolidate with other
+    Cleans the data from each picture, picking out the fields needed
+    """
+    if from_elastic_search:
+        photo = picture.photo
+    else:
+        photo = picture.photo.url
+
+    print(picture.tags)
+
+    return {
+        "photo": photo,
+        "title": picture.title,
+        "tags": picture.tags,
+        "public_id": str(picture.public_id),
+    }
+
 
 # Create your views here.
 def picture(request, picture_public_id):
-    return render(request, "picture.html.j2")
+    my_picture = Picture.objects.get(public_id=picture_public_id)
+    return render(request, "picture.html.j2", clean_picture_data(my_picture, False))
