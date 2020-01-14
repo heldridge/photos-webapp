@@ -57,12 +57,14 @@
                         <a 
                             href="{% url 'gallery' %}?q={{ current_query }}&before={{ first_picture.public_id }}"
                             class="bg-gray-300 hover:bg-gray-500 rounded-t h-8 lg:h-10 xl:h-12 lg:text-xl px-2 lg:px-3 xl:px-4 flex items-center justify-center"
+                            title="Previous Page"
                         >
                             <i class="fas fa-angle-double-left"></i>
                         </a>
                     </div>
                     <button 
                         class="bg-gray-300 hover:bg-gray-500 rounded-t h-8 lg:h-10 xl:h-12 lg:text-xl px-2 lg:px-3 xl:px-4 ml-2 previous-button"
+                        title="Previous Image"
                         onclick=previousPicture()
                     >
                         <i class="fas fa-arrow-left"></i>
@@ -70,6 +72,7 @@
                     <a 
                         href="{% url 'gallery' %}?q={{ current_query }}&before={{ first_picture.public_id }}"
                         class="bg-gray-300 hover:bg-gray-500 rounded-t h-8 lg:h-10 xl:h-12 lg:text-xl px-2 lg:px-3 xl:px-4 flex items-center justify-center ml-2 previous-link"
+                        title="Previous Image"
                     >
                         <i class="fas fa-arrow-left"></i>
                     </a>
@@ -77,7 +80,8 @@
                 
                 <div class="flex justify-between w-5/12 xl:w-2/5">
                     <button 
-                        class="bg-gray-300 hover:bg-gray-500 rounded-t h-8 lg:h-10 xl:h-12 lg:text-xl px-2 lg:px-3 xl:px-4 mr-2 next-button "
+                        class="bg-gray-300 hover:bg-gray-500 rounded-t h-8 lg:h-10 xl:h-12 lg:text-xl px-2 lg:px-3 xl:px-4 mr-2 next-button"
+                        title="Next Image"
                         onclick=nextPicture()
                     >
                         <i class="fas fa-arrow-right"></i>
@@ -85,6 +89,7 @@
                     <a 
                         href="{% url 'gallery' %}?q={{ current_query }}&after={{ last_picture.public_id }}"
                         class="hidden bg-gray-300 hover:bg-gray-500 rounded-t h-8 lg:h-10 xl:h-12 lg:text-xl px-2 lg:px-3 xl:px-4 flex items-center justify-center mr-2 next-link"
+                        title="Next Image"
                     >
                         <i class="fas fa-arrow-right"></i>
                     </a>
@@ -92,6 +97,7 @@
                         <a 
                             class="bg-gray-300 hover:bg-gray-500 rounded-t h-8 lg:h-10 xl:h-12 lg:text-xl px-2 lg:px-3 xl:px-4 flex items-center justify-center"
                             href="{% url 'gallery' %}?q={{ current_query }}&after={{ last_picture.public_id }}"
+                            title="Next Page"
                         >
                             <i class="fas fa-angle-double-right"></i>
                         </a>
