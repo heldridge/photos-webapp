@@ -229,9 +229,9 @@ def get_baseline_context(request):
 
     current_full_query = "+".join(searched_tags)
     if before_picture is not None:
-        current_full_query += f"before={before_picture}"
+        current_full_query += f"&before={before_picture}"
     if after_picture is not None:
-        current_full_query += f"after={after_picture}"
+        current_full_query += f"&after={after_picture}"
 
     return {
         "max_tag_length": settings.MAX_TAG_LENGTH,
