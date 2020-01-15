@@ -6,7 +6,7 @@
 
 {% if picture %}
 
-<div class="flex flex-row justify-center md:justify-start px-8 pt-4 pb-20">
+<div class="flex flex-col md:flex-row justify-center md:justify-start px-8 pt-4 pb-20">
     <div class="md:w-9/12 flex flex-col" id="gallery-image-guide-container">
     
         <div class="flex justify-between">
@@ -45,7 +45,7 @@
         </div>
         <div id="images-info">
             {% for picture in pictures %}
-            <div class="flex flex-col hidden">
+            <div class="flex flex-col items-center md:items-start hidden">
                 <div>
                     <a 
                         href="{% url 'picture' picture.public_id %}"
@@ -72,7 +72,7 @@
             {% endfor %}
         </div>
     </div>
-    <div class="w-3/12 hidden md:flex flex-col" id="gallery-sidebar">
+    <div class="md:w-3/12 flex flex-col pt-4" id="gallery-sidebar">
         <div> 
             <!--
             <div class="mx-6 flex justify-between">
@@ -80,7 +80,7 @@
             </div>
             -->
             
-            <div class="flex mx-6 justify-between">
+            <div class="hidden md:flex mx-6 justify-between">
                 <div class="flex justify-between w-5/12 xl:w-2/5">
                     <div>
                         <a 
