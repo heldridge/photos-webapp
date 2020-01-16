@@ -49,13 +49,13 @@
         <div class="block md:hidden">
             {% include "partials/_gallery_nav.html.j2" %}
         </div>
-        <div id="images-info">
+        <div id="images-info" class="mt-6 md:mt-0">
             {% for picture in pictures %}
             <div class="flex flex-col items-center md:items-start hidden">
-                <div>
+                <div class="mb-1 md:mb-0">
                     <a 
                         href="{% url 'picture' picture.public_id %}"
-                        class="text-5xl font-semibold hover:opacity-50 inline-block" id="title-{{ picture.public_id }}"
+                        class="text-3xl md:text-5xl font-semibold hover:opacity-50 inline-block" id="title-{{ picture.public_id }}"
                     >
                         {{ picture.title }}
                     </a>
@@ -63,12 +63,12 @@
                 
                 <div class="flex flex-wrap">
                     {% for tag in picture.above_tags %}
-                    <a href="{% url 'search'%}?q={{ tag }}" class="tag bg-gray-300 hover:bg-gray-400 rounded py-2 px-3 text mr-3 font-medium mb-3 text-gray-600 hover:text-black">
+                    <a href="{% url 'search'%}?q={{ tag }}" class="tag bg-gray-300 hover:bg-gray-400 rounded py-1 md:py-2 px-2 md:px-3 mr-3 font-medium mb-3 text-gray-600 hover:text-black text-xs md:text-md">
                         {{ tag }}
                     </a>
                     {% endfor %}
                     {% for tag in picture.below_tags %}
-                    <a href="{% url 'search'%}?q={{ tag }}" class="tag bg-gray-300 hover:bg-gray-400 rounded py-2 px-3 text mr-3 font-medium mb-3 text-gray-600 hover:text-black">
+                    <a href="{% url 'search'%}?q={{ tag }}" class="tag bg-gray-300 hover:bg-gray-400 rounded py-1 md:py-2 px-2 md:px-3 mr-3 font-medium mb-3 text-gray-600 hover:text-black text-xs md:text-md">
                         {{ tag }}
                     </a>
                     {% endfor %}
@@ -86,7 +86,7 @@
             </div>
             -->
 
-            <div class="flex md:hidden justify-center mb-4">
+            <div class="flex md:hidden justify-center mb-6">
                 <a 
                     href="{% url 'search' %}?q={{ current_full_query }}"
                     class="rounded bg-gray-300 hover:bg-gray-500 mx-6 py-2 pl-3 pr-3"
