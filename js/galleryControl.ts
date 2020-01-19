@@ -44,8 +44,6 @@ function setImage(index: number, stateAction: string = "") {
     }
     updateNextPrevActions(index);
 
-    console.log(galleryNextImages);
-
     removeClass(galleryNextImages[currentIndex], "selected-picture");
     addClass(galleryNextImages[index], "selected-picture");
 
@@ -97,6 +95,9 @@ function updateNextPrevActions(index: number): void {
   // maximum value "next" becomes a link. If either is not a link it is made a button.
   if (index === 0) {
     for (let i = 0; i < previousButtons.length; i++) {
+      console.log("HERE!!");
+      console.log(previousButtons[i]);
+
       addClass(previousButtons[i], "hidden");
     }
     for (let i = 0; i < previousLinks.length; i++) {
