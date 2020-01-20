@@ -95,3 +95,7 @@
         max-height: 80vh;
     }
 }
+
+.bg-black-op-90 {
+    background-color: rgba(0, 0, 0, 0.9);
+}
