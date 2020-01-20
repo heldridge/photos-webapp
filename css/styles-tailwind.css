@@ -80,7 +80,7 @@
 }
 
 .max-h-80-screen {
-    max-height: 80vh;
+    max-height: 60vh;
 }
 
 #gallery-image-container {
@@ -90,5 +90,8 @@
 @media (min-width: 1024px) {
     #gallery-image-container {
         height: 80vh;
+    }
+    .max-h-80-screen {
+        max-height: 80vh;
     }
 }
