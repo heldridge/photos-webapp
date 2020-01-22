@@ -122,9 +122,15 @@ def get_photos_data(tags=None, before=None, after=None):
 
     # Fetch the before or after ID
     if before is not None and before != "":
-        before_picture = Picture.objects.get(public_id=before)
+        try:
+            before_picture = Picture.objects.get(public_id=before)
+        except (exceptions.ValidationError, Picture.DoesNotExist):
+            before = None
     if after is not None and after != "":
-        after_picture = Picture.objects.get(public_id=after)
+        try:
+            after_picture = Picture.objects.get(public_id=after)
+        except (exceptions.ValidationError, Picture.DoesNotExist):
+            after = None
 
     # Instantiate default values
     photos = []
