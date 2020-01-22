@@ -97,5 +97,10 @@
 }
 
 .bg-black-op-90 {
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal {
+    left: 0;
+    top: 0;
 }

@@ -17,6 +17,12 @@ let imagesInfo = document.getElementById('images-info').children;
 let galleryImageContainer = <HTMLDivElement>(
     document.getElementById('gallery-image-container')
 );
+let modalImageContainer = <HTMLDivElement>(
+    document.getElementById('modal-image-container')
+);
+
+let modalImage = <HTMLDivElement>document.getElementById('modal-image');
+
 let currentIndex = originalPictureIndex;
 let previousButtons = document.getElementsByClassName('previous-button');
 let nextButtons = document.getElementsByClassName('next-button');
@@ -36,13 +42,21 @@ function setImage(index: number, stateAction: string = '') {
                     galleryImageContainer.lastChild
                 );
             }
+            // Remove children
+            while (modalImageContainer.hasChildNodes()) {
+                modalImageContainer.removeChild(modalImageContainer.lastChild);
+            }
+
             // Add new child
             let image = document.createElement('img');
-
             addClass(image, 'max-h-80-screen');
-
             image.src = allPictures[index].photo;
             galleryImageContainer.appendChild(image);
+
+            // Add child to modal image
+            let modalImage = document.createElement('img');
+            modalImage.src = allPictures[index].photo;
+            modalImageContainer.appendChild(modalImage);
         }
         updateNextPrevActions(index);
 
@@ -136,3 +150,11 @@ window.onpopstate = function(event: PopStateEvent) {
         setImage(event.state.index);
     }
 };
+
+function showModalImage() {
+    removeClass(modalImage, 'hidden');
+}
+
+function hideModalImage() {
+    addClass(modalImage, 'hidden');
+}
