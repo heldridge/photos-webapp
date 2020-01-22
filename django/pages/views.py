@@ -1,8 +1,11 @@
 import functools
 import re
+import json
 
 from django.conf import settings
+from django.core import exceptions
 from django.shortcuts import render
+
 
 from pictures.models import Picture
 from pictures.documents import PictureDocument
@@ -266,17 +269,21 @@ def gallery(request):
     picture_id = request.GET.get("p", "")
     current_picture = None
     current_picture_index = 0
+    could_not_find_picture = False
     if picture_id != "":
-        current_picture = clean_picture_data(
-            Picture.objects.get(public_id=picture_id), False
-        )
+        try:
+            current_picture = clean_picture_data(
+                Picture.objects.get(public_id=picture_id), False
+            )
+        except (exceptions.ValidationError, Picture.DoesNotExist):
+            could_not_find_picture = True
+        else:
+            for i, picture in enumerate(context["pictures"]):
+                if picture["public_id"] == picture_id:
+                    current_picture_index = i
+                    break
 
-        for i, picture in enumerate(context["pictures"]):
-            if picture["public_id"] == picture_id:
-                current_picture_index = i
-                break
-
-    elif len(context["pictures"]) > 0:
+    if (picture_id == "" or could_not_find_picture) and len(context["pictures"]) > 0:
         # We are coming in the "backwards" direction
         if before_picture is not None:
             current_picture = context["pictures"][-1]
@@ -296,5 +303,7 @@ def gallery(request):
     )
     context["grid_placeholders"] = [1] * (18 - len(context["pictures"]))
     context["picture"] = current_picture
+
+    print(json.dumps(context, indent=2))
 
     return render(request, "pages/gallery.html.j2", context)
