@@ -5,12 +5,13 @@
 {% block content %}
 
 {% if picture %}
-
-<div class="hidden fixed z-10 bg-black-op-90 w-full min-h-full">
-
-    
-
+<div class="hidden absolute z-10 min-h-full bg-black-op-90 modal flex flex-col" id="modal-image" onclick="hideModalImage()">
+    <button class="text-white text-5xl self-end pr-4 pt-2" onclick="hideModalImage()">
+        <i class="fas fa-times"></i>
+    </button>
+    <div class="px-8 pt-1 pb-10 pointer-events-none" id="modal-image-container"></div>
 </div>
+
 
 <div class="flex flex-col md:flex-row justify-center md:justify-start px-8 pt-4 pb-20">
     <div class="md:w-9/12 flex justify-between border-red-300" id="gallery-image-guide-container">
@@ -37,8 +38,8 @@
                     </a>
                 </div>
 
-                <div id="gallery-image-container" class="flex items-center">
-                </div>
+                <button id="gallery-image-container" class="flex items-center" onclick="showModalImage()">
+                </button>
 
 
                 <div class="hidden md:inline-block">
