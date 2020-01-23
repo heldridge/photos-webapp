@@ -11,8 +11,8 @@ let renderNextButton = renderNextButtonOutside;
 //@ts-ignore
 let renderPreviousButton = renderPreviousButtonOutside;
 
-let galleryNextImages = document.getElementById('gallery-next-images').children;
-let imagesInfo = document.getElementById('images-info').children;
+let galleryNextImages = document.getElementById('gallery-next-images');
+let imagesInfo = document.getElementById('images-info');
 
 let galleryImageContainer = <HTMLDivElement>(
     document.getElementById('gallery-image-container')
@@ -64,13 +64,16 @@ function setImage(index: number, stateAction: string = '') {
         updateNextPrevActions(index);
 
         if (galleryNextImages) {
-            removeClass(galleryNextImages[currentIndex], 'selected-picture');
-            addClass(galleryNextImages[index], 'selected-picture');
+            removeClass(
+                galleryNextImages.children[currentIndex],
+                'selected-picture'
+            );
+            addClass(galleryNextImages.children[index], 'selected-picture');
         }
 
         if (imagesInfo) {
-            addClass(imagesInfo[currentIndex], 'hidden');
-            removeClass(imagesInfo[index], 'hidden');
+            addClass(imagesInfo.children[currentIndex], 'hidden');
+            removeClass(imagesInfo.children[index], 'hidden');
         }
 
         currentIndex = index;
