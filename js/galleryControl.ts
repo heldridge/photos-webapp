@@ -42,29 +42,36 @@ function setImage(index: number, stateAction: string = '') {
                     galleryImageContainer.lastChild
                 );
             }
-            // Remove children
-            while (modalImageContainer.hasChildNodes()) {
-                modalImageContainer.removeChild(modalImageContainer.lastChild);
-            }
 
             // Add new child
             let image = document.createElement('img');
             addClass(image, 'max-h-80-screen');
             image.src = allPictures[index].photo;
             galleryImageContainer.appendChild(image);
+        }
+        if (modalImageContainer) {
+            // Remove children
+            while (modalImageContainer.hasChildNodes()) {
+                modalImageContainer.removeChild(modalImageContainer.lastChild);
+            }
 
             // Add child to modal image
             let modalImage = document.createElement('img');
             modalImage.src = allPictures[index].photo;
             modalImageContainer.appendChild(modalImage);
         }
+
         updateNextPrevActions(index);
 
-        removeClass(galleryNextImages[currentIndex], 'selected-picture');
-        addClass(galleryNextImages[index], 'selected-picture');
+        if (galleryNextImages) {
+            removeClass(galleryNextImages[currentIndex], 'selected-picture');
+            addClass(galleryNextImages[index], 'selected-picture');
+        }
 
-        addClass(imagesInfo[currentIndex], 'hidden');
-        removeClass(imagesInfo[index], 'hidden');
+        if (imagesInfo) {
+            addClass(imagesInfo[currentIndex], 'hidden');
+            removeClass(imagesInfo[index], 'hidden');
+        }
 
         currentIndex = index;
 
