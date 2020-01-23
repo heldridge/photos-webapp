@@ -18,10 +18,32 @@ let modalImage = <HTMLDivElement>document.getElementById("modal-image");
 let currentIndex = originalPictureIndex;
 let previousButtons = document.getElementsByClassName("previous-button");
 let nextButtons = document.getElementsByClassName("next-button");
-let previousLinks = document.getElementsByClassName("previous-link");
-let nextLinks = document.getElementsByClassName("next-link");
+let previousLinks = <HTMLCollectionOf<HTMLAnchorElement>>(
+  document.getElementsByClassName("previous-link")
+);
+let nextLinks = <HTMLCollectionOf<HTMLAnchorElement>>(
+  document.getElementsByClassName("next-link")
+);
 
 let sideBarSlots: number = 26;
+
+// Only set the next/previous links (used in nextPicture and previousPicture functions)
+// if there is a valid next/previous link and that link is enabled
+let nextLinkHREF = "";
+if (nextLinks.length > 0 && !hasClass(nextLinks[0], "pointer-events-none")) {
+  nextLinkHREF = nextLinks[0].href;
+}
+
+let previousLinkHREF = "";
+// console.log(previousLinks);
+// console.log(previousLinks[0]);
+// console.log(!hasClass(previousLinks[0], "pointer-events-none"));
+if (
+  previousLinks.length > 0 &&
+  !hasClass(previousLinks[0], "pointer-events-none")
+) {
+  previousLinkHREF = previousLinks[0].href;
+}
 
 setImage(originalPictureIndex, "replace");
 
@@ -93,12 +115,16 @@ function setImage(index: number, stateAction: string = "") {
 function nextPicture(): void {
   if (currentIndex + 1 < allPictures.length) {
     setImage(currentIndex + 1, "push");
+  } else if (nextLinkHREF) {
+    document.location.href = nextLinkHREF;
   }
 }
 
 function previousPicture(): void {
   if (currentIndex > 0) {
     setImage(currentIndex - 1, "push");
+  } else if (previousLinkHREF) {
+    document.location.href = previousLinkHREF;
   }
 }
 
