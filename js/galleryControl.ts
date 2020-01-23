@@ -35,9 +35,6 @@ if (nextLinks.length > 0 && !hasClass(nextLinks[0], "pointer-events-none")) {
 }
 
 let previousLinkHREF = "";
-// console.log(previousLinks);
-// console.log(previousLinks[0]);
-// console.log(!hasClass(previousLinks[0], "pointer-events-none"));
 if (
   previousLinks.length > 0 &&
   !hasClass(previousLinks[0], "pointer-events-none")
@@ -184,6 +181,11 @@ document.onkeyup = function(event) {
     previousPicture();
   } else if (event.code === "ArrowRight") {
     nextPicture();
-  } else if (event.code === "Space") {
+  } else if (event.code === "KeyF") {
+    if (hasClass(modalImage, "hidden")) {
+      showModalImage();
+    } else {
+      hideModalImage();
+    }
   }
 };
