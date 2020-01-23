@@ -2,14 +2,6 @@
 let allPictures: Array = allPicturesOutside;
 //@ts-ignore
 let originalPictureIndex = originalPictureIndexOutside;
-//@ts-ignore
-let nextPageLink = nextPageLinkOutside;
-//@ts-ignore
-let previousPageLink = previousPageLinkOutside;
-//@ts-ignore
-let renderNextButton = renderNextButtonOutside;
-//@ts-ignore
-let renderPreviousButton = renderPreviousButtonOutside;
 
 let galleryNextImages = document.getElementById("gallery-next-images");
 let imagesInfo = document.getElementById("images-info");
