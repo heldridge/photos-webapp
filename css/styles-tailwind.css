@@ -34,10 +34,15 @@
   max-width: 80rem;
 }
 
-#addTagsButton:active {
-  /* Tailwind default bg-gray-500 */
-  background-color: #a0aec0;
+#addTagsButton {
+  transition: background-color 0.1s;
+  -webkit-transition: background-color 0.1s;
 }
+
+/* #addTagsIcon {
+  transition: color 0.1s;
+  -webkit-transition: color 0.1s;
+} */
 
 #addTagsInputContainer {
   transition: border-color 0.1s;
@@ -117,6 +122,10 @@
   background-color: #232323;
 }
 
+.bg-dt-3 {
+  background-color: #252525;
+}
+
 .bg-dt-9 {
   background-color: #383838;
 }
@@ -129,7 +138,7 @@
   background-color: #2c2c2c;
 }
 
-.tag:hover {
+a.tag:hover {
   background-color: #2c2c2c;
 }
 
@@ -142,7 +151,48 @@
 }
 
 .text-disabled {
+  color: white;
   opacity: 38%;
+}
+
+.tag-close {
+  opacity: 60%;
+}
+
+.tag-close:hover {
+  opacity: 87%;
+}
+
+.dark-button:hover {
+  background-color: #2c2c2c;
+}
+
+.bg-dt-primary-200 {
+  /* background-color: #ffa38a; */
+  background-color: #fa79fe;
+}
+
+.bg-dt-primary-500 {
+  /* background-color: #ff280c; */
+  background-color: #e100f2;
+}
+
+.bg-dt-disabled {
+  background-color: #2f2f2f;
+}
+
+.enabled-button {
+  background-color: #e100f2;
+  color: black;
+}
+
+.enabled-button:hover {
+  background-color: #fa79fe;
+}
+
+.disabled-button {
+  background-color: #2f2f2f;
+  pointer-events: none;
 }
 
 /*

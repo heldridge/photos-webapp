@@ -1,4 +1,5 @@
 let addTagsButton = <HTMLAnchorElement>document.getElementById("addTagsButton");
+let addTagsIcon = document.getElementById("addTagsIcon");
 let addTagsInput = <HTMLInputElement>document.getElementById("addTagsInput");
 let addTagsInputContainer = <HTMLDivElement>(
   document.getElementById("addTagsInputContainer")
@@ -55,7 +56,11 @@ function addTagsInputUpdated(
 
   // Disable link if tag is empty
   if (value === "") {
-    addClass(addTagsButton, "disabled-link");
+    console.log("HERE!!!!");
+    addClass(addTagsButton, "disabled-button");
+    removeClass(addTagsIcon, "text-black");
+    addClass(addTagsIcon, "text-disabled");
+    console.log(addTagsIcon.className);
   }
 
   let valid = validateTag(
@@ -65,7 +70,7 @@ function addTagsInputUpdated(
     new RegExp(validTagRegex)
   );
   if (valid.isValid) {
-    addClass(addTagsInputContainer, "border-gray-300");
+    addClass(addTagsInputContainer, "border-dt-0");
     removeClass(addTagsInputContainer, "border-red-500");
     addClass(addTagsErrorMessage, "hidden");
     let newHREF = originalHREF;
@@ -76,13 +81,20 @@ function addTagsInputUpdated(
     addTagsButton.href = newHREF;
 
     if (value !== "") {
-      removeClass(addTagsButton, "disabled-link");
+      removeClass(addTagsButton, "disabled-button");
+      addClass(addTagsButton, "enabled-button");
+      removeClass(addTagsIcon, "text-disabled");
+      addClass(addTagsIcon, "text-black");
     }
   } else if (value !== "") {
     addTagsErrorMessage.innerHTML = valid.message;
-    removeClass(addTagsInputContainer, "border-gray-300");
+    removeClass(addTagsInputContainer, "border-dt-0");
     addClass(addTagsInputContainer, "border-red-500");
+
     removeClass(addTagsErrorMessage, "hidden");
-    addClass(addTagsButton, "disabled-link");
+    addClass(addTagsButton, "disabled-button");
+
+    removeClass(addTagsIcon, "text-black");
+    addClass(addTagsIcon, "text-disabled");
   }
 }

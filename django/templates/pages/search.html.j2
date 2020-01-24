@@ -5,38 +5,43 @@
 {% block content %}
     <div class="search-page flex justify-center flex-wrap md:flex-no-wrap mt-5 mb-5">
         <div class="search-sidebar md:w-1/5 max-w-xl ml-3 mr-3 md:mr-0">
-            <div class="tags-bar border border-gray-300 rounded px-5 flex flex-col py-3 shadow">
+            <!-- old: "tags-bar border border-gray-300 rounded px-5 flex flex-col py-3 shadow" -->
+            <div class="tags-bar bg-dt-1 rounded px-5 flex flex-col py-3 shadow">
                 <div class="flex flex-col align">
-                    <div class="flex border justify-between border-gray-300 w-4/5 rounded overflow-hidden" id="addTagsInputContainer">
+                    <!-- old: "flex border justify-between border-gray-300 w-4/5 rounded overflow-hidden" -->
+                    <div class="flex border justify-between border-dt-0 w-4/5 rounded overflow-hidden" id="addTagsInputContainer">
                         <div class="my-2 pl-2">
+                            <!--old: "appearance-none w-full pr-2" -->
                             <input 
-                                type="text" 
-                                class="appearance-none w-full pr-2" 
+                                type="text"
+                                class="appearance-none w-full pr-2 bg-dt-1" 
                                 placeholder="Add Tags..." 
                                 id="addTagsInput" 
                                 oninput="addTagsInputUpdated( '{{ current_query }}', {{ max_tag_length }}, {{ min_tag_length }}, '{{ valid_tag_regex }}' )"
                                 onkeyup="addTagsInputOnKeyUp(event, '{{ current_query }}', {{ max_tag_length }}, {{ min_tag_length }}, '{{ valid_tag_regex }}' )"">
                         </div>
-                        <a href="{% url 'search'%}?q={{ current_query }}" class="bg-gray-300 hover:bg-gray-400 active:bg-blue-300 px-3 py-2 disabled-link" id="addTagsButton">
-                            <i class="fas fa-plus"></i>
+                        <!-- old: bg-gray-300 hover:bg-gray-400 active:bg-blue-300 px-3 py-2 disabled-link" -->
+                        <a href="{% url 'search'%}?q={{ current_query }}" class="disabled-button px-3 py-2" id="addTagsButton">
+                            <i class="fas fa-plus text-disabled" id="addTagsIcon"></i>
                         </a>
                     </div>
                     <p class="pt-1 text-red-500 hidden" id="addTagsErrorMessage">  </p>
                 </div>
                 
                 
-                <h1 class="text-2xl font-semibold pb-3 pt-1">
+                <h1 class="text-2xl font-semibold pb-3 pt-1 text-he">
                     Searched Tags
                 </h1>
 
                 {% if searched_tags_data %}
                     <div class="flex flex-row flex-wrap w-4/5">
                     {% for tag_data in searched_tags_data %}
-                        <div class="tag bg-gray-300 rounded py-1 px-2 text-xs mr-2 font-medium mb-2 text-gray-600">
+                        <!-- old: "tag bg-gray-300 rounded py-1 px-2 text-xs mr-2 font-medium mb-2 text-gray-600" -->
+                        <div class="tag bg-dt-2 shadow rounded py-1 px-2 text-xs mr-2 font-medium mb-2">
                             <a href="{% url 'search'%}?q={{ tag_data.query }}">
-                                <i class="fas fa-times pr-1 hover:text-black"></i>
+                                <i class="fas fa-times pr-1 tag-close"></i>
                             </a>
-                            {{ tag_data.tag }}
+                            <span class="text-me">{{ tag_data.tag }}</span>
                         </div>
                     {% endfor %}
                     </div>
@@ -54,7 +59,8 @@
             <div class="flex justify-between my-2 text-lg">
 
                 {% if first_picture and render_previous_button %}
-                    <a href="{% url 'search' %}?q={{ current_query }}&before={{ first_picture.public_id }}" id="previousButton" class="bg-gray-300 hover:bg-gray-500 rounded py-2 pl-4 pr-3">
+                    <!-- old: bg-gray-300 hover:bg-gray-500 rounded py-2 pl-4 pr-3" -->
+                    <a href="{% url 'search' %}?q={{ current_query }}&before={{ first_picture.public_id }}" id="previousButton" class="bg-dt-2 dark-button shadow rounded py-2 pl-4 pr-3">
                         <i class="fas fa-arrow-left pr-2"></i>
                         Previous
                     </a>
@@ -66,7 +72,8 @@
                 
 
                 {% if last_picture and render_next_button %}
-                    <a href="{% url 'search' %}?q={{ current_query }}&after={{ last_picture.public_id }}" id="nextButton" class="bg-gray-300 hover:bg-gray-500 rounded py-2 pl-4 pr-3">
+                    <!-- old: "bg-gray-300 hover:bg-gray-500 rounded py-2 pl-4 pr-3" -->
+                    <a href="{% url 'search' %}?q={{ current_query }}&after={{ last_picture.public_id }}" id="nextButton" class="bg-dt-2 dark-button shadow rounded py-2 pl-4 pr-3">
                         Next
                         <i class="fas fa-arrow-right pl-2"></i>
                     </a>
