@@ -61,7 +61,7 @@
 
                 {% if first_picture and render_previous_button %}
                     <!-- old: bg-gray-300 hover:bg-gray-500 rounded py-2 pl-4 pr-3" -->
-                    <a href="{% url 'search' %}?q={{ current_query }}&before={{ first_picture.public_id }}" id="previousButton" class="bg-dt-2 dark-button shadow rounded py-2 pl-4 pr-3">
+                    <a href="{% url 'search' %}?q={{ current_query }}&before={{ first_picture.public_id }}" id="previousButton" class="rounded py-2 pl-4 pr-3 enabled-button">
                         <i class="fas fa-arrow-left pr-2"></i>
                         Previous
                     </a>
@@ -74,7 +74,7 @@
 
                 {% if last_picture and render_next_button %}
                     <!-- old: "bg-gray-300 hover:bg-gray-500 rounded py-2 pl-4 pr-3" -->
-                    <a href="{% url 'search' %}?q={{ current_query }}&after={{ last_picture.public_id }}" id="nextButton" class="bg-dt-2 dark-button shadow rounded py-2 pl-4 pr-3">
+                    <a href="{% url 'search' %}?q={{ current_query }}&after={{ last_picture.public_id }}" id="nextButton" class="rounded py-2 pl-4 pr-3 enabled-button">
                         Next
                         <i class="fas fa-arrow-right pl-2"></i>
                     </a>
