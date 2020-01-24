@@ -15,6 +15,8 @@
     --primary-color-200: #ffa48c;
     --primary-color-100: #ffc8b9;
     --primary-color-50: #ffe8e6;
+
+    --secondary-color-200: #00f2f2;
 }
 
 #navSearchIcon {
@@ -94,7 +96,7 @@
 }
 
 .selected-picture {
-    box-shadow: 0 0 0 2px rgba(0, 204, 0, 1);
+    box-shadow: 0 0 0 2px var(--secondary-color-200);
 }
 
 .max-h-80-screen {
@@ -213,6 +215,10 @@ a.tag:hover {
 
 .hoverable-button:hover {
     background-color: #383838;
+}
+
+.border-secondary-200 {
+    border-color: var(--secondary-color-200);
 }
 
 /*
