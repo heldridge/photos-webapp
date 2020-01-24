@@ -105,8 +105,9 @@
                         </a>
                         {% endfor %}
                         {% for tag in picture.below_tags %}
-                        <a href="{% url 'search'%}?q={{ tag }}" class="tag bg-gray-300 hover:bg-gray-400 rounded py-1 md:py-2 px-2 md:px-3 mr-3 font-medium mb-3 text-gray-600 hover:text-black text-xs md:text-md">
-                            {{ tag }}
+                        <!-- old: "tag bg-gray-300 hover:bg-gray-400 rounded py-1 md:py-2 px-2 md:px-3 mr-3 font-medium mb-3 text-gray-600 hover:text-black text-xs md:text-md" -->
+                        <a href="{% url 'search'%}?q={{ tag }}" class="tag rounded py-1 md:py-2 px-2 md:px-3 mr-3 font-medium mb-3 text-xs md:text-md bg-dt-2 shadow">
+                           <span class="text-me">{{ tag }}</span>
                         </a>
                         {% endfor %}
                     </div>
