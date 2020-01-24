@@ -1,3 +1,10 @@
+let defaultBorderClass = "border-dt-0";
+let selectedBorderClass = "border-blue-300";
+let errorBorderClass = "border-red-500";
+
+let unfocusedIconClass = "text-disabled";
+let focusedIconClass = "text-me";
+
 interface validData {
   isValid: boolean;
   message: string;
@@ -43,12 +50,14 @@ function navSearchOnFocus(): void {
   let searchBorder: HTMLElement = document.getElementById("navSearchBorder");
   let navSearchIcon: HTMLElement = document.getElementById("navSearchIcon");
 
-  if (!hasClass(searchBorder, "border-red-500")) {
-    removeClass(searchBorder, "border-gray-300");
-    addClass(searchBorder, "border-blue-300");
+  if (!hasClass(searchBorder, errorBorderClass)) {
+    removeClass(searchBorder, defaultBorderClass);
+    addClass(searchBorder, selectedBorderClass);
 
-    removeClass(navSearchIcon, "opacity-50");
-    addClass(navSearchIcon, "opacity-100");
+    console.log("HJERE");
+    console.log(focusedIconClass);
+    removeClass(navSearchIcon, unfocusedIconClass);
+    addClass(navSearchIcon, focusedIconClass);
   }
 }
 
@@ -56,12 +65,12 @@ function navSearchFocusOut(): void {
   let searchBorder: HTMLElement = document.getElementById("navSearchBorder");
   let navSearchIcon: HTMLElement = document.getElementById("navSearchIcon");
 
-  if (!hasClass(searchBorder, "border-red-500")) {
-    removeClass(searchBorder, "border-blue-300");
-    addClass(searchBorder, "border-gray-300");
+  if (!hasClass(searchBorder, errorBorderClass)) {
+    removeClass(searchBorder, selectedBorderClass);
+    addClass(searchBorder, defaultBorderClass);
 
-    removeClass(navSearchIcon, "opacity-100");
-    addClass(navSearchIcon, "opacity-50");
+    removeClass(navSearchIcon, focusedIconClass);
+    addClass(navSearchIcon, unfocusedIconClass);
   }
 }
 

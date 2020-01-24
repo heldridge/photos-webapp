@@ -1,17 +1,18 @@
-<nav class="flex items-center bg-white-500 border rounded shadow">
-  <a href="/" class="py-5 pr-6 pl-6 hover:bg-gray-100 text-xl">
-      Home
+<!-- old:bg-white-500 -->
+<nav class="flex items-center bg-dt-1 rounded shadow">
+  <a href="/" class="py-5 pr-6 pl-6 text-xl nav-bar-link">
+      <span class="text-he">Home</span>
   </a>
 
-  <div class="py-2 pr-6 pl-6 border-r border-l border-gray-300 flex flex-col md:flex-row justify-center">
+  <div class="py-2 pr-6 pl-6 border-r border-l border-dt-0 flex flex-col md:flex-row justify-center">
     <div 
-      class="cursor-text border border-gray-300 rounded px-4 flex items-center text-xl w-full justify-between" 
+      class="cursor-text border border-dt-0 rounded px-4 flex items-center text-xl w-full justify-between" 
       id="navSearchBorder"
       onclick="focusNavSearch()"
     >
       <input 
         id="navSearch"
-        class="focus:outline-none focus:placeholder-gray-600 appearance-none py-3 w-3/4 md:w-full" 
+        class="focus:outline-none appearance-none py-3 w-3/4 md:w-full bg-dt-1 text-he" 
         type="text" placeholder="Search Tags..." 
         onfocus="navSearchOnFocus()" onfocusout="navSearchFocusOut()"
         onkeyup="navSearchOnKeyUp(event, this, {{ max_tag_length }}, {{ min_tag_length }}, '{{ valid_tag_regex }}')"
@@ -19,7 +20,7 @@
         onchange="navSearchRestrictOnInput(this, '{{invalid_tag_char_regex}}')"
         maxlength="{{ max_tag_length }}"
       >
-      <i class="fas fa-search opacity-50 pl-3" id="navSearchIcon"></i>
+      <i class="fas fa-search text-disabled pl-3" id="navSearchIcon"></i>
     </div>
     <p class="text-red-500 pl-3 self-center max-w-s hidden" id="navSearchErrorMessage"></p>
   </div>
