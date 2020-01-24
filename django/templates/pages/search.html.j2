@@ -37,9 +37,9 @@
                     <div class="flex flex-row flex-wrap w-4/5">
                     {% for tag_data in searched_tags_data %}
                         <!-- old: "tag bg-gray-300 rounded py-1 px-2 text-xs mr-2 font-medium mb-2 text-gray-600" -->
-                        <div class="tag bg-dt-2 shadow rounded py-1 px-2 text-xs mr-2 font-medium mb-2">
+                        <div class="tag bg-dt-2 shadow rounded py-1 px-2 text-base mr-2 font-medium mb-2">
                             <a href="{% url 'search'%}?q={{ tag_data.query }}">
-                                <i class="fas fa-times pr-1 tag-close"></i>
+                                <i class="fas fa-times pr-1 tag-close text-base"></i>
                             </a>
                             <span class="text-me">{{ tag_data.tag }}</span>
                         </div>
