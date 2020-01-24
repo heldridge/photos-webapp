@@ -4,6 +4,19 @@
 
 @tailwind utilities;
 
+:root {
+    --primary-color-900: #db0000;
+    --primary-color-800: #f20000;
+    --primary-color-700: #ff1706;
+    --primary-color-600: #ff240e;
+    --primary-color-500: #ff2c13;
+    --primary-color-400: #ff5939;
+    --primary-color-300: #ff7c5d;
+    --primary-color-200: #ffa48c;
+    --primary-color-100: #ffc8b9;
+    --primary-color-50: #ffe8e6;
+}
+
 #navSearchIcon {
     transition: opacity 0.3s;
     -webkit-transition: opacity 0.3s;
@@ -168,13 +181,12 @@ a.tag:hover {
 }
 
 .bg-dt-primary-200 {
-    /* background-color: #ffa38a; */
-    background-color: #fa79fe;
+    background-color: var(--primary-color-200);
 }
 
 .bg-dt-primary-500 {
     /* background-color: #ff280c; */
-    background-color: #e100f2;
+    background-color: var(--primary-color-500);
 }
 
 .bg-dt-disabled {
@@ -182,12 +194,12 @@ a.tag:hover {
 }
 
 .enabled-button {
-    background-color: #fa79fe;
+    background-color: var(--primary-color-200);
     color: black;
 }
 
 .enabled-button:hover {
-    background-color: #e100f2;
+    background-color: var(--primary-color-100);
 }
 
 .disabled-button {
@@ -198,6 +210,11 @@ a.tag:hover {
 .border-dt-9 {
     border-color: #383838;
 }
+
+.hoverable-button:hover {
+    background-color: #383838;
+}
+
 /*
 Overlays using plain white (branded colors later)
 
