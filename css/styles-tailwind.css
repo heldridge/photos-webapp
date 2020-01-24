@@ -182,12 +182,12 @@ a.tag:hover {
 }
 
 .enabled-button {
-    background-color: #e100f2;
+    background-color: #fa79fe;
     color: black;
 }
 
 .enabled-button:hover {
-    background-color: #fa79fe;
+    background-color: #e100f2;
 }
 
 .disabled-button {
