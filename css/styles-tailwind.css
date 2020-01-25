@@ -17,6 +17,10 @@
     --primary-color-50: #ffe8e6;
 
     --secondary-color-200: #00f2f2;
+
+    --basic-color-200: #f2f2f2;
+    --basic-color-400: #c7c7c7;
+    --basic-color-500: #a9a9a9;
 }
 
 #navSearchIcon {
@@ -86,7 +90,7 @@
 }
 
 .next-picture:hover {
-    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.16);
+    box-shadow: 0 0 0 2px var(--basic-color-400);
 }
 
 @media (min-width: 768px) {
