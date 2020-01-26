@@ -54,8 +54,6 @@ function navSearchOnFocus(): void {
     removeClass(searchBorder, defaultBorderClass);
     addClass(searchBorder, selectedBorderClass);
 
-    console.log("HJERE");
-    console.log(focusedIconClass);
     removeClass(navSearchIcon, unfocusedIconClass);
     addClass(navSearchIcon, focusedIconClass);
   }
