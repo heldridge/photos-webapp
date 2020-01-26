@@ -21,7 +21,7 @@
                 <div class="hidden md:inline-block">
                     <!-- old: "border flex flex-col justify-center text-lg bg-gray-300 hover:bg-gray-500 px-6 rounded h-16 mr-1 ml-2 previous-button" -->
                     <button 
-                        class="flex flex-col justify-center text-lg px-6 rounded h-16 mr-1 ml-2 previous-button bg-gray-200 hover:bg-basic-500 text-black"
+                        class="flex flex-col justify-center text-lg px-6 rounded h-16 mr-1 ml-2 previous-button bg-basic-400 hover:bg-basic-500 text-black"
                         onclick="previousPicture()"
                     >
                         <i class="fas fa-chevron-left"></i>
@@ -32,7 +32,7 @@
                     <a 
                         href="{% url 'gallery' %}?q={{ current_query }}&before={{ first_picture.public_id }}"
                         {% if render_previous_button %}
-                        class="hidden flex flex-col justify-center text-lg px-6 rounded h-16 mr-1 ml-2 previous-link bg-gray-200 hover:bg-basic-500 text-black"
+                        class="hidden flex flex-col justify-center text-lg px-6 rounded h-16 mr-1 ml-2 previous-link bg-basic-400 hover:bg-basic-500 text-black"
                         {% else %}
                         class="hidden flex flex-col justify-center text-lg px-6 rounded h-16 mr-1 ml-2 previous-link disabled-button"
                         {% endif %}                    
@@ -52,7 +52,7 @@
                 <div class="hidden md:inline-block">
                     <!-- old: "border flex flex-col justify-center text-lg bg-gray-300 hover:bg-gray-500 px-6 rounded h-16 ml-1 mr-2 next-button" -->
                     <button 
-                        class="flex flex-col justify-center text-lg px-6 rounded h-16 ml-1 mr-2 next-button bg-gray-200 hover:bg-basic-500 text-black"
+                        class="flex flex-col justify-center text-lg px-6 rounded h-16 ml-1 mr-2 next-button bg-basic-400 hover:bg-basic-500 text-black"
                         onclick="nextPicture()"
                     >
                         <i class="fas fa-chevron-right"></i>
@@ -64,7 +64,7 @@
                     <a 
                         href="{% url 'gallery' %}?q={{ current_query }}&after={{ last_picture.public_id }}"
                         {% if render_next_button %}
-                        class="hidden flex flex-col justify-center text-lg px-6 rounded h-16 mr-2 ml-1 next-link bg-gray-200 hover:bg-basic-500 text-black"
+                        class="hidden flex flex-col justify-center text-lg px-6 rounded h-16 mr-2 ml-1 next-link bg-basic-400 hover:bg-basic-500 text-black"
                         {% else %}
                         class="hidden flex flex-col justify-center text-lg px-6 rounded h-16 mr-2 ml-1 next-link disabled-button"
                         {% endif %}                    
@@ -132,7 +132,7 @@
                 <!-- old: "rounded bg-gray-300 hover:bg-gray-500 mx-6 py-2 pl-3 pr-3" -->
                 <a 
                     href="{% url 'search' %}?q={{ current_full_query }}"
-                    class="rounded mx-6 py-2 pl-3 pr-3 bg-gray-200 hover:bg-basic-500 text-black"
+                    class="rounded mx-6 py-2 pl-3 pr-3 bg-basic-400 hover:bg-basic-500 text-black"
                 >
                     <i class="fas fa-undo pr-1"></i>
                     Back to Search
@@ -146,7 +146,7 @@
                     href="{% url 'gallery' %}?q={{ current_query }}&before={{ first_picture.public_id }}"
 
                     {% if render_previous_button %}
-                    class="rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center bg-gray-200 hover:bg-basic-500 text-black"
+                    class="rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center bg-basic-400 hover:bg-basic-500 text-black"
                     {% else %}
                     class="rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center disabled-button"
                     {% endif %}
@@ -166,7 +166,7 @@
                     href="{% url 'gallery' %}?q={{ current_query }}&after={{ last_picture.public_id }}"
 
                     {% if render_next_button %}
-                    class="rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center bg-gray-200 hover:bg-basic-500 text-black"
+                    class="rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center bg-basic-400 hover:bg-basic-500 text-black"
                     {% else %}
                     class="rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center disabled-button"
                     {% endif %}
@@ -202,7 +202,7 @@
                 <!-- old: "rounded bg-gray-300 hover:bg-gray-500 mx-6 py-2 pl-3 pr-3 lg:text-xl flex" -->
                 <a 
                     href="{% url 'search' %}?q={{ current_full_query }}"
-                    class="rounded mx-6 py-2 pl-3 pr-3 lg:text-xl flex bg-gray-200 hover:bg-basic-500 text-black"
+                    class="rounded mx-6 py-2 pl-3 pr-3 lg:text-xl flex bg-basic-400 hover:bg-basic-500 text-black"
                 >
                     <div class="hidden lg:inline-block">
                         <i class="hidden fas fa-undo pr-2"></i>
