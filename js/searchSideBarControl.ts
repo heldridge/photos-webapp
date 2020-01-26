@@ -61,11 +61,9 @@ function addTagsInputUpdated(
 
   // Disable link if tag is empty
   if (value === "") {
-    console.log("HERE!!!!");
     addClass(addTagsButton, "disabled-button");
     removeClass(addTagsIcon, "text-black");
     addClass(addTagsIcon, "text-disabled");
-    console.log(addTagsIcon.className);
   }
 
   let valid = validateTag(
