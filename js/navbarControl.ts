@@ -1,6 +1,6 @@
 let defaultBorderClass = "border-dt-9";
 let selectedBorderClass = "border-secondary-700";
-let errorBorderClass = "border-red-500";
+let errorBorderClass = "border-error";
 
 let unfocusedIconClass = "text-disabled";
 let focusedIconClass = "text-me";
