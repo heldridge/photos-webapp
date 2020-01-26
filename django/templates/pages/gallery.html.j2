@@ -34,7 +34,7 @@
                         {% if render_previous_button %}
                         class="hidden flex flex-col justify-center text-lg px-6 rounded h-16 mr-1 ml-2 previous-link bg-basic-400 hover:bg-basic-500 text-black"
                         {% else %}
-                        class="hidden flex flex-col justify-center text-lg px-6 rounded h-16 mr-1 ml-2 previous-link disabled-button"
+                        class="hidden flex flex-col justify-center text-lg px-6 rounded h-16 mr-1 ml-2 previous-link bg-dt-6 text-disabled pointer-events-none"
                         {% endif %}                    
                         >
                         {% if render_previous_button %}
@@ -66,7 +66,7 @@
                         {% if render_next_button %}
                         class="hidden flex flex-col justify-center text-lg px-6 rounded h-16 mr-2 ml-1 next-link bg-basic-400 hover:bg-basic-500 text-black"
                         {% else %}
-                        class="hidden flex flex-col justify-center text-lg px-6 rounded h-16 mr-2 ml-1 next-link disabled-button"
+                        class="hidden flex flex-col justify-center text-lg px-6 rounded h-16 mr-2 ml-1 next-link bg-dt-6 text-disabled pointer-events-none"
                         {% endif %}                    
                         >
 
@@ -100,13 +100,13 @@
                     <div class="flex flex-wrap">
                         {% for tag in picture.above_tags %}
                         <!-- old: "tag bg-gray-300 hover:bg-gray-400 rounded py-1 md:py-2 px-2 md:px-3 mr-3 font-medium mb-3 text-gray-600 hover:text-black text-xs md:text-md" -->
-                        <a href="{% url 'search'%}?q={{ tag }}" class="tag rounded py-1 md:py-2 px-2 md:px-3 mr-3 font-medium mb-3 text-xs md:text-md bg-dt-2 shadow">
+                        <a href="{% url 'search'%}?q={{ tag }}" class="tag rounded py-1 md:py-2 px-2 md:px-3 mr-3 font-medium mb-3 text-xs md:text-md bg-dt-2 hover:bg-dt-9 shadow">
                             <span class="text-me">{{ tag }}</span>
                         </a>
                         {% endfor %}
                         {% for tag in picture.below_tags %}
                         <!-- old: "tag bg-gray-300 hover:bg-gray-400 rounded py-1 md:py-2 px-2 md:px-3 mr-3 font-medium mb-3 text-gray-600 hover:text-black text-xs md:text-md" -->
-                        <a href="{% url 'search'%}?q={{ tag }}" class="tag rounded py-1 md:py-2 px-2 md:px-3 mr-3 font-medium mb-3 text-xs md:text-md bg-dt-2 shadow">
+                        <a href="{% url 'search'%}?q={{ tag }}" class="tag rounded py-1 md:py-2 px-2 md:px-3 mr-3 font-medium mb-3 text-xs md:text-md bg-dt-2 hover:bg-dt-9 shadow">
                            <span class="text-me">{{ tag }}</span>
                         </a>
                         {% endfor %}
@@ -148,7 +148,7 @@
                     {% if render_previous_button %}
                     class="rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center bg-basic-400 hover:bg-basic-500 text-black"
                     {% else %}
-                    class="rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center disabled-button"
+                    class="rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center bg-dt-6 text-disabled pointer-events-none"
                     {% endif %}
 
                     title="Previous Page"
@@ -168,7 +168,7 @@
                     {% if render_next_button %}
                     class="rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center bg-basic-400 hover:bg-basic-500 text-black"
                     {% else %}
-                    class="rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center disabled-button"
+                    class="rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center bg-dt-6 text-disabled pointer-events-none"
                     {% endif %}
                     title="Next Page"
                 >

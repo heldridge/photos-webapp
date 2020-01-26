@@ -15,14 +15,14 @@
             <div class="card-tags flex flex-row flex-wrap">
                 {% for tag in picture.above_tags %}
                 <!-- old: "tag bg-gray-300 hover:bg-gray-400 rounded py-1 px-2 text-xs mr-2 font-medium mb-2 text-gray-600 hover:text-black"-->
-                <a href="{% url 'search'%}?q={{ tag }}" class="tag rounded py-1 px-2 text-xs mr-2 font-medium mb-2 bg-dt-2">
+                <a href="{% url 'search'%}?q={{ tag }}" class="tag rounded py-1 px-2 text-xs mr-2 font-medium mb-2 bg-dt-2 hover:bg-dt-9">
                     <span class="text-me">{{ tag }}</span>
                 </a>
                 {% endfor %}
                 {% if picture.below_tags %}
                 {% for tag in picture.below_tags %}
                 <!-- old: tag bg-gray-300 hover:bg-gray-400 rounded py-1 px-2 text-xs mr-2 font-medium mb-2 text-gray-600 hover:text-black collapsed-tag hidden" -->
-                <a href="{% url 'search'%}?q={{ tag }}" class="tag rounded py-1 px-2 text-xs mr-2 font-medium mb-2 collapsed-tag hidden bg-dt-2">
+                <a href="{% url 'search'%}?q={{ tag }}" class="tag rounded py-1 px-2 text-xs mr-2 font-medium mb-2 collapsed-tag hidden bg-dt-2 hover:bg-dt-9">
                     <span class="text-me">{{ tag }}</span>
                 </a>
                 {% endfor %}
