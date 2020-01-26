@@ -60,11 +60,6 @@
   -webkit-transition: background-color 0.1s;
 }
 
-/* #addTagsIcon {
-  transition: color 0.1s;
-  -webkit-transition: color 0.1s;
-} */
-
 #addTagsInputContainer {
   transition: border-color 0.1s;
   -webkit-transition: border-color 0.1s;
