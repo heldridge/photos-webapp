@@ -34,13 +34,13 @@
                         {% if render_previous_button %}
                         class="hidden flex flex-col justify-center text-lg px-6 rounded h-16 mr-1 ml-2 previous-link bg-basic-400 hover:bg-basic-500 text-black"
                         {% else %}
-                        class="hidden flex flex-col justify-center text-lg px-6 rounded h-16 mr-1 ml-2 previous-link bg-dt-6 text-disabled pointer-events-none"
+                        class="hidden flex flex-col justify-center text-lg px-6 rounded h-16 mr-1 ml-2 previous-link bg-dt-6 pointer-events-none"
                         {% endif %}                    
                         >
                         {% if render_previous_button %}
                         <i class="fas fa-chevron-left"></i>
                         {% else %}
-                        <i class="fas fa-chevron-left text-disabled"></i>
+                        <i class="fas fa-chevron-left opacity-disabled"></i>
                         {% endif %}
                     </a>
                 </div>
@@ -66,14 +66,14 @@
                         {% if render_next_button %}
                         class="hidden flex flex-col justify-center text-lg px-6 rounded h-16 mr-2 ml-1 next-link bg-basic-400 hover:bg-basic-500 text-black"
                         {% else %}
-                        class="hidden flex flex-col justify-center text-lg px-6 rounded h-16 mr-2 ml-1 next-link bg-dt-6 text-disabled pointer-events-none"
+                        class="hidden flex flex-col justify-center text-lg px-6 rounded h-16 mr-2 ml-1 next-link bg-dt-6 pointer-events-none"
                         {% endif %}                    
                         >
 
                         {% if render_next_button %}
                         <i class="fas fa-chevron-right"></i>
                         {% else %}
-                        <i class="fas fa-chevron-right text-disabled"></i>
+                        <i class="fas fa-chevron-right opacity-disabled"></i>
                         {% endif %}
                     </a>
                 </div>
@@ -93,7 +93,7 @@
                             href="{% url 'picture' picture.public_id %}"
                             class="text-3xl md:text-5xl font-semibold hover:opacity-50 inline-block" id="title-{{ picture.public_id }}"
                         >
-                            <span class="text-he">{{ picture.title }}</span>
+                            <span class="opacity-high-emphasis">{{ picture.title }}</span>
                         </a>
                     </div>
                     
@@ -101,13 +101,13 @@
                         {% for tag in picture.above_tags %}
                         <!-- old: "tag bg-gray-300 hover:bg-gray-400 rounded py-1 md:py-2 px-2 md:px-3 mr-3 font-medium mb-3 text-gray-600 hover:text-black text-xs md:text-md" -->
                         <a href="{% url 'search'%}?q={{ tag }}" class="tag rounded py-1 md:py-2 px-2 md:px-3 mr-3 font-medium mb-3 text-xs md:text-md bg-dt-2 hover:bg-dt-9 shadow">
-                            <span class="text-me">{{ tag }}</span>
+                            <span class="opacity-medium-emphasis">{{ tag }}</span>
                         </a>
                         {% endfor %}
                         {% for tag in picture.below_tags %}
                         <!-- old: "tag bg-gray-300 hover:bg-gray-400 rounded py-1 md:py-2 px-2 md:px-3 mr-3 font-medium mb-3 text-gray-600 hover:text-black text-xs md:text-md" -->
                         <a href="{% url 'search'%}?q={{ tag }}" class="tag rounded py-1 md:py-2 px-2 md:px-3 mr-3 font-medium mb-3 text-xs md:text-md bg-dt-2 hover:bg-dt-9 shadow">
-                           <span class="text-me">{{ tag }}</span>
+                           <span class="opacity-medium-emphasis">{{ tag }}</span>
                         </a>
                         {% endfor %}
                     </div>
@@ -142,7 +142,7 @@
                     {% if render_previous_button %}
                     class="rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center bg-basic-400 hover:bg-basic-500 text-black"
                     {% else %}
-                    class="rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center bg-dt-6 text-disabled pointer-events-none"
+                    class="rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center bg-dt-6 pointer-events-none"
                     {% endif %}
 
                     title="Previous Page"
@@ -150,7 +150,7 @@
                     {% if render_previous_button %}
                     <i class="fas fa-angle-double-left"></i>
                     {% else %}
-                    <i class="fas fa-angle-double-left text-disabled"></i>
+                    <i class="fas fa-angle-double-left opacity-disabled"></i>
                     {% endif %}
                 </a>
 
@@ -162,14 +162,14 @@
                     {% if render_next_button %}
                     class="rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center bg-basic-400 hover:bg-basic-500 text-black"
                     {% else %}
-                    class="rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center bg-dt-6 text-disabled pointer-events-none"
+                    class="rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center bg-dt-6 pointer-events-none"
                     {% endif %}
                     title="Next Page"
                 >
                     {% if render_next_button %}
                     <i class="fas fa-angle-double-right"></i>
                     {% else %}
-                    <i class="fas fa-angle-double-right text-disabled"></i>
+                    <i class="fas fa-angle-double-right opacity-disabled"></i>
                     {% endif %}
                 </a>
             </div>

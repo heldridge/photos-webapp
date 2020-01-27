@@ -1,7 +1,7 @@
 <!-- old:bg-white-500 -->
 <nav class="flex items-center bg-dt-1 rounded shadow">
   <a href="/" class="py-5 pr-6 pl-6 text-xl nav-bar-link">
-      <span class="text-he">Home</span>
+      <span class="opacity-high-emphasis">Home</span>
   </a>
 
   <div class="py-2 pr-6 pl-6 border-r-2 border-l-2 border-dt-9 flex flex-col md:flex-row justify-center">
@@ -12,7 +12,7 @@
     >
       <input 
         id="navSearch"
-        class="focus:outline-none appearance-none py-3 w-3/4 md:w-full bg-dt-1 text-he" 
+        class="focus:outline-none appearance-none py-3 w-3/4 md:w-full bg-dt-1 opacity-high-emphasis" 
         type="text" placeholder="Search Tags..." 
         onfocus="navSearchOnFocus()" onfocusout="navSearchFocusOut()"
         onkeyup="navSearchOnKeyUp(event, this, {{ max_tag_length }}, {{ min_tag_length }}, '{{ valid_tag_regex }}')"
@@ -20,7 +20,7 @@
         onchange="navSearchRestrictOnInput(this, '{{invalid_tag_char_regex}}')"
         maxlength="{{ max_tag_length }}"
       >
-      <i class="fas fa-search text-disabled pl-3" id="navSearchIcon"></i>
+      <i class="fas fa-search opacity-disabled pl-3" id="navSearchIcon"></i>
     </div>
     <p class="text-red-500 pl-3 self-center max-w-s hidden" id="navSearchErrorMessage"></p>
   </div>

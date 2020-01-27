@@ -28,15 +28,19 @@
 .theme-light {
     /* FULL PAGE */
     --color-bg-main: #ffffff; /* The Page */
-    --opacity-text-high-emphesis: 100%;
-    --opacity-text-medium-emphesis: 100%;
+    --color-text: #000000;
+    --opacity-text-high-emphasis: 100%;
+    --opacity-text-medium-emphasis: 100%;
     --opacity-text-disabled: 50%;
-    --color-error-text: '#f56565';
+    --color-error-text: #f56565;
+    --color-border-default: #e2e8f0;
+    --color-border-error: #f56565;
 
     /* NAVBAR */
     --color-bg-surface-1: #ffffff; /* The Navbar */
     --color-bg-nav-link-hover: #f7fafc; /* Navbar links on hover */
-    --color-border-nav-search: #e2e8f0; /* Navbar search border */
+    --border-width-nav-item: 1px;
+
     --color-placeholder-nav-search-focus: #718096; /* Nav search placeholder text on focus */
     --color-nav-search-icon: #000000; /* Text color of the search icon */
     --opacity-nav-search-icon-default: 50%; /* Opacity of the search icon when not focused */
@@ -44,6 +48,49 @@
 
     /* Images Grid */
     --color-bg-image-card: #ffffff;
+    --color-border-image-card: #e2e8f0;
+
+    /* Tags */
+    --color-bg-tag: #e2e8f0;
+    --color-bg-tag-hover: #cbd5e0;
+    --color-tag: #718096;
+    --color-tag-hover: #000000;
+
+    /* Buttons */
+    --color-bg-button-basic: #e2e8f0;
+    --color-bg-button-basic-hover: #a0aec0;
+    --color-button-basic: #000000;
+    --color-bg-button-primary: #e2e8f0;
+    --color-bg-button-primary-hover: #a0aec0;
+    --color-button-primary: #000000;
+    --color-bg-button-disabled: #e2e8f0;
+    --color-button-disabled: #000000;
+    --opacity-button-disabled: 50%;
+}
+
+.theme-dark {
+    /* FULL PAGE */
+    --color-bg-main: #121212; /* The Page */
+    --color-text: #ffffff;
+    --opacity-text-high-emphasis: 87%;
+    --opacity-text-medium-emphasis: 60%;
+    --opacity-text-disabled: 38%;
+    --color-error-text: #cf6679;
+    --color-border-default: #383838;
+    --color-border-error: #cf6679;
+
+    /* NAVBAR */
+    --color-bg-surface-1: #1e1e1e; /* The Navbar */
+    --color-bg-nav-link-hover: #252525; /* Navbar links on hover */
+    --border-width-nav-item: 2px;
+
+    /* --color-placeholder-nav-search-focus: #718096; Nav search placeholder text on focus */
+    --color-nav-search-icon: #ffffff; /* Text color of the search icon */
+    --opacity-nav-search-icon-default: 38%; /* Opacity of the search icon when not focused */
+    --opacity-nav-search-icon-focus: 87%; /* Opacity of the nav search icon when focused */
+
+    /* Images Grid */
+    --color-bg-image-card: #1e1e1e;
     --color-border-image-card: #e2e8f0;
 
     /* Tags */
@@ -163,21 +210,6 @@
 .modal {
     left: 0;
     top: 0;
-}
-
-.text-he {
-    color: white;
-    opacity: 87%;
-}
-
-.text-me {
-    color: white;
-    opacity: 60%;
-}
-
-.text-disabled {
-    color: white;
-    opacity: 38%;
 }
 
 .tag-close:hover {

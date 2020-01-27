@@ -22,14 +22,14 @@
                         </div>
                         <!-- old: bg-gray-300 hover:bg-gray-400 active:bg-blue-300 px-3 py-2 disabled-link" -->
                         <a href="{% url 'search'%}?q={{ current_query }}" class="bg-dt-6 pointer-events-none px-3 py-2" id="addTagsButton">
-                            <i class="fas fa-plus text-disabled" id="addTagsIcon"></i>
+                            <i class="fas fa-plus opacity-disabled" id="addTagsIcon"></i>
                         </a>
                     </div>
                     <p class="pt-1 text-error hidden" id="addTagsErrorMessage">  </p>
                 </div>
                 
                 
-                <h1 class="text-2xl font-semibold pb-3 pt-1 text-he">
+                <h1 class="text-2xl font-semibold pb-3 pt-1 opacity-high-emphasis">
                     Searched Tags
                 </h1>
 
@@ -39,10 +39,10 @@
                         <!-- old: "tag bg-gray-300 rounded py-1 px-2 text-xs mr-2 font-medium mb-2 text-gray-600" -->
                         <div class="tag bg-dt-2 shadow rounded py-1 px-2 text-xs md:text-sm mr-2 font-medium mb-2">
                             <a href="{% url 'search'%}?q={{ tag_data.query }}">
-                                <i class="fas fa-times pr-1 text-me tag-close"></i>
+                                <i class="fas fa-times pr-1 opacity-medium-emphasis tag-close"></i>
                             </a>
                             
-                            <span class="text-me">{{ tag_data.tag }}</span>
+                            <span class="opacity-medium-emphasis">{{ tag_data.tag }}</span>
                         </div>
                     {% endfor %}
                     </div>

@@ -13,7 +13,7 @@
         <div class="flex flex-wrap mt-2">
             {% for tag in tags %}
             <!-- old: "tag bg-gray-300 hover:bg-gray-400 rounded py-2 px-3 text mr-3 font-medium mb-3 text-gray-600 hover:text-black"> -->
-            <a href="{% url 'search'%}?q={{ tag }}" class="tag bg-gray-300 hover:bg-gray-400 rounded py-2 px-3 text mr-3 font-medium mb-3 bg-dt-2 hover:bg-dt-9 text-he">
+            <a href="{% url 'search'%}?q={{ tag }}" class="tag bg-gray-300 hover:bg-gray-400 rounded py-2 px-3 text mr-3 font-medium mb-3 bg-dt-2 hover:bg-dt-9 opacity-high-emphasis">
                 {{ tag }}
             </a>
             {% endfor %}
