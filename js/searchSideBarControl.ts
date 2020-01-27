@@ -1,7 +1,11 @@
-let addTagsIconEnabledClasses = ["text-me", "text-black"];
-let addTagsIconDisabledClasses = ["text-disabled"];
+let addTagsIconEnabledClasses = ["text-black"];
+let addTagsIconDisabledClass = "text-disabled";
 
-let addTagsButtonEnabledClasses = ["text-black", "bg-primary-200"];
+let addTagsButtonEnabledClasses = ["bg-primary-200", "hover:bg-primary-300"];
+let addTagsButtonDisabledClasses = ["bg-dt-6", "pointer-events-none"];
+
+let addTagsInputContainerDefaultClass = "border-dt-9";
+let addTagsInputContainerErrorClass = "border-error";
 
 let addTagsButton = <HTMLAnchorElement>document.getElementById("addTagsButton");
 let addTagsIcon = document.getElementById("addTagsIcon");
@@ -61,9 +65,17 @@ function addTagsInputUpdated(
 
   // Disable link if tag is empty
   if (value === "") {
-    addClass(addTagsButton, "disabled-button");
-    removeClass(addTagsIcon, "text-black");
-    addClass(addTagsIcon, "text-disabled");
+    addTagsButtonEnabledClasses.forEach(className => {
+      removeClass(addTagsButton, className);
+    });
+    addTagsButtonDisabledClasses.forEach(className => {
+      addClass(addTagsButton, className);
+    });
+
+    addTagsIconEnabledClasses.forEach(className => {
+      removeClass(addTagsIcon, className);
+    });
+    addClass(addTagsIcon, addTagsIconDisabledClass);
   }
 
   let valid = validateTag(
@@ -73,9 +85,10 @@ function addTagsInputUpdated(
     new RegExp(validTagRegex)
   );
   if (valid.isValid) {
-    addClass(addTagsInputContainer, "border-dt-9");
-    removeClass(addTagsInputContainer, "border-red-500");
+    addClass(addTagsInputContainer, addTagsInputContainerDefaultClass);
+    removeClass(addTagsInputContainer, addTagsInputContainerErrorClass);
     addClass(addTagsErrorMessage, "hidden");
+
     let newHREF = originalHREF;
     if (currentQuery !== "" && value !== "") {
       newHREF += "+";
@@ -84,20 +97,37 @@ function addTagsInputUpdated(
     addTagsButton.href = newHREF;
 
     if (value !== "") {
-      removeClass(addTagsButton, "disabled-button");
-      addClass(addTagsButton, "enabled-button");
-      removeClass(addTagsIcon, "text-disabled");
-      addClass(addTagsIcon, "text-black");
+      addTagsButtonDisabledClasses.forEach(className => {
+        removeClass(addTagsButton, className);
+      });
+
+      addTagsButtonEnabledClasses.forEach(className => {
+        addClass(addTagsButton, className);
+      });
+
+      removeClass(addTagsIcon, addTagsIconDisabledClass);
+
+      addTagsIconEnabledClasses.forEach(className => {
+        addClass(addTagsIcon, className);
+      });
     }
   } else if (value !== "") {
     addTagsErrorMessage.innerHTML = valid.message;
-    removeClass(addTagsInputContainer, "border-dt-9");
-    addClass(addTagsInputContainer, "border-red-500");
+    removeClass(addTagsInputContainer, addTagsInputContainerDefaultClass);
+    addClass(addTagsInputContainer, addTagsInputContainerErrorClass);
 
     removeClass(addTagsErrorMessage, "hidden");
-    addClass(addTagsButton, "disabled-button");
 
-    removeClass(addTagsIcon, "text-black");
-    addClass(addTagsIcon, "text-disabled");
+    addTagsButtonEnabledClasses.forEach(className => {
+      removeClass(addTagsButton, className);
+    });
+    addTagsButtonDisabledClasses.forEach(className => {
+      addClass(addTagsButton, className);
+    });
+
+    addTagsIconEnabledClasses.forEach(className => {
+      removeClass(addTagsIcon, className);
+    });
+    addClass(addTagsIcon, addTagsIconDisabledClass);
   }
 }
