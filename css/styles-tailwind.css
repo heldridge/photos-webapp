@@ -25,6 +25,32 @@
   --basic-color-500: #a9a9a9;
 }
 
+.theme-light {
+  /* FULL PAGE */
+  --color-bg-main: #ffffff; /* The Page */
+  --opacity-text-high-emphesis: 100%;
+  --opacity-text-medium-emphesis: 100%;
+  --opacity-text-disabled: 50%;
+  --color-error-text: "#f56565";
+
+  /* NAVBAR */
+  --color-bg-surface-1: #ffffff; /* The Navbar */
+  --color-bg-nav-link-hover: #f7fafc; /* Navbar links on hover */
+  --color-border-nav-search: #e2e8f0; /* Navbar search border */
+  --color-placeholder-nav-search-focus: #718096; /* Nav search placeholder text on focus */
+  --color-nav-search-icon: #000000; /* Text color of the search icon */
+  --opacity-nav-search-icon-default: 50%; /* Opacity of the search icon when not focused */
+  --opacity-nav-search-icon-focus: 100%; /* Opacity of the nav search icon when focused */
+
+  /* Images Grid */
+  --color-bg-image-card: #ffffff;
+  --color-border-image-card: #e2e8f0;
+
+  /* Tags */
+  --color-bg-tag: #e2e8f0;
+  --color-bg-tag-hover: #cbd5e0;
+}
+
 #navSearchIcon {
   transition: opacity 0.3s;
   -webkit-transition: opacity 0.3s;
