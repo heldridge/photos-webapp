@@ -51,6 +51,9 @@ module.exports = {
                 'high-emphasis': 'var(--opacity-text-high-emphasis)',
                 'medium-emphasis': 'var(--opacity-text-medium-emphasis)',
                 disabled: 'var(--opacity-text-disabled)'
+            },
+            backgroundColor: {
+                main: 'var(--color-bg-main)'
             }
         }
     },
