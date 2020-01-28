@@ -5,7 +5,7 @@
 
             <a href="{% url 'gallery' %}?p={{ picture.public_id }}&q={{ current_full_query }}">
                 <!-- old: "h-picture-card bg-white border rounded-lg overflow-hidden shadow link-image" -->
-                <div class="h-picture-card bg-surface-1 rounded-lg overflow-hidden shadow link-image">
+                <div class="h-picture-card bg-surface-1 border-image-card rounded-lg overflow-hidden shadow link-image">
                     <img class="object-cover" src="{{ picture.photo }}" alt="">
                 </div>
             </a>

@@ -48,8 +48,7 @@
   --opacity-nav-search-icon-focus: 100%; /* Opacity of the nav search icon when focused */
 
   /* Images Grid */
-  --color-bg-image-card: #ffffff;
-  --color-border-image-card: #e2e8f0;
+  --width-border-image-card: 1px;
 
   /* Tags */
   --color-bg-tag: #e2e8f0;
@@ -92,8 +91,7 @@
   --opacity-nav-search-icon-focus: 87%; /* Opacity of the nav search icon when focused */
 
   /* Images Grid */
-  --color-bg-image-card: #1e1e1e;
-  --color-border-image-card: #e2e8f0;
+  --width-border-image-card: 0px;
 
   /* Tags */
   --color-bg-tag: #e2e8f0;

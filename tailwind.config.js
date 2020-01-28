@@ -54,11 +54,15 @@ module.exports = {
       },
       backgroundColor: {
         main: "var(--color-bg-main)",
-        "surface-1": "var(--color-bg-surface-1)"
+        "surface-1": "var(--color-bg-surface-1)",
+        tag: "var(--color-bg-tag)"
       },
       borderColor: {
         default: "var(--color-border-default)",
         "input-selected": "var(--color-border-input-selected)"
+      },
+      borderWidth: {
+        "image-card": "var(--width-border-image-card)"
       }
     }
   },
