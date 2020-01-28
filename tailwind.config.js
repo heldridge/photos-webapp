@@ -53,7 +53,8 @@ module.exports = {
                 disabled: 'var(--opacity-text-disabled)'
             },
             backgroundColor: {
-                main: 'var(--color-bg-main)'
+                main: 'var(--color-bg-main)',
+                'surface-1': 'var(--color-bg-surface-1)'
             }
         }
     },

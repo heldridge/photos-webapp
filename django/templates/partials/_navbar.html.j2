@@ -1,5 +1,5 @@
 <!-- old:bg-white-500 -->
-<nav class="flex items-center bg-dt-1 rounded shadow">
+<nav class="flex items-center bg-surface-1 rounded shadow">
   <a href="/" class="py-5 pr-6 pl-6 text-xl nav-bar-link">
       <span class="opacity-high-emphasis">Home</span>
   </a>
@@ -12,7 +12,7 @@
     >
       <input 
         id="navSearch"
-        class="focus:outline-none appearance-none py-3 w-3/4 md:w-full bg-dt-1 opacity-high-emphasis" 
+        class="focus:outline-none appearance-none py-3 w-3/4 md:w-full bg-surface-1 opacity-high-emphasis" 
         type="text" placeholder="Search Tags..." 
         onfocus="navSearchOnFocus()" onfocusout="navSearchFocusOut()"
         onkeyup="navSearchOnKeyUp(event, this, {{ max_tag_length }}, {{ min_tag_length }}, '{{ valid_tag_regex }}')"
@@ -23,6 +23,16 @@
       <i class="fas fa-search opacity-disabled pl-3" id="navSearchIcon"></i>
     </div>
     <p class="text-red-500 pl-3 self-center max-w-s hidden" id="navSearchErrorMessage"></p>
+  </div>
+  
+  <div class="mx-2 h-full flex flex-col justify-center">
+
+  <button class="px-2 py-2 bg-basic-400 text-black rounded hover:bg-basic-500 shadow" onclick="toggleLightDarkTheme()">
+
+    Toggle Theme
+
+  </button>
+
   </div>
 
 </nav>

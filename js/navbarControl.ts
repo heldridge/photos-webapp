@@ -108,3 +108,14 @@ function navSearchRestrictOnInput(
         ''
     );
 }
+
+function toggleLightDarkTheme() {
+    let body = document.getElementById('body');
+    if (hasClass(body, 'theme-dark')) {
+        removeClass(body, 'theme-dark');
+        addClass(body, 'theme-light');
+    } else {
+        removeClass(body, 'theme-light');
+        addClass(body, 'theme-dark');
+    }
+}
