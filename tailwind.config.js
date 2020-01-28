@@ -45,7 +45,9 @@ module.exports = {
       },
       textColor: {
         error: "var(--color-error-text)",
-        primary: "var(--color-text)"
+        primary: "var(--color-text)",
+        tag: "var(--color-tag)",
+        "tag-hover": "var(--color-tag-hover)"
       },
       opacity: {
         "high-emphasis": "var(--opacity-text-high-emphasis)",
@@ -55,7 +57,8 @@ module.exports = {
       backgroundColor: {
         main: "var(--color-bg-main)",
         "surface-1": "var(--color-bg-surface-1)",
-        tag: "var(--color-bg-tag)"
+        tag: "var(--color-bg-tag)",
+        "tag-hover": "var(--color-bg-tag-hover)"
       },
       borderColor: {
         default: "var(--color-border-default)",

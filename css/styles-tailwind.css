@@ -94,10 +94,10 @@
   --width-border-image-card: 0px;
 
   /* Tags */
-  --color-bg-tag: #e2e8f0;
-  --color-bg-tag-hover: #cbd5e0;
-  --color-tag: #718096;
-  --color-tag-hover: #000000;
+  --color-bg-tag: #1e1e1e;
+  --color-bg-tag-hover: #383838;
+  --color-tag: #ffffff;
+  --color-tag-hover: #ffffff;
 
   /* Buttons */
   --color-bg-button-basic: #e2e8f0;
