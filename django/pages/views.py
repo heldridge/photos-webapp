@@ -310,6 +310,4 @@ def gallery(request):
     context["grid_placeholders"] = [1] * (18 - len(context["pictures"]))
     context["picture"] = current_picture
 
-    print(json.dumps(context, indent=2))
-
     return render(request, "pages/gallery.html.j2", context)
