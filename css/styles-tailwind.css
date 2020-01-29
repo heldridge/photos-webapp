@@ -4,6 +4,123 @@
 
 @tailwind utilities;
 
+:root {
+    --primary-color-900: #db0000;
+    --primary-color-800: #f20000;
+    --primary-color-700: #ff1706;
+    --primary-color-600: #ff240e;
+    --primary-color-500: #ff2c13;
+    --primary-color-400: #ff5939;
+    --primary-color-300: #ff7c5d;
+    --primary-color-200: #ffa48c;
+    --primary-color-100: #ffc8b9;
+    --primary-color-50: #ffe8e6;
+
+    --secondary-color-100: #97f7f5;
+    --secondary-color-200: #00f2f2;
+    --secondary-color-700: #00b2b9;
+
+    --basic-color-200: #f2f2f2;
+    --basic-color-400: #c7c7c7;
+    --basic-color-500: #a9a9a9;
+}
+
+.theme-light {
+    /* FULL PAGE */
+    --color-bg-main: #ffffff; /* The Page */
+    --color-text: #000000;
+    --opacity-text-high-emphasis: 100%;
+    --opacity-text-medium-emphasis: 100%;
+    --opacity-text-disabled: 50%;
+    --color-error-text: #f56565;
+    --color-border-default: #e2e8f0;
+    --color-border-error: #f56565;
+    --color-border-input-selected: #90cdf4; /* border-blue-300 */
+
+    /* NAVBAR */
+    --color-bg-surface-1: #ffffff; /* The Navbar */
+    --color-bg-nav-link-hover: #edf2f7; /* Navbar links on hover */
+    --border-width-nav-item: 1px;
+
+    --color-placeholder-nav-search-focus: #718096; /* Nav search placeholder text on focus */
+    --color-nav-search-icon: #000000; /* Text color of the search icon */
+    --opacity-nav-search-icon-default: 50%; /* Opacity of the search icon when not focused */
+    --opacity-nav-search-icon-focus: 100%; /* Opacity of the nav search icon when focused */
+
+    /* Images Grid */
+    --width-border-image-card: 1px;
+
+    /* Tags */
+    --color-bg-tag: #e2e8f0;
+    --color-bg-tag-hover: #cbd5e0;
+    --color-tag: #718096;
+    --color-tag-hover: #000000;
+    --color-tag-item-hover: #000000;
+
+    /* Buttons */
+    --color-bg-basic: #e2e8f0;
+    --color-bg-basic-hover: #cbd5e0;
+    --color-button-basic: #000000;
+    --color-bg-primary: #e2e8f0;
+    --color-bg-primary-hover: #cbd5e0;
+    --color-button-primary: #000000;
+    --color-bg-button-disabled: #f7fafc;
+    --color-button-disabled: #000000;
+    --opacity-button-disabled: 50%;
+}
+
+.theme-dark {
+    /* FULL PAGE */
+    --color-bg-main: #121212; /* The Page */
+    --color-text: #ffffff;
+    --opacity-text-high-emphasis: 87%;
+    --opacity-text-medium-emphasis: 60%;
+    --opacity-text-disabled: 38%;
+    --color-error-text: #cf6679;
+    --color-border-default: #383838;
+    --color-border-error: #cf6679;
+    --color-border-input-selected: #007870; /* secondary-700 */
+
+    /* NAVBAR */
+    --color-bg-surface-1: #1e1e1e; /* The Navbar */
+    --color-bg-nav-link-hover: #2c2c2c; /* Navbar links on hover */
+    --border-width-nav-item: 2px;
+
+    /* --color-placeholder-nav-search-focus: #718096; Nav search placeholder text on focus */
+    --color-nav-search-icon: #ffffff; /* Text color of the search icon */
+    --opacity-nav-search-icon-default: 38%; /* Opacity of the search icon when not focused */
+    --opacity-nav-search-icon-focus: 87%; /* Opacity of the nav search icon when focused */
+
+    /* Images Grid */
+    --width-border-image-card: 0px;
+
+    /* Tags */
+    --color-bg-tag: #1e1e1e;
+    --color-bg-tag-hover: #383838;
+    --color-tag: #ffffff;
+    --color-tag-hover: #ffffff;
+    --color-tag-item-hover: #ffffff;
+
+    /* Buttons */
+    --color-bg-basic: #b8bcbc;
+    --color-bg-basic-hover: #e9eeee;
+    --color-button-basic: #000000;
+    --color-bg-primary: #ffa28a;
+    --color-bg-primary-hover: #ffc7b8;
+    --color-button-primary: #000000;
+    --color-bg-button-disabled: #2f2f2f;
+    --color-button-disabled: #ffffff;
+    --opacity-button-disabled: 100%;
+}
+
+/* from: https://stackoverflow.com/questions/11131875/what-is-the-cleanest-way-to-disable-css-transition-effects-temporarily */
+.no-transition {
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    -o-transition: none !important;
+    transition: none !important;
+}
+
 #navSearchIcon {
     transition: opacity 0.3s;
     -webkit-transition: opacity 0.3s;
@@ -23,20 +140,20 @@
 }
 
 .link-image {
-    transition: 0.1s ease;
+    transition: transform 0.1s ease;
 }
 
 .link-image:hover {
-    transform: translate(0rem, -0.2rem);
+    transform: translate(0rem, -0.3rem);
 }
 
 .max-w-7xl {
     max-width: 80rem;
 }
 
-#addTagsButton:active {
-    /* Tailwind default bg-gray-500 */
-    background-color: #a0aec0;
+#addTagsButton {
+    transition: background-color 0.1s;
+    -webkit-transition: background-color 0.1s;
 }
 
 #addTagsInputContainer {
@@ -66,7 +183,7 @@
 }
 
 .next-picture:hover {
-    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.16);
+    box-shadow: 0 0 0 2px var(--basic-color-400);
 }
 
 @media (min-width: 768px) {
@@ -76,7 +193,7 @@
 }
 
 .selected-picture {
-    box-shadow: 0 0 0 2px rgba(0, 204, 0, 1);
+    box-shadow: 0 0 0 2px var(--secondary-color-200);
 }
 
 .max-h-80-screen {
@@ -103,4 +220,78 @@
 .modal {
     left: 0;
     top: 0;
+}
+
+/*
+Overlays using plain white (branded colors later)
+
+5%:     #1e1e1e
+7%:     #232323
+8%:     #252525
+9%:     #282828
+11%:    #2c2c2c
+12%:    #2F2F2F
+14%:    #343434
+15%:    #363636
+16%:    #383838
+
+*/
+
+/* sliders from https://proto.io/freebies/onoff/ 
+
+generated with Material, switch size 21, active color #00F2F2,
+width: 41, height: 15, border radius: 30
+Then, comment out the label:before box shadow, change the other box
+shadow to alpha .9
+
+*/
+
+.theme-switch {
+    position: relative;
+    width: 41px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+.theme-switch-checkbox {
+    display: none;
+}
+.theme-switch-label {
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+    height: 15px;
+    padding: 0;
+    line-height: 15px;
+    border: 0px solid #ffffff;
+    border-radius: 21px;
+    background-color: var(--color-bg-basic);
+}
+.theme-switch-label:before {
+    content: '';
+    display: block;
+    width: 21px;
+    margin: -3px;
+    background: #ffffff;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    /* right: 22px; */
+    border-radius: 21px;
+    box-shadow: 0 3px 6px 0px #757575;
+}
+.theme-switch-checkbox:checked + .theme-switch-label {
+    background-color: #ffa28a;
+}
+.theme-switch-checkbox:checked + .theme-switch-label,
+.theme-switch-checkbox:checked + .theme-switch-label:before {
+    border-color: #ffa28a;
+}
+.theme-switch-checkbox:checked + .theme-switch-label .theme-switch-inner {
+    margin-left: 0;
+}
+.theme-switch-checkbox:checked + .theme-switch-label:before {
+    right: 0px;
+    background-color: #ffa28a;
+    box-shadow: 3px 6px 18px 4px rgba(0, 0, 0, 0.5);
 }

@@ -1,76 +1,102 @@
 <div class="flex md:mx-6 justify-between">
     <div class="flex justify-between w-5/12 xl:w-2/5">
         <div>
+            <!-- old: "bg-gray-300 hover:bg-gray-500 shadow md:shadow-none rounded-b md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center" -->
+            <!-- old: "bg-gray-300 hover:bg-gray-500 shadow md:shadow-none rounded-b md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center opacity-50 pointer-events-none" -->
             <a 
                 href="{% url 'gallery' %}?q={{ current_query }}&before={{ first_picture.public_id }}"
 
                 {% if render_previous_button %}
-                class="bg-gray-300 hover:bg-gray-500 shadow md:shadow-none rounded-b md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center"
+                class="shadow md:shadow-none rounded md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center bg-basic hover:bg-basic-hover text-black"
                 {% else %}
-                class="bg-gray-300 hover:bg-gray-500 shadow md:shadow-none rounded-b md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center opacity-50 pointer-events-none"
+                class="shadow md:shadow-none rounded md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center bg-button-disabled pointer-events-none"
                 {% endif %}
 
                 title="Previous Page"
             >
+                {% if render_previous_button %}
                 <i class="fas fa-angle-double-left"></i>
+                {% else %}
+                <i class="fas fa-angle-double-left opacity-disabled"></i>
+                {% endif %}
             </a>
         </div>
+        <!-- old: "bg-gray-300 hover:bg-gray-500 shadow md:shadow-none rounded-b md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 ml-2 previous-button" -->
         <button 
-            class="bg-gray-300 hover:bg-gray-500 shadow md:shadow-none rounded-b md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 ml-2 previous-button"
+            class="shadow md:shadow-none rounded md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-6 md:px-2 lg:px-3 xl:px-4 ml-2 previous-button bg-basic hover:bg-basic-hover text-black"
             title="Previous Image"
             onclick=previousPicture()
         >
-            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-chevron-left"></i>
         </button>
+        <!-- old: "hidden bg-gray-300 hover:bg-gray-500 shadow md:shadow-none rounded-b md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center ml-2 previous-link -->
+        <!-- old: "hidden bg-gray-300 hover:bg-gray-500 shadow md:shadow-none rounded-b md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center ml-2 previous-link opacity-50 pointer-events-none" -->
         <a 
             href="{% url 'gallery' %}?q={{ current_query }}&before={{ first_picture.public_id }}"
 
             {% if render_previous_button %}
-            class="hidden bg-gray-300 hover:bg-gray-500 shadow md:shadow-none rounded-b md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center ml-2 previous-link"
+            class="hidden shadow md:shadow-none rounded md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-6 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center ml-2 previous-link bg-basic hover:bg-basic-hover text-black"
             {% else %}
-            class="hidden bg-gray-300 hover:bg-gray-500 shadow md:shadow-none rounded-b md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center ml-2 previous-link opacity-50 pointer-events-none"
+            class="hidden shadow md:shadow-none rounded md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-6 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center ml-2 previous-link bg-button-disabled pointer-events-none"
             {% endif %}
 
             title="Previous Image"
         >
-            <i class="fas fa-arrow-left"></i>
+            {% if render_previous_button %}
+            <i class="fas fa-chevron-left"></i>
+            {% else %}
+            <i class="fas fa-chevron-left opacity-disabled"></i>
+            {% endif %}
         </a>
 
     </div>
     
     <div class="flex justify-between w-5/12 xl:w-2/5">
+        <!-- old: "bg-gray-300 hover:bg-gray-500 shadow md:shadow-none rounded-b md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 mr-2 next-button" -->
         <button 
-            class="bg-gray-300 hover:bg-gray-500 shadow md:shadow-none rounded-b md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 mr-2 next-button"
+            class="shadow md:shadow-none rounded md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-6 md:px-2 lg:px-3 xl:px-4 mr-2 next-button bg-basic hover:bg-basic-hover text-black"
             title="Next Image"
             onclick=nextPicture()
         >
-            <i class="fas fa-arrow-right"></i>
+            <i class="fas fa-chevron-right"></i>
         </button>
+        <!--old: "hidden bg-gray-300 hover:bg-gray-500 shadow md:shadow-none rounded-b md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center mr-2 next-link" --?
+        <!-- old: "hidden bg-gray-300 hover:bg-gray-500 shadow md:shadow-none rounded-b md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center mr-2 next-link opacity-50 pointer-events-none" -->
         <a 
             href="{% url 'gallery' %}?q={{ current_query }}&after={{ last_picture.public_id }}"
 
             {% if render_next_button %}
-            class="hidden bg-gray-300 hover:bg-gray-500 shadow md:shadow-none rounded-b md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center mr-2 next-link"
+            class="hidden shadow md:shadow-none rounded md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-6 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center mr-2 next-link bg-basic hover:bg-basic-hover text-black"
             {% else %}
-            class="hidden bg-gray-300 hover:bg-gray-500 shadow md:shadow-none rounded-b md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center mr-2 next-link opacity-50 pointer-events-none"
+            class="hidden shadow md:shadow-none rounded md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-6 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center mr-2 next-link bg-button-disabled pointer-events-none"
             {% endif %}
 
             title="Next Image"
         >
-            <i class="fas fa-arrow-right"></i>
+            {% if render_next_button %}
+            <i class="fas fa-chevron-right"></i>
+            {% else %}
+            <i class="fas fa-chevron-right opacity-disabled"></i>
+            {% endif %}
         </a>
         <div>
+            <!-- old: "bg-gray-300 hover:bg-gray-500 shadow md:shadow-none rounded-b md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center" -->
+            <!-- old: "bg-gray-300 hover:bg-gray-500 shadow md:shadow-none rounded-b md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center opacity-50 pointer-events-none" -->
             <a 
                 href="{% url 'gallery' %}?q={{ current_query }}&after={{ last_picture.public_id }}"
 
                 {% if render_next_button %}
-                class="bg-gray-300 hover:bg-gray-500 shadow md:shadow-none rounded-b md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center"
+                class="shadow md:shadow-none rounded md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center bg-basic hover:bg-basic-hover text-black"
                 {% else %}
-                class="bg-gray-300 hover:bg-gray-500 shadow md:shadow-none rounded-b md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center opacity-50 pointer-events-none"
+                class="shadow md:shadow-none rounded md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center bg-button-disabled pointer-events-none"
                 {% endif %}
                 title="Next Page"
             >
+                {% if render_next_button %}
                 <i class="fas fa-angle-double-right"></i>
+                {% else %}
+                <i class="fas fa-angle-double-right opacity-disabled"></i>
+                {% endif %}
             </a>
         </div>
     </div>   

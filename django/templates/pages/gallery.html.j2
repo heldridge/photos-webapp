@@ -5,7 +5,7 @@
 {% block content %}
 
 {% if picture %}
-<div class="hidden absolute z-10 min-w-full min-h-full bg-black-op-90 modal flex flex-col" id="modal-image" onclick="hideModalImage()">
+<div class="hidden absolute z-10 min-w-full min-h-double-screen bg-black-op-90 modal flex flex-col" id="modal-image" onclick="hideModalImage()">
     <button class="text-white text-5xl self-end pr-4 pt-2" onclick="hideModalImage()">
         <i class="fas fa-times"></i>
     </button>
@@ -19,22 +19,29 @@
             <div class="md:flex md:justify-between md:items-center md:w-full">
 
                 <div class="hidden md:inline-block">
+                    <!-- old: "border flex flex-col justify-center text-lg bg-gray-300 hover:bg-gray-500 px-6 rounded h-16 mr-1 ml-2 previous-button" -->
                     <button 
-                        class="border flex flex-col justify-center text-lg bg-gray-300 hover:bg-gray-500 px-6 rounded h-16 mr-1 ml-2 previous-button"
+                        class="flex flex-col justify-center text-lg px-6 rounded h-16 mr-1 ml-2 previous-button bg-basic hover:bg-basic-hover text-black"
                         onclick="previousPicture()"
                     >
                         <i class="fas fa-chevron-left"></i>
                     </button>
 
+                    <!-- old: "border hidden flex flex-col justify-center text-lg bg-gray-300 hover:bg-gray-500 px-6 rounded h-16 mr-1 ml-2 previous-link" -->
+                    <!-- old: "border hidden flex flex-col justify-center text-lg bg-gray-300 hover:bg-gray-500 px-6 rounded h-16 mr-1 ml-2 previous-link opacity-50 pointer-events-none" -->
                     <a 
                         href="{% url 'gallery' %}?q={{ current_query }}&before={{ first_picture.public_id }}"
                         {% if render_previous_button %}
-                        class="border hidden flex flex-col justify-center text-lg bg-gray-300 hover:bg-gray-500 px-6 rounded h-16 mr-1 ml-2 previous-link"
+                        class="hidden flex flex-col justify-center text-lg px-6 rounded h-16 mr-1 ml-2 previous-link bg-basic hover:bg-basic-hover text-black"
                         {% else %}
-                        class="border hidden flex flex-col justify-center text-lg bg-gray-300 hover:bg-gray-500 px-6 rounded h-16 mr-1 ml-2 previous-link opacity-50 pointer-events-none"
+                        class="hidden flex flex-col justify-center text-lg px-6 rounded h-16 mr-1 ml-2 previous-link bg-button-disabled pointer-events-none"
                         {% endif %}                    
                         >
+                        {% if render_previous_button %}
                         <i class="fas fa-chevron-left"></i>
+                        {% else %}
+                        <i class="fas fa-chevron-left opacity-disabled"></i>
+                        {% endif %}
                     </a>
                 </div>
 
@@ -43,30 +50,39 @@
 
 
                 <div class="hidden md:inline-block">
+                    <!-- old: "border flex flex-col justify-center text-lg bg-gray-300 hover:bg-gray-500 px-6 rounded h-16 ml-1 mr-2 next-button" -->
                     <button 
-                        class="border flex flex-col justify-center text-lg bg-gray-300 hover:bg-gray-500 px-6 rounded h-16 ml-1 mr-2 next-button"
+                        class="flex flex-col justify-center text-lg px-6 rounded h-16 ml-1 mr-2 next-button bg-basic hover:bg-basic-hover text-black"
                         onclick="nextPicture()"
                     >
                         <i class="fas fa-chevron-right"></i>
                     </button>
                 
                 
-
+                    <!-- old: "border hidden flex flex-col justify-center text-lg bg-gray-300 hover:bg-gray-500 px-6 rounded h-16 mr-2 ml-1 next-link" -->
+                    <!--old: "border hidden flex flex-col justify-center text-lg bg-gray-300 hover:bg-gray-500 px-6 rounded h-16 mr-2 ml-1 next-link opacity-50 pointer-events-none" -->
                     <a 
                         href="{% url 'gallery' %}?q={{ current_query }}&after={{ last_picture.public_id }}"
                         {% if render_next_button %}
-                        class="border hidden flex flex-col justify-center text-lg bg-gray-300 hover:bg-gray-500 px-6 rounded h-16 mr-2 ml-1 next-link"
+                        class="hidden flex flex-col justify-center text-lg px-6 rounded h-16 mr-2 ml-1 next-link bg-basic hover:bg-basic-hover text-black"
                         {% else %}
-                        class="border hidden flex flex-col justify-center text-lg bg-gray-300 hover:bg-gray-500 px-6 rounded h-16 mr-2 ml-1 next-link opacity-50 pointer-events-none"
+                        class="hidden flex flex-col justify-center text-lg px-6 rounded h-16 mr-2 ml-1 next-link bg-button-disabled pointer-events-none"
                         {% endif %}                    
                         >
+
+                        {% if render_next_button %}
                         <i class="fas fa-chevron-right"></i>
+                        {% else %}
+                        <i class="fas fa-chevron-right opacity-disabled"></i>
+                        {% endif %}
                     </a>
                 </div>
 
-                <div class="block md:hidden w-full">
-                    {% include "partials/_gallery_nav.html.j2" %}
-                </div>
+                
+            </div>
+
+            <div class="block md:hidden w-full max-w-md">
+                {% include "partials/_gallery_nav.html.j2" %}
             </div>
             
             <div id="images-info" class="mt-6 md:mt-0">
@@ -77,19 +93,21 @@
                             href="{% url 'picture' picture.public_id %}"
                             class="text-3xl md:text-5xl font-semibold hover:opacity-50 inline-block" id="title-{{ picture.public_id }}"
                         >
-                            {{ picture.title }}
+                            <span class="opacity-high-emphasis">{{ picture.title }}</span>
                         </a>
                     </div>
                     
                     <div class="flex flex-wrap">
                         {% for tag in picture.above_tags %}
-                        <a href="{% url 'search'%}?q={{ tag }}" class="tag bg-gray-300 hover:bg-gray-400 rounded py-1 md:py-2 px-2 md:px-3 mr-3 font-medium mb-3 text-gray-600 hover:text-black text-xs md:text-md">
-                            {{ tag }}
+                        <!-- old: "tag bg-gray-300 hover:bg-gray-400 rounded py-1 md:py-2 px-2 md:px-3 mr-3 font-medium mb-3 text-gray-600 hover:text-black text-xs md:text-md" -->
+                        <a href="{% url 'search'%}?q={{ tag }}" class="tag rounded py-1 md:py-2 px-2 md:px-3 mr-3 font-medium mb-3 text-xs md:text-md bg-tag hover:bg-tag-hover text-tag hover:text-tag-hover">
+                            <span class="opacity-medium-emphasis">{{ tag }}</span>
                         </a>
                         {% endfor %}
                         {% for tag in picture.below_tags %}
-                        <a href="{% url 'search'%}?q={{ tag }}" class="tag bg-gray-300 hover:bg-gray-400 rounded py-1 md:py-2 px-2 md:px-3 mr-3 font-medium mb-3 text-gray-600 hover:text-black text-xs md:text-md">
-                            {{ tag }}
+                        <!-- old: "tag bg-gray-300 hover:bg-gray-400 rounded py-1 md:py-2 px-2 md:px-3 mr-3 font-medium mb-3 text-gray-600 hover:text-black text-xs md:text-md" -->
+                        <a href="{% url 'search'%}?q={{ tag }}" class="tag rounded py-1 md:py-2 px-2 md:px-3 mr-3 font-medium mb-3 text-xs md:text-md bg-tag hover:bg-tag-hover text-tag hover:text-tag-hover">
+                           <span class="opacity-medium-emphasis">{{ tag }}</span>
                         </a>
                         {% endfor %}
                     </div>
@@ -104,16 +122,11 @@
     </div>
     <div class="md:w-3/12 flex flex-col pt-4" id="gallery-sidebar">
         <div> 
-            <!--
-            <div class="mx-6 flex justify-between">
-                {% include "partials/_gallery_next_prev.html.j2" %}
-            </div>
-            -->
-
             <div class="flex md:hidden justify-center mb-6">
+                <!-- old: "rounded bg-gray-300 hover:bg-gray-500 mx-6 py-2 pl-3 pr-3" -->
                 <a 
                     href="{% url 'search' %}?q={{ current_full_query }}"
-                    class="rounded bg-gray-300 hover:bg-gray-500 mx-6 py-2 pl-3 pr-3"
+                    class="rounded mx-6 py-2 pl-3 pr-3 bg-basic hover:bg-basic-hover text-black"
                 >
                     <i class="fas fa-undo pr-1"></i>
                     Back to Search
@@ -121,35 +134,48 @@
             </div>
 
             <div class="hidden md:flex justify-between mx-6">
+                <!-- old: "bg-gray-300 hover:bg-gray-500 shadow md:shadow-none rounded-b md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center" -->
+                <!-- old: "bg-gray-300 hover:bg-gray-500 shadow md:shadow-none rounded-b md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center opacity-50 pointer-events-none" -->
                 <a 
                     href="{% url 'gallery' %}?q={{ current_query }}&before={{ first_picture.public_id }}"
 
                     {% if render_previous_button %}
-                    class="bg-gray-300 hover:bg-gray-500 shadow md:shadow-none rounded-b md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center"
+                    class="rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center bg-basic hover:bg-basic-hover text-black"
                     {% else %}
-                    class="bg-gray-300 hover:bg-gray-500 shadow md:shadow-none rounded-b md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center opacity-50 pointer-events-none"
+                    class="rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center bg-button-disabled pointer-events-none"
                     {% endif %}
 
                     title="Previous Page"
                 >
+                    {% if render_previous_button %}
                     <i class="fas fa-angle-double-left"></i>
+                    {% else %}
+                    <i class="fas fa-angle-double-left opacity-disabled"></i>
+                    {% endif %}
                 </a>
 
+                <!-- old: "bg-gray-300 hover:bg-gray-500 shadow md:shadow-none rounded-b md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center" -->
+                <!-- old: "bg-gray-300 hover:bg-gray-500 shadow md:shadow-none rounded-b md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center opacity-50 pointer-events-none" -->
                 <a 
                     href="{% url 'gallery' %}?q={{ current_query }}&after={{ last_picture.public_id }}"
 
                     {% if render_next_button %}
-                    class="bg-gray-300 hover:bg-gray-500 shadow md:shadow-none rounded-b md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center"
+                    class="rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center bg-basic hover:bg-basic-hover text-black"
                     {% else %}
-                    class="bg-gray-300 hover:bg-gray-500 shadow md:shadow-none rounded-b md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center opacity-50 pointer-events-none"
+                    class="rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center bg-button-disabled pointer-events-none"
                     {% endif %}
                     title="Next Page"
                 >
+                    {% if render_next_button %}
                     <i class="fas fa-angle-double-right"></i>
+                    {% else %}
+                    <i class="fas fa-angle-double-right opacity-disabled"></i>
+                    {% endif %}
                 </a>
             </div>
 
-            <div class="border-2 rounded-b border-gray-300 mx-6 pb-5 px-1 flex flex-col items-center">
+            <!-- old: "border-2 rounded-b border-gray-300 mx-6 pb-5 px-1 flex flex-col items-center" -->
+            <div class="border-2 rounded-b border-default mx-6 pb-5 px-1 flex flex-col items-center">
                 <div class="flex flex-row flex-wrap justify-around" id="gallery-next-images">
                     {% for picture in pictures %}
                     <button 
@@ -167,9 +193,10 @@
 
 
             <div class="hidden md:flex justify-center mt-4">
+                <!-- old: "rounded bg-gray-300 hover:bg-gray-500 mx-6 py-2 pl-3 pr-3 lg:text-xl flex" -->
                 <a 
                     href="{% url 'search' %}?q={{ current_full_query }}"
-                    class="rounded bg-gray-300 hover:bg-gray-500 mx-6 py-2 pl-3 pr-3 lg:text-xl flex"
+                    class="rounded mx-6 py-2 pl-3 pr-3 lg:text-xl flex bg-basic hover:bg-basic-hover text-black"
                 >
                     <div class="hidden lg:inline-block">
                         <i class="hidden fas fa-undo pr-2"></i>
