@@ -1,10 +1,13 @@
 let addTagsIconEnabledClasses = ["text-black"];
-let addTagsIconDisabledClass = "text-disabled";
+let addTagsIconDisabledClass = "opacity-disabled";
 
-let addTagsButtonEnabledClasses = ["bg-primary-200", "hover:bg-primary-300"];
-let addTagsButtonDisabledClasses = ["bg-dt-6", "pointer-events-none"];
+let addTagsButtonEnabledClasses = ["bg-primary", "hover:bg-primary-hover"];
+let addTagsButtonDisabledClasses = [
+  "bg-button-disabled",
+  "pointer-events-none"
+];
 
-let addTagsInputContainerDefaultClass = "border-dt-9";
+let addTagsInputContainerDefaultClass = "border-default";
 let addTagsInputContainerErrorClass = "border-error";
 
 let addTagsButton = <HTMLAnchorElement>document.getElementById("addTagsButton");
@@ -98,6 +101,7 @@ function addTagsInputUpdated(
 
     if (value !== "") {
       addTagsButtonDisabledClasses.forEach(className => {
+        console.log("removing " + className);
         removeClass(addTagsButton, className);
       });
 

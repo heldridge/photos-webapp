@@ -22,14 +22,14 @@ module.exports = {
           "800": "#009da0",
           "900": "#007870"
         },
-        basic: {
-          "200": "#e9eeee",
-          "300": "#dbdfdf",
-          "400": "#b8bcbc",
-          "500": "#999d9d",
-          "600": "#707474",
-          "700": "#5c6060"
-        },
+        // basic: {
+        //   "200": "#e9eeee",
+        //   "300": "#dbdfdf",
+        //   "400": "#b8bcbc",
+        //   "500": "#999d9d",
+        //   "600": "#707474",
+        //   "700": "#5c6060"
+        // },
         dt: {
           "0": "#121212",
           "1": "#1e1e1e",
@@ -58,11 +58,17 @@ module.exports = {
         main: "var(--color-bg-main)",
         "surface-1": "var(--color-bg-surface-1)",
         tag: "var(--color-bg-tag)",
-        "tag-hover": "var(--color-bg-tag-hover)"
+        "tag-hover": "var(--color-bg-tag-hover)",
+        basic: "var(--color-bg-basic)",
+        "basic-hover": "var(--color-bg-basic-hover)",
+        "button-disabled": "var(--color-bg-button-disabled)",
+        primary: "var(--color-bg-primary)",
+        "primary-hover": "var(--color-bg-primary-hover)"
       },
       borderColor: {
         default: "var(--color-border-default)",
-        "input-selected": "var(--color-border-input-selected)"
+        "input-selected": "var(--color-border-input-selected)",
+        error: "var(--color-border-error)"
       },
       borderWidth: {
         "image-card": "var(--width-border-image-card)"

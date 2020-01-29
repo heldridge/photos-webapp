@@ -21,7 +21,7 @@
                                 onkeyup="addTagsInputOnKeyUp(event, '{{ current_query }}', {{ max_tag_length }}, {{ min_tag_length }}, '{{ valid_tag_regex }}' )"">
                         </div>
                         <!-- old: bg-gray-300 hover:bg-gray-400 active:bg-blue-300 px-3 py-2 disabled-link" -->
-                        <a href="{% url 'search'%}?q={{ current_query }}" class="bg-dt-6 pointer-events-none px-3 py-2" id="addTagsButton">
+                        <a href="{% url 'search'%}?q={{ current_query }}" class="bg-button-disabled pointer-events-none px-3 py-2" id="addTagsButton">
                             <i class="fas fa-plus opacity-disabled" id="addTagsIcon"></i>
                         </a>
                     </div>
