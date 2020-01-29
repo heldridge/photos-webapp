@@ -5,6 +5,17 @@ let errorBorderClass = 'border-error';
 let unfocusedIconClass = 'opacity-disabled';
 let focusedIconClass = 'opacity-medium-emphasis';
 
+let theme = localStorage.getItem('theme');
+if (theme === 'dark') {
+    setDarkTheme();
+    let themeSwitch = <HTMLInputElement>document.getElementById('theme-switch');
+    themeSwitch.checked = true;
+} else if (theme === 'light') {
+    setLightTheme();
+    let themeSwitch = <HTMLInputElement>document.getElementById('theme-switch');
+    themeSwitch.checked = false;
+}
+
 interface validData {
     isValid: boolean;
     message: string;
@@ -109,30 +120,44 @@ function navSearchRestrictOnInput(
     );
 }
 
-function toggleLightDarkTheme() {
+function setDarkTheme() {
     let body = document.getElementById('body');
-    let themeSwitch = <HTMLInputElement>document.getElementById('theme-switch');
     let themeSunIcon = document.getElementById('theme-sun-icon');
     let themeMoonIcon = document.getElementById('theme-moon-icon');
 
+    removeClass(body, 'theme-light');
+    addClass(body, 'theme-dark');
+
+    removeClass(themeSunIcon, 'opacity-high-emphasis');
+    addClass(themeSunIcon, 'opacity-disabled');
+
+    removeClass(themeMoonIcon, 'opacity-disabled');
+    addClass(themeMoonIcon, 'opacity-high-emphasis');
+}
+
+function setLightTheme() {
+    let body = document.getElementById('body');
+    let themeSunIcon = document.getElementById('theme-sun-icon');
+    let themeMoonIcon = document.getElementById('theme-moon-icon');
+
+    removeClass(body, 'theme-dark');
+    addClass(body, 'theme-light');
+
+    removeClass(themeMoonIcon, 'opacity-high-emphasis');
+    addClass(themeMoonIcon, 'opacity-disabled');
+
+    removeClass(themeSunIcon, 'opacity-disabled');
+    addClass(themeSunIcon, 'opacity-high-emphasis');
+}
+
+function toggleLightDarkTheme() {
+    let themeSwitch = <HTMLInputElement>document.getElementById('theme-switch');
+
     if (themeSwitch.checked) {
-        removeClass(body, 'theme-light');
-        addClass(body, 'theme-dark');
-
-        removeClass(themeSunIcon, 'opacity-high-emphasis');
-        addClass(themeSunIcon, 'opacity-disabled');
-
-        removeClass(themeMoonIcon, 'opacity-disabled');
-        addClass(themeMoonIcon, 'opacity-high-emphasis');
+        setDarkTheme();
+        window.localStorage.setItem('theme', 'dark');
     } else {
-        removeClass(body, 'theme-dark');
-        addClass(body, 'theme-light');
-
-        console.log('HERE!!!!!');
-        removeClass(themeMoonIcon, 'opacity-high-emphasis');
-        addClass(themeMoonIcon, 'opacity-disabled');
-
-        removeClass(themeSunIcon, 'opacity-disabled');
-        addClass(themeSunIcon, 'opacity-high-emphasis');
+        setLightTheme();
+        window.localStorage.setItem('theme', 'light');
     }
 }
