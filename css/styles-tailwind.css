@@ -132,11 +132,11 @@
 }
 
 .link-image {
-    transition: 0.1s ease;
+    transition: transform 0.1s ease;
 }
 
 .link-image:hover {
-    transform: translate(0rem, -0.2rem);
+    transform: translate(0rem, -0.3rem);
 }
 
 .max-w-7xl {
