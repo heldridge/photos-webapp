@@ -33,6 +33,8 @@ if (addTagsButton !== null) {
     originalHREF = addTagsButton.href;
 }
 
+addTagsInputUpdated();
+
 function addTagsInputOnKeyUp(e: onKeyUpEvent) {
     // Listens for an "Enter" keypress in the add tags input,
     // on one directs the page to the page + tag
@@ -99,7 +101,6 @@ function addTagsInputUpdated() {
 
         if (value !== '') {
             addTagsButtonDisabledClasses.forEach(className => {
-                console.log('removing ' + className);
                 removeClass(addTagsButton, className);
             });
 
