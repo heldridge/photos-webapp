@@ -293,5 +293,5 @@ shadow to alpha .9
 .theme-switch-checkbox:checked + .theme-switch-label:before {
     right: 0px;
     background-color: #ffa28a;
-    box-shadow: 3px 6px 18px 0px rgba(0, 0, 0, 0.5);
+    box-shadow: 3px 6px 18px 4px rgba(0, 0, 0, 0.5);
 }
