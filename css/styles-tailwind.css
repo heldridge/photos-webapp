@@ -55,6 +55,7 @@
   --color-bg-tag-hover: #cbd5e0;
   --color-tag: #718096;
   --color-tag-hover: #000000;
+  --color-tag-item-hover: #000000;
 
   /* Buttons */
   --color-bg-basic: #e2e8f0;
@@ -98,6 +99,7 @@
   --color-bg-tag-hover: #383838;
   --color-tag: #ffffff;
   --color-tag-hover: #ffffff;
+  --color-tag-item-hover: #ffffff;
 
   /* Buttons */
   --color-bg-basic: #b8bcbc;

@@ -47,7 +47,8 @@ module.exports = {
         error: "var(--color-error-text)",
         primary: "var(--color-text)",
         tag: "var(--color-tag)",
-        "tag-hover": "var(--color-tag-hover)"
+        "tag-hover": "var(--color-tag-hover)",
+        "tag-item-hover": "var(--color-tag-item-hover)"
       },
       opacity: {
         "high-emphasis": "var(--opacity-text-high-emphasis)",
