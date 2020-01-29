@@ -228,3 +228,62 @@ Overlays using plain white (branded colors later)
 16%:    #383838
 
 */
+
+/* sliders from https://proto.io/freebies/onoff/ 
+
+generated with Material, switch size 21, active color #00F2F2,
+width: 41, height: 15, border radius: 30
+Then, comment out the label:before box shadow, change the other box
+shadow to alpha .9
+
+*/
+
+.theme-switch {
+  position: relative;
+  width: 41px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+.theme-switch-checkbox {
+  display: none;
+}
+.theme-switch-label {
+  display: block;
+  overflow: hidden;
+  cursor: pointer;
+  height: 15px;
+  padding: 0;
+  line-height: 15px;
+  border: 0px solid #ffffff;
+  border-radius: 21px;
+  background-color: var(--color-bg-basic);
+}
+.theme-switch-label:before {
+  content: "";
+  display: block;
+  width: 21px;
+  margin: -3px;
+  background: #ffffff;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  /* right: 22px; */
+  border-radius: 21px;
+  box-shadow: 0 3px 6px 0px #757575;
+}
+.theme-switch-checkbox:checked + .theme-switch-label {
+  background-color: #ffa28a;
+}
+.theme-switch-checkbox:checked + .theme-switch-label,
+.theme-switch-checkbox:checked + .theme-switch-label:before {
+  border-color: #ffa28a;
+}
+.theme-switch-checkbox:checked + .theme-switch-label .theme-switch-inner {
+  margin-left: 0;
+}
+.theme-switch-checkbox:checked + .theme-switch-label:before {
+  right: 0px;
+  background-color: #ffa28a;
+  box-shadow: 3px 6px 18px 0px rgba(0, 0, 0, 0.2);
+}

@@ -30,11 +30,32 @@
   </div>
   
   <div class="mx-2 h-full flex flex-col justify-center">
+    <!--
     <button class="px-2 py-2 bg-basic text-black rounded hover:bg-basic-hover shadow flex justify-center items-center" onclick="toggleLightDarkTheme()">
 
       <i class="far fa-sun text-xl" id="toggle-icon"></i>
 
     </button>
+    -->
+
+    <div class="flex">
+
+      <i class="far fa-sun text-xl mr-2"></i>
+
+      <div class="flex flex-col justify-center">
+        <div class="theme-switch">
+            <input type="checkbox" name="theme-switch" class="theme-switch-checkbox" id="theme-switch" checked onclick="toggleLightDarkTheme()">
+            <label class="theme-switch-label" for="theme-switch"></label>
+        </div>
+      </div>
+
+      <i class="far fa-moon text-xl ml-2"></i>
+      
+
+    </div>
+
+    
+
 
   </div>
 

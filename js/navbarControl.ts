@@ -107,18 +107,12 @@ function navSearchRestrictOnInput(
 
 function toggleLightDarkTheme() {
   let body = document.getElementById("body");
-  let toggleIcon = document.getElementById("toggle-icon");
-  if (hasClass(body, "theme-dark")) {
-    removeClass(body, "theme-dark");
-    addClass(body, "theme-light");
-
-    removeClass(toggleIcon, "fa-sun");
-    addClass(toggleIcon, "fa-moon");
-  } else {
+  let themeSwitch = <HTMLInputElement>document.getElementById("theme-switch");
+  if (themeSwitch.checked) {
     removeClass(body, "theme-light");
     addClass(body, "theme-dark");
-
-    removeClass(toggleIcon, "fa-moon");
-    addClass(toggleIcon, "fa-sun");
+  } else {
+    removeClass(body, "theme-dark");
+    addClass(body, "theme-light");
   }
 }
