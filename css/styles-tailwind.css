@@ -58,10 +58,10 @@
 
   /* Buttons */
   --color-bg-basic: #e2e8f0;
-  --color-bg-basic-hover: ;
+  --color-bg-basic-hover: #cbd5e0;
   --color-button-basic: #000000;
   --color-bg-primary: #e2e8f0;
-  --color-bg-primary-hover: #a0aec0;
+  --color-bg-primary-hover: #cbd5e0;
   --color-button-primary: #000000;
   --color-bg-button-disabled: #f7fafc;
   --color-button-disabled: #000000;
