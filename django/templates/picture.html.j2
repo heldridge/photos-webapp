@@ -7,13 +7,14 @@
 <div class="px-8 pt-4 pb-20 flex justify-center">
     <div class="flex flex-col">
         <img src="{{ photo }}" alt="{{ title }}" title="{{ title }}">
-        <h3 class="text-5xl font-semibold">
+        <h3 class="text-5xl font-semibold opacity-high-emphasis">
             {{ title }}
         </h3>
         <div class="flex flex-wrap mt-2">
             {% for tag in tags %}
-            <a href="{% url 'search'%}?q={{ tag }}" class="tag bg-gray-300 hover:bg-gray-400 rounded py-2 px-3 text mr-3 font-medium mb-3 text-gray-600 hover:text-black">
-                {{ tag }}
+            <!-- old: "tag bg-gray-300 hover:bg-gray-400 rounded py-2 px-3 text mr-3 font-medium mb-3 text-gray-600 hover:text-black"> -->
+            <a href="{% url 'search'%}?q={{ tag }}" class="tag bg-gray-300 hover:bg-gray-400 rounded py-2 px-3 text mr-3 font-medium mb-3 bg-tag hover:bg-tag-hover text-tag hover:text-tag-hover">
+                <span class="opacity-medium-emphasis"> {{ tag }} </span>
             </a>
             {% endfor %}
         </div>
@@ -22,4 +23,5 @@
 
 </div>
 
+<script type="text/javascript" src="{% static 'js/picture.js' %}"></script>
 {% endblock %}

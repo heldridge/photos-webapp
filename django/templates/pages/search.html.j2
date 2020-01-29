@@ -3,79 +3,93 @@
 {% load static %}
 
 {% block content %}
-    <div class="search-page flex justify-center flex-wrap md:flex-no-wrap mt-5 mb-5">
-        <div class="search-sidebar md:w-1/5 max-w-xl ml-3 mr-3 md:mr-0">
-            <div class="tags-bar border border-gray-300 rounded px-5 flex flex-col py-3 shadow">
-                <div class="flex flex-col align">
-                    <div class="flex border justify-between border-gray-300 w-4/5 rounded overflow-hidden" id="addTagsInputContainer">
-                        <div class="my-2 pl-2">
-                            <input 
-                                type="text" 
-                                class="appearance-none w-full pr-2" 
-                                placeholder="Add Tags..." 
-                                id="addTagsInput" 
-                                oninput="addTagsInputUpdated( '{{ current_query }}', {{ max_tag_length }}, {{ min_tag_length }}, '{{ valid_tag_regex }}' )"
-                                onkeyup="addTagsInputOnKeyUp(event, '{{ current_query }}', {{ max_tag_length }}, {{ min_tag_length }}, '{{ valid_tag_regex }}' )"">
-                        </div>
-                        <a href="{% url 'search'%}?q={{ current_query }}" class="bg-gray-300 hover:bg-gray-400 active:bg-blue-300 px-3 py-2 disabled-link" id="addTagsButton">
-                            <i class="fas fa-plus"></i>
-                        </a>
+<div class="search-page flex justify-center flex-wrap md:flex-no-wrap mt-5 mb-5">
+    <div class="search-sidebar md:w-1/5 max-w-xl ml-3 mr-3 md:mr-0">
+        <!-- old: "tags-bar border border-gray-300 rounded px-5 flex flex-col py-3 shadow" -->
+        <div class="tags-bar border-2 border-default rounded px-5 flex flex-col py-3">
+            <div class="flex flex-col align">
+                <!-- old: "flex border justify-between border-gray-300 w-4/5 rounded overflow-hidden" -->
+                <div class="flex border border-default justify-between bg-surface-1 w-4/5 rounded overflow-hidden disable-transition-on-theme-change" id="addTagsInputContainer">
+                    <div class="my-2 pl-2">
+                        <!--old: "appearance-none w-full pr-2" -->
+                        <input 
+                            type="text"
+                            class="appearance-none w-full pr-2 bg-surface-1" 
+                            placeholder="Add Tags..." 
+                            id="addTagsInput" 
+                            oninput="addTagsInputUpdated()"
+                            onkeyup="addTagsInputOnKeyUp(event)"">
                     </div>
-                    <p class="pt-1 text-red-500 hidden" id="addTagsErrorMessage">  </p>
+                    <!-- old: bg-gray-300 hover:bg-gray-400 active:bg-blue-300 px-3 py-2 disabled-link" -->
+                    <a href="{% url 'search'%}?q={{ current_query }}" class="bg-button-disabled pointer-events-none px-3 py-2 disable-transition-on-theme-change" id="addTagsButton">
+                        <i class="fas fa-plus opacity-disabled" id="addTagsIcon"></i>
+                    </a>
                 </div>
-                
-                
-                <h1 class="text-2xl font-semibold pb-3 pt-1">
-                    Searched Tags
-                </h1>
+                <p class="pt-1 text-error hidden" id="addTagsErrorMessage">  </p>
+            </div>
+            
+            
+            <h1 class="text-2xl font-semibold pb-3 pt-1 opacity-high-emphasis">
+                Searched Tags
+            </h1>
 
-                {% if searched_tags_data %}
-                    <div class="flex flex-row flex-wrap w-4/5">
-                    {% for tag_data in searched_tags_data %}
-                        <div class="tag bg-gray-300 rounded py-1 px-2 text-xs mr-2 font-medium mb-2 text-gray-600">
-                            <a href="{% url 'search'%}?q={{ tag_data.query }}">
-                                <i class="fas fa-times pr-1 hover:text-black"></i>
-                            </a>
-                            {{ tag_data.tag }}
-                        </div>
-                    {% endfor %}
+            {% if searched_tags_data %}
+                <div class="flex flex-row flex-wrap w-4/5">
+                {% for tag_data in searched_tags_data %}
+                    <!-- old: "tag bg-gray-300 rounded py-1 px-2 text-xs mr-2 font-medium mb-2 text-gray-600" -->
+                    <div class="tag bg-tag text-tag rounded py-1 px-2 text-xs md:text-sm mr-2 font-medium mb-2">
+                        <a href="{% url 'search'%}?q={{ tag_data.query }}">
+                            <i class="fas fa-times pr-1 opacity-medium-emphasis hover:opacity-high-emphasis hover:text-tag-item-hover"></i>
+                        </a>
+                        
+                        <span class="opacity-medium-emphasis">{{ tag_data.tag }}</span>
                     </div>
-                {% endif %}
-            </div>
-            <div class="return-to-first-page-button">
-            </div>
+                {% endfor %}
+                </div>
+            {% endif %}
         </div>
-        
-        <div class="w-4/5 max-w-7xl">
-            <div class="flex flex-wrap justify-center" id="cardsHolder">
-                {% include "partials/_images_grid.html.j2" with pictures=pictures %}
-            </div>
 
-            <div class="flex justify-between my-2 text-lg">
-
-                {% if first_picture and render_previous_button %}
-                    <a href="{% url 'search' %}?q={{ current_query }}&before={{ first_picture.public_id }}" id="previousButton" class="bg-gray-300 hover:bg-gray-500 rounded py-2 pl-4 pr-3">
-                        <i class="fas fa-arrow-left pr-2"></i>
-                        Previous
-                    </a>
-                {% else %}
-                    <div id="previousButton">
-                    
-                    </div>
-                {% endif %} 
-                
-
-                {% if last_picture and render_next_button %}
-                    <a href="{% url 'search' %}?q={{ current_query }}&after={{ last_picture.public_id }}" id="nextButton" class="bg-gray-300 hover:bg-gray-500 rounded py-2 pl-4 pr-3">
-                        Next
-                        <i class="fas fa-arrow-right pl-2"></i>
-                    </a>
-                {% endif %}                
-            </div>
+        <div class="return-to-first-page-button">
         </div>
-        
-        
     </div>
+    
+    <div class="w-4/5 max-w-7xl">
+        <div class="flex flex-wrap justify-center" id="cardsHolder">
+            {% include "partials/_images_grid.html.j2" with pictures=pictures %}
+        </div>
 
-    <script type="text/javascript" src="{% static 'js/search.js' %}"></script>
+        <div class="flex justify-between my-2 text-lg">
+
+            {% if first_picture and render_previous_button %}
+                <!-- old: bg-gray-300 hover:bg-gray-500 rounded py-2 pl-4 pr-3" -->
+                <a href="{% url 'search' %}?q={{ current_query }}&before={{ first_picture.public_id }}" id="previousButton" class="rounded py-2 pl-4 pr-3 bg-basic-400 hover:bg-basic-500 text-black">
+                    <i class="fas fa-arrow-left pr-2"></i>
+                    Previous
+                </a>
+            {% else %}
+                <div id="previousButton">
+                
+                </div>
+            {% endif %} 
+            
+
+            {% if last_picture and render_next_button %}
+                <!-- old: "bg-gray-300 hover:bg-gray-500 rounded py-2 pl-4 pr-3" -->
+                <a href="{% url 'search' %}?q={{ current_query }}&after={{ last_picture.public_id }}" id="nextButton" class="rounded py-2 pl-4 pr-3 bg-basic-400 hover:bg-basic-500 text-black">
+                    Next
+                    <i class="fas fa-arrow-right pl-2"></i>
+                </a>
+            {% endif %}                
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    let currentQueryOutside = "{{ current_query }}";
+    let maxTagLengthOutside = {{ max_tag_length }};
+    let minTagLengthOutside = {{ min_tag_length }};
+    let validTagRegexOutside = "{{ valid_tag_regex }}";
+
+</script>
+<script type="text/javascript" src="{% static 'js/search.js' %}"></script>
 {% endblock %}
