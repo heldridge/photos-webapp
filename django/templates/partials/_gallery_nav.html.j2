@@ -7,9 +7,9 @@
                 href="{% url 'gallery' %}?q={{ current_query }}&before={{ first_picture.public_id }}"
 
                 {% if render_previous_button %}
-                class="shadow md:shadow-none rounded md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center bg-basic-400 hover:bg-basic-500 text-black"
+                class="shadow md:shadow-none rounded md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center bg-basic hover:bg-basic-hover text-black"
                 {% else %}
-                class="shadow md:shadow-none rounded md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center bg-dt-6 pointer-events-none"
+                class="shadow md:shadow-none rounded md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center bg-button-disabled pointer-events-none"
                 {% endif %}
 
                 title="Previous Page"
@@ -23,7 +23,7 @@
         </div>
         <!-- old: "bg-gray-300 hover:bg-gray-500 shadow md:shadow-none rounded-b md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 ml-2 previous-button" -->
         <button 
-            class="shadow md:shadow-none rounded md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-6 md:px-2 lg:px-3 xl:px-4 ml-2 previous-button bg-basic-400 hover:bg-basic-500 text-black"
+            class="shadow md:shadow-none rounded md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-6 md:px-2 lg:px-3 xl:px-4 ml-2 previous-button bg-basic hover:bg-basic-hover text-black"
             title="Previous Image"
             onclick=previousPicture()
         >
@@ -35,9 +35,9 @@
             href="{% url 'gallery' %}?q={{ current_query }}&before={{ first_picture.public_id }}"
 
             {% if render_previous_button %}
-            class="hidden shadow md:shadow-none rounded md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-6 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center ml-2 previous-link bg-basic-400 hover:bg-basic-500 text-black"
+            class="hidden shadow md:shadow-none rounded md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-6 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center ml-2 previous-link bg-basic hover:bg-basic-hover text-black"
             {% else %}
-            class="hidden shadow md:shadow-none rounded md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-6 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center ml-2 previous-link bg-dt-6 pointer-events-none"
+            class="hidden shadow md:shadow-none rounded md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-6 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center ml-2 previous-link bg-button-disabled pointer-events-none"
             {% endif %}
 
             title="Previous Image"
@@ -54,7 +54,7 @@
     <div class="flex justify-between w-5/12 xl:w-2/5">
         <!-- old: "bg-gray-300 hover:bg-gray-500 shadow md:shadow-none rounded-b md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 mr-2 next-button" -->
         <button 
-            class="shadow md:shadow-none rounded md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-6 md:px-2 lg:px-3 xl:px-4 mr-2 next-button bg-basic-400 hover:bg-basic-500 text-black"
+            class="shadow md:shadow-none rounded md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-6 md:px-2 lg:px-3 xl:px-4 mr-2 next-button bg-basic hover:bg-basic-hover text-black"
             title="Next Image"
             onclick=nextPicture()
         >
@@ -66,9 +66,9 @@
             href="{% url 'gallery' %}?q={{ current_query }}&after={{ last_picture.public_id }}"
 
             {% if render_next_button %}
-            class="hidden shadow md:shadow-none rounded md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-6 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center mr-2 next-link bg-basic-400 hover:bg-basic-500 text-black"
+            class="hidden shadow md:shadow-none rounded md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-6 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center mr-2 next-link bg-basic hover:bg-basic-hover text-black"
             {% else %}
-            class="hidden shadow md:shadow-none rounded md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-6 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center mr-2 next-link bg-dt-6 pointer-events-none"
+            class="hidden shadow md:shadow-none rounded md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-6 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center mr-2 next-link bg-button-disabled pointer-events-none"
             {% endif %}
 
             title="Next Image"
@@ -86,9 +86,9 @@
                 href="{% url 'gallery' %}?q={{ current_query }}&after={{ last_picture.public_id }}"
 
                 {% if render_next_button %}
-                class="shadow md:shadow-none rounded md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center bg-basic-400 hover:bg-basic-500 text-black"
+                class="shadow md:shadow-none rounded md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center bg-basic hover:bg-basic-hover text-black"
                 {% else %}
-                class="shadow md:shadow-none rounded md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center bg-dt-6 pointer-events-none"
+                class="shadow md:shadow-none rounded md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center bg-button-disabled pointer-events-none"
                 {% endif %}
                 title="Next Page"
             >
