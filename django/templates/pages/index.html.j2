@@ -5,9 +5,8 @@
 {% block content %}
 
 
-
 <div class="flex items-center flex-col">
-  <h1 class="text-5xl font-semibold py-4">Latest Uploads</h1>
+  <h1 class="text-5xl font-semibold py-4 opacity-high-emphasis">Latest Uploads</h1>
 
   <div class="flex flex-wrap w-4/5 max-w-7xl justify-center" id="cardsHolder">
    {% include "partials/_images_grid.html.j2" with pictures=pictures %}
@@ -16,14 +15,14 @@
 
   <div class="flex justify-center w-4/5 max-w-7xl mt-3 text-lg mb-20">
     {% if last_picture and render_continue_button %}
-      <a href="{% url 'search' %}?after={{ last_picture.public_id }}" class="bg-gray-300 hover:bg-gray-500 rounded py-2 pl-3 pr-4">
+      <!-- old: class="bg-gray-300 hover:bg-gray-500 rounded py-2 pl-3 pr-4" -->
+      <a href="{% url 'search' %}?after={{ last_picture.public_id }}" class="rounded shadow py-2 pl-3 pr-4 bg-basic hover:bg-basic-hover text-black">
         Continue Browsing
         <i class="fas fa-arrow-right pl-2"></i>
       </a> 
     {% endif %}
   </div>
 </div>
-
 <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
 
 {% endblock %}
