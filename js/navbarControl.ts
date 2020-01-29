@@ -120,7 +120,28 @@ function navSearchRestrictOnInput(
     );
 }
 
+function disableElementsForThemeToggle() {
+    let toDisable = document.getElementsByClassName(
+        'disable-transition-on-theme-change'
+    );
+    for (let i = 0; i < toDisable.length; i++) {
+        addClass(toDisable[i], 'no-transition');
+    }
+}
+
+function enableElementsForThemeToggle() {
+    let toEnable = <HTMLCollectionOf<HTMLElement>>(
+        document.getElementsByClassName('disable-transition-on-theme-change')
+    );
+    for (let i = 0; i < toEnable.length; i++) {
+        toEnable[i].offsetHeight;
+        removeClass(toEnable[i], 'no-transition');
+    }
+}
+
 function setDarkTheme() {
+    disableElementsForThemeToggle();
+
     let body = document.getElementById('body');
     let themeSunIcon = document.getElementById('theme-sun-icon');
     let themeMoonIcon = document.getElementById('theme-moon-icon');
@@ -133,9 +154,13 @@ function setDarkTheme() {
 
     removeClass(themeMoonIcon, 'opacity-disabled');
     addClass(themeMoonIcon, 'opacity-high-emphasis');
+
+    enableElementsForThemeToggle();
 }
 
 function setLightTheme() {
+    disableElementsForThemeToggle();
+
     let body = document.getElementById('body');
     let themeSunIcon = document.getElementById('theme-sun-icon');
     let themeMoonIcon = document.getElementById('theme-moon-icon');
@@ -148,6 +173,8 @@ function setLightTheme() {
 
     removeClass(themeSunIcon, 'opacity-disabled');
     addClass(themeSunIcon, 'opacity-high-emphasis');
+
+    enableElementsForThemeToggle();
 }
 
 function toggleLightDarkTheme() {

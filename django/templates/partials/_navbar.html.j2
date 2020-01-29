@@ -7,7 +7,7 @@
 
     <div class="py-2 pr-6 pl-6 border-r-2 border-l-2 border-default flex flex-col md:flex-row justify-center">
       <div 
-        class="cursor-text border-2 border-default rounded px-4 flex items-center text-xl w-full justify-between" 
+        class="cursor-text border-2 border-default rounded px-4 flex items-center text-xl w-full justify-between disable-transition-on-theme-change" 
         id="navSearchBorder"
         onclick="focusNavSearch()"
       >
@@ -21,7 +21,7 @@
           onchange="navSearchRestrictOnInput(this, '{{invalid_tag_char_regex}}')"
           maxlength="{{ max_tag_length }}"
         >
-        <i class="fas fa-search opacity-disabled pl-3" id="navSearchIcon"></i>
+        <i class="fas fa-search opacity-disabled pl-3 disable-transition-on-theme-change" id="navSearchIcon"></i>
       </div>
       <p class="text-red-500 pl-3 self-center max-w-s hidden" id="navSearchErrorMessage"></p>
     </div>
