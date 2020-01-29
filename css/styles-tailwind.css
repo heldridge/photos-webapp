@@ -39,7 +39,7 @@
 
     /* NAVBAR */
     --color-bg-surface-1: #ffffff; /* The Navbar */
-    --color-bg-nav-link-hover: #f7fafc; /* Navbar links on hover */
+    --color-bg-nav-link-hover: #edf2f7; /* Navbar links on hover */
     --border-width-nav-item: 1px;
 
     --color-placeholder-nav-search-focus: #718096; /* Nav search placeholder text on focus */
@@ -83,7 +83,7 @@
 
     /* NAVBAR */
     --color-bg-surface-1: #1e1e1e; /* The Navbar */
-    --color-bg-nav-link-hover: #252525; /* Navbar links on hover */
+    --color-bg-nav-link-hover: #2c2c2c; /* Navbar links on hover */
     --border-width-nav-item: 2px;
 
     /* --color-placeholder-nav-search-focus: #718096; Nav search placeholder text on focus */
