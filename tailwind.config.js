@@ -74,6 +74,9 @@ module.exports = {
             },
             borderWidth: {
                 'image-card': 'var(--width-border-image-card)'
+            },
+            minHeight: {
+                'double-screen': '200vh'
             }
         }
     },
