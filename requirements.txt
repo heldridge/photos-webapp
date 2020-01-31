@@ -1,3 +1,4 @@
+boto3>=1.11.9
 Django<4.0.0
 django-storages>=1.8
 gunicorn~=19.9.0

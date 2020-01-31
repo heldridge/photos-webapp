@@ -15,7 +15,7 @@ function processTailwind(cb) {
                     require('autoprefixer')
                 ])
             )
-            // .pipe(cleanCSS())
+            .pipe(cleanCSS())
             .pipe(gulp.dest('django/photos/static/css'))
     );
 }
