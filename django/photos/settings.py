@@ -131,11 +131,11 @@ if USE_S3:
     AWS_LOCATION = "static"
     STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/"
     STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
-    STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 else:
     STATIC_ROOT = os.path.join(BASE_DIR, "static")
     STATIC_URL = "/static/"
-    STATICFILES_DIRS = [os.path.join(BASE_DIR, "photos/static")]
+
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "photos/static")]
 
 # Media Folder Settings
 MEDIA_ROOT = os.path.join(BASE_DIR, os.environ["DJANGO_MEDIA_FOLDER_NAME"])
