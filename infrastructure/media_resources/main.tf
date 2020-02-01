@@ -8,10 +8,10 @@ resource "aws_s3_bucket" "static_media_storage" {
   }
 
   cors_rule {
-    allowed_origins = ["*"]
+    allowed_origins = ["http://localhost:8000"]
     allowed_methods = ["GET"]
     max_age_seconds = 3000
-    allowed_headers = ["*"]
+    allowed_headers = ["Content-*", "Host"]
   }
 }
 
