@@ -6,6 +6,13 @@ resource "aws_s3_bucket" "static_media_storage" {
   tags = {
     Name = "Bucket for media files -stage"
   }
+
+  cors_rule {
+    allowed_origins = ["*"]
+    allowed_methods = ["GET"]
+    max_age_seconds = 3000
+    allowed_headers = ["*"]
+  }
 }
 
 # Django user
