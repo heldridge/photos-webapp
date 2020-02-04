@@ -304,7 +304,10 @@ def gallery(request):
     context["original_picture_index"] = original_picture_index
     context["all_pictures"] = list(
         map(
-            lambda item: {"photo": item["photo"], "public_id": item["public_id"]},
+            lambda item: {
+                "photo": "/media/" + item["photo"],
+                "public_id": item["public_id"],
+            },
             context["pictures"],
         )
     )
