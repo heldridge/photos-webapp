@@ -140,7 +140,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "photos/static")]
 
 # Media Folder Settings
 MEDIA_ROOT = os.path.join(BASE_DIR, os.environ["DJANGO_MEDIA_FOLDER_NAME"])
-MEDIA_URL = "/" + os.environ["DJANGO_MEDIA_FOLDER_NAME"] + "/"
+MEDIA_URL = os.path.join(BASE_DIR, os.environ["DJANGO_MEDIA_FOLDER_NAME"]) + "/"
 
 # How many characters a tag is allowed to be
 MAX_TAG_LENGTH = 20
