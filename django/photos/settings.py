@@ -119,7 +119,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 # https://testdriven.io/blog/storing-django-static-and-media-files-on-amazon-s3/
 
-USE_S3 = os.environ["USE_S3"] == "TRUE"
+USE_S3 = os.environ["DJANGO_USE_S3"] == "TRUE"
 
 if USE_S3:
     AWS_ACCESS_KEY_ID = os.environ["DJANGO_AWS_ACCESS_KEY_ID"]
