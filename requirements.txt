@@ -1,7 +1,8 @@
 boto3>=1.11.9
 Django<4.0.0
+django-elasticsearch-dsl>=7.0.0,<8.0.0
 django-storages>=1.8
 gunicorn~=19.9.0
 Pillow~=6.2.1
 psycopg2~=2.8.4
-django-elasticsearch-dsl>=7.0.0,<8.0.0
+sorl-thumbnail<13.0.0

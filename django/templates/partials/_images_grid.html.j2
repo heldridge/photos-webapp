@@ -1,46 +1,49 @@
 {% if pictures %}
-    {% for picture in pictures %}
-    <div class="mt-5 px-3">
-        <div class="w-picture-card">
+{% load thumbnail %}
+{% for picture in pictures %}
+<div class="mt-5 px-3">
+    <div class="w-picture-card">
 
-            <a href="{% url 'gallery' %}?p={{ picture.public_id }}&q={{ current_full_query }}">
-                <!-- old: "h-picture-card bg-white border rounded-lg overflow-hidden shadow link-image" -->
-                <div class="h-picture-card bg-surface-1 border-image-card rounded-lg overflow-hidden shadow link-image">
-                    <img class="object-cover" src="{{ picture.photo }}" alt="">
-                </div>
-            </a>
-
-            <h3 class="text-2xl font-semibold py-2 opacity-high-emphasis">{{ picture.title }}</h3>
-
-            <div class="card-tags flex flex-row flex-wrap">
-                {% for tag in picture.above_tags %}
-                <!-- old: "tag bg-gray-300 hover:bg-gray-400 rounded py-1 px-2 text-xs mr-2 font-medium mb-2 text-gray-600 hover:text-black"-->
-                <a href="{% url 'search'%}?q={{ tag }}" class="tag rounded py-1 px-2 text-xs mr-2 font-medium mb-2 bg-tag hover:bg-tag-hover text-tag hover:text-tag-hover">
-                    <span class="opacity-medium-emphasis">{{ tag }}</span>
-                </a>
-                {% endfor %}
-                {% if picture.below_tags %}
-                {% for tag in picture.below_tags %}
-                <!-- old: tag bg-gray-300 hover:bg-gray-400 rounded py-1 px-2 text-xs mr-2 font-medium mb-2 text-gray-600 hover:text-black collapsed-tag hidden" -->
-                <a href="{% url 'search'%}?q={{ tag }}" class="tag rounded py-1 px-2 text-xs mr-2 font-medium mb-2 collapsed-tag bg-tag hover:bg-tag-hover text-tag hover:text-tag-hover hidden">
-                    <span class="opacity-medium-emphasis">{{ tag }}</span>
-                </a>
-                {% endfor %}
-                <!-- old: "tag bg-gray-300 hover:bg-gray-400 rounded py-1 px-3 text-xs mr-2 mb-2 text-black tag-expander" -->
-                <button class="tag rounded py-1 px-3 text-xs mr-2 mb-2 tag-expander bg-tag hover:bg-tag-hover hover:text-tag-hover" onclick="expandTags(this)">
-                    <i class="fas fa-level-down-alt opacity-medium-emphasis"></i>
-                </button>
-                {% endif %}
+        <a href="{% url 'gallery' %}?p={{ picture.public_id }}&q={{ current_full_query }}">
+            <!-- old: "h-picture-card bg-white border rounded-lg overflow-hidden shadow link-image" -->
+            <div class="h-picture-card bg-surface-1 border-image-card rounded-lg overflow-hidden shadow link-image">
+                {% thumbnail picture.photo "272" as im %}
+                    <img class="object-cover" src="{{ im.url }}" alt="">
+                {% endthumbnail %}
             </div>
+        </a>
 
-        </div>
-    </div>
-    {% endfor %}
+        <h3 class="text-2xl font-semibold py-2 opacity-high-emphasis">{{ picture.title }}</h3>
 
-    {% for placeholder in grid_placeholders %}
-    <div class="card-container mt-5 px-3">
-        <div class="full-card w-picture-card">
+        <div class="card-tags flex flex-row flex-wrap">
+            {% for tag in picture.above_tags %}
+            <!-- old: "tag bg-gray-300 hover:bg-gray-400 rounded py-1 px-2 text-xs mr-2 font-medium mb-2 text-gray-600 hover:text-black"-->
+            <a href="{% url 'search'%}?q={{ tag }}" class="tag rounded py-1 px-2 text-xs mr-2 font-medium mb-2 bg-tag hover:bg-tag-hover text-tag hover:text-tag-hover">
+                <span class="opacity-medium-emphasis">{{ tag }}</span>
+            </a>
+            {% endfor %}
+            {% if picture.below_tags %}
+            {% for tag in picture.below_tags %}
+            <!-- old: tag bg-gray-300 hover:bg-gray-400 rounded py-1 px-2 text-xs mr-2 font-medium mb-2 text-gray-600 hover:text-black collapsed-tag hidden" -->
+            <a href="{% url 'search'%}?q={{ tag }}" class="tag rounded py-1 px-2 text-xs mr-2 font-medium mb-2 collapsed-tag bg-tag hover:bg-tag-hover text-tag hover:text-tag-hover hidden">
+                <span class="opacity-medium-emphasis">{{ tag }}</span>
+            </a>
+            {% endfor %}
+            <!-- old: "tag bg-gray-300 hover:bg-gray-400 rounded py-1 px-3 text-xs mr-2 mb-2 text-black tag-expander" -->
+            <button class="tag rounded py-1 px-3 text-xs mr-2 mb-2 tag-expander bg-tag hover:bg-tag-hover hover:text-tag-hover" onclick="expandTags(this)">
+                <i class="fas fa-level-down-alt opacity-medium-emphasis"></i>
+            </button>
+            {% endif %}
         </div>
+
     </div>
-    {% endfor %}
+</div>
+{% endfor %}
+
+{% for placeholder in grid_placeholders %}
+<div class="card-container mt-5 px-3">
+    <div class="full-card w-picture-card">
+    </div>
+</div>
+{% endfor %}
 {% endif %}
