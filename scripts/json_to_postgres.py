@@ -76,7 +76,7 @@ def main():
                 f"{image['id']}, "  # id
                 f"'{format_title(image['title'])}', "  # title
                 f"'description', "  # description
-                f"'photos/user_uploads/{image['filename']}', "  # photo
+                f"'pictures/2020/01/01/{image['filename']}', "  # photo
                 f"'{format_tags(image['tags'])}', "  # tags
                 f"'{format_timestamp(image['uploaded_at'])}', "  # uploaded_at
                 f"'{format_timestamp(image['updated_at'])}', "  # updated_at

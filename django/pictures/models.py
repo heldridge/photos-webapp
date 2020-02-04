@@ -9,7 +9,7 @@ from django.contrib.postgres.fields import ArrayField
 class Picture(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField(blank=True)
-    photo = models.ImageField(upload_to="photos/user_uploads/%Y/%m/%d/")
+    photo = models.ImageField(upload_to="pictures/%Y/%m/%d/")
     tags = ArrayField(models.CharField(max_length=20), blank=True)
     # uploaded_by = ForeignKey
     uploaded_at = models.DateTimeField()
