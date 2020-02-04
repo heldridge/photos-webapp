@@ -46,7 +46,9 @@ def clean_picture_data(picture, from_elastic_search):
     split_tags = get_split_tags(picture.tags)
 
     if from_elastic_search:
-        photo = picture.photo
+        # Strip /media off of the path.
+        # TODO: Make sure this actually works when photos are in AWS
+        photo = picture.photo[7:]
     else:
         photo = picture.photo.url
 
@@ -267,7 +269,6 @@ def search(request):
 
 
 def gallery(request):
-
     context = get_baseline_context(request)
     before_picture = request.GET.get("before")
 
