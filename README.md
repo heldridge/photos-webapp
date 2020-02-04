@@ -40,3 +40,4 @@ Note, prompts beginning with `=#` indicate they should be done in psql
 1. `cd scripts`
 1. `python json_to_postgres.py`
 1. `python manage.py search_index --rebuild`
+1. `python manage.py sqlsequencereset pictures | python manage.py dbshell`
