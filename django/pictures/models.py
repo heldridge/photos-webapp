@@ -2,7 +2,10 @@ import datetime
 import uuid
 
 from django.db import models
+from django.conf import settings
 from django.contrib.postgres.fields import ArrayField
+
+from sorl.thumbnail import get_thumbnail
 
 
 # Create your models here.
@@ -20,3 +23,8 @@ class Picture(models.Model):
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        for size in settings.THUMBNAIL_SIZES:
+            get_thumbnail(self.photo, size)

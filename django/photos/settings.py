@@ -157,3 +157,5 @@ ELASTICSEARCH_DSL = {
 
 # How many pictures to put on a page
 PAGE_SIZE = 16
+
+THUMBNAIL_SIZES = ["272"]
