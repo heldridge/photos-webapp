@@ -42,7 +42,10 @@ if (
     previousLinkHREF = previousLinks[0].href;
 }
 
+let preloadedImages = {};
+
 setImage(originalPictureIndex, 'replace');
+preloadImages();
 
 function setImage(index: number, stateAction: string = '') {
     if (index < allPictures.length) {
@@ -194,3 +197,11 @@ document.onkeyup = function(event) {
         }
     }
 };
+
+function preloadImages() {
+    allPictures.forEach(picture => {
+        let newImg = new Image();
+        newImg.src = picture.photo;
+        preloadedImages[picture.public_id] = newImg;
+    });
+}
