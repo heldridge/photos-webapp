@@ -48,7 +48,7 @@ def clean_picture_data(picture, from_elastic_search):
     if from_elastic_search:
         photo = picture.photo
     else:
-        photo = picture.photo.url
+        photo = str(picture.photo)
 
     return {
         "photo": photo,
@@ -87,6 +87,8 @@ def index(request):
     render_continue_button = data["more_left"]
     pictures = data["photos"]
     pictures = pictures[: settings.PAGE_SIZE]
+
+    print(pictures[0])
 
     context = {
         "pictures": pictures,
