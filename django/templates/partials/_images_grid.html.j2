@@ -1,4 +1,5 @@
 {% if pictures %}
+{% load thumbnail %}
     {% for picture in pictures %}
     <div class="mt-5 px-3">
         <div class="w-picture-card">
@@ -6,7 +7,9 @@
             <a href="{% url 'gallery' %}?p={{ picture.public_id }}&q={{ current_full_query }}">
                 <!-- old: "h-picture-card bg-white border rounded-lg overflow-hidden shadow link-image" -->
                 <div class="h-picture-card bg-surface-1 border-image-card rounded-lg overflow-hidden shadow link-image">
-                    <img class="object-cover" src="{{ picture.photo }}" alt="">
+                    {% thumbnail picture.photo "272" as im %}
+                        <img class="object-cover" src="{{ im.url }}" alt="">
+                    {% endthumbnail %}
                 </div>
             </a>
 
