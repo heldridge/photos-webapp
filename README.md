@@ -22,6 +22,7 @@ Note, prompts beginning with `=#` indicate they should be done in psql
     - `./elasticsearch`
     - `./elasticsearch -Epath.data=data2 -Epath.logs=log2`
     - `./elasticsearch -Epath.data=data3 -Epath.logs=log3`
+1. Run memcached with `memcached`
 1. cd into the `django` folder
 1. `python manage.py migrate`
 1. `python manage.py search_index --rebuild`
@@ -41,3 +42,7 @@ Note, prompts beginning with `=#` indicate they should be done in psql
 1. `python json_to_postgres.py`
 1. `python manage.py search_index --rebuild`
 1. `python manage.py sqlsequencereset pictures | python manage.py dbshell`
+
+# Other dependencies
+
+-   memcached
