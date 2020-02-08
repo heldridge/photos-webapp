@@ -262,7 +262,10 @@ def search(request):
     # Grab and validate tags
     # Also remove duplicates
     context = get_baseline_context(request)
-    context["grid_placeholders"] = [1] * (settings.PAGE_SIZE - len(context["pictures"]))
+    context["grid_placeholders"] = [1] * (
+        settings.MAX_THEORETICAL_PAGE_SIZE_FOR_PLACEHOLDERS - len(context["pictures"])
+    )
+    print(context["grid_placeholders"])
     return render(request, "pages/search.html.j2", context)
 
 
