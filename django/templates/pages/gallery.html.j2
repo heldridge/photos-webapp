@@ -1,6 +1,6 @@
 {% extends 'base.html.j2' %}
 
-{% load static %}
+{% load static thumbnail %}
 
 {% block content %}
 
@@ -182,7 +182,9 @@
                         class="h-0 pb-1-3 w-under-1-3 rounded overflow-hidden mt-5 next-picture"
                         onclick="setImage({{ forloop.counter0 }}, 'push')"
                     >
-                        <img src="{{ picture.photo }}" alt="TODO" class="object-cover">
+                        {% thumbnail picture.photo "272" as im %}
+                            <img src="{{ im.url }}" alt="TODO" class="object-cover">
+                        {% endthumbnail %}
                     </button>
                     {% endfor %}
                     {% for placeholder in grid_placeholders %}
