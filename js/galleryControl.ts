@@ -57,7 +57,7 @@ function setImage(index: number, stateAction: string = '') {
             // Add new child
             let image = document.createElement('img');
             addClass(image, 'max-h-80-screen');
-            image.src = allPictures[index].photo;
+            image.src = `/media/${allPictures[index].photo}`;
             galleryImageContainer.appendChild(image);
         }
         if (modalImageContainer) {
