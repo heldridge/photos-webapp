@@ -8,9 +8,13 @@ from .models import Picture
 class PictureDocument(Document):
     tags = fields.KeywordField()
     public_id = fields.TextField()
+    photo = fields.TextField()
 
     def prepare_public_id(self, instance):
         return str(instance.public_id)
+
+    def prepare_photo(self, instance):
+        return str(instance.photo)
 
     class Index:
         # Name of the Elasticsearch index
@@ -26,7 +30,6 @@ class PictureDocument(Document):
             "id",
             "title",
             "description",
-            "photo",
             "uploaded_at",
             "updated_at",
         ]
