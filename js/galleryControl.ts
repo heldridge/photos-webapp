@@ -68,7 +68,7 @@ function setImage(index: number, stateAction: string = '') {
 
             // Add child to modal image
             let modalImage = document.createElement('img');
-            modalImage.src = allPictures[index].photo;
+            modalImage.src = `/media/${allPictures[index].photo}`;
             modalImageContainer.appendChild(modalImage);
         }
 
