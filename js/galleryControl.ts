@@ -44,6 +44,9 @@ if (
 
 setImage(originalPictureIndex, 'replace');
 
+let preloadedImages = {};
+preloadImages();
+
 function setImage(index: number, stateAction: string = '') {
     if (index < allPictures.length) {
         if (galleryImageContainer) {
@@ -194,3 +197,11 @@ document.onkeyup = function(event) {
         }
     }
 };
+
+function preloadImages() {
+    allPictures.forEach(picture => {
+        let newImg = new Image();
+        newImg.src = `/media/${picture.photo}`;
+        preloadedImages[picture.public_id] = newImg;
+    });
+}
