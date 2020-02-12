@@ -1,9 +1,10 @@
 import datetime
+import threading
 import uuid
 
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
-
+from sorl.thumbnail import get_thumbnail
 
 # Create your models here.
 class Picture(models.Model):
