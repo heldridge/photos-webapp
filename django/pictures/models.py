@@ -3,6 +3,7 @@ import threading
 import uuid
 
 from django.db import models
+from django.conf import settings
 from django.contrib.postgres.fields import ArrayField
 from sorl.thumbnail import get_thumbnail
 
@@ -21,3 +22,11 @@ class Picture(models.Model):
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        for size in settings.THUMBNAIL_SIZES:
+            thumbnail_creator = threading.Thread(
+                target=get_thumbnail, args=(self.photo, size)
+            )
+            thumbnail_creator.start()
