@@ -15,6 +15,22 @@ resource "aws_s3_bucket" "static_media_storage" {
   }
 }
 
+resource "aws_s3_bucket" "qlbhmmvpym" {
+  bucket        = "media.qlbhmmvpym.club"
+  acl           = "private"
+
+  tags = {
+    Name = "Bucket for media files -dev domain"
+  }
+
+  cors_rule {
+    allowed_origins = ["http://localhost:8000"]
+    allowed_methods = ["GET"]
+    max_age_seconds = 3000
+    allowed_headers = ["Content-*", "Host"]
+  }
+}
+
 # Django user
 resource "aws_iam_user" "django" {
   name = "django"
@@ -40,7 +56,9 @@ data "aws_iam_policy_document" "django_user" {
 
     resources = [
       "arn:aws:s3:::${aws_s3_bucket.static_media_storage.id}/*",
-      "arn:aws:s3:::${aws_s3_bucket.static_media_storage.id}"
+      "arn:aws:s3:::${aws_s3_bucket.static_media_storage.id}",
+      "arn:aws:s3:::${aws_s3_bucket.qlbhmmvpym.id}/*",
+      "arn:aws:s3:::${aws_s3_bucket.qlbhmmvpym.id}"
     ]
   }
 }
