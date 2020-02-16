@@ -134,21 +134,30 @@ if USE_S3:
     AWS_ACCESS_KEY_ID = os.environ["DJANGO_AWS_ACCESS_KEY_ID"]
     AWS_SECRET_ACCESS_KEY = os.environ["DJANGO_AWS_SECRET_ACCESS_KEY"]
     AWS_STORAGE_BUCKET_NAME = os.environ["DJANGO_AWS_S3_BUCKET_NAME"]
-    AWS_DEFAULT_ACL = "public-read"
+    AWS_DEFAULT_ACL = None
     AWS_S3_CUSTOM_DOMAIN = os.environ["DJANGO_AWS_S3_CUSTOM_DOMAIN"]
     AWS_S3_OBJECT_PARAMETERS = {"CacheControl": "max-age=86400"}
-    AWS_LOCATION = "static"
-    STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/"
-    STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+
+    # static settings
+    STATIC_LOCATION = "static"
+    STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{STATIC_LOCATION}/"
+    STATICFILES_STORAGE = "photos.storage_backends.StaticStorage"
+
+    # public media settings
+    PUBLIC_MEDIA_LOCATION = "media"
+    MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/"
+    DEFAULT_FILE_STORAGE = "photos.storage_backends.PublicMediaStorage"
 else:
+    # Static Folder
     STATIC_ROOT = os.path.join(BASE_DIR, "static")
     STATIC_URL = "/static/"
 
+    # Media Folder
+    MEDIA_ROOT = os.path.join(BASE_DIR, os.environ["DJANGO_MEDIA_FOLDER_NAME"])
+    MEDIA_URL = "/" + os.environ["DJANGO_MEDIA_FOLDER_NAME"] + "/"
+
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "photos/static")]
 
-# Media Folder Settings
-MEDIA_ROOT = os.path.join(BASE_DIR, os.environ["DJANGO_MEDIA_FOLDER_NAME"])
-MEDIA_URL = "/" + os.environ["DJANGO_MEDIA_FOLDER_NAME"] + "/"
 
 # How many characters a tag is allowed to be
 MAX_TAG_LENGTH = 20
