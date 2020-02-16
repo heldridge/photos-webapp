@@ -18,6 +18,7 @@ resource "aws_s3_bucket" "static_media_storage" {
 resource "aws_s3_bucket" "qlbhmmvpym" {
   bucket        = "media.qlbhmmvpym.club"
   acl           = "private"
+  policy        = file("policy.json")
 
   tags = {
     Name = "Bucket for media files -dev domain"
