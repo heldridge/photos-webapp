@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "storages",
     "sorl.thumbnail",
+    "users.apps.UsersConfig",
 ]
 
 MIDDLEWARE = [
@@ -177,3 +178,7 @@ PAGE_SIZE = 16
 MAX_THEORETICAL_PAGE_SIZE_FOR_PLACEHOLDERS = 18
 
 THUMBNAIL_SIZES = ["272"]
+
+# Custom User
+AUTH_USER_MODEL = "users.CustomUser"
+
