@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 
-
+# From: https://testdriven.io/blog/django-custom-user-model/
 class UsersManagersTests(TestCase):
     def test_create_user(self):
         User = get_user_model()
