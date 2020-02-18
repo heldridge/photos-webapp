@@ -30,7 +30,7 @@ Note, prompts beginning with `=#` indicate they should be done in psql
 
 # Completely reset the database
 
-1. `=# DROP DATABASE photos`
+1. `=# DROP DATABASE photos;`
 1. `=# CREATE DATABASE photos;`
 1. `=# grant all privileges on database photos to django;`
 1. `python manage.py migrate`
