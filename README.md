@@ -43,6 +43,10 @@ Note, prompts beginning with `=#` indicate they should be done in psql
 1. `python manage.py search_index --rebuild`
 1. `python manage.py sqlsequencereset pictures | python manage.py dbshell`
 
+# Allow django to create the tests database
+
+1. `=# ALTER USER django CREATEDB;`
+
 # Other dependencies
 
 -   memcached
