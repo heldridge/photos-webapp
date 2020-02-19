@@ -58,7 +58,11 @@ function processJavascript(cb) {
         },
         {
             outputFileName: 'login.js',
-            files: ['js/navbarControl.ts', 'js/classUtils.ts']
+            files: [
+                'js/navbarControl.ts',
+                'js/loginControl.ts',
+                'js/classUtils.ts'
+            ]
         }
     ];
 
