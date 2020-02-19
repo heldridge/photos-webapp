@@ -25,12 +25,14 @@ class CustomAuthenticationForm(AuthenticationForm):
 
         self.fields["username"].widget.attrs.update(
             {
-                "class": "focus:outline-none focus:border-input-selected appearance-none py-3 bg-surface-1 opacity-high-emphasis rounded border-2 border-default text-indent shadow-none invalid-border-error"
+                "class": "focus:outline-none focus:border-input-selected appearance-none py-3 bg-surface-1 opacity-high-emphasis rounded border-2 border-default text-indent shadow-none",
+                "onfocusout": "addInvalidBorder(this)",
             }
         )
         self.fields["password"].widget.attrs.update(
             {
-                "class": "focus:outline-none focus:border-input-selected appearance-none py-3 bg-surface-1 opacity-high-emphasis rounded border-2 border-default text-indent shadow-none invalid-border-error"
+                "class": "focus:outline-none focus:border-input-selected appearance-none py-3 bg-surface-1 opacity-high-emphasis rounded border-2 border-default text-indent shadow-none",
+                "onfocusout": "addInvalidBorder(this)",
             }
         )
 
