@@ -10,6 +10,7 @@ class CustomUserManager(BaseUserManager):
     """
 
     # Case insensitive validation on email
+    # https://stackoverflow.com/questions/13190758/django-case-insensitive-matching-of-username-from-auth-user
     def get_by_natural_key(self, email):
         return self.get(email=self.normalize_email(email))
 
