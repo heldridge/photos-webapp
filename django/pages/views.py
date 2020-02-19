@@ -88,8 +88,6 @@ def index(request):
     pictures = data["photos"]
     pictures = pictures[: settings.PAGE_SIZE]
 
-    print(pictures[0])
-
     context = {
         "pictures": pictures,
         "grid_placeholders": [1] * (18 - len(pictures)),
@@ -267,7 +265,6 @@ def search(request):
     context["grid_placeholders"] = [1] * (
         settings.MAX_THEORETICAL_PAGE_SIZE_FOR_PLACEHOLDERS - len(context["pictures"])
     )
-    print(context["grid_placeholders"])
     return render(request, "pages/search.html.j2", context)
 
 
