@@ -4,22 +4,26 @@
 
 {% block content %}
 
-<form method="post">
-    {% csrf_token %}
-    <div class="flex flex-col items-center">
-        <h1 class="text-5xl font-semibold py-4 opacity-high-emphasis">Login</h1>
-        <div class="flex flex-col">
-            <span class="text-lg opacity-high-emphasis">{{ form.username.label_tag }}</span>
-            {{ form.username }}
-        </div>
-        <div class="flex flex-col pt-5">
-            <span class="text-lg opacity-high-emphasis">{{ form.password.label_tag }}</span>
-            {{ form.password }}
-        </div>
+{# <h1 class="text-5xl font-semibold py-4 opacity-high-emphasis">Login</h1> #}
+<div class="flex flex-col items-center">
+    <form method="post" class="inline-block p-10 mt-10 rounded border-default border-2 shadow-lg">
+        {% csrf_token %}       
+        <div class="flex flex-col items-center">
+            <div class="flex flex-col">
+                <span class="text-lg opacity-high-emphasis">{{ form.username.label_tag }}</span>
+                {{ form.username }}
+            </div>
+            <div class="flex flex-col pt-5">
+                <span class="text-lg opacity-high-emphasis">{{ form.password.label_tag }}</span>
+                {{ form.password }}
+            </div>
+            
+            <button type="submit" class="text-lg rounded mt-5 py-2 px-4 bg-primary hover:bg-primary-hover text-black">Login</button>
+        </div> 
         
-        <button type="submit" class="text-lg rounded mt-5 py-2 px-4 bg-primary hover:bg-primary-hover text-black">Login</button>
-    </div>
-</form>
+    </form>
+</div>
+
 
 <script type="text/javascript" src="{% static 'js/login.js' %}"></script>
 {% endblock %}
