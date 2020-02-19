@@ -126,7 +126,7 @@
     -webkit-transition: opacity 0.3s;
 }
 
-#navSearchBorder {
+.border-color-transition {
     transition: border-color 0.1s;
     -webkit-transition: border-color 0.1s;
 }
@@ -154,11 +154,6 @@
 #addTagsButton {
     transition: background-color 0.1s;
     -webkit-transition: background-color 0.1s;
-}
-
-#addTagsInputContainer {
-    transition: border-color 0.1s;
-    -webkit-transition: border-color 0.1s;
 }
 
 .disabled-link {
