@@ -4,6 +4,7 @@ from django.contrib.auth.forms import (
     UserChangeForm,
 )
 from django import forms
+from django.utils.translation import ugettext, ugettext_lazy as _
 from .models import CustomUser
 
 
@@ -36,3 +37,4 @@ class CustomAuthenticationForm(AuthenticationForm):
             }
         )
 
+        self.error_messages["invalid_login"] = _("The email or password is incorrect.")
