@@ -6,18 +6,16 @@ function processTailwind(cb) {
     const postcss = require('gulp-postcss');
     var tailwindcss = require('tailwindcss');
 
-    return (
-        gulp
-            .src('css/styles-tailwind.css')
-            .pipe(
-                postcss([
-                    tailwindcss('./tailwind.config.js'),
-                    require('autoprefixer')
-                ])
-            )
-            .pipe(cleanCSS())
-            .pipe(gulp.dest('django/photos/static/css'))
-    );
+    return gulp
+        .src('css/styles-tailwind.css')
+        .pipe(
+            postcss([
+                tailwindcss('./tailwind.config.js'),
+                require('autoprefixer')
+            ])
+        )
+        .pipe(cleanCSS())
+        .pipe(gulp.dest('django/photos/static/css'));
 }
 
 function processJavascript(cb) {
@@ -56,6 +54,10 @@ function processJavascript(cb) {
         },
         {
             outputFileName: 'picture.js',
+            files: ['js/navbarControl.ts', 'js/classUtils.ts']
+        },
+        {
+            outputFileName: 'login.js',
             files: ['js/navbarControl.ts', 'js/classUtils.ts']
         }
     ];
