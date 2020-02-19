@@ -9,7 +9,7 @@
     <form method="post" class="inline-block p-10 mt-10 rounded border-default border-2 shadow-lg w-77">
         {% csrf_token %}       
         {% if form.non_field_errors %}
-            <div class='text-center mb-3 text-error'>
+            <div class='mb-3 text-error'>
                 <ul>
                 {% for error in form.non_field_errors %}
                     <li> {{ error| escape }}</li>
