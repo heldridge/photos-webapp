@@ -77,6 +77,9 @@ module.exports = {
             },
             minHeight: {
                 'double-screen': '200vh'
+            },
+            width: {
+                '77': '19.25rem'
             }
         }
     },
