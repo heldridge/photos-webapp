@@ -295,3 +295,11 @@ shadow to alpha .9
     background-color: #ffa28a;
     box-shadow: 3px 6px 18px 4px rgba(0, 0, 0, 0.5);
 }
+
+.text-indent {
+    text-indent: 7px;
+}
+
+.invalid-border-error:invalid {
+    border-color: var(--color-border-error);
+}
