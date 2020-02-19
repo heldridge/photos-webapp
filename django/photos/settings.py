@@ -181,3 +181,5 @@ THUMBNAIL_SIZES = ["272"]
 
 # Custom User / Authentication
 AUTH_USER_MODEL = "users.CustomUser"
+LOGIN_REDIRECT_URL = "/"
+
