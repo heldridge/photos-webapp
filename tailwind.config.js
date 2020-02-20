@@ -65,12 +65,14 @@ module.exports = {
                 'button-disabled': 'var(--color-bg-button-disabled)',
                 primary: 'var(--color-bg-primary)',
                 'primary-hover': 'var(--color-bg-primary-hover)',
-                'nav-link-hover': 'var(--color-bg-nav-link-hover)'
+                'nav-link-hover': 'var(--color-bg-nav-link-hover)',
+                alternate: 'var(--color-bg-alternate)'
             },
             borderColor: {
                 default: 'var(--color-border-default)',
                 'input-selected': 'var(--color-border-input-selected)',
-                error: 'var(--color-border-error)'
+                error: 'var(--color-border-error)',
+                basic: 'var(--color-bg-basic)'
             },
             borderWidth: {
                 'image-card': 'var(--width-border-image-card)'
