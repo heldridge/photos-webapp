@@ -67,6 +67,7 @@
     --color-bg-button-disabled: #f7fafc;
     --color-button-disabled: #000000;
     --opacity-button-disabled: 50%;
+    --color-bg-alternate: #f7fafc;
 }
 
 .theme-dark {
@@ -111,6 +112,7 @@
     --color-bg-button-disabled: #2f2f2f;
     --color-button-disabled: #ffffff;
     --opacity-button-disabled: 100%;
+    --color-bg-alternate: #1e1e1e;
 }
 
 /* from: https://stackoverflow.com/questions/11131875/what-is-the-cleanest-way-to-disable-css-transition-effects-temporarily */
