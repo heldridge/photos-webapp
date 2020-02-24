@@ -4,11 +4,15 @@
 
 {% block content %}
 
-{% if user.is_authenticated %}
-  Hi {{ user.display_name }}!
-{% else %}
-  <p>You are not logged in</p>
-{% endif %}
+<div class="flex justify-center w-full pt-10">
+    <p class="opacity-high-emphasis text-4xl">
+        {% if user.is_authenticated %}
+        Hi {{ user.display_name }}!
+        {% else %}
+        You are not logged in
+        {% endif %}
+    </p>
+</div>
 
 <script type="text/javascript" src="{% static 'js/picture.js' %}"></script>
 {% endblock %}
