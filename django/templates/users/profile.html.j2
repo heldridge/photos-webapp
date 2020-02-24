@@ -5,13 +5,24 @@
 {% block content %}
 
 <div class="flex justify-center w-full pt-10">
-    <p class="opacity-high-emphasis text-4xl">
+
+    <div class="flex flex-col">   
         {% if user.is_authenticated %}
-        Hi {{ user.display_name }}!
+        <p class="opacity-high-emphasis text-4xl">
+            Hi {{ user.display_name }}!
+        </p>
+
+        <a href="{% url 'logout' %}" class="border-basic border-2 bg-alternate hover:bg-basic rounded text-black px-3 py-2 text-primary opacity-high-emphasis hover:text-black hover:opacity-100 text-lg mr-8">
+            Logout
+        </a>
         {% else %}
-        You are not logged in
+        <p class="opacity-high-emphasis text-4xl">
+            You are not logged in
+        </p>
         {% endif %}
-    </p>
+    </div>
+
+    
 </div>
 
 <script type="text/javascript" src="{% static 'js/picture.js' %}"></script>
