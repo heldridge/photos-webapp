@@ -1,0 +1,52 @@
+{% extends 'base.html.j2' %}
+
+{% load static %}
+
+{% block content %}
+
+{# <h1 class="text-5xl font-semibold py-4 opacity-high-emphasis">Login</h1> #}
+<div class="flex flex-col items-center">
+
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+
+    <form method="post" class="inline-block p-10 mt-10 rounded border-default border-2 shadow-lg w-77">
+        {% csrf_token %}       
+        {% if form.non_field_errors %}
+            <div class='mb-3 text-error'>
+                <ul>
+                {% for error in form.non_field_errors %}
+                    <li> {{ error| escape }}</li>
+                {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        <div class="flex flex-col items-center">
+            <div class="flex flex-col">
+                <span class="text-lg opacity-high-emphasis">{{ form.email.label_tag }}</span>
+                {{ form.email }}
+            </div>
+            <div class="flex flex-col pt-5">
+                <span class="text-lg opacity-high-emphasis">{{ form.password1.label_tag }}</span>
+                {{ form.password1 }}
+            </div>
+            <div class="flex flex-col pt-5">
+                <span class="text-lg opacity-high-emphasis">{{ form.password2.label_tag }}</span>
+                {{ form.password2 }}
+            </div>
+            
+            <button type="submit" class="text-lg rounded mt-5 py-2 px-4 bg-primary hover:bg-primary-hover text-black">Login</button>
+        </div> 
+        
+    </form>
+</div>
+
+
+<script type="text/javascript" src="{% static 'js/login.js' %}"></script>
+{% endblock %}
