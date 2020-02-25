@@ -7,37 +7,41 @@ from django import forms
 from django.utils.translation import ugettext, ugettext_lazy as _
 from .models import CustomUser
 
+_FORM_FIELD_CLASSES = [
+    "focus:outline-none",
+    "focus:border-input-selected",
+    "appearance-none",
+    "py-3",
+    "bg-surface-1",
+    "opacity-high-emphasis",
+    "rounded",
+    "border-2",
+    "border-default",
+    "text-indent",
+    "shadow-none",
+    "border-color-transition",
+    "disable-transition-on-theme-change",
+]
+
 
 class CustomUserCreationForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         self.fields["display_name"].widget.attrs.update(
-            {
-                "class": "focus:outline-none focus:border-input-selected appearance-none py-3 bg-surface-1 opacity-high-emphasis rounded border-2 border-default text-indent shadow-none border-color-transition disable-transition-on-theme-change",
-                # "onfocusout": "addInvalidBorder(this)",
-            }
+            {"class": " ".join(_FORM_FIELD_CLASSES)}
         )
 
         self.fields["email"].widget.attrs.update(
-            {
-                "class": "focus:outline-none focus:border-input-selected appearance-none py-3 bg-surface-1 opacity-high-emphasis rounded border-2 border-default text-indent shadow-none border-color-transition disable-transition-on-theme-change",
-                # "onfocusout": "addInvalidBorder(this)",
-            }
+            {"class": " ".join(_FORM_FIELD_CLASSES)}
         )
 
         self.fields["password1"].widget.attrs.update(
-            {
-                "class": "focus:outline-none focus:border-input-selected appearance-none py-3 bg-surface-1 opacity-high-emphasis rounded border-2 border-default text-indent shadow-none border-color-transition disable-transition-on-theme-change",
-                # "onfocusout": "addInvalidBorder(this)",
-            }
+            {"class": " ".join(_FORM_FIELD_CLASSES)}
         )
 
         self.fields["password2"].widget.attrs.update(
-            {
-                "class": "focus:outline-none focus:border-input-selected appearance-none py-3 bg-surface-1 opacity-high-emphasis rounded border-2 border-default text-indent shadow-none border-color-transition disable-transition-on-theme-change",
-                # "onfocusout": "addInvalidBorder(this)",
-            }
+            {"class": " ".join(_FORM_FIELD_CLASSES)}
         )
 
     class Meta(UserCreationForm):
@@ -57,13 +61,13 @@ class CustomAuthenticationForm(AuthenticationForm):
 
         self.fields["username"].widget.attrs.update(
             {
-                "class": "focus:outline-none focus:border-input-selected appearance-none py-3 bg-surface-1 opacity-high-emphasis rounded border-2 border-default text-indent shadow-none border-color-transition disable-transition-on-theme-change",
+                "class": " ".join(_FORM_FIELD_CLASSES),
                 "onfocusout": "addInvalidBorder(this)",
             }
         )
         self.fields["password"].widget.attrs.update(
             {
-                "class": "focus:outline-none focus:border-input-selected appearance-none py-3 bg-surface-1 opacity-high-emphasis rounded border-2 border-default text-indent shadow-none border-color-transition disable-transition-on-theme-change",
+                "class": " ".join(_FORM_FIELD_CLASSES),
                 "onfocusout": "addInvalidBorder(this)",
             }
         )
