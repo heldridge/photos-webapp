@@ -9,6 +9,30 @@ from .models import CustomUser
 
 
 class CustomUserCreationForm(UserCreationForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields["email"].widget.attrs.update(
+            {
+                "class": "focus:outline-none focus:border-input-selected appearance-none py-3 bg-surface-1 opacity-high-emphasis rounded border-2 border-default text-indent shadow-none border-color-transition disable-transition-on-theme-change",
+                # "onfocusout": "addInvalidBorder(this)",
+            }
+        )
+
+        self.fields["password1"].widget.attrs.update(
+            {
+                "class": "focus:outline-none focus:border-input-selected appearance-none py-3 bg-surface-1 opacity-high-emphasis rounded border-2 border-default text-indent shadow-none border-color-transition disable-transition-on-theme-change",
+                # "onfocusout": "addInvalidBorder(this)",
+            }
+        )
+
+        self.fields["password2"].widget.attrs.update(
+            {
+                "class": "focus:outline-none focus:border-input-selected appearance-none py-3 bg-surface-1 opacity-high-emphasis rounded border-2 border-default text-indent shadow-none border-color-transition disable-transition-on-theme-change",
+                # "onfocusout": "addInvalidBorder(this)",
+            }
+        )
+
     class Meta(UserCreationForm):
         model = CustomUser
         fields = ("email", "display_name")
