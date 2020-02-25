@@ -81,7 +81,8 @@ module.exports = {
                 'double-screen': '200vh'
             },
             width: {
-                '77': '19.25rem'
+                '77': '19.25rem',
+                '96': '24rem'
             }
         }
     },
