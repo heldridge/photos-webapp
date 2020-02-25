@@ -29,7 +29,7 @@ class CustomUserCreationForm(UserCreationForm):
         super().__init__(*args, **kwargs)
 
         self.fields["display_name"].widget.attrs.update(
-            {"class": " ".join(_FORM_FIELD_CLASSES)}
+            {"class": " ".join(_FORM_FIELD_CLASSES), "autofocus": ""}
         )
 
         self.fields["email"].widget.attrs.update(
@@ -43,6 +43,8 @@ class CustomUserCreationForm(UserCreationForm):
         self.fields["password2"].widget.attrs.update(
             {"class": " ".join(_FORM_FIELD_CLASSES)}
         )
+
+        self.fields["display_name"].initial = None
 
     class Meta(UserCreationForm):
         model = CustomUser
