@@ -7,10 +7,13 @@ def profile(request):
 
 
 def register(request):
-    f = forms.CustomUserCreationForm(request.POST)
+
     if request.method == "POST":
+        f = forms.CustomUserCreationForm(request.POST)
         if f.is_valid():
-            f.save()
+            f.save(commit=False)
             return redirect("login")
     else:
-        return render(request, "users/register.html.j2", {"form": f})
+        f = forms.CustomUserCreationForm()
+
+    return render(request, "users/register.html.j2", {"form": f})
