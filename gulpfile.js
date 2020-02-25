@@ -63,6 +63,14 @@ function processJavascript(cb) {
                 'js/loginControl.ts',
                 'js/classUtils.ts'
             ]
+        },
+        {
+            outputFileName: 'register.js',
+            files: [
+                'js/navbarControl.ts',
+                'js/registerControl.ts',
+                'js/classUtils.ts'
+            ]
         }
     ];
 

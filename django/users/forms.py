@@ -23,8 +23,12 @@ _FORM_FIELD_CLASSES = [
     "disable-transition-on-theme-change",
 ]
 
+_FORM_FIELD_ERROR_CLASSES = ["border-error"]
+
 
 class CustomUserCreationForm(UserCreationForm):
+    field_order = ["display_name", "email", "password1", "password2"]
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -49,6 +53,19 @@ class CustomUserCreationForm(UserCreationForm):
     class Meta(UserCreationForm):
         model = CustomUser
         fields = ("email", "display_name")
+
+    def is_valid(self):
+        ret = super().is_valid()
+        for f in self.errors:
+            self.fields[f].widget.attrs.update(
+                {
+                    "class": " ".join(_FORM_FIELD_CLASSES)
+                    + " "
+                    + " ".join(_FORM_FIELD_ERROR_CLASSES),
+                    "onfocus": "removeErrorBorder(this)",
+                }
+            )
+        return ret
 
 
 class CustomUserChangeForm(UserChangeForm):
