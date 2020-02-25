@@ -11,7 +11,7 @@ def register(request):
     if request.method == "POST":
         f = forms.CustomUserCreationForm(request.POST)
         if f.is_valid():
-            f.save(commit=False)
+            f.save()
             return redirect("login")
     else:
         f = forms.CustomUserCreationForm()
