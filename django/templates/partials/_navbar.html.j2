@@ -34,7 +34,7 @@
       Profile
     </a>
     {% else %}
-    <a href="/login" class="border-basic border-2 bg-alternate hover:bg-basic rounded text-black px-3 py-2 text-primary opacity-high-emphasis hover:text-black hover:opacity-100 text-lg mr-8">
+    <a href="{% url 'login' %}" class="border-basic border-2 bg-alternate hover:bg-basic rounded text-black px-3 py-2 text-primary opacity-high-emphasis hover:text-black hover:opacity-100 text-lg mr-8">
       Login
     </a>
     {% endif %}
