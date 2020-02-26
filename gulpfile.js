@@ -61,7 +61,8 @@ function processJavascript(cb) {
             files: [
                 'js/navbarControl.ts',
                 'js/loginControl.ts',
-                'js/classUtils.ts'
+                'js/classUtils.ts',
+                'js/messagesControl.ts'
             ]
         },
         {

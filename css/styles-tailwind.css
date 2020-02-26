@@ -68,6 +68,9 @@
     --color-button-disabled: #000000;
     --opacity-button-disabled: 50%;
     --color-bg-alternate: #f7fafc;
+
+    /* Messages */
+    --color-bg-success: #aaf255;
 }
 
 .theme-dark {
@@ -113,6 +116,9 @@
     --color-button-disabled: #ffffff;
     --opacity-button-disabled: 100%;
     --color-bg-alternate: #1e1e1e;
+
+    /* Messages */
+    --color-bg-success: #c6f68d;
 }
 
 /* from: https://stackoverflow.com/questions/11131875/what-is-the-cleanest-way-to-disable-css-transition-effects-temporarily */
@@ -121,6 +127,11 @@
     -moz-transition: none !important;
     -o-transition: none !important;
     transition: none !important;
+}
+
+.message {
+    transition: opacity 0.7s;
+    -webkit-transition: opacity 0.7s;
 }
 
 #navSearchIcon {

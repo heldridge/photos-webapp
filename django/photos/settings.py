@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 
+from django.contrib.messages import constants as messages
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -183,3 +185,8 @@ THUMBNAIL_SIZES = ["272"]
 AUTH_USER_MODEL = "users.CustomUser"
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
+
+# Message Tags
+MESSAGE_TAGS = {
+    messages.SUCCESS: "rounded bg-success text-black py-1 px-4 min-w-64 text-center mt-2 ml-2 z-10 text-lg message",
+}
