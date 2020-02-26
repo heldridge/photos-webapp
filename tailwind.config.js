@@ -66,7 +66,8 @@ module.exports = {
                 primary: 'var(--color-bg-primary)',
                 'primary-hover': 'var(--color-bg-primary-hover)',
                 'nav-link-hover': 'var(--color-bg-nav-link-hover)',
-                alternate: 'var(--color-bg-alternate)'
+                alternate: 'var(--color-bg-alternate)',
+                success: 'var(--color-bg-success)'
             },
             borderColor: {
                 default: 'var(--color-border-default)',
@@ -79,6 +80,9 @@ module.exports = {
             },
             minHeight: {
                 'double-screen': '200vh'
+            },
+            minWidth: {
+                '64': '16rem'
             },
             width: {
                 '77': '19.25rem',
