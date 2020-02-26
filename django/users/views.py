@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from . import forms
 
@@ -12,6 +13,7 @@ def register(request):
         f = forms.CustomUserCreationForm(request.POST)
         if f.is_valid():
             f.save()
+            messages.success(request, "Account Created Successfully!")
             return redirect("login")
     else:
         f = forms.CustomUserCreationForm()
