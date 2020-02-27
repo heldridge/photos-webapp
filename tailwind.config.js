@@ -58,6 +58,7 @@ module.exports = {
             backgroundColor: {
                 main: 'var(--color-bg-main)',
                 'surface-1': 'var(--color-bg-surface-1)',
+                'surface-2': 'var(--color-bg-surface-2)',
                 tag: 'var(--color-bg-tag)',
                 'tag-hover': 'var(--color-bg-tag-hover)',
                 basic: 'var(--color-bg-basic)',
@@ -83,6 +84,9 @@ module.exports = {
             },
             minWidth: {
                 '64': '16rem'
+            },
+            padding: {
+                'nav-perf': '1.3rem'
             },
             width: {
                 '77': '19.25rem',
