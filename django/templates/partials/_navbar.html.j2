@@ -29,7 +29,11 @@
 
   <div class="flex items-center">
 
-    <button class="py-nav-perf px-5 flex sm:hidden items-center justify-center hover:bg-nav-link-hover">
+    <button 
+      class="py-nav-perf px-5 flex sm:hidden items-center justify-center hover:bg-nav-link-hover"
+      id="search-dropdown-toggle"
+      onclick="toggleSearchDropdownVisible()"
+    >
       <i class="fas fa-search opacity-high-emphasis text-lg"></i>
     </button>
 
@@ -65,7 +69,7 @@
   </div>
 </nav>
 
-<div class="w-full bg-nav-link-hover flex justify-center hidden">
+<div class="w-full bg-nav-link-hover flex justify-center hidden" id="navbar-search-dropdown">
   <input 
     id="navSearch"
     class="focus:outline-none appearance-none py-2 my-2 pl-2 w-3/4 bg-surface-1 opacity-high-emphasis border-2 rounded border-default" 
