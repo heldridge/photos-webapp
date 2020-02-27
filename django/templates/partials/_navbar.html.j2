@@ -1,10 +1,11 @@
 <!-- old:bg-white-500 -->
 <nav class="flex items-center justify-between bg-surface-1 rounded shadow">
   <div class="flex">
-    <a href="/" class="py-4 md:py-5 px-4 md:px-6 text-lg md:text-xl hover:bg-nav-link-hover border-default border-r-2 md:border-r-0">
+    <a href="/" class="py-4 md:py-5 px-4 md:px-6 text-lg md:text-xl hover:bg-nav-link-hover border-default border-r-2 sm:border-r-0">
         <span class="opacity-high-emphasis">Home</span>
     </a>
 
+    <!--
     <div class="py-1 md:py-2 px-4 md:px-6 border-r-2 border-l-2 border-default hidden sm:flex flex-col md:flex-row justify-center">
       <div 
         class="cursor-text border-2 border-default rounded px-4 flex items-center text-lg md:text-xl w-full justify-between border-color-transition disable-transition-on-theme-change" 
@@ -25,6 +26,17 @@
       </div>
       <p class="text-red-500 pl-3 self-center max-w-s hidden" id="navSearchErrorMessage"></p>
     </div>
+    -->
+    <div class="border-l-2 border-r-2 border-default flex items-center text-lg md:text-xl relative">
+      <input 
+        type="text" 
+        class="focus:outline-none appearance-none py-2 md:py-3 px-2 md:px-3 mx-2 md:mx-3 my-2bg-surface-1 opacity-high-emphasis border-2 rounded border-default focus:border-input-selected border-color-transition disable-transition-on-theme-change"
+        placeholder="Search Tags ..."
+      >
+      <i class="fas fa-search opacity-disabled disable-transition-on-theme-change absolute right-6 md:right-8" id="navSearchIcon"></i>
+    </div>
+    
+
   </div>
 
   <div class="flex items-center">

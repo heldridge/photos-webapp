@@ -91,6 +91,10 @@ module.exports = {
             width: {
                 '77': '19.25rem',
                 '96': '24rem'
+            },
+            inset: {
+                '8': '2rem',
+                '6': '1.5rem'
             }
         }
     },
