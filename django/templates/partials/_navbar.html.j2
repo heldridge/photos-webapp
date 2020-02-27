@@ -32,6 +32,8 @@
         type="text" 
         class="focus:outline-none appearance-none py-2 md:py-3 px-2 md:px-3 mx-2 md:mx-3 my-2bg-surface-1 opacity-high-emphasis border-2 rounded border-default focus:border-input-selected border-color-transition disable-transition-on-theme-change"
         placeholder="Search Tags ..."
+        onfocus="navSearchOnFocus()"
+        onfocusout="navSearchOnFocusOut()"
       >
       <i class="fas fa-search opacity-disabled disable-transition-on-theme-change absolute right-6 md:right-8" id="navSearchIcon"></i>
     </div>
