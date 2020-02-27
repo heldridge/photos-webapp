@@ -188,3 +188,25 @@ function toggleLightDarkTheme() {
         window.localStorage.setItem('theme', 'light');
     }
 }
+
+function toggleSearchDropdownVisible() {
+    let navbarSearchDropdown = <HTMLDivElement>(
+        document.getElementById('navbar-search-dropdown')
+    );
+    let navSearchToggle = <HTMLDivElement>(
+        document.getElementById('search-dropdown-toggle')
+    );
+    if (navbarSearchDropdown) {
+        if (hasClass(navbarSearchDropdown, 'hidden')) {
+            removeClass(navbarSearchDropdown, 'hidden');
+            if (navSearchToggle) {
+                addClass(navSearchToggle, 'bg-nav-link-hover');
+            }
+        } else {
+            addClass(navbarSearchDropdown, 'hidden');
+            if (navSearchToggle) {
+                removeClass(navSearchToggle, 'bg-nav-link-hover');
+            }
+        }
+    }
+}
