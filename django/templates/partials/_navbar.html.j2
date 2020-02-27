@@ -5,28 +5,6 @@
         <span class="opacity-high-emphasis">Home</span>
     </a>
 
-    <!--
-    <div class="py-1 md:py-2 px-4 md:px-6 border-r-2 border-l-2 border-default hidden sm:flex flex-col md:flex-row justify-center">
-      <div 
-        class="cursor-text border-2 border-default rounded px-4 flex items-center text-lg md:text-xl w-full justify-between border-color-transition disable-transition-on-theme-change" 
-        id="navSearchBorder"
-        onclick="focusNavSearch()"
-      >
-        <input 
-          id="navSearch"
-          class="focus:outline-none appearance-none py-2 md:py-3 w-3/4 md:w-full bg-surface-1 opacity-high-emphasis" 
-          type="text" placeholder="Search Tags..." 
-          onfocus="navSearchOnFocus()" onfocusout="navSearchFocusOut()"
-          onkeyup="navSearchOnKeyUp(event, this, {{ max_tag_length }}, {{ min_tag_length }}, '{{ valid_tag_regex }}')"
-          oninput="navSearchRestrictOnInput(this, '{{invalid_tag_char_regex}}')"
-          onchange="navSearchRestrictOnInput(this, '{{invalid_tag_char_regex}}')"
-          maxlength="{{ max_tag_length }}"
-        >
-        <i class="fas fa-search opacity-disabled pl-3 disable-transition-on-theme-change" id="navSearchIcon"></i>
-      </div>
-      <p class="text-red-500 pl-3 self-center max-w-s hidden" id="navSearchErrorMessage"></p>
-    </div>
-    -->
     <div class="border-l-2 border-r-2 border-default hidden sm:flex items-center text-lg md:text-xl relative">
       <input 
         type="text" 
@@ -34,11 +12,13 @@
         placeholder="Search Tags ..."
         onfocus="navSearchOnFocus()"
         onfocusout="navSearchOnFocusOut()"
+        oninput="navSearchRestrictOnInput(this, '{{invalid_tag_char_regex}}')"
+        onchange="navSearchRestrictOnInput(this, '{{invalid_tag_char_regex}}')"
+        onkeyup="navSearchOnKeyUp(event, this, {{ max_tag_length }}, {{ min_tag_length }}, '{{ valid_tag_regex }}')"
+        maxlength="{{ max_tag_length }}"
       >
       <i class="fas fa-search opacity-disabled disable-transition-on-theme-change absolute right-6 md:right-8" id="navSearchIcon"></i>
     </div>
-    
-
   </div>
 
   <div class="flex items-center">
