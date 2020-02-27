@@ -58,26 +58,17 @@ function validateTag(
 }
 
 function navSearchOnFocus(): void {
-    let searchBorder: HTMLElement = document.getElementById('navSearchBorder');
     let navSearchIcon: HTMLElement = document.getElementById('navSearchIcon');
-
-    if (!hasClass(searchBorder, errorBorderClass)) {
-        removeClass(searchBorder, defaultBorderClass);
-        addClass(searchBorder, selectedBorderClass);
-
+    if (navSearchIcon) {
         removeClass(navSearchIcon, unfocusedIconClass);
         addClass(navSearchIcon, focusedIconClass);
     }
 }
 
-function navSearchFocusOut(): void {
-    let searchBorder: HTMLElement = document.getElementById('navSearchBorder');
+function navSearchOnFocusOut(): void {
     let navSearchIcon: HTMLElement = document.getElementById('navSearchIcon');
 
-    if (!hasClass(searchBorder, errorBorderClass)) {
-        removeClass(searchBorder, selectedBorderClass);
-        addClass(searchBorder, defaultBorderClass);
-
+    if (navSearchIcon) {
         removeClass(navSearchIcon, focusedIconClass);
         addClass(navSearchIcon, unfocusedIconClass);
     }
