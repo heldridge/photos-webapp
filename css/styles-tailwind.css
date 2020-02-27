@@ -41,6 +41,7 @@
     --color-bg-surface-1: #ffffff; /* The Navbar */
     --color-bg-nav-link-hover: #edf2f7; /* Navbar links on hover */
     --border-width-nav-item: 1px;
+    --color-bg-surface-2: #ffffff;
 
     --color-placeholder-nav-search-focus: #718096; /* Nav search placeholder text on focus */
     --color-nav-search-icon: #000000; /* Text color of the search icon */
@@ -89,6 +90,7 @@
     --color-bg-surface-1: #1e1e1e; /* The Navbar */
     --color-bg-nav-link-hover: #2c2c2c; /* Navbar links on hover */
     --border-width-nav-item: 2px;
+    --color-bg-surface-2: #232323;
 
     /* --color-placeholder-nav-search-focus: #718096; Nav search placeholder text on focus */
     --color-nav-search-icon: #ffffff; /* Text color of the search icon */
