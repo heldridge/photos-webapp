@@ -40,11 +40,11 @@
     <a href="{% url 'login' %}" class="border-basic border-2 bg-alternate hover:bg-basic rounded text-black px-2 md:px-3 py-1 md:py-2 text-primary opacity-high-emphasis hover:text-black hover:opacity-100 md:text-lg ml-1 mr-3 md:mx-8">
       Login
     </a>
-    {% endif %}
-
+    
     <a href="{% url 'register' %}" class="border-basic border-2 bg-alternate hover:bg-basic rounded text-black px-2 md:px-3 py-1 md:py-2 text-primary opacity-high-emphasis hover:text-black hover:opacity-100 md:text-lg mr-0 md:mr-8 whitespace-no-wrap">
       Sign up
     </a>
+    {% endif %}
     
     <div class="mx-2 h-full flex flex-col justify-center">
       <div class="flex">
@@ -63,6 +63,7 @@
     </div>
   </div>
 </nav>
+
 <form action="{% url 'search' %}" method="get">
   <div class="w-full bg-nav-link-hover flex justify-center relative flex items-center hidden sm:hidden" id="navbar-search-dropdown">
     <input
