@@ -4,21 +4,22 @@
     <a href="/" class="py-4 md:py-5 px-4 md:px-6 text-lg md:text-xl hover:bg-nav-link-hover border-default border-r-2 sm:border-r-0 flex items-center">
         <span class="opacity-high-emphasis">Home</span>
     </a>
-
-    <div class="border-l-2 border-r-2 border-default hidden sm:flex items-center text-lg md:text-xl relative">
-      <input 
-        type="text" 
-        class="focus:outline-none appearance-none py-2 md:py-3 px-2 md:px-3 mx-2 md:mx-3 my-2 bg-surface-1 opacity-high-emphasis border-2 rounded border-default focus:border-input-selected border-color-transition disable-transition-on-theme-change"
-        placeholder="Search Tags ..."
-        maxlength="{{ max_tag_length }}"
-        onfocus="navSearchOnFocus(this)"
-        onfocusout="navSearchOnFocusOut(this)"
-        oninput="navSearchRestrictOnInput(this, '{{invalid_tag_char_regex}}')"
-        onchange="navSearchRestrictOnInput(this, '{{invalid_tag_char_regex}}')"
-        onkeyup="navSearchOnKeyUp(event, this, {{ max_tag_length }}, {{ min_tag_length }}, '{{ valid_tag_regex }}')"
-      >
-      <i class="fas fa-search opacity-disabled disable-transition-on-theme-change absolute right-6 md:right-8"></i>
-    </div>
+    <form action="{% url 'search' %}" method="get">
+      <div class="border-l-2 border-r-2 border-default hidden sm:flex items-center text-lg md:text-xl relative">
+        <input
+          name="q"
+          type="text" 
+          class="focus:outline-none appearance-none py-2 md:py-3 px-2 md:px-3 mx-2 md:mx-3 my-2 bg-surface-1 opacity-high-emphasis border-2 rounded border-default focus:border-input-selected border-color-transition disable-transition-on-theme-change"
+          placeholder="Search Tags ..."
+          maxlength="{{ max_tag_length }}"
+          onfocus="navSearchOnFocus(this)"
+          onfocusout="navSearchOnFocusOut(this)"
+          oninput="navSearchRestrictOnInput(this, '{{invalid_tag_char_regex}}')"
+          onchange="navSearchRestrictOnInput(this, '{{invalid_tag_char_regex}}')"
+        >
+        <i class="fas fa-search opacity-disabled disable-transition-on-theme-change absolute right-6 md:right-8"></i>
+      </div>
+    </form>
   </div>
 
   <div class="flex items-center">
@@ -62,20 +63,20 @@
     </div>
   </div>
 </nav>
-
-<div class="w-full bg-nav-link-hover flex justify-center relative flex items-center hidden sm:hidden" id="navbar-search-dropdown">
-  <input 
-    id="navSearch"
-    class="focus:outline-none focus:border-input-selected appearance-none py-2 my-2 pl-2 w-3/4 bg-surface-1 opacity-high-emphasis border-2 rounded border-default border-color-transition disable-transition-on-theme-change" 
-    type="text" placeholder="Search Tags..." 
-    maxlength="{{ max_tag_length }}"
-    onfocus="navSearchOnFocus(this)"
-    onfocusout="navSearchOnFocusOut(this)"
-    oninput="navSearchRestrictOnInput(this, '{{invalid_tag_char_regex}}')"
-    onchange="navSearchRestrictOnInput(this, '{{invalid_tag_char_regex}}')"
-    onkeyup="navSearchOnKeyUp(event, this, {{ max_tag_length }}, {{ min_tag_length }}, '{{ valid_tag_regex }}')"
-  >
-  <i class="fas fa-search opacity-disabled disable-transition-on-theme-change absolute right-17p"></i>
-</div>
+<form action="{% url 'search' %}" method="get">
+  <div class="w-full bg-nav-link-hover flex justify-center relative flex items-center hidden sm:hidden" id="navbar-search-dropdown">
+    <input
+      name="q"
+      class="focus:outline-none focus:border-input-selected appearance-none py-2 my-2 pl-2 w-3/4 bg-surface-1 opacity-high-emphasis border-2 rounded border-default border-color-transition disable-transition-on-theme-change" 
+      type="text" placeholder="Search Tags..." 
+      maxlength="{{ max_tag_length }}"
+      onfocus="navSearchOnFocus(this)"
+      onfocusout="navSearchOnFocusOut(this)"
+      oninput="navSearchRestrictOnInput(this, '{{invalid_tag_char_regex}}')"
+      onchange="navSearchRestrictOnInput(this, '{{invalid_tag_char_regex}}')"
+    >
+    <i class="fas fa-search opacity-disabled disable-transition-on-theme-change absolute right-17p"></i>
+  </div>
+</form>
 
 
