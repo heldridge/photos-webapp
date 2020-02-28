@@ -10,14 +10,14 @@
         type="text" 
         class="focus:outline-none appearance-none py-2 md:py-3 px-2 md:px-3 mx-2 md:mx-3 my-2 bg-surface-1 opacity-high-emphasis border-2 rounded border-default focus:border-input-selected border-color-transition disable-transition-on-theme-change"
         placeholder="Search Tags ..."
-        onfocus="navSearchOnFocus()"
-        onfocusout="navSearchOnFocusOut()"
+        maxlength="{{ max_tag_length }}"
+        onfocus="navSearchOnFocus(this)"
+        onfocusout="navSearchOnFocusOut(this)"
         oninput="navSearchRestrictOnInput(this, '{{invalid_tag_char_regex}}')"
         onchange="navSearchRestrictOnInput(this, '{{invalid_tag_char_regex}}')"
         onkeyup="navSearchOnKeyUp(event, this, {{ max_tag_length }}, {{ min_tag_length }}, '{{ valid_tag_regex }}')"
-        maxlength="{{ max_tag_length }}"
       >
-      <i class="fas fa-search opacity-disabled disable-transition-on-theme-change absolute right-6 md:right-8" id="navSearchIcon"></i>
+      <i class="fas fa-search opacity-disabled disable-transition-on-theme-change absolute right-6 md:right-8"></i>
     </div>
   </div>
 
@@ -63,14 +63,19 @@
   </div>
 </nav>
 
-<div class="w-full bg-nav-link-hover flex justify-center hidden sm:hidden" id="navbar-search-dropdown">
+<div class="w-full bg-nav-link-hover flex justify-center relative flex items-center hidden sm:hidden" id="navbar-search-dropdown">
   <input 
     id="navSearch"
     class="focus:outline-none focus:border-input-selected appearance-none py-2 my-2 pl-2 w-3/4 bg-surface-1 opacity-high-emphasis border-2 rounded border-default border-color-transition disable-transition-on-theme-change" 
     type="text" placeholder="Search Tags..." 
     maxlength="{{ max_tag_length }}"
+    onfocus="navSearchOnFocus(this)"
+    onfocusout="navSearchOnFocusOut(this)"
+    oninput="navSearchRestrictOnInput(this, '{{invalid_tag_char_regex}}')"
+    onchange="navSearchRestrictOnInput(this, '{{invalid_tag_char_regex}}')"
     onkeyup="navSearchOnKeyUp(event, this, {{ max_tag_length }}, {{ min_tag_length }}, '{{ valid_tag_regex }}')"
   >
+  <i class="fas fa-search opacity-disabled disable-transition-on-theme-change absolute right-17p"></i>
 </div>
 
 
