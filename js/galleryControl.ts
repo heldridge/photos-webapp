@@ -1,7 +1,9 @@
-// @ts-ignore
-let allPictures: Array = allPicturesOutside;
-//@ts-ignore
-let originalPictureIndex = originalPictureIndexOutside;
+let allPictures = JSON.parse(
+    document.getElementById('all-pictures').textContent
+);
+let originalPictureIndex = JSON.parse(
+    document.getElementById('original-picture-index').textContent
+);
 
 let galleryNextImages = document.getElementById('gallery-next-images');
 let imagesInfo = document.getElementById('images-info');
