@@ -47,8 +47,7 @@
     {% endif %}
     
     <div class="mx-2 h-full flex flex-col justify-center">
-      <div class="flex">
-
+      <div class="hidden sm:flex">
         <i class="far fa-sun text-lg md:text-xl mr-2 opacity-disabled" id="theme-sun-icon"></i>
 
         <div class="flex flex-col justify-center">
@@ -60,6 +59,10 @@
 
         <i class="far fa-moon text-lg md:text-xl ml-2 opacity-high-emphasis" id="theme-moon-icon"></i>
       </div>
+
+      <button class='bg-basic rounded px-3 block sm:hidden py-2 shadow text-center mr-3' onclick="toggleThemeSwitch()"> 
+        <i class="far fa-moon text-black opacity-high-emphasis"></i>
+      </button>
     </div>
   </div>
 </nav>
