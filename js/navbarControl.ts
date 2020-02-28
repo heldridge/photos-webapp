@@ -78,29 +78,6 @@ function focusNavSearch(): void {
     document.getElementById('navSearch').focus();
 }
 
-function navSearchOnKeyUp(
-    event: onKeyUpEvent,
-    inputElement,
-    maxTagLength,
-    minTagLength,
-    validTagRegex
-): void {
-    if (event.key === 'Enter') {
-        let value = inputElement.value;
-        if (
-            value !== '' &&
-            validateTag(
-                value,
-                maxTagLength,
-                minTagLength,
-                new RegExp(validTagRegex)
-            ).isValid
-        ) {
-            window.location.href = `/search?q=${value}`;
-        }
-    }
-}
-
 function navSearchRestrictOnInput(
     navSearchInput: HTMLInputElement,
     invalidCharRegex: string
