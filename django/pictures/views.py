@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.shortcuts import render
 
 from pictures.models import Picture
@@ -26,4 +27,9 @@ def clean_picture_data(picture, from_elastic_search):
 # Create your views here.
 def picture(request, picture_public_id):
     my_picture = Picture.objects.get(public_id=picture_public_id)
-    return render(request, "picture.html.j2", clean_picture_data(my_picture, False))
+
+    context = clean_picture_data(my_picture, False)
+    context["max_tag_length"] = settings.MAX_TAG_LENGTH
+    context["invalid_tag_char_regex"] = settings.INVALID_TAG_CHAR_REGEX
+
+    return render(request, "picture.html.j2", context)
