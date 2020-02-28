@@ -16,7 +16,7 @@
     {% endif %}
 
 
-    <form method="post" class="inline-block p-10 mt-10 rounded border-default border-2 shadow-lg w-96">
+    <form method="post" class="inline-block py-5 sm:p-10 mt-5 md:mt-10 rounded border-default border-2 shadow-lg w-77 sm:w-96">
         {% csrf_token %}       
         {% if form.non_field_errors %}
             <div class='mb-3 text-error'>
@@ -29,7 +29,6 @@
         {% endif %}
         <div class="flex flex-col items-center">
             {% for field in form %}
-
             {% if forloop.first %}
             <div class="flex flex-col w-56">
             {% else %}
@@ -50,10 +49,7 @@
                 </div>
             </div>
             {% endfor %}
-            
-            
-            
-            
+                 
             <button type="submit" class="text-lg rounded mt-5 py-2 px-4 bg-primary hover:bg-primary-hover text-black">Register</button>
         </div> 
         
