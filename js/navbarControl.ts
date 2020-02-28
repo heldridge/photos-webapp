@@ -57,16 +57,16 @@ function validateTag(
     }
 }
 
-function navSearchOnFocus(): void {
-    let navSearchIcon: HTMLElement = document.getElementById('navSearchIcon');
+function navSearchOnFocus(source: HTMLInputElement): void {
+    let navSearchIcon = source.nextElementSibling;
     if (navSearchIcon) {
         removeClass(navSearchIcon, unfocusedIconClass);
         addClass(navSearchIcon, focusedIconClass);
     }
 }
 
-function navSearchOnFocusOut(): void {
-    let navSearchIcon: HTMLElement = document.getElementById('navSearchIcon');
+function navSearchOnFocusOut(source: HTMLInputElement): void {
+    let navSearchIcon = source.nextElementSibling;
 
     if (navSearchIcon) {
         removeClass(navSearchIcon, focusedIconClass);
