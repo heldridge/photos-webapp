@@ -157,6 +157,19 @@ function toggleLightDarkTheme() {
     }
 }
 
+function toggleThemeSwitch() {
+    let themeSwitch = <HTMLInputElement>document.getElementById('theme-switch');
+
+    if (themeSwitch) {
+        if (themeSwitch.checked) {
+            themeSwitch.checked = false;
+        } else {
+            themeSwitch.checked = true;
+        }
+        toggleLightDarkTheme();
+    }
+}
+
 function toggleSearchDropdownVisible() {
     let navbarSearchDropdown = <HTMLDivElement>(
         document.getElementById('navbar-search-dropdown')
