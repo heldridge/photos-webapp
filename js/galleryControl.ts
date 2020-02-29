@@ -1,6 +1,4 @@
-let allPictures = JSON.parse(
-    document.getElementById('all-pictures').textContent
-);
+let pictures = JSON.parse(document.getElementById('pictures').textContent);
 let originalPictureIndex = JSON.parse(
     document.getElementById('original-picture-index').textContent
 );
@@ -50,7 +48,7 @@ let preloadedImages = {};
 preloadImages();
 
 function setImage(index: number, stateAction: string = '') {
-    if (index < allPictures.length) {
+    if (index < pictures.length) {
         if (galleryImageContainer) {
             // Remove children
             while (galleryImageContainer.hasChildNodes()) {
@@ -62,7 +60,7 @@ function setImage(index: number, stateAction: string = '') {
             // Add new child
             let image = document.createElement('img');
             addClass(image, 'max-h-80-screen');
-            image.src = `/media/${allPictures[index].photo}`;
+            image.src = `/media/${pictures[index].photo}`;
             galleryImageContainer.appendChild(image);
         }
         if (modalImageContainer) {
@@ -73,7 +71,7 @@ function setImage(index: number, stateAction: string = '') {
 
             // Add child to modal image
             let modalImage = document.createElement('img');
-            modalImage.src = `/media/${allPictures[index].photo}`;
+            modalImage.src = `/media/${pictures[index].photo}`;
             modalImageContainer.appendChild(modalImage);
         }
 
@@ -87,9 +85,32 @@ function setImage(index: number, stateAction: string = '') {
             addClass(galleryNextImages.children[index], 'selected-picture');
         }
 
-        if (imagesInfo) {
-            addClass(imagesInfo.children[currentIndex], 'hidden');
-            removeClass(imagesInfo.children[index], 'hidden');
+        // Set the title
+        let imageTitle = document.getElementById('image-title');
+        if (imageTitle) {
+            imageTitle.innerHTML = pictures[index].title;
+        }
+        let imageTitleLink = <HTMLAnchorElement>(
+            document.getElementById('image-title-link')
+        );
+        if (imageTitleLink) {
+            imageTitleLink.href = `/pictures/${pictures[index].public_id}`;
+        }
+
+        // Set the tags
+        let imageTags = <HTMLDivElement>document.getElementById('image-tags');
+        if (imageTags) {
+            // Remove previous tags
+            while (imageTags.hasChildNodes()) {
+                imageTags.removeChild(imageTags.lastChild);
+            }
+            // Add the new tags
+            pictures[index].above_tags.forEach((tag: string) => {
+                addTag(imageTags, tag);
+            });
+            pictures[index].below_tags.forEach((tag: string) => {
+                addTag(imageTags, tag);
+            });
         }
 
         currentIndex = index;
@@ -99,7 +120,7 @@ function setImage(index: number, stateAction: string = '') {
         let before = getUrlParameter('before');
 
         if (stateAction) {
-            let newState = `?p=${allPictures[index].public_id}`;
+            let newState = `?p=${pictures[index].public_id}`;
             if (query) {
                 newState += `&q=${query}`;
             }
@@ -120,7 +141,7 @@ function setImage(index: number, stateAction: string = '') {
 }
 
 function nextPicture(): void {
-    if (currentIndex + 1 < allPictures.length) {
+    if (currentIndex + 1 < pictures.length) {
         setImage(currentIndex + 1, 'push');
     } else if (nextLinkHREF) {
         document.location.href = nextLinkHREF;
@@ -155,7 +176,7 @@ function updateNextPrevActions(index: number): void {
         }
     }
 
-    if (index === allPictures.length - 1) {
+    if (index === pictures.length - 1) {
         for (let i = 0; i < nextButtons.length; i++) {
             addClass(nextButtons[i], 'hidden');
         }
@@ -201,9 +222,23 @@ document.onkeyup = function(event) {
 };
 
 function preloadImages() {
-    allPictures.forEach(picture => {
+    pictures.forEach(picture => {
         let newImg = new Image();
         newImg.src = `/media/${picture.photo}`;
         preloadedImages[picture.public_id] = newImg;
     });
+}
+
+function addTag(parent: HTMLDivElement, tag: string) {
+    let tagAnchor = document.createElement('a');
+    tagAnchor.className =
+        'tag rounded py-1 md:py-2 px-2 md:px-3 mr-3 font-medium mb-3 text-xs md:text-md bg-tag hover:bg-tag-hover text-tag hover:text-tag-hover';
+    tagAnchor.href = `/search?q=${tag}`;
+
+    let tagSpan = document.createElement('span');
+    tagSpan.className = 'opacity-medium-emphasis';
+    tagSpan.innerHTML = tag;
+
+    tagAnchor.appendChild(tagSpan);
+    parent.appendChild(tagAnchor);
 }
