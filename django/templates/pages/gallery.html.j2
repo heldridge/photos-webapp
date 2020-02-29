@@ -80,38 +80,20 @@
                 {% include "partials/_gallery_nav.html.j2" %}
             </div>
             
-            <div id="images-info" class="mt-6 md:mt-0">
-                {% for picture in pictures %}
-                <div class="flex flex-col items-center hidden">
-                    <div class="mb-1 md:mb-0">
-                        <a 
-                            href="{% url 'picture' picture.public_id %}"
-                            class="text-3xl md:text-5xl font-semibold hover:opacity-50 inline-block" id="title-{{ picture.public_id }}"
-                        >
-                            <span class="opacity-high-emphasis">{{ picture.title }}</span>
-                        </a>
-                    </div>
-                    
-                    <div class="flex flex-wrap">
-                        {% for tag in picture.above_tags %}
-                        <a href="{% url 'search'%}?q={{ tag }}" class="tag rounded py-1 md:py-2 px-2 md:px-3 mr-3 font-medium mb-3 text-xs md:text-md bg-tag hover:bg-tag-hover text-tag hover:text-tag-hover">
-                            <span class="opacity-medium-emphasis">{{ tag }}</span>
-                        </a>
-                        {% endfor %}
-                        {% for tag in picture.below_tags %}
-                        <a href="{% url 'search'%}?q={{ tag }}" class="tag rounded py-1 md:py-2 px-2 md:px-3 mr-3 font-medium mb-3 text-xs md:text-md bg-tag hover:bg-tag-hover text-tag hover:text-tag-hover">
-                           <span class="opacity-medium-emphasis">{{ tag }}</span>
-                        </a>
-                        {% endfor %}
-                    </div>
+            <div id="images-info" class="mt-6 md:mt-0 flex flex-col items-center">
+                <div class="mb-1 md:mb-0">
+                    <a 
+                        href="/"
+                        class="text-3xl md:text-5xl font-semibold hover:opacity-50 inline-block"
+                        id="image-title-link"
+                    >
+                        <span class="opacity-high-emphasis" id="image-title"></span>
+                    </a>
                 </div>
-                
-                {% endfor %}
+                <div class="flex flex-wrap" id="image-tags">
+                </div>
             </div>
         </div>
-
-        
-        
     </div>
     <div class="md:w-3/12 flex flex-col pt-4" id="gallery-sidebar">
         <div> 
@@ -200,7 +182,7 @@
 
 {% endif %}
 
-{{ all_pictures|json_script:"all-pictures"}}
+{{ pictures|json_script:"pictures"}}
 {{ original_picture_index|json_script:"original-picture-index"}}
 <script type="text/javascript" src="{% static 'js/gallery.js' %}"></script>
 

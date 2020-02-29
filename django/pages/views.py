@@ -303,9 +303,15 @@ def gallery(request):
     original_picture_index = current_picture_index
 
     context["original_picture_index"] = original_picture_index
-    context["all_pictures"] = list(
+    context["pictures"] = list(
         map(
-            lambda item: {"photo": item["photo"], "public_id": item["public_id"]},
+            lambda item: {
+                "photo": item["photo"],
+                "title": item["title"],
+                "public_id": item["public_id"],
+                "above_tags": item["above_tags"],
+                "below_tags": item["below_tags"],
+            },
             context["pictures"],
         )
     )
