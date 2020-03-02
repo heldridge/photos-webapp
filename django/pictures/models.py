@@ -30,3 +30,12 @@ class Picture(models.Model):
                 target=get_thumbnail, args=(self.photo, size)
             )
             thumbnail_creator.start()
+
+
+class Favorite(models.Model):
+    class Meta:
+        unique_together = (("user", "picture"),)
+
+    user = models.ForeignKey("users.CustomUser", on_delete=models.CASCADE)
+    picture = models.ForeignKey("Picture", on_delete=models.CASCADE)
+
