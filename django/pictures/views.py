@@ -1,5 +1,7 @@
 from django.conf import settings
+from django.http import HttpResponse
 from django.shortcuts import render
+from django.views import View
 
 from pictures.models import Picture
 
@@ -33,3 +35,8 @@ def picture(request, picture_public_id):
     context["invalid_tag_char_regex"] = settings.INVALID_TAG_CHAR_REGEX
 
     return render(request, "picture.html.j2", context)
+
+
+class AddLike(View):
+    def post(self, request, picture_public_id):
+        return HttpResponse("OK")
