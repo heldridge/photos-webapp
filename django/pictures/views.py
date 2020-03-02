@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.views import View
 
-from pictures.models import Picture
+from pictures.models import Picture, Favorite
 
 
 def clean_picture_data(picture, from_elastic_search):
@@ -37,6 +37,10 @@ def picture(request, picture_public_id):
     return render(request, "picture.html.j2", context)
 
 
-class AddLike(View):
+class AddFavorite(View):
     def post(self, request, picture_public_id):
+        if request.user.is_authenticated:
+            like = a
+        else:
+            pass
         return HttpResponse("OK")
