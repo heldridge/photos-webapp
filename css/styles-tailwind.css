@@ -123,10 +123,6 @@
     --color-bg-success: #c6f68d;
 }
 
-.justify-self-end {
-    justify-self: flex-end;
-}
-
 /* from: https://stackoverflow.com/questions/11131875/what-is-the-cleanest-way-to-disable-css-transition-effects-temporarily */
 .no-transition {
     -webkit-transition: none !important;
