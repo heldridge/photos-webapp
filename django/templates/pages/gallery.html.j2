@@ -94,7 +94,10 @@
                     </div>
                     
                     <div class="w-2/12 flex items-center">
-                        <button class="text-black bg-basic hover:bg-basic-hover md:text-lg px-3 py-3 rounded flex items-center justify-center justify-self-end">
+                        <button 
+                            class="text-black bg-basic hover:bg-basic-hover md:text-lg px-3 py-3 rounded flex items-center justify-center justify-self-end"
+                            onclick="addLike()";
+                        >
                             <i class="far fa-heart"></i>
                         </button>
                     </div>
@@ -188,6 +191,7 @@
         </div>
     </div>
 </div>
+{% csrf_token %}
 
 {% endif %}
 

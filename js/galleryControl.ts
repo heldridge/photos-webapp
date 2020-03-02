@@ -242,3 +242,20 @@ function addTag(parent: HTMLDivElement, tag: string) {
     tagAnchor.appendChild(tagSpan);
     parent.appendChild(tagAnchor);
 }
+
+function addLike() {
+    let csrftoken = (<HTMLInputElement>(
+        document.querySelector('[name=csrfmiddlewaretoken]')
+    )).value;
+
+    let request = new Request('/pictures/aaaa/likes/', {
+        headers: { 'X-CSRFToken': csrftoken }
+    });
+
+    fetch(request, {
+        method: 'POST',
+        mode: 'same-origin'
+    }).then(response => {
+        console.log(response);
+    });
+}
