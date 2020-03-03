@@ -39,7 +39,7 @@ def get_split_tags(tags):
     return data
 
 
-def clean_picture_data(picture, from_elastic_search):
+def clean_picture_data(picture, from_elastic_search, user=None):
     """
     Cleans the data from each picture, picking out the fields needed
     """
@@ -49,6 +49,9 @@ def clean_picture_data(picture, from_elastic_search):
         photo = picture.photo
     else:
         photo = str(picture.photo)
+
+    if user is not None:
+        print(user)
 
     return {
         "photo": photo,
@@ -93,13 +96,14 @@ def index(request):
     return render(request, "pages/index.html.j2", context)
 
 
-def get_photos_data(tags=None, before=None, after=None):
+def get_photos_data(tags=None, before=None, after=None, user=None):
     """Given query parameters returns a photos dataset
 
     Args:
         tags (``list`` of ``str``): The list of tags to search for
         before (``str``): The id of the photo to fetch photos before
         after (``str``): The id of the photo to fetch photos after
+        user (``user``): The user that made the request, None if not logged in
     Returns:
         {
             "photos": (``list``) The photos returned by the query
@@ -172,7 +176,9 @@ def get_photos_data(tags=None, before=None, after=None):
     if before is not None:
         query_set.reverse()
 
-    photos = [clean_picture_data(picture, tags is not None) for picture in query_set]
+    photos = [
+        clean_picture_data(picture, tags is not None, user) for picture in query_set
+    ]
     if len(photos) > 0:
         first = photos[0]
         last = photos[-1]
@@ -217,8 +223,13 @@ def get_baseline_context(request):
     before_picture = request.GET.get("before")
     after_picture = request.GET.get("after")
 
+    if request.user.is_authenticated:
+        user = request.user
+    else:
+        user = None
+
     data = get_photos_data(
-        searched_tags, request.GET.get("before"), request.GET.get("after")
+        searched_tags, request.GET.get("before"), request.GET.get("after"), user
     )
     last_picture = data["last"]
     first_picture = data["first"]
