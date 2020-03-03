@@ -47,19 +47,21 @@ setImage(originalPictureIndex, 'replace');
 let preloadedImages = {};
 preloadImages();
 
-let likeLoader = document.createElement('div');
-likeLoader.className = 'la-ball-clip-rotate la-sm la-dark';
-likeLoader.appendChild(document.createElement('div'));
+let favoriteLoader = document.createElement('div');
+favoriteLoader.className = 'la-ball-clip-rotate la-sm la-dark';
+favoriteLoader.appendChild(document.createElement('div'));
+
+let emptyHeartIcon = document.createElement('i');
+emptyHeartIcon.className = 'far fa-heart';
+
+let fullHeartIcon = document.createElement('i');
+fullHeartIcon.className = 'fas fa-heart';
 
 function setImage(index: number, stateAction: string = '') {
     if (index < pictures.length) {
         if (galleryImageContainer) {
             // Remove children
-            while (galleryImageContainer.hasChildNodes()) {
-                galleryImageContainer.removeChild(
-                    galleryImageContainer.lastChild
-                );
-            }
+            removeChildren(galleryImageContainer);
 
             // Add new child
             let image = document.createElement('img');
@@ -69,9 +71,7 @@ function setImage(index: number, stateAction: string = '') {
         }
         if (modalImageContainer) {
             // Remove children
-            while (modalImageContainer.hasChildNodes()) {
-                modalImageContainer.removeChild(modalImageContainer.lastChild);
-            }
+            removeChildren(modalImageContainer);
 
             // Add child to modal image
             let modalImage = document.createElement('img');
@@ -105,9 +105,7 @@ function setImage(index: number, stateAction: string = '') {
         let imageTags = <HTMLDivElement>document.getElementById('image-tags');
         if (imageTags) {
             // Remove previous tags
-            while (imageTags.hasChildNodes()) {
-                imageTags.removeChild(imageTags.lastChild);
-            }
+            removeChildren(imageTags);
             // Add the new tags
             pictures[index].above_tags.forEach((tag: string) => {
                 addTag(imageTags, tag);
@@ -248,10 +246,9 @@ function addTag(parent: HTMLDivElement, tag: string) {
 }
 
 function addFavorite(source: HTMLButtonElement) {
-    while (source.hasChildNodes()) {
-        source.removeChild(source.lastChild);
-    }
-    source.appendChild(likeLoader);
+    removeChildren(source);
+    source.appendChild(favoriteLoader);
+    addClass(source, 'pointer-events-none');
 
     let csrftoken = (<HTMLInputElement>(
         document.querySelector('[name=csrfmiddlewaretoken]')
@@ -268,6 +265,14 @@ function addFavorite(source: HTMLButtonElement) {
         method: 'POST',
         mode: 'same-origin'
     }).then(response => {
-        console.log(response);
+        removeChildren(source);
+        source.appendChild(fullHeartIcon);
+        removeClass(source, 'pointer-events-none');
     });
+}
+
+function removeChildren(e: HTMLElement) {
+    while (e.hasChildNodes()) {
+        e.removeChild(e.lastChild);
+    }
 }
