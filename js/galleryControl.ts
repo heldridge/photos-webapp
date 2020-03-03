@@ -266,9 +266,13 @@ function addFavorite(source: HTMLButtonElement) {
         mode: 'same-origin'
     }).then(response => {
         removeChildren(source);
-        source.appendChild(fullHeartIcon);
-        source.onclick = () => removeFavorite(source);
         removeClass(source, 'pointer-events-none');
+        if (response.status >= 200 && response.status < 300) {
+            source.appendChild(fullHeartIcon);
+            source.onclick = () => removeFavorite(source);
+        } else {
+            source.appendChild(emptyHeartIcon);
+        }
     });
 }
 
