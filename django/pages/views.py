@@ -59,14 +59,6 @@ def clean_picture_data(picture, from_elastic_search):
     }
 
 
-def clean_pictures(pictures, from_elastic_search):
-    """ Cleans each picture in a dataset """
-    new_pictures = []
-    for picture in pictures:
-        new_pictures.append(clean_picture_data(picture, from_elastic_search))
-    return new_pictures
-
-
 def is_valid_tag(tag):
     """ Verifies that a tag is valid """
     return (
