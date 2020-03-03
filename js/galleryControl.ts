@@ -294,6 +294,7 @@ function removeFavorite(source: HTMLButtonElement) {
     }).then(response => {
         removeChildren(source);
         source.appendChild(emptyHeartIcon);
+        source.onclick = () => addFavorite(source);
         removeClass(source, 'pointer-events-none');
     });
 }
