@@ -268,9 +268,12 @@ function addFavorite(source: HTMLButtonElement) {
         removeChildren(source);
         removeClass(source, 'pointer-events-none');
         if (response.status >= 200 && response.status < 300) {
+            // Expected response, replace with "favorite" icon, and
+            // change functionality to "removeFavorite"
             source.appendChild(fullHeartIcon);
             source.onclick = () => removeFavorite(source);
         } else {
+            // Post a "Must be logged in" message
             source.appendChild(emptyHeartIcon);
 
             /*
@@ -286,6 +289,7 @@ function addFavorite(source: HTMLButtonElement) {
                 document.getElementsByClassName('must-be-logged-in').length ===
                 0
             ) {
+                // Only add the message if there isn't one already
                 let message = document.createElement('li');
                 message.className =
                     'rounded bg-error text-black pl-4 min-w-64 text-center mt-2 ml-2 z-10 md:text-lg message sm:h-10 must-be-logged-in';
@@ -303,6 +307,8 @@ function addFavorite(source: HTMLButtonElement) {
                 let messages = document.getElementById('messages');
                 messages.appendChild(message);
 
+                // After three seconds, fade out the message.
+                // .6 seconds after fading out, remove from the dom
                 window.setTimeout(() => {
                     if (message) {
                         addClass(message, 'opacity-0');
@@ -345,6 +351,7 @@ function removeFavorite(source: HTMLButtonElement) {
     });
 }
 
+// Called when the "close" button on a message is pressed
 function closeMessage(message: HTMLLIElement) {
     if (message) {
         addClass(message, 'opacity-0');
