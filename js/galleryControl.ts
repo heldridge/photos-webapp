@@ -42,6 +42,12 @@ if (
     previousLinkHREF = previousLinks[0].href;
 }
 
+let emptyHeartIcon = document.createElement('i');
+emptyHeartIcon.className = 'far fa-heart';
+
+let fullHeartIcon = document.createElement('i');
+fullHeartIcon.className = 'fas fa-heart';
+
 setImage(originalPictureIndex, 'replace');
 
 let preloadedImages = {};
@@ -50,12 +56,6 @@ preloadImages();
 let favoriteLoader = document.createElement('div');
 favoriteLoader.className = 'la-ball-clip-rotate la-sm la-dark';
 favoriteLoader.appendChild(document.createElement('div'));
-
-let emptyHeartIcon = document.createElement('i');
-emptyHeartIcon.className = 'far fa-heart';
-
-let fullHeartIcon = document.createElement('i');
-fullHeartIcon.className = 'fas fa-heart';
 
 function setImage(index: number, stateAction: string = '') {
     if (index < pictures.length) {
@@ -113,6 +113,16 @@ function setImage(index: number, stateAction: string = '') {
             pictures[index].below_tags.forEach((tag: string) => {
                 addTag(imageTags, tag);
             });
+        }
+
+        // Set the favorite button
+        let favoriteButton = <HTMLButtonElement>(
+            document.getElementById('favoriteButton')
+        );
+        if (pictures[index].favorite) {
+            setToDeleteFavoriteMode(favoriteButton);
+        } else {
+            setToAddFavoriteMode(favoriteButton);
         }
 
         currentIndex = index;
@@ -268,10 +278,7 @@ function addFavorite(source: HTMLButtonElement) {
         removeChildren(source);
         removeClass(source, 'pointer-events-none');
         if (response.status >= 200 && response.status < 300) {
-            // Expected response, replace with "favorite" icon, and
-            // change functionality to "removeFavorite"
-            source.appendChild(fullHeartIcon);
-            source.onclick = () => removeFavorite(source);
+            setToDeleteFavoriteMode(source);
         } else if (response.status === 401) {
             source.appendChild(emptyHeartIcon);
             addMessage(
@@ -311,8 +318,7 @@ function removeFavorite(source: HTMLButtonElement) {
         removeChildren(source);
         removeClass(source, 'pointer-events-none');
         if (response.status >= 200 && response.status < 300) {
-            source.appendChild(emptyHeartIcon);
-            source.onclick = () => addFavorite(source);
+            setToAddFavoriteMode(source);
         } else if (response.status === 401) {
             source.appendChild(fullHeartIcon);
             addMessage(
@@ -382,6 +388,18 @@ function closeMessage(message: HTMLLIElement) {
             }
         }, 0.6 * 1000);
     }
+}
+
+function setToAddFavoriteMode(favoriteButton: HTMLButtonElement) {
+    removeChildren(favoriteButton);
+    favoriteButton.appendChild(emptyHeartIcon);
+    favoriteButton.onclick = () => addFavorite(favoriteButton);
+}
+
+function setToDeleteFavoriteMode(favoriteButton: HTMLButtonElement) {
+    removeChildren(favoriteButton);
+    favoriteButton.appendChild(fullHeartIcon);
+    favoriteButton.onclick = () => removeFavorite(favoriteButton);
 }
 
 function removeChildren(e: HTMLElement) {
