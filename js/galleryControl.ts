@@ -309,9 +309,23 @@ function removeFavorite(source: HTMLButtonElement) {
         mode: 'same-origin'
     }).then(response => {
         removeChildren(source);
-        source.appendChild(emptyHeartIcon);
-        source.onclick = () => addFavorite(source);
         removeClass(source, 'pointer-events-none');
+        if (response.status >= 200 && response.status < 300) {
+            source.appendChild(emptyHeartIcon);
+            source.onclick = () => addFavorite(source);
+        } else if (response.status === 401) {
+            source.appendChild(fullHeartIcon);
+            addMessage(
+                'You must be logged in to remove a favorite!',
+                'must-be-logged-in'
+            );
+        } else {
+            source.appendChild(fullHeartIcon);
+            addMessage(
+                'Something went wrong. Please try again later.',
+                'something-went-wrong'
+            );
+        }
     });
 }
 
