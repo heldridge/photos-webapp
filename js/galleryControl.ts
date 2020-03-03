@@ -272,6 +272,48 @@ function addFavorite(source: HTMLButtonElement) {
             source.onclick = () => removeFavorite(source);
         } else {
             source.appendChild(emptyHeartIcon);
+
+            /*
+            Build message:
+            <li class="rounded bg-error text-black pl-4 min-w-64 text-center mt-2 ml-2 z-10 md:text-lg message sm:h-10"> 
+                You must be logged in to add a favorite!
+                <button class="pl-2 pr-4 h-full opacity-medium-emphasis hover:opacity-high-emphasis py-2 sm:py-0">
+                    <i class="fas fa-times"></i>
+                </button>
+            </li>
+            */
+            if (
+                document.getElementsByClassName('must-be-logged-in').length ===
+                0
+            ) {
+                let message = document.createElement('li');
+                message.className =
+                    'rounded bg-error text-black pl-4 min-w-64 text-center mt-2 ml-2 z-10 md:text-lg message sm:h-10 must-be-logged-in';
+                message.innerHTML = 'You must be logged in to add a favorite!';
+                let closeButton = document.createElement('button');
+                closeButton.className =
+                    'pl-2 pr-4 h-full opacity-medium-emphasis hover:opacity-high-emphasis py-2 sm:py-0';
+                let closeIcon = document.createElement('i');
+                closeIcon.className = 'fas fa-times';
+                closeButton.appendChild(closeIcon);
+                closeButton.onclick = () => closeMessage(message);
+
+                message.appendChild(closeButton);
+
+                let messages = document.getElementById('messages');
+                messages.appendChild(message);
+
+                window.setTimeout(() => {
+                    if (message) {
+                        addClass(message, 'opacity-0');
+                        window.setTimeout(() => {
+                            if (message) {
+                                message.remove();
+                            }
+                        }, 0.6 * 1000);
+                    }
+                }, 3 * 1000);
+            }
         }
     });
 }
@@ -301,6 +343,17 @@ function removeFavorite(source: HTMLButtonElement) {
         source.onclick = () => addFavorite(source);
         removeClass(source, 'pointer-events-none');
     });
+}
+
+function closeMessage(message: HTMLLIElement) {
+    if (message) {
+        addClass(message, 'opacity-0');
+        window.setTimeout(() => {
+            if (message) {
+                message.remove();
+            }
+        }, 0.6 * 1000);
+    }
 }
 
 function removeChildren(e: HTMLElement) {
