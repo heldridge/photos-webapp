@@ -272,54 +272,15 @@ function addFavorite(source: HTMLButtonElement) {
             // change functionality to "removeFavorite"
             source.appendChild(fullHeartIcon);
             source.onclick = () => removeFavorite(source);
-        } else {
+        } else if (response.status === 401) {
             // Post a "Must be logged in" message
             source.appendChild(emptyHeartIcon);
 
-            /*
-            Build message:
-            <li class="rounded bg-error text-black pl-4 min-w-64 text-center mt-2 ml-2 z-10 md:text-lg message sm:h-10"> 
-                You must be logged in to add a favorite!
-                <button class="pl-2 pr-4 h-full opacity-medium-emphasis hover:opacity-high-emphasis py-2 sm:py-0">
-                    <i class="fas fa-times"></i>
-                </button>
-            </li>
-            */
-            if (
-                document.getElementsByClassName('must-be-logged-in').length ===
-                0
-            ) {
-                // Only add the message if there isn't one already
-                let message = document.createElement('li');
-                message.className =
-                    'rounded bg-error text-black pl-4 min-w-64 text-center mt-2 ml-2 z-10 md:text-lg message sm:h-10 must-be-logged-in';
-                message.innerHTML = 'You must be logged in to add a favorite!';
-                let closeButton = document.createElement('button');
-                closeButton.className =
-                    'pl-2 pr-4 h-full opacity-medium-emphasis hover:opacity-high-emphasis py-2 sm:py-0';
-                let closeIcon = document.createElement('i');
-                closeIcon.className = 'fas fa-times';
-                closeButton.appendChild(closeIcon);
-                closeButton.onclick = () => closeMessage(message);
-
-                message.appendChild(closeButton);
-
-                let messages = document.getElementById('messages');
-                messages.appendChild(message);
-
-                // After three seconds, fade out the message.
-                // .6 seconds after fading out, remove from the dom
-                window.setTimeout(() => {
-                    if (message) {
-                        addClass(message, 'opacity-0');
-                        window.setTimeout(() => {
-                            if (message) {
-                                message.remove();
-                            }
-                        }, 0.6 * 1000);
-                    }
-                }, 3 * 1000);
-            }
+            addMessage(
+                'You must be logged in to add a favorite!',
+                'must-be-logged-in'
+            );
+        } else {
         }
     });
 }
@@ -349,6 +310,49 @@ function removeFavorite(source: HTMLButtonElement) {
         source.onclick = () => addFavorite(source);
         removeClass(source, 'pointer-events-none');
     });
+}
+
+function addMessage(text: string, classIdentifier: string) {
+    /*
+    Build message:
+    <li class="rounded bg-error text-black pl-4 min-w-64 text-center mt-2 ml-2 z-10 md:text-lg message sm:h-10 ~*~Identifier~*~"> 
+        ~*~Text~*~
+        <button class="pl-2 pr-4 h-full opacity-medium-emphasis hover:opacity-high-emphasis py-2 sm:py-0">
+            <i class="fas fa-times"></i>
+        </button>
+    </li>
+    */
+    if (document.getElementsByClassName(classIdentifier).length === 0) {
+        // Only add the message if there isn't one already
+        let message = document.createElement('li');
+        message.className = `rounded bg-error text-black pl-4 min-w-64 text-center mt-2 ml-2 z-10 md:text-lg message sm:h-10 ${classIdentifier}`;
+        message.innerHTML = text;
+        let closeButton = document.createElement('button');
+        closeButton.className =
+            'pl-2 pr-4 h-full opacity-medium-emphasis hover:opacity-high-emphasis py-2 sm:py-0';
+        let closeIcon = document.createElement('i');
+        closeIcon.className = 'fas fa-times';
+        closeButton.appendChild(closeIcon);
+        closeButton.onclick = () => closeMessage(message);
+
+        message.appendChild(closeButton);
+
+        let messages = document.getElementById('messages');
+        messages.appendChild(message);
+
+        // After three seconds, fade out the message.
+        // .6 seconds after fading out, remove from the dom
+        window.setTimeout(() => {
+            if (message) {
+                addClass(message, 'opacity-0');
+                window.setTimeout(() => {
+                    if (message) {
+                        message.remove();
+                    }
+                }, 0.6 * 1000);
+            }
+        }, 3 * 1000);
+    }
 }
 
 // Called when the "close" button on a message is pressed
