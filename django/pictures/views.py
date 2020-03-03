@@ -2,6 +2,7 @@ from django.conf import settings
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views import View
+from psycopg2.errors import UniqueViolation
 
 from pictures.models import Picture, Favorite
 
@@ -40,7 +41,10 @@ def picture(request, picture_public_id):
 class AddFavorite(View):
     def post(self, request, picture_public_id):
         if request.user.is_authenticated:
-            like = a
+            fav, created = Favorite.objects.get_or_create(
+                user=request.user,
+                picture=Picture.objects.get(public_id=picture_public_id),
+            )
         else:
             pass
         return HttpResponse("OK")
