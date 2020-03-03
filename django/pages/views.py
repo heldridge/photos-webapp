@@ -7,7 +7,7 @@ from django.core import exceptions
 from django.shortcuts import render
 
 
-from pictures.models import Picture
+from pictures.models import Picture, Favorite
 from pictures.documents import PictureDocument
 
 
@@ -50,15 +50,16 @@ def clean_picture_data(picture, from_elastic_search, user=None):
     else:
         photo = str(picture.photo)
 
-    if user is not None:
-        print(user)
-
     return {
         "photo": photo,
         "title": picture.title,
         "above_tags": split_tags["above_tags"],
         "below_tags": split_tags["below_tags"],
         "public_id": str(picture.public_id),
+        "favorite": (
+            user is not None
+            and Favorite.objects.filter(user=user).filter(picture=picture.id).exists()
+        ),
     }
 
 
