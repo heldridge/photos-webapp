@@ -267,6 +267,33 @@ function addFavorite(source: HTMLButtonElement) {
     }).then(response => {
         removeChildren(source);
         source.appendChild(fullHeartIcon);
+        source.onclick = () => removeFavorite(source);
+        removeClass(source, 'pointer-events-none');
+    });
+}
+
+function removeFavorite(source: HTMLButtonElement) {
+    removeChildren(source);
+    source.appendChild(favoriteLoader);
+    addClass(source, 'pointer-events-none');
+
+    let csrftoken = (<HTMLInputElement>(
+        document.querySelector('[name=csrfmiddlewaretoken]')
+    )).value;
+
+    let request = new Request(
+        `/pictures/${pictures[currentIndex].public_id}/favorites/`,
+        {
+            headers: { 'X-CSRFToken': csrftoken }
+        }
+    );
+
+    fetch(request, {
+        method: 'DELETE',
+        mode: 'same-origin'
+    }).then(response => {
+        removeChildren(source);
+        source.appendChild(emptyHeartIcon);
         removeClass(source, 'pointer-events-none');
     });
 }
