@@ -3,6 +3,11 @@
 {% load static thumbnail %}
 
 {% block content %}
+<div class="flex justify-center z-10">
+    <ul class="messages absolute z-10 mt-1" id="messages">
+    </ul>
+</div>
+
 
 {% if picture %}
 <div class="hidden absolute z-10 min-w-full min-h-double-screen bg-black-op-90 modal flex flex-col" id="modal-image" onclick="hideModalImage()">

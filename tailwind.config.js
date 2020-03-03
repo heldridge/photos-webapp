@@ -68,7 +68,8 @@ module.exports = {
                 'primary-hover': 'var(--color-bg-primary-hover)',
                 'nav-link-hover': 'var(--color-bg-nav-link-hover)',
                 alternate: 'var(--color-bg-alternate)',
-                success: 'var(--color-bg-success)'
+                success: 'var(--color-bg-success)',
+                error: 'var(--color-bg-error)'
             },
             borderColor: {
                 default: 'var(--color-border-default)',
