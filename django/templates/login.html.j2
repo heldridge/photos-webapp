@@ -6,7 +6,7 @@
 
 {% if messages %}
 <div class="flex justify-center z-10">
-    <ul class="messages position-absolute z-10">
+    <ul class="messages absolute z-10">
         {% for message in messages %}
         <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
         {% endfor %}
