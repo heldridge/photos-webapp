@@ -41,13 +41,17 @@ def picture(request, picture_public_id):
 class Favorites(View):
     def post(self, request, picture_public_id):
         if request.user.is_authenticated:
-            fav, created = Favorite.objects.get_or_create(
+            _, created = Favorite.objects.get_or_create(
                 user=request.user,
                 picture=Picture.objects.get(public_id=picture_public_id),
             )
+            if created:
+                return HttpResponse(status=201)
+            else:
+                return HttpResponse(status=200)
         else:
             pass
-        return HttpResponse("OK")
+        return HttpResponse(status=401)
 
     def delete(self, request, picture_public_id):
         if request.user.is_authenticated:
