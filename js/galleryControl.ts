@@ -281,7 +281,7 @@ function addFavorite(source: HTMLButtonElement) {
         } else {
             source.appendChild(emptyHeartIcon);
             addMessage(
-                'Something went wrong. Please try again later',
+                'Something went wrong. Please try again later.',
                 'something-went-wrong'
             );
         }
