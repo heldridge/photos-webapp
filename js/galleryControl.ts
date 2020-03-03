@@ -279,6 +279,11 @@ function addFavorite(source: HTMLButtonElement) {
                 'must-be-logged-in'
             );
         } else {
+            source.appendChild(emptyHeartIcon);
+            addMessage(
+                'Something went wrong. Please try again later',
+                'something-went-wrong'
+            );
         }
     });
 }
