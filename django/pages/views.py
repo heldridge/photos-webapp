@@ -39,7 +39,7 @@ def get_split_tags(tags):
     return data
 
 
-def clean_picture_data(picture, from_elastic_search, user=None):
+def clean_picture_data(picture, from_elastic_search, user=None, fetch_favorites=False):
     """
     Cleans the data from each picture, picking out the fields needed
     """
@@ -57,7 +57,8 @@ def clean_picture_data(picture, from_elastic_search, user=None):
         "below_tags": split_tags["below_tags"],
         "public_id": str(picture.public_id),
         "favorite": (
-            user is not None
+            fetch_favorites
+            and user is not None
             and Favorite.objects.filter(user=user).filter(picture=picture.id).exists()
         ),
     }
@@ -97,7 +98,9 @@ def index(request):
     return render(request, "pages/index.html.j2", context)
 
 
-def get_photos_data(tags=None, before=None, after=None, user=None):
+def get_photos_data(
+    tags=None, before=None, after=None, user=None, fetch_favorites=False
+):
     """Given query parameters returns a photos dataset
 
     Args:
@@ -178,7 +181,8 @@ def get_photos_data(tags=None, before=None, after=None, user=None):
         query_set.reverse()
 
     photos = [
-        clean_picture_data(picture, tags is not None, user) for picture in query_set
+        clean_picture_data(picture, tags is not None, user, fetch_favorites)
+        for picture in query_set
     ]
     if len(photos) > 0:
         first = photos[0]
@@ -205,7 +209,7 @@ def get_render_next_prev(before_picture, after_picture, more_left):
     return (render_next_button, render_previous_button)
 
 
-def get_baseline_context(request):
+def get_baseline_context(request, fetch_favorites=False):
     """
     Returns the base context that is shared between views
     """
@@ -230,7 +234,11 @@ def get_baseline_context(request):
         user = None
 
     data = get_photos_data(
-        searched_tags, request.GET.get("before"), request.GET.get("after"), user
+        searched_tags,
+        request.GET.get("before"),
+        request.GET.get("after"),
+        user,
+        fetch_favorites,
     )
     last_picture = data["last"]
     first_picture = data["first"]
@@ -274,7 +282,7 @@ def search(request):
 
 def gallery(request):
 
-    context = get_baseline_context(request)
+    context = get_baseline_context(request, True)
     before_picture = request.GET.get("before")
 
     # Get the gallery picture id query
@@ -315,6 +323,7 @@ def gallery(request):
                 "public_id": item["public_id"],
                 "above_tags": item["above_tags"],
                 "below_tags": item["below_tags"],
+                "favorite": item["favorite"],
             },
             context["pictures"],
         )
