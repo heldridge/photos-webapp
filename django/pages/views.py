@@ -285,6 +285,11 @@ def gallery(request):
     context = get_baseline_context(request, True)
     before_picture = request.GET.get("before")
 
+    if request.user.is_authenticated:
+        user = request.user
+    else:
+        user = None
+
     # Get the gallery picture id query
     picture_id = request.GET.get("p", "")
     current_picture = None
@@ -293,7 +298,7 @@ def gallery(request):
     if picture_id != "":
         try:
             current_picture = clean_picture_data(
-                Picture.objects.get(public_id=picture_id), False
+                Picture.objects.get(public_id=picture_id), False, user, True
             )
         except (exceptions.ValidationError, Picture.DoesNotExist):
             could_not_find_picture = True
