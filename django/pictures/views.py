@@ -38,13 +38,22 @@ def picture(request, picture_public_id):
     return render(request, "picture.html.j2", context)
 
 
-class AddFavorite(View):
+class Favorites(View):
     def post(self, request, picture_public_id):
         if request.user.is_authenticated:
             fav, created = Favorite.objects.get_or_create(
                 user=request.user,
                 picture=Picture.objects.get(public_id=picture_public_id),
             )
+        else:
+            pass
+        return HttpResponse("OK")
+
+    def delete(self, request, picture_public_id):
+        if request.user.is_authenticated:
+            Favorite.objects.filter(
+                user=request.user, picture__public_id=picture_public_id
+            ).delete()
         else:
             pass
         return HttpResponse("OK")
