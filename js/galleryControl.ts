@@ -248,9 +248,12 @@ function addLike() {
         document.querySelector('[name=csrfmiddlewaretoken]')
     )).value;
 
-    let request = new Request('/pictures/aaaa/favorites/', {
-        headers: { 'X-CSRFToken': csrftoken }
-    });
+    let request = new Request(
+        `/pictures/${pictures[currentIndex].public_id}/favorites/`,
+        {
+            headers: { 'X-CSRFToken': csrftoken }
+        }
+    );
 
     fetch(request, {
         method: 'POST',
