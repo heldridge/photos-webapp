@@ -47,6 +47,10 @@ setImage(originalPictureIndex, 'replace');
 let preloadedImages = {};
 preloadImages();
 
+let likeLoader = document.createElement('div');
+likeLoader.className = 'la-ball-clip-rotate la-sm la-dark';
+likeLoader.appendChild(document.createElement('div'));
+
 function setImage(index: number, stateAction: string = '') {
     if (index < pictures.length) {
         if (galleryImageContainer) {
@@ -243,7 +247,12 @@ function addTag(parent: HTMLDivElement, tag: string) {
     parent.appendChild(tagAnchor);
 }
 
-function addLike() {
+function addFavorite(source: HTMLButtonElement) {
+    while (source.hasChildNodes()) {
+        source.removeChild(source.lastChild);
+    }
+    source.appendChild(likeLoader);
+
     let csrftoken = (<HTMLInputElement>(
         document.querySelector('[name=csrfmiddlewaretoken]')
     )).value;
