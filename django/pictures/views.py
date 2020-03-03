@@ -17,8 +17,6 @@ def clean_picture_data(picture, from_elastic_search):
     else:
         photo = picture.photo.url
 
-    print(picture.tags)
-
     return {
         "photo": photo,
         "title": picture.title,
