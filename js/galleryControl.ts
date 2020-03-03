@@ -273,9 +273,7 @@ function addFavorite(source: HTMLButtonElement) {
             source.appendChild(fullHeartIcon);
             source.onclick = () => removeFavorite(source);
         } else if (response.status === 401) {
-            // Post a "Must be logged in" message
             source.appendChild(emptyHeartIcon);
-
             addMessage(
                 'You must be logged in to add a favorite!',
                 'must-be-logged-in'
