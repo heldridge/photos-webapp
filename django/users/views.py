@@ -61,7 +61,6 @@ def profile(request):
 
 
 def register(request):
-
     if request.method == "POST":
         f = forms.CustomUserCreationForm(request.POST)
         if f.is_valid():
@@ -75,4 +74,15 @@ def register(request):
 
 
 def settings(request):
-    return render(request, "users/settings.html.j2")
+    if request.method == "POST":
+        f = forms.UpdateDisplayNameForm(request.POST, instance=request.user)
+        if f.is_valid():
+            f.save()
+            messages.success(request, "Display Name Updated Successfully!")
+            return redirect("settings")
+    else:
+        if request.user.is_authenticated:
+            f = forms.UpdateDisplayNameForm(instance=request.user)
+        else:
+            return render(request, "users/settings.html.j2")
+    return render(request, "users/settings.html.j2", {"form": f})

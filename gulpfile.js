@@ -26,7 +26,11 @@ function processJavascript(cb) {
     const jsFiles = [
         {
             outputFileName: 'basic.js',
-            files: ['js/navbarControl.ts', 'js/classUtils.ts']
+            files: [
+                'js/navbarControl.ts',
+                'js/classUtils.ts',
+                'js/messagesControl.ts'
+            ]
         },
         {
             outputFileName: 'index.js',

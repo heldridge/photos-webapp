@@ -92,3 +92,16 @@ class CustomAuthenticationForm(AuthenticationForm):
         )
 
         self.error_messages["invalid_login"] = _("The email or password is incorrect.")
+
+
+class UpdateDisplayNameForm(forms.ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = ["display_name"]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields["display_name"].widget.attrs.update(
+            {"class": " ".join(_FORM_FIELD_CLASSES),}
+        )
