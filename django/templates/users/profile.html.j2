@@ -6,27 +6,35 @@
 
 <div class="flex justify-center w-full pt-10">
 
-    <div class="flex flex-col">   
+    <div class="flex flex-col w-4/5 max-w-7xl items-center">   
         {% if user.is_authenticated %}
-        <p class="opacity-high-emphasis text-4xl">
-            Hi {{ user.display_name }}!
-        </p>
+        <div class="flex justify-between w-4/5">
+            <p class="opacity-high-emphasis text-4xl">
+                Hi {{ user.display_name }}!
+            </p>
 
-        <a href="{% url 'logout' %}" class="border-basic border-2 bg-alternate hover:bg-basic rounded text-black px-3 py-2 text-primary opacity-high-emphasis hover:text-black hover:opacity-100 text-lg mr-8">
-            Logout
-        </a>
+            <div class="flex justify-around">
+                <a href="{% url 'profile' %}" class="bg-basic hover:bg-basic-hover rounded text-black px-3 text-black opacity-high-emphasis text-lg flex items-center mr-8">
+                    Settings
+                </a>
+                <a href="{% url 'logout' %}" class="border-basic border-2 bg-alternate hover:bg-basic rounded text-black px-3 text-primary opacity-high-emphasis hover:text-black hover:opacity-100 text-lg flex items-center">
+                    Logout
+                </a>
+            </div>
+        </div>
         {% else %}
         <p class="opacity-high-emphasis text-4xl">
             You are not logged in
         </p>
         {% endif %}
 
-        <ul class="flex flex-wrap w-4/5 max-w-7xl justify-center" id="cardsHolder">
+
+        <h1 class="text-5xl font-semibold py-4 opacity-high-emphasis mt-10">Favorites</h1>
+
+        <ul class="flex flex-wrap max-w-7xl justify-center" id="cardsHolder">
             {% include "partials/_images_grid.html.j2" with pictures=pictures %}
         </ul>
     </div>
-
-    
 </div>
 
 <script type="text/javascript" src="{% static 'js/picture.js' %}"></script>
