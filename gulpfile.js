@@ -25,6 +25,10 @@ function processJavascript(cb) {
     const merge = require('merge-stream');
     const jsFiles = [
         {
+            outputFileName: 'basic.js',
+            files: ['js/navbarControl.ts', 'js/classUtils.ts']
+        },
+        {
             outputFileName: 'index.js',
             files: [
                 'js/navbarControl.ts',
