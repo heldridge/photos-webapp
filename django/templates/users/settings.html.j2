@@ -17,14 +17,14 @@
 <div class="flex justify-center w-full pt-5">
     <div class="flex flex-col w-4/5 max-w-7xl items-center">   
         {% if user.is_authenticated %}
-        <p class="opacity-high-emphasis text-4xl">
+        <p class="opacity-high-emphasis text-3xl sm:text-4xl">
             Settings
         </p>
 
         <div class="w-3/4 mt-3">
-            <div class="flex items-center">
-                <span class="text-2xl opacity-high-emphasis w-3/12">Email:</span>
-                <div class="w-9/12 flex flex-row-reverse text-2xl">{{ user.email }} </div>
+            <div class="flex flex-col sm:flex-row items-center">
+                <span class="text-xl sm:text-2xl opacity-high-emphasis sm:w-3/12">Email:</span>
+                <div class="sm:w-9/12 flex flex-row-reverse text-xl sm:text-2xl opacity-high-emphasis">{{ user.email }} </div>
             </div>
 
             <form method="post" class="w-full mt-3">
@@ -38,11 +38,11 @@
                     </ul>
                 </div>
             {% endif %}
-                <div class="flex items-center relative">
-                    <span class="text-2xl opacity-high-emphasis w-3/12">{{ form.display_name.label_tag }}</span>
-                    <div class="w-9/12 flex flex-row-reverse">{{ form.display_name }} </div>
+                <div class="flex flex-col sm:flex-row justify-center items-center sm:relative">
+                    <span class="text-xl sm:text-2xl opacity-high-emphasis sm:w-3/12">{{ form.display_name.label_tag }}</span>
+                    <div class="sm:w-9/12 sm:flex sm:flex-row-reverse mt-2 sm:mt-0">{{ form.display_name }} </div>
 
-                    <button type="submit" class="absolute right-28n text-lg rounded py-2 px-4 bg-primary hover:bg-primary-hover text-black">Update</button>
+                    <button type="submit" class="mt-2 sm:mt-0 sm:absolute sm:right-28n sm:text-lg rounded py-2 px-4 bg-primary hover:bg-primary-hover text-black">Update</button>
                 </div>
             </form>
         </div>
