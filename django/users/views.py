@@ -72,3 +72,7 @@ def register(request):
         f = forms.CustomUserCreationForm()
 
     return render(request, "users/register.html.j2", {"form": f})
+
+
+def settings(request):
+    return render(request, "users/settings.html.j2")
