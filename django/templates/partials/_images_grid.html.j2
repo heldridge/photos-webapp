@@ -16,14 +16,14 @@
         <h3 class="text-2xl font-semibold py-2 opacity-high-emphasis">{{ picture.title }}</h3>
 
         <div class="card-tags flex flex-row flex-wrap">
-            {% for tag in picture.above_tags %}
+            {% for tag in picture.split_tags.above_tags %}
             <!-- old: "tag bg-gray-300 hover:bg-gray-400 rounded py-1 px-2 text-xs mr-2 font-medium mb-2 text-gray-600 hover:text-black"-->
             <a href="{% url 'search'%}?q={{ tag }}" class="tag rounded py-1 px-2 text-xs mr-2 font-medium mb-2 bg-tag hover:bg-tag-hover text-tag hover:text-tag-hover">
                 <span class="opacity-medium-emphasis">{{ tag }}</span>
             </a>
             {% endfor %}
-            {% if picture.below_tags %}
-            {% for tag in picture.below_tags %}
+            {% if picture.split_tags.below_tags %}
+            {% for tag in picture.split_tags.below_tags %}
             <!-- old: tag bg-gray-300 hover:bg-gray-400 rounded py-1 px-2 text-xs mr-2 font-medium mb-2 text-gray-600 hover:text-black collapsed-tag hidden" -->
             <a href="{% url 'search'%}?q={{ tag }}" class="tag rounded py-1 px-2 text-xs mr-2 font-medium mb-2 collapsed-tag bg-tag hover:bg-tag-hover text-tag hover:text-tag-hover hidden">
                 <span class="opacity-medium-emphasis">{{ tag }}</span>
