@@ -35,7 +35,6 @@ ALLOWED_HOSTS = ["django-local", "django-local:8080", "localhost", "localhost:80
 INSTALLED_APPS = [
     "pages.apps.PagesConfig",
     "pictures.apps.PicturesConfig",
-    "django_elasticsearch_dsl",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -46,7 +45,6 @@ INSTALLED_APPS = [
     "sorl.thumbnail",
     "users",
     "debug_toolbar",
-    "elastic_panel",
 ]
 
 MIDDLEWARE = [
@@ -173,11 +171,6 @@ MIN_TAG_LENGTH = 1
 VALID_TAG_REGEX = r"^[a-zA-Z0-9\-]*$"
 INVALID_TAG_CHAR_REGEX = r"[^a-zA-Z0-9\-]"
 
-# Elasticsearch
-ELASTICSEARCH_DSL = {
-    "default": {"hosts": "localhost:9200"},
-}
-
 # How many pictures to put on a page
 PAGE_SIZE = 16
 MAX_THEORETICAL_PAGE_SIZE_FOR_PLACEHOLDERS = 18
@@ -212,5 +205,4 @@ DEBUG_TOOLBAR_PANELS = [
     "debug_toolbar.panels.logging.LoggingPanel",
     "debug_toolbar.panels.redirects.RedirectsPanel",
     "debug_toolbar.panels.profiling.ProfilingPanel",
-    "elastic_panel.panel.ElasticDebugPanel",
 ]
