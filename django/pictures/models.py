@@ -7,6 +7,11 @@ from django.conf import settings
 from django.contrib.postgres.fields import ArrayField
 from sorl.thumbnail import get_thumbnail
 
+
+class Tag(models.Model):
+    title = models.CharField(max_length=20)
+
+
 # Create your models here.
 class Picture(models.Model):
     title = models.CharField(max_length=100)
@@ -18,6 +23,7 @@ class Picture(models.Model):
     updated_at = models.DateTimeField()
     public_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
 
+    tags2 = models.ManyToManyField(Tag)
     # galleries = ForeignKey (many to many???)
 
     def __str__(self):
