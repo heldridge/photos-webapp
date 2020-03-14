@@ -8,7 +8,6 @@ from django.shortcuts import render
 
 
 from pictures.models import Picture, Favorite
-from pictures.documents import PictureDocument
 
 
 def get_split_tags(tags):
@@ -139,7 +138,7 @@ def get_photos_data(
     last = None
 
     # If tags is None we can get everything from the database
-    if tags is None:
+    if True:  # tags is None:
         query_set = Picture.objects
         if before is not None:
             # For before we want to go "backwards," to get the pictures
