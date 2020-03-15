@@ -297,46 +297,12 @@ def search(request):
     # Search goes backwards if before is specified
     if before_id is not None:
         pictures.reverse()
-    # Grab and validate tags
-    # Also remove duplicates
-    # context = get_baseline_context(request)
-
-    # searched_tags = request.GET.get("q", "").split()
-    # searched_tags.sort()
-    # searched_tags_data = []
-
-    # for tag in searched_tags:
-    #     non_matches = functools.partial(stringsDoNotMatch, tag)
-    #     searched_tags_data.append(
-    #         {"tag": tag, "query": "+".join(filter(non_matches, searched_tags))}
-    #     )
-
-    # response = PictureDocument.get_pictures(
-    #     settings.PAGE_SIZE,
-    #     request.GET.get("before"),
-    #     request.GET.get("after"),
-    #     list(set(filter(is_valid_tag, searched_tags))),
-    # )
 
     render_next_button, render_previous_button = get_render_next_prev(
         before_id, after_id, len(pictures) >= settings.PAGE_SIZE + 1
     )
 
     print(render_next_button, render_previous_button)
-
-    # context["grid_placeholders"] = [1] * (
-    #     settings.MAX_THEORETICAL_PAGE_SIZE_FOR_PLACEHOLDERS - len(context["pictures"])
-    # )
-
-    # newContext = {
-    #     "max_tag_length": settings.MAX_TAG_LENGTH,
-    #     "min_tag_length": settings.MIN_TAG_LENGTH,
-    #     "valid_tag_regex": settings.VALID_TAG_REGEX,
-    #     "invalid_tag_char_regex": settings.INVALID_TAG_CHAR_REGEX,
-    #     "searched_tags_data": searched_tags_data,
-    #     "current_query": "+".join(searched_tags),
-    #     "current_full_query": current_full_query,
-    # }
 
     context = {
         "max_tag_length": settings.MAX_TAG_LENGTH,
