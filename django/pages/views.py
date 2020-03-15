@@ -314,9 +314,11 @@ def search(request):
     #     list(set(filter(is_valid_tag, searched_tags))),
     # )
 
-    # render_next_button, render_previous_button = get_render_next_prev(
-    #     request.GET.get("before"), request.GET.get("after"), data["more_left"]
-    # )
+    render_next_button, render_previous_button = get_render_next_prev(
+        before_id, after_id, len(pictures) >= settings.PAGE_SIZE + 1
+    )
+
+    print(render_next_button, render_previous_button)
 
     # context["grid_placeholders"] = [1] * (
     #     settings.MAX_THEORETICAL_PAGE_SIZE_FOR_PLACEHOLDERS - len(context["pictures"])
@@ -343,6 +345,8 @@ def search(request):
             {"picture": picture, "tags": get_split_tags(picture.tags.all())}
             for picture in pictures[: settings.PAGE_SIZE]
         ],
+        "render_next_button": render_next_button,
+        "render_previous_button": render_previous_button,
     }
 
     return render(request, "pages/search.html.j2", context)
