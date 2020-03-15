@@ -4,7 +4,7 @@
 <li class="mt-5 px-3">
     <div class="w-picture-card">
 
-        <a href="{% url 'gallery' %}?p={{ picture.public_id }}&q={{ current_full_query }}">
+        <a href="{% url 'gallery' %}?p={{ picture.picture.public_id }}&q={{ current_full_query }}">
             <!-- old: "h-picture-card bg-white border rounded-lg overflow-hidden shadow link-image" -->
             <div class="h-picture-card bg-surface-1 border-image-card rounded-lg overflow-hidden shadow link-image">
                 {% thumbnail picture.picture.photo "272" as im %}
