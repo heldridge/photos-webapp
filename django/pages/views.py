@@ -290,15 +290,9 @@ def search(request):
     before_id = request.GET.get("before")
     after_id = request.GET.get("after")
 
-    if request.user.is_authenticated:
-        user = request.user
-    else:
-        user = None
-
-    pictures = get_pictures(settings.PAGE_SIZE + 1, before_id, after_id, searched_tags)
-
-    print(pictures)
-
+    pictures = list(
+        get_pictures(settings.PAGE_SIZE + 1, before_id, after_id, searched_tags)
+    )
     # Grab and validate tags
     # Also remove duplicates
     # context = get_baseline_context(request)
@@ -338,9 +332,18 @@ def search(request):
     #     "current_full_query": current_full_query,
     # }
 
-    context = {}
-
-    pictures = list(get_pictures(settings.PAGE_SIZE,))
+    context = {
+        "max_tag_length": settings.MAX_TAG_LENGTH,
+        "min_tag_length": settings.MIN_TAG_LENGTH,
+        "valid_tag_regex": settings.VALID_TAG_REGEX,
+        "invalid_tag_char_regex": settings.INVALID_TAG_CHAR_REGEX,
+        "searched_tags_data": searched_tags_data,
+        "current_query": "+".join(searched_tags),
+        "pictures": [
+            {"picture": picture, "tags": get_split_tags(picture.tags.all())}
+            for picture in pictures[: settings.PAGE_SIZE]
+        ],
+    }
 
     return render(request, "pages/search.html.j2", context)
 
