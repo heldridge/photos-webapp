@@ -126,7 +126,7 @@ def get_pictures(amount, before=None, after=None, tags=[]):
     query_set = Picture.objects
 
     for tag in tags:
-        query_set = query_set.filter(tags__title=tag)
+        query_set = query_set.filter(tags__search=" ".join(tags))
 
     if before is not None:
         # For before we want to go "backwards," to get the pictures
