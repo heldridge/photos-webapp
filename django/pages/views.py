@@ -78,27 +78,17 @@ def stringsDoNotMatch(str1, str2):
 
 
 def index(request):
-    # data = get_photos_data()
-
-    # render_continue_button = data["more_left"]
-    # pictures = data["photos"]
-    # pictures = pictures[: settings.PAGE_SIZE]
-
-    pictures = get_pictures(settings.PAGE_SIZE + 1)
-    more_left = len(pictures) >= settings.PAGE_SIZE + 1
-
-    # print(get_split_tags(response["pictures"][1].tags.all()))
-
     # Force query set evaluation because we do
     # a reverse to get the last element, after doing a slice
+    pictures = list(get_pictures(settings.PAGE_SIZE + 1))
+
     context = {
-        # "pictures": [
-        #     {"picture": picture, "tag_data": get_split_tags(picture.tags.all())}
-        #     for picture in response["pictures"]
-        # ],
-        "pictures": pictures[: settings.PAGE_SIZE],
+        "pictures": [
+            {"picture": picture, "tags": get_split_tags(picture.tags.all())}
+            for picture in pictures[: settings.PAGE_SIZE]
+        ],
         "grid_placeholders": [1] * (18 - len(pictures)),
-        "more_left": more_left,
+        "more_left": len(pictures) >= settings.PAGE_SIZE + 1,
         "max_tag_length": settings.MAX_TAG_LENGTH,
         "min_tag_length": settings.MIN_TAG_LENGTH,
         "valid_tag_regex": settings.VALID_TAG_REGEX,
