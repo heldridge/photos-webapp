@@ -10,32 +10,6 @@ from django.shortcuts import render
 from pictures.models import Picture, Favorite, get_pictures, get_split_tags
 
 
-# def get_split_tags(tags):
-#     """
-#     Splits an image's tags into "above" and "below" tags,
-#     so they don't over-clutter the UI
-
-#     Above and below are decided by estimating how wide
-#     the resulting tag bar would be, and then putting a cap on
-#     that width
-#     """
-#     data = {"above_tags": [], "below_tags": []}
-
-#     max_width = 85  # Max width of the theoretical tag bar
-#     expander_length = 5  # Width of the "click to expand" symbol
-#     static_width_addition = 4  # How much to add in addition to each letter
-#     current_width = 0
-#     above = True
-#     for tag in tags:
-#         current_width += static_width_addition + len(tag)
-#         if current_width + expander_length > max_width:
-#             above = False
-
-#         if above:
-#             data["above_tags"].append(tag)
-#         else:
-#             data["below_tags"].append(tag)
-#     return data
 def is_valid_tag(tag):
     """ Verifies that a tag is valid """
     return (
