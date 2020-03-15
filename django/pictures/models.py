@@ -126,35 +126,27 @@ def get_pictures(amount, before=None, after=None, tags=[]):
         except (exceptions.ValidationError, Picture.DoesNotExist):
             after = None
 
+    query_set = Picture.objects.prefetch_related("tags")
+
+    print(tags)
     # If tags is None we can get everything from the database
     if len(tags) == 0:
-        query_set = Picture.objects.prefetch_related("tags")
-        if before is not None:
-            # For before we want to go "backwards," to get the pictures
-            # closest in id to before_picture, so order by id (increasing)
-            query_set = list(query_set.filter(id__gt=before_picture.id).order_by("id"))
-        elif after is not None:
-            query_set = query_set.filter(id__lt=after_picture.id).order_by("-id")
-        else:
-            query_set = query_set.order_by("-id")
+        pass
 
-    # # If there are tags we have to go to Elasticsearch
-    # else:
-    #     query_set = PictureDocument.search()
+    # If there are tags we have to go to Elasticsearch
 
-    #     for tag in tags:
-    #         query_set = query_set.query("term", tags=tag)
+    else:
+        for tag in tags:
+            query_set = query_set.filter(tags__title=tag)
 
-    #     if before is not None:
-    #         query_set = query_set.query("range", id={"gt": before_picture.id}).sort(
-    #             "id"
-    #         )
-    #     elif after is not None:
-    #         query_set = query_set.query("range", id={"lt": after_picture.id}).sort(
-    #             "-id"
-    #         )
-    #     else:
-    #         query_set = query_set.sort("-id")
+    if before is not None:
+        # For before we want to go "backwards," to get the pictures
+        # closest in id to before_picture, so order by id (increasing)
+        query_set = list(query_set.filter(id__gt=before_picture.id).order_by("id"))
+    elif after is not None:
+        query_set = query_set.filter(id__lt=after_picture.id).order_by("-id")
+    else:
+        query_set = query_set.order_by("-id")
 
     # query_set = query_set[: amount + 1]
 

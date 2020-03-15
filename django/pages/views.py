@@ -293,6 +293,10 @@ def search(request):
     pictures = list(
         get_pictures(settings.PAGE_SIZE + 1, before_id, after_id, searched_tags)
     )
+
+    # Search goes backwards if before is specified
+    if before_id is not None:
+        pictures.reverse()
     # Grab and validate tags
     # Also remove duplicates
     # context = get_baseline_context(request)
