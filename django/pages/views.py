@@ -57,8 +57,7 @@ def index(request):
     return render(request, "pages/index.html.j2", context)
 
 
-def search(request):
-
+def get_shared_search_gallery_context(request):
     # Filter out invalid tags
     # Use SET to make all unique
     # cast as a list because easier to use
@@ -95,7 +94,7 @@ def search(request):
 
     print(render_next_button, render_previous_button)
 
-    context = {
+    return {
         "max_tag_length": settings.MAX_TAG_LENGTH,
         "min_tag_length": settings.MIN_TAG_LENGTH,
         "valid_tag_regex": settings.VALID_TAG_REGEX,
@@ -111,6 +110,9 @@ def search(request):
         "render_previous_button": render_previous_button,
     }
 
+
+def search(request):
+    context = get_shared_search_gallery_context(request)
     return render(request, "pages/search.html.j2", context)
 
 
