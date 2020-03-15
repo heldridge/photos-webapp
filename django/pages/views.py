@@ -84,7 +84,7 @@ def index(request):
 
     context = {
         "pictures": [
-            {"picture": picture, "tags": get_split_tags(picture.tags.all())}
+            {"picture": picture, "tags": get_split_tags(picture.tags)}
             for picture in pictures[: settings.PAGE_SIZE]
         ],
         "grid_placeholders": [1] * (18 - len(pictures[: settings.PAGE_SIZE])),
@@ -346,7 +346,7 @@ def search(request):
         "searched_tags_data": searched_tags_data,
         "current_query": "+".join(searched_tags),
         "pictures": [
-            {"picture": picture, "tags": get_split_tags(picture.tags.all())}
+            {"picture": picture, "tags": get_split_tags(picture.tags)}
             for picture in pictures[: settings.PAGE_SIZE]
         ],
         "render_next_button": render_next_button,
