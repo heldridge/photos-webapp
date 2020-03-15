@@ -318,6 +318,7 @@ def search(request):
             {"picture": picture, "tags": get_split_tags(picture.tags)}
             for picture in pictures
         ],
+        "grid_placeholders": [1] * (18 - len(pictures[: settings.PAGE_SIZE])),
         "render_next_button": render_next_button,
         "render_previous_button": render_previous_button,
     }
