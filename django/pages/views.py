@@ -50,6 +50,24 @@ def stringsDoNotMatch(str1, str2):
     return str1 != str2
 
 
+def get_render_next_prev(before_picture, after_picture, more_left):
+    render_next_button = True
+    render_previous_button = True
+
+    if before_picture is None and after_picture is None:
+        render_previous_button = False
+        if not more_left:
+            render_next_button = False
+
+    if before_picture is not None and not more_left:
+        render_previous_button = False
+
+    if after_picture is not None and not more_left:
+        render_next_button = False
+
+    return (render_next_button, render_previous_button)
+
+
 def index(request):
     # Force query set evaluation because we do
     # a reverse to get the last element, after doing a slice
@@ -68,24 +86,6 @@ def index(request):
         "invalid_tag_char_regex": settings.INVALID_TAG_CHAR_REGEX,
     }
     return render(request, "pages/index.html.j2", context)
-
-
-def get_render_next_prev(before_picture, after_picture, more_left):
-    render_next_button = True
-    render_previous_button = True
-
-    if before_picture is None and after_picture is None:
-        render_previous_button = False
-        if not more_left:
-            render_next_button = False
-
-    if before_picture is not None and not more_left:
-        render_previous_button = False
-
-    if after_picture is not None and not more_left:
-        render_next_button = False
-
-    return (render_next_button, render_previous_button)
 
 
 def search(request):
