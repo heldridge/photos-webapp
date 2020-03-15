@@ -82,8 +82,9 @@ def get_split_tags(tags):
     static_width_addition = 4  # How much to add in addition to each letter
     current_width = 0
     above = True
+    # TODO: Minor optimization, stop adding once above is hit
     for tag in tags:
-        current_width += static_width_addition + len(tag)
+        current_width += static_width_addition + len(tag.title)
         if current_width + expander_length > max_width:
             above = False
 
@@ -94,7 +95,7 @@ def get_split_tags(tags):
     return data
 
 
-def get_pictures(amount, before=None, after=None, tags=None):
+def get_pictures(amount, before=None, after=None, tags=[]):
     """Queries the database or elasticsearch for pictures
     Args:
         amount (``int``): The number of pictures to return
@@ -126,16 +127,16 @@ def get_pictures(amount, before=None, after=None, tags=None):
             after = None
 
     # If tags is None we can get everything from the database
-    # if tags is None:
-    #     query_set = Picture.objects
-    #     if before is not None:
-    #         # For before we want to go "backwards," to get the pictures
-    #         # closest in id to before_picture, so order by id (increasing)
-    #         query_set = list(query_set.filter(id__gt=before_picture.id).order_by("id"))
-    #     elif after is not None:
-    #         query_set = query_set.filter(id__lt=after_picture.id).order_by("-id")
-    #     else:
-    #         query_set = query_set.order_by("-id")
+    if len(tags) == 0:
+        query_set = Picture.objects.prefetch_related("tags")
+        if before is not None:
+            # For before we want to go "backwards," to get the pictures
+            # closest in id to before_picture, so order by id (increasing)
+            query_set = list(query_set.filter(id__gt=before_picture.id).order_by("id"))
+        elif after is not None:
+            query_set = query_set.filter(id__lt=after_picture.id).order_by("-id")
+        else:
+            query_set = query_set.order_by("-id")
 
     # # If there are tags we have to go to Elasticsearch
     # else:
@@ -161,4 +162,4 @@ def get_pictures(amount, before=None, after=None, tags=None):
     # if before is not None:
     #     query_set.reverse()
 
-    return {"pictures": query_set[:amount], "more_left": len(query_set) < amount + 1}
+    return list(query_set[:amount])
