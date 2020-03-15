@@ -45,11 +45,6 @@ def is_valid_tag(tag):
     )
 
 
-def stringsDoNotMatch(str1, str2):
-    """ Dummy function to be used in a partial """
-    return str1 != str2
-
-
 def get_render_next_prev(before_picture, after_picture, more_left):
     render_next_button = True
     render_previous_button = True
