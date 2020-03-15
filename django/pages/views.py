@@ -208,67 +208,6 @@ def get_render_next_prev(before_picture, after_picture, more_left):
     return (render_next_button, render_previous_button)
 
 
-def get_baseline_context(request, fetch_favorites=False):
-    """
-    Returns the base context that is shared between views
-    """
-    searched_tags_query_parameter = request.GET.get("q", "")
-    searched_tags = list(
-        set(filter(is_valid_tag, searched_tags_query_parameter.split()))
-    )
-    searched_tags.sort()
-    searched_tags_data = []
-    for tag in searched_tags:
-        non_matches = functools.partial(stringsDoNotMatch, tag)
-        searched_tags_data.append(
-            {"tag": tag, "query": "+".join(filter(non_matches, searched_tags))}
-        )
-
-    before_picture = request.GET.get("before")
-    after_picture = request.GET.get("after")
-
-    if request.user.is_authenticated:
-        user = request.user
-    else:
-        user = None
-
-    data = get_photos_data(
-        searched_tags,
-        request.GET.get("before"),
-        request.GET.get("after"),
-        user,
-        fetch_favorites,
-    )
-    last_picture = data["last"]
-    first_picture = data["first"]
-    pictures = data["photos"]
-
-    render_next_button, render_previous_button = get_render_next_prev(
-        before_picture, after_picture, data["more_left"]
-    )
-
-    current_full_query = "+".join(searched_tags)
-    if before_picture is not None:
-        current_full_query += f"&before={before_picture}"
-    if after_picture is not None:
-        current_full_query += f"&after={after_picture}"
-
-    return {
-        "max_tag_length": settings.MAX_TAG_LENGTH,
-        "min_tag_length": settings.MIN_TAG_LENGTH,
-        "valid_tag_regex": settings.VALID_TAG_REGEX,
-        "invalid_tag_char_regex": settings.INVALID_TAG_CHAR_REGEX,
-        "searched_tags_data": searched_tags_data,
-        "current_query": "+".join(searched_tags),
-        "current_full_query": current_full_query,
-        "pictures": pictures,
-        "last_picture": last_picture,
-        "first_picture": first_picture,
-        "render_next_button": render_next_button,
-        "render_previous_button": render_previous_button,
-    }
-
-
 def search(request):
 
     # Filter out invalid tags
