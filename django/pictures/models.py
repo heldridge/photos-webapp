@@ -45,23 +45,6 @@ class Favorite(models.Model):
 ###################
 # UTILITY METHODS #
 ###################
-def normalize_photo(picture):
-    """
-    Normalizes the 'photo' field for Picture Models and Documents
-
-    The Picture Model and the Picture Document handle the 'photo' field
-    differently, which can lead to trickyness down the road.
-    This method normalizes that field so that it is consistent.
-
-    Args:
-        picture (``str`` or ``ImageField``): the field value to normalize
-
-    Returns:
-        ``str``: the str value of the photo's filename
-    """
-    return str(picture.photo)
-
-
 def get_split_tags(tags):
     """
     Splits an image's tags into "above" and "below" tags,
