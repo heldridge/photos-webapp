@@ -13,7 +13,6 @@
 
   <div class="flex justify-center w-4/5 max-w-7xl mt-3 text-lg mb-20">
     {% if more_left and pictures|length > 0 %}
-      <!-- old: class="bg-gray-300 hover:bg-gray-500 rounded py-2 pl-3 pr-4" -->
       {% with last_picture=pictures|last %}
       <a href="{% url 'search' %}?after={{ last_picture.picture.public_id }}" class="rounded shadow py-2 pl-3 pr-4 bg-basic hover:bg-basic-hover text-black">
         Continue Browsing
