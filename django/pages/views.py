@@ -147,13 +147,13 @@ def search(request):
 
 def gallery(request):
 
-    context = get_baseline_context(request, True)
-    before_picture = request.GET.get("before")
+    # context = get_baseline_context(request, True)
+    # before_picture = request.GET.get("before")
 
-    if request.user.is_authenticated:
-        user = request.user
-    else:
-        user = None
+    # if request.user.is_authenticated:
+    #     user = request.user
+    # else:
+    #     user = None
 
     # Get the gallery picture id query
     picture_id = request.GET.get("p", "")
@@ -162,9 +162,8 @@ def gallery(request):
     could_not_find_picture = False
     if picture_id != "":
         try:
-            current_picture = clean_picture_data(
-                Picture.objects.get(public_id=picture_id), False, user, True
-            )
+            current_picture = Picture.objects.get(public_id=picture_id)
+
         except (exceptions.ValidationError, Picture.DoesNotExist):
             could_not_find_picture = True
         else:
@@ -173,32 +172,34 @@ def gallery(request):
                     current_picture_index = i
                     break
 
-    if (picture_id == "" or could_not_find_picture) and len(context["pictures"]) > 0:
-        # We are coming in the "backwards" direction
-        if before_picture is not None:
-            current_picture = context["pictures"][-1]
-            current_picture_index = len(context["pictures"]) - 1
-        else:
-            current_picture = context["pictures"][0]
-            current_picture_index = 0
+    # if (picture_id == "" or could_not_find_picture) and len(context["pictures"]) > 0:
+    #     # We are coming in the "backwards" direction
+    #     if before_picture is not None:
+    #         current_picture = context["pictures"][-1]
+    #         current_picture_index = len(context["pictures"]) - 1
+    #     else:
+    #         current_picture = context["pictures"][0]
+    #         current_picture_index = 0
 
-    original_picture_index = current_picture_index
+    # original_picture_index = current_picture_index
 
-    context["original_picture_index"] = original_picture_index
-    context["pictures"] = list(
-        map(
-            lambda item: {
-                "photo": item["photo"],
-                "title": item["title"],
-                "public_id": item["public_id"],
-                "above_tags": item["above_tags"],
-                "below_tags": item["below_tags"],
-                "favorite": item["favorite"],
-            },
-            context["pictures"],
-        )
-    )
-    context["grid_placeholders"] = [1] * (18 - len(context["pictures"]))
-    context["picture"] = current_picture
+    # context["original_picture_index"] = original_picture_index
+    # context["pictures"] = list(
+    #     map(
+    #         lambda item: {
+    #             "photo": item["photo"],
+    #             "title": item["title"],
+    #             "public_id": item["public_id"],
+    #             "above_tags": item["above_tags"],
+    #             "below_tags": item["below_tags"],
+    #             "favorite": item["favorite"],
+    #         },
+    #         context["pictures"],
+    #     )
+    # )
+    # context["grid_placeholders"] = [1] * (18 - len(context["pictures"]))
+    # context["picture"] = current_picture
+
+    context = {}
 
     return render(request, "pages/gallery.html.j2", context)
