@@ -294,9 +294,9 @@ def search(request):
         get_pictures(settings.PAGE_SIZE + 1, before_id, after_id, searched_tags)
     )
 
+    # Truncate before the reverse so the correct image gets truncated
     more_left = len(pictures) >= settings.PAGE_SIZE + 1
     pictures = pictures[: settings.PAGE_SIZE]
-
     # Search goes backwards if before is specified
     if before_id is not None:
         pictures.reverse()
