@@ -294,12 +294,15 @@ def search(request):
         get_pictures(settings.PAGE_SIZE + 1, before_id, after_id, searched_tags)
     )
 
+    more_left = len(pictures) >= settings.PAGE_SIZE + 1
+    pictures = pictures[: settings.PAGE_SIZE]
+
     # Search goes backwards if before is specified
     if before_id is not None:
         pictures.reverse()
 
     render_next_button, render_previous_button = get_render_next_prev(
-        before_id, after_id, len(pictures) >= settings.PAGE_SIZE + 1
+        before_id, after_id, more_left
     )
 
     print(render_next_button, render_previous_button)
@@ -313,7 +316,7 @@ def search(request):
         "current_query": "+".join(searched_tags),
         "pictures": [
             {"picture": picture, "tags": get_split_tags(picture.tags)}
-            for picture in pictures[: settings.PAGE_SIZE]
+            for picture in pictures
         ],
         "render_next_button": render_next_button,
         "render_previous_button": render_previous_button,
