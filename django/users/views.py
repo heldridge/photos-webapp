@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from . import forms
 
-from pictures.models import Picture, Favorite, normalize_photo, get_split_tags
+from pictures.models import Picture, Favorite, get_split_tags
 
 
 def profile(request):
