@@ -120,10 +120,4 @@ def get_pictures(amount, before=None, after=None, tags=[]):
     else:
         query_set = query_set.order_by("-id")
 
-    # query_set = query_set[: amount + 1]
-
-    # # We went "backwards" if we had a before, so reverse the list now
-    # if before is not None:
-    #     query_set.reverse()
-
     return query_set[:amount]
