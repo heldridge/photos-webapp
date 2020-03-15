@@ -162,4 +162,4 @@ def get_pictures(amount, before=None, after=None, tags=[]):
     # if before is not None:
     #     query_set.reverse()
 
-    return list(query_set[:amount])
+    return query_set[:amount]
