@@ -55,23 +55,27 @@
 
         <div class="flex justify-between my-2 text-lg">
 
-            {% if first_picture and render_previous_button %}
-                <a href="{% url 'search' %}?q={{ current_query }}&before={{ first_picture.public_id }}" id="previousButton" class="rounded py-2 pl-4 pr-3 bg-basic hover:bg-basic-hover text-black">
-                    <i class="fas fa-arrow-left pr-2"></i>
-                    Previous
-                </a>
+            {% if pictures|first and render_previous_button %}
+            {% with first_picture=pictures|first %}
+            <a href="{% url 'search' %}?q={{ current_query }}&before={{ first_picture.picture.public_id }}" id="previousButton" class="rounded py-2 pl-4 pr-3 bg-basic hover:bg-basic-hover text-black">
+                <i class="fas fa-arrow-left pr-2"></i>
+                Previous
+            </a>
+            {% endwith %}
             {% else %}
-                <div id="previousButton">
-                
-                </div>
+            <div id="previousButton">
+            
+            </div>
             {% endif %} 
             
 
-            {% if last_picture and render_next_button %}
-                <a href="{% url 'search' %}?q={{ current_query }}&after={{ last_picture.public_id }}" id="nextButton" class="rounded py-2 pl-4 pr-3 bg-basic hover:bg-basic-hover text-black">
-                    Next
-                    <i class="fas fa-arrow-right pl-2"></i>
-                </a>
+            {% if pictures|last and render_next_button %}
+            {% with last_picture=pictures|last %}
+            <a href="{% url 'search' %}?q={{ current_query }}&after={{ last_picture.picture.public_id }}" id="nextButton" class="rounded py-2 pl-4 pr-3 bg-basic hover:bg-basic-hover text-black">
+                Next
+                <i class="fas fa-arrow-right pl-2"></i>
+            </a>
+            {% endwith %}
             {% endif %}                
         </div>
     </div>
