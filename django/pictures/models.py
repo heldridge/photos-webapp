@@ -125,7 +125,7 @@ def get_pictures(amount, before=None, after=None, tags=[]):
 
     query_set = Picture.objects
 
-    for tag in tags:
+    if len(tags) > 0:
         query_set = query_set.filter(tags__search=" ".join(tags))
 
     if before is not None:
