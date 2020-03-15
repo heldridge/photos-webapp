@@ -7,35 +7,35 @@ from django.core import exceptions
 from django.shortcuts import render
 
 
-from pictures.models import Picture, Favorite
+from pictures.models import Picture, Favorite, get_pictures, get_split_tags
 
 
-def get_split_tags(tags):
-    """
-    Splits an image's tags into "above" and "below" tags,
-    so they don't over-clutter the UI
+# def get_split_tags(tags):
+#     """
+#     Splits an image's tags into "above" and "below" tags,
+#     so they don't over-clutter the UI
 
-    Above and below are decided by estimating how wide
-    the resulting tag bar would be, and then putting a cap on
-    that width
-    """
-    data = {"above_tags": [], "below_tags": []}
+#     Above and below are decided by estimating how wide
+#     the resulting tag bar would be, and then putting a cap on
+#     that width
+#     """
+#     data = {"above_tags": [], "below_tags": []}
 
-    max_width = 85  # Max width of the theoretical tag bar
-    expander_length = 5  # Width of the "click to expand" symbol
-    static_width_addition = 4  # How much to add in addition to each letter
-    current_width = 0
-    above = True
-    for tag in tags:
-        current_width += static_width_addition + len(tag)
-        if current_width + expander_length > max_width:
-            above = False
+#     max_width = 85  # Max width of the theoretical tag bar
+#     expander_length = 5  # Width of the "click to expand" symbol
+#     static_width_addition = 4  # How much to add in addition to each letter
+#     current_width = 0
+#     above = True
+#     for tag in tags:
+#         current_width += static_width_addition + len(tag)
+#         if current_width + expander_length > max_width:
+#             above = False
 
-        if above:
-            data["above_tags"].append(tag)
-        else:
-            data["below_tags"].append(tag)
-    return data
+#         if above:
+#             data["above_tags"].append(tag)
+#         else:
+#             data["below_tags"].append(tag)
+#     return data
 
 
 def clean_picture_data(picture, from_elastic_search, user=None, fetch_favorites=False):
@@ -78,17 +78,27 @@ def stringsDoNotMatch(str1, str2):
 
 
 def index(request):
-    data = get_photos_data()
+    # data = get_photos_data()
 
-    render_continue_button = data["more_left"]
-    pictures = data["photos"]
-    pictures = pictures[: settings.PAGE_SIZE]
+    # render_continue_button = data["more_left"]
+    # pictures = data["photos"]
+    # pictures = pictures[: settings.PAGE_SIZE]
 
+    pictures = get_pictures(settings.PAGE_SIZE + 1)
+    more_left = len(pictures) >= settings.PAGE_SIZE + 1
+
+    # print(get_split_tags(response["pictures"][1].tags.all()))
+
+    # Force query set evaluation because we do
+    # a reverse to get the last element, after doing a slice
     context = {
-        "pictures": pictures,
+        # "pictures": [
+        #     {"picture": picture, "tag_data": get_split_tags(picture.tags.all())}
+        #     for picture in response["pictures"]
+        # ],
+        "pictures": pictures[: settings.PAGE_SIZE],
         "grid_placeholders": [1] * (18 - len(pictures)),
-        "last_picture": data["last"],
-        "render_continue_button": render_continue_button,
+        "more_left": more_left,
         "max_tag_length": settings.MAX_TAG_LENGTH,
         "min_tag_length": settings.MIN_TAG_LENGTH,
         "valid_tag_regex": settings.VALID_TAG_REGEX,
