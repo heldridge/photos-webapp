@@ -3,7 +3,7 @@ import json
 
 from django.core.management.base import BaseCommand, CommandError
 from django.conf import settings
-from pictures.models import Picture, Tag
+from pictures.models import Picture
 
 
 class Command(BaseCommand):
@@ -23,9 +23,6 @@ class Command(BaseCommand):
                 photo=f'pictures/2020/01/01/{image["filename"]}',
                 uploaded_at=datetime.datetime.now(),
                 updated_at=datetime.datetime.now(),
+                tags=" ".join(image["tags"]),
             )
             picture.save()
-
-            for title in image["tags"]:
-                tag, _ = Tag.objects.get_or_create(title=title)
-                picture.tags.add(tag)

@@ -9,16 +9,12 @@ from django.contrib.postgres.fields import ArrayField
 from sorl.thumbnail import get_thumbnail
 
 
-class Tag(models.Model):
-    title = models.CharField(max_length=20, unique=True)
-
-
 # Create your models here.
 class Picture(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField(blank=True)
     photo = models.ImageField(upload_to="pictures/%Y/%m/%d/")
-    tags = models.ManyToManyField(Tag)
+    tags = models.TextField(blank=True)
     uploaded_at = models.DateTimeField()
     updated_at = models.DateTimeField()
     public_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
@@ -75,6 +71,7 @@ def get_split_tags(tags):
     the resulting tag bar would be, and then putting a cap on
     that width
     """
+    tags = tags.split()
     data = {"above_tags": [], "below_tags": []}
 
     max_width = 85  # Max width of the theoretical tag bar
@@ -84,7 +81,7 @@ def get_split_tags(tags):
     above = True
     # TODO: Minor optimization, stop adding once above is hit
     for tag in tags:
-        current_width += static_width_addition + len(tag.title)
+        current_width += static_width_addition + len(tag)
         if current_width + expander_length > max_width:
             above = False
 
@@ -126,18 +123,10 @@ def get_pictures(amount, before=None, after=None, tags=[]):
         except (exceptions.ValidationError, Picture.DoesNotExist):
             after = None
 
-    query_set = Picture.objects.prefetch_related("tags")
+    query_set = Picture.objects
 
-    print(tags)
-    # If tags is None we can get everything from the database
-    if len(tags) == 0:
-        pass
-
-    # If there are tags we have to go to Elasticsearch
-
-    else:
-        for tag in tags:
-            query_set = query_set.filter(tags__title=tag)
+    for tag in tags:
+        query_set = query_set.filter(tags__title=tag)
 
     if before is not None:
         # For before we want to go "backwards," to get the pictures
