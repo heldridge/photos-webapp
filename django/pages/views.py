@@ -287,6 +287,18 @@ def search(request):
             }
         )
 
+    before_id = request.GET.get("before")
+    after_id = request.GET.get("after")
+
+    if request.user.is_authenticated:
+        user = request.user
+    else:
+        user = None
+
+    pictures = get_pictures(settings.PAGE_SIZE + 1, before_id, after_id, searched_tags)
+
+    print(pictures)
+
     # Grab and validate tags
     # Also remove duplicates
     # context = get_baseline_context(request)
