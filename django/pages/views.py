@@ -270,44 +270,65 @@ def get_baseline_context(request, fetch_favorites=False):
 
 
 def search(request):
-    # Grab and validate tags
-    # Also remove duplicates
-    context = get_baseline_context(request)
 
-    searched_tags = request.GET.get("q", "").split()
-    searched_tags.sort()
+    # Filter out invalid tags
+    # Use SET to make all unique
+    # cast as a list because easier to use
+    searched_tags = list(set(filter(is_valid_tag, request.GET.get("q", "").split())))
+
     searched_tags_data = []
-
     for tag in searched_tags:
-        non_matches = functools.partial(stringsDoNotMatch, tag)
         searched_tags_data.append(
-            {"tag": tag, "query": "+".join(filter(non_matches, searched_tags))}
+            {
+                "tag": tag,
+                "query_if_removed": "+".join(
+                    filter(lambda newTag: newTag != tag, searched_tags)
+                ),
+            }
         )
 
-    response = PictureDocument.get_pictures(
-        settings.PAGE_SIZE,
-        request.GET.get("before"),
-        request.GET.get("after"),
-        list(set(filter(is_valid_tag, searched_tags))),
-    )
+    # Grab and validate tags
+    # Also remove duplicates
+    # context = get_baseline_context(request)
 
-    render_next_button, render_previous_button = get_render_next_prev(
-        request.GET.get("before"), request.GET.get("after"), data["more_left"]
-    )
+    # searched_tags = request.GET.get("q", "").split()
+    # searched_tags.sort()
+    # searched_tags_data = []
 
-    context["grid_placeholders"] = [1] * (
-        settings.MAX_THEORETICAL_PAGE_SIZE_FOR_PLACEHOLDERS - len(context["pictures"])
-    )
+    # for tag in searched_tags:
+    #     non_matches = functools.partial(stringsDoNotMatch, tag)
+    #     searched_tags_data.append(
+    #         {"tag": tag, "query": "+".join(filter(non_matches, searched_tags))}
+    #     )
 
-    newContext = {
-        "max_tag_length": settings.MAX_TAG_LENGTH,
-        "min_tag_length": settings.MIN_TAG_LENGTH,
-        "valid_tag_regex": settings.VALID_TAG_REGEX,
-        "invalid_tag_char_regex": settings.INVALID_TAG_CHAR_REGEX,
-        "searched_tags_data": searched_tags_data,
-        "current_query": "+".join(searched_tags),
-        "current_full_query": current_full_query,
-    }
+    # response = PictureDocument.get_pictures(
+    #     settings.PAGE_SIZE,
+    #     request.GET.get("before"),
+    #     request.GET.get("after"),
+    #     list(set(filter(is_valid_tag, searched_tags))),
+    # )
+
+    # render_next_button, render_previous_button = get_render_next_prev(
+    #     request.GET.get("before"), request.GET.get("after"), data["more_left"]
+    # )
+
+    # context["grid_placeholders"] = [1] * (
+    #     settings.MAX_THEORETICAL_PAGE_SIZE_FOR_PLACEHOLDERS - len(context["pictures"])
+    # )
+
+    # newContext = {
+    #     "max_tag_length": settings.MAX_TAG_LENGTH,
+    #     "min_tag_length": settings.MIN_TAG_LENGTH,
+    #     "valid_tag_regex": settings.VALID_TAG_REGEX,
+    #     "invalid_tag_char_regex": settings.INVALID_TAG_CHAR_REGEX,
+    #     "searched_tags_data": searched_tags_data,
+    #     "current_query": "+".join(searched_tags),
+    #     "current_full_query": current_full_query,
+    # }
+
+    context = {}
+
+    pictures = list(get_pictures(settings.PAGE_SIZE,))
 
     return render(request, "pages/search.html.j2", context)
 
