@@ -87,7 +87,7 @@ def index(request):
             {"picture": picture, "tags": get_split_tags(picture.tags.all())}
             for picture in pictures[: settings.PAGE_SIZE]
         ],
-        "grid_placeholders": [1] * (18 - len(pictures)),
+        "grid_placeholders": [1] * (18 - len(pictures[: settings.PAGE_SIZE])),
         "more_left": len(pictures) >= settings.PAGE_SIZE + 1,
         "max_tag_length": settings.MAX_TAG_LENGTH,
         "min_tag_length": settings.MIN_TAG_LENGTH,
