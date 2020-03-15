@@ -36,33 +36,6 @@ from pictures.models import Picture, Favorite, get_pictures, get_split_tags
 #         else:
 #             data["below_tags"].append(tag)
 #     return data
-
-
-def clean_picture_data(picture, from_elastic_search, user=None, fetch_favorites=False):
-    """
-    Cleans the data from each picture, picking out the fields needed
-    """
-    split_tags = get_split_tags(picture.tags)
-
-    if from_elastic_search:
-        photo = picture.photo
-    else:
-        photo = str(picture.photo)
-
-    return {
-        "photo": photo,
-        "title": picture.title,
-        "above_tags": split_tags["above_tags"],
-        "below_tags": split_tags["below_tags"],
-        "public_id": str(picture.public_id),
-        "favorite": (
-            fetch_favorites
-            and user is not None
-            and Favorite.objects.filter(user=user).filter(picture=picture.id).exists()
-        ),
-    }
-
-
 def is_valid_tag(tag):
     """ Verifies that a tag is valid """
     return (
