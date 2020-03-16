@@ -125,7 +125,7 @@ def gallery(request):
             could_not_find_picture = True
         else:
             for i, picture in enumerate(context["pictures"]):
-                if picture.public_id == picture_id:
+                if str(picture.public_id) == picture_id:
                     current_picture_index = i
                     break
 
