@@ -12,6 +12,9 @@ def profile(request):
         pictures = list(get_pictures(project_settings.PAGE_SIZE + 1, user=request.user))
         context["pictures"] = pictures[: project_settings.PAGE_SIZE]
         context["more_left"] = len(pictures) >= project_settings.PAGE_SIZE + 1
+        context["grid_placeholders"] = [1] * (
+            18 - len(pictures[: project_settings.PAGE_SIZE])
+        )
 
     return render(request, "users/profile.html.j2", context=context)
 
