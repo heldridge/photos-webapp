@@ -275,6 +275,7 @@ function addFavorite(source: HTMLButtonElement) {
         removeChildren(source);
         removeClass(source, 'pointer-events-none');
         if (response.status >= 200 && response.status < 300) {
+            pictures[currentIndex].favorite = true;
             setToDeleteFavoriteMode(source);
         } else if (response.status === 401) {
             source.appendChild(emptyHeartIcon);
@@ -315,6 +316,7 @@ function removeFavorite(source: HTMLButtonElement) {
         removeChildren(source);
         removeClass(source, 'pointer-events-none');
         if (response.status >= 200 && response.status < 300) {
+            pictures[currentIndex].favorite = false;
             setToAddFavoriteMode(source);
         } else if (response.status === 401) {
             source.appendChild(fullHeartIcon);
