@@ -1,7 +1,9 @@
+{% with first_picture=pictures|first last_picture=pictures|last %}
 <div class="flex md:mx-6 justify-between">
     <div class="flex justify-between w-5/12 xl:w-2/5">
         <div>
             <a 
+                
                 href="{% url 'gallery' %}?q={{ current_query }}&before={{ first_picture.public_id }}"
 
                 {% if render_previous_button %}
@@ -91,3 +93,4 @@
         </div>
     </div>   
 </div>
+{% endwith %}

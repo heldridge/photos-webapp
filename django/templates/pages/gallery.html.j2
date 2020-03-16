@@ -33,7 +33,9 @@
                     </button>
 
                     <a 
+                        {% with first_picture=pictures|first %}
                         href="{% url 'gallery' %}?q={{ current_query }}&before={{ first_picture.public_id }}"
+                        {% endwith %}
                         {% if render_previous_button %}
                         class="hidden flex flex-col justify-center text-lg px-6 rounded h-16 mr-1 ml-2 previous-link bg-basic hover:bg-basic-hover text-black"
                         {% else %}
@@ -62,7 +64,9 @@
                 
                 
                     <a 
+                        {% with last_picture=pictures|last %}
                         href="{% url 'gallery' %}?q={{ current_query }}&after={{ last_picture.public_id }}"
+                        {% endwith %}
                         {% if render_next_button %}
                         class="hidden flex flex-col justify-center text-lg px-6 rounded h-16 mr-2 ml-1 next-link bg-basic hover:bg-basic-hover text-black"
                         {% else %}
@@ -138,7 +142,9 @@
 
             <div class="hidden md:flex justify-between mx-6">
                 <a 
+                    {% with first_picture=pictures|first %}
                     href="{% url 'gallery' %}?q={{ current_query }}&before={{ first_picture.public_id }}"
+                    {% endwith %}
 
                     {% if render_previous_button %}
                     class="rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center bg-basic hover:bg-basic-hover text-black"
@@ -156,7 +162,9 @@
                 </a>
 
                 <a 
+                    {% with last_picture=pictures|last %}
                     href="{% url 'gallery' %}?q={{ current_query }}&after={{ last_picture.public_id }}"
+                    {% endwith %}
 
                     {% if render_next_button %}
                     class="rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-5 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center bg-basic hover:bg-basic-hover text-black"
