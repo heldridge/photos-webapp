@@ -7,32 +7,18 @@ from psycopg2.errors import UniqueViolation
 from pictures.models import Picture, Favorite
 
 
-def clean_picture_data(picture, from_elastic_search):
-    """
-    TODO: Consolidate with other
-    Cleans the data from each picture, picking out the fields needed
-    """
-    if from_elastic_search:
-        photo = picture.photo
-    else:
-        photo = picture.photo.url
-
-    return {
-        "photo": photo,
-        "title": picture.title,
-        "tags": picture.tags,
-        "public_id": str(picture.public_id),
-    }
-
-
 # Create your views here.
 def picture(request, picture_public_id):
-    my_picture = Picture.objects.get(public_id=picture_public_id)
 
-    context = clean_picture_data(my_picture, False)
-    context["max_tag_length"] = settings.MAX_TAG_LENGTH
-    context["invalid_tag_char_regex"] = settings.INVALID_TAG_CHAR_REGEX
+    target_picture = Picture.objects.get(public_id=picture_public_id)
 
+    context = {
+        "photo": str(target_picture.photo),
+        "title": target_picture.title,
+        "tags": str(target_picture.tags).split(),
+        "max_tag_length": settings.MAX_TAG_LENGTH,
+        "invalid_tag_char_regex": settings.INVALID_TAG_CHAR_REGEX,
+    }
     return render(request, "picture.html.j2", context)
 
 
