@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from . import forms
 
-from pictures.models import Picture, Favorite
+from pictures.models import Picture
 
 
 def profile(request):
