@@ -4,6 +4,7 @@ import json
 
 from django.conf import settings
 from django.core import exceptions
+from django.db.models import Q
 from django.shortcuts import render
 
 
@@ -136,6 +137,17 @@ def gallery(request):
     original_picture_index = current_picture_index
     context["original_picture_index"] = original_picture_index
 
+    favorite_ids = []
+    if request.user.is_authenticated and len(context["pictures"]) > 0:
+        favorites = Favorite.objects.select_related("picture").filter(user=request.user)
+        full_q = Q(picture=context["pictures"][0])
+        for picture in context["pictures"][1:]:
+            full_q = full_q | Q(picture=picture)
+        favorites = favorites.filter(full_q)
+
+        for favorite in favorites:
+            favorite_ids.append(favorite.picture.public_id)
+
     # Need to make it json serializable
     context["pictures"] = list(
         map(
@@ -144,6 +156,7 @@ def gallery(request):
                 "title": picture.title,
                 "public_id": picture.public_id,
                 "tags": str(picture.tags).split(),
+                "favorite": picture.public_id in favorite_ids,
             },
             context["pictures"],
         )
