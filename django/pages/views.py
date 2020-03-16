@@ -134,8 +134,8 @@ def gallery(request):
         current_picture_index = 0
 
     original_picture_index = current_picture_index
-
     context["original_picture_index"] = original_picture_index
+
     # Need to make it json serializable
     context["pictures"] = list(
         map(
