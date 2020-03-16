@@ -96,6 +96,7 @@ def get_pictures(amount, before=None, after=None, tags=[]):
     # Fetch the correct before or after picture
     if before is not None:
         try:
+            # TODO: Change before and after fetching to use one trip to the database
             before_picture = Picture.objects.get(public_id=before)
         except (exceptions.ValidationError, Picture.DoesNotExist):
             before = None
