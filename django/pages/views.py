@@ -131,8 +131,12 @@ def gallery(request):
                     break
 
     if (picture_id == "" or could_not_find_picture) and len(context["pictures"]) > 0:
-        current_picture = context["pictures"][0]
-        current_picture_index = 0
+        if request.GET.get("before") is None or request.GET.get("before") == "":
+            current_picture = context["pictures"][0]
+            current_picture_index = 0
+        else:
+            current_picture = context["pictures"][-1]
+            current_picture_index = len(context["pictures"]) - 1
 
     original_picture_index = current_picture_index
     context["original_picture_index"] = original_picture_index
