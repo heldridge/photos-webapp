@@ -43,7 +43,7 @@ def index(request):
     pictures = list(get_pictures(settings.PAGE_SIZE + 1))
 
     context = {
-        "pictures": pictures,
+        "pictures": pictures[: settings.PAGE_SIZE],
         "grid_placeholders": [1] * (18 - len(pictures[: settings.PAGE_SIZE])),
         "more_left": len(pictures) >= settings.PAGE_SIZE + 1,
         "max_tag_length": settings.MAX_TAG_LENGTH,
