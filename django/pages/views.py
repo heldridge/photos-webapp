@@ -75,7 +75,7 @@ def get_shared_search_gallery_context(request):
     before_id = request.GET.get("before")
     after_id = request.GET.get("after")
 
-    search_favorites = request.GET.get("favorites", False)
+    search_favorites = request.GET.get("favorites", "false")
 
     if search_favorites == "true" and request.user.is_authenticated:
         user = request.user
@@ -105,11 +105,15 @@ def get_shared_search_gallery_context(request):
         "valid_tag_regex": settings.VALID_TAG_REGEX,
         "invalid_tag_char_regex": settings.INVALID_TAG_CHAR_REGEX,
         "searched_tags_data": searched_tags_data,
-        "current_query": "+".join(searched_tags),
+        # "current_query": "+".join(searched_tags),
         "pictures": pictures,
         "grid_placeholders": [1] * (18 - len(pictures[: settings.PAGE_SIZE])),
         "render_next_button": render_next_button,
         "render_previous_button": render_previous_button,
+        "q": "+".join(searched_tags),
+        "before_id": before_id,
+        "after_id": after_id,
+        "favorites": search_favorites == "true",
     }
 
 
