@@ -125,22 +125,17 @@ def gallery(request):
             could_not_find_picture = True
         else:
             for i, picture in enumerate(context["pictures"]):
-                if picture["picture"]["public_id"] == picture_id:
+                if picture.public_id == picture_id:
                     current_picture_index = i
                     break
 
-    # if (picture_id == "" or could_not_find_picture) and len(context["pictures"]) > 0:
-    #     # We are coming in the "backwards" direction
-    #     if before_picture is not None:
-    #         current_picture = context["pictures"][-1]
-    #         current_picture_index = len(context["pictures"]) - 1
-    #     else:
-    #         current_picture = context["pictures"][0]
-    #         current_picture_index = 0
+    if (picture_id == "" or could_not_find_picture) and len(context["pictures"]) > 0:
+        current_picture = context["pictures"][0]
+        current_picture_index = 0
 
-    # original_picture_index = current_picture_index
+    original_picture_index = current_picture_index
 
-    # context["original_picture_index"] = original_picture_index
+    context["original_picture_index"] = original_picture_index
     # context["pictures"] = list(
     #     map(
     #         lambda item: {
@@ -154,9 +149,6 @@ def gallery(request):
     #         context["pictures"],
     #     )
     # )
-    # context["grid_placeholders"] = [1] * (18 - len(context["pictures"]))
-    # context["picture"] = current_picture
-
-    context = {}
+    context["picture"] = current_picture
 
     return render(request, "pages/gallery.html.j2", context)
