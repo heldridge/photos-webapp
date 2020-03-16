@@ -122,8 +122,6 @@ def get_pictures(amount, before=None, after=None, tags=[], user=None):
         query_set = query_set.filter(favorite__user=user)
 
     if len(tags) > 0:
-        # These are both the same
-        # query_set = query_set.filter(tags__search=" ".join(tags))
         query_set = query_set.filter(indexed_tags_search=SearchQuery(" ".join(tags)))
 
     if before is not None:
