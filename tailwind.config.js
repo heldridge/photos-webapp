@@ -53,7 +53,9 @@ module.exports = {
             opacity: {
                 'high-emphasis': 'var(--opacity-text-high-emphasis)',
                 'medium-emphasis': 'var(--opacity-text-medium-emphasis)',
-                disabled: 'var(--opacity-text-disabled)'
+                disabled: 'var(--opacity-text-disabled)',
+                'message-close': 'var(--opacity-message-close)',
+                'message-close-hover': 'var(--opacity-message-close-hover)'
             },
             backgroundColor: {
                 main: 'var(--color-bg-main)',

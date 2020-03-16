@@ -69,6 +69,8 @@
     --color-button-disabled: #000000;
     --opacity-button-disabled: 50%;
     --color-bg-alternate: #f7fafc;
+    --opacity-message-close: 50%;
+    --opacity-message-close-hover: 100%;
 
     /* Messages */
     --color-bg-success: #aaf255;
@@ -119,6 +121,8 @@
     --color-button-disabled: #ffffff;
     --opacity-button-disabled: 100%;
     --color-bg-alternate: #1e1e1e;
+    --opacity-message-close: 87%;
+    --opacity-message-close-hover: 38%;
 
     /* Messages */
     --color-bg-success: #c6f68d;

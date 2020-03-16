@@ -339,7 +339,7 @@ function addMessage(text: string, classIdentifier: string) {
     Build message:
     <li class="rounded bg-error text-black pl-4 min-w-64 text-center mt-2 ml-2 z-10 md:text-lg message sm:h-10 ~*~Identifier~*~"> 
         ~*~Text~*~
-        <button class="pl-2 pr-4 h-full opacity-medium-emphasis hover:opacity-high-emphasis py-2 sm:py-0">
+        <button class="pl-2 pr-4 h-full opacity-message-close hover:opacity-message-close-hover py-2 sm:py-0">
             <i class="fas fa-times"></i>
         </button>
     </li>
@@ -351,7 +351,7 @@ function addMessage(text: string, classIdentifier: string) {
         message.innerHTML = text;
         let closeButton = document.createElement('button');
         closeButton.className =
-            'pl-2 pr-4 h-full opacity-medium-emphasis hover:opacity-high-emphasis py-2 sm:py-0';
+            'pl-2 pr-4 h-full opacity-message-close hover:opacity-message-close-hover py-2 sm:py-0';
         let closeIcon = document.createElement('i');
         closeIcon.className = 'fas fa-times';
         closeButton.appendChild(closeIcon);
