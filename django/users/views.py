@@ -9,9 +9,11 @@ from pictures.models import Picture, Favorite
 def profile(request):
     context = {}
     if request.user.is_authenticated:
-        context["pictures"] = Picture.objects.filter(
-            favorite__user=request.user
-        ).order_by("-id")[: project_settings.PAGE_SIZE + 1]
+        pictures = Picture.objects.filter(favorite__user=request.user).order_by("-id")[
+            : project_settings.PAGE_SIZE + 1
+        ]
+        context["pictures"] = pictures[: project_settings.PAGE_SIZE]
+        context["more_left"] = len(pictures) >= project_settings.PAGE_SIZE + 1
 
     return render(request, "users/profile.html.j2", context=context)
 
