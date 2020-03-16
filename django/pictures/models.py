@@ -33,6 +33,28 @@ class Picture(models.Model):
             )
             thumbnail_creator.start()
 
+    @property
+    def split_tags(self):
+        tags = str(self.tags).split()
+        data = {"above_tags": [], "below_tags": []}
+
+        max_width = 85  # Max width of the theoretical tag bar
+        expander_length = 5  # Width of the "click to expand" symbol
+        static_width_addition = 4  # How much to add in addition to each letter
+        current_width = 0
+        above = True
+        # TODO: Minor optimization, stop adding once above is hit
+        for tag in tags:
+            current_width += static_width_addition + len(tag)
+            if current_width + expander_length > max_width:
+                above = False
+
+            if above:
+                data["above_tags"].append(tag)
+            else:
+                data["below_tags"].append(tag)
+        return data
+
 
 class Favorite(models.Model):
     class Meta:
@@ -45,36 +67,6 @@ class Favorite(models.Model):
 ###################
 # UTILITY METHODS #
 ###################
-def get_split_tags(tags):
-    """
-    Splits an image's tags into "above" and "below" tags,
-    so they don't over-clutter the UI
-
-    Above and below are decided by estimating how wide
-    the resulting tag bar would be, and then putting a cap on
-    that width
-    """
-    tags = tags.split()
-    data = {"above_tags": [], "below_tags": []}
-
-    max_width = 85  # Max width of the theoretical tag bar
-    expander_length = 5  # Width of the "click to expand" symbol
-    static_width_addition = 4  # How much to add in addition to each letter
-    current_width = 0
-    above = True
-    # TODO: Minor optimization, stop adding once above is hit
-    for tag in tags:
-        current_width += static_width_addition + len(tag)
-        if current_width + expander_length > max_width:
-            above = False
-
-        if above:
-            data["above_tags"].append(tag)
-        else:
-            data["below_tags"].append(tag)
-    return data
-
-
 def get_pictures(amount, before=None, after=None, tags=[]):
     """Queries the database or elasticsearch for pictures
     Args:

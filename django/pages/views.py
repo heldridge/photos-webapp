@@ -7,7 +7,7 @@ from django.core import exceptions
 from django.shortcuts import render
 
 
-from pictures.models import Picture, Favorite, get_pictures, get_split_tags
+from pictures.models import Picture, Favorite, get_pictures
 
 
 def is_valid_tag(tag):
@@ -43,10 +43,7 @@ def index(request):
     pictures = list(get_pictures(settings.PAGE_SIZE + 1))
 
     context = {
-        "pictures": [
-            {"picture": picture, "tags": get_split_tags(picture.tags)}
-            for picture in pictures[: settings.PAGE_SIZE]
-        ],
+        "pictures": pictures,
         "grid_placeholders": [1] * (18 - len(pictures[: settings.PAGE_SIZE])),
         "more_left": len(pictures) >= settings.PAGE_SIZE + 1,
         "max_tag_length": settings.MAX_TAG_LENGTH,
@@ -101,10 +98,7 @@ def get_shared_search_gallery_context(request):
         "invalid_tag_char_regex": settings.INVALID_TAG_CHAR_REGEX,
         "searched_tags_data": searched_tags_data,
         "current_query": "+".join(searched_tags),
-        "pictures": [
-            {"picture": picture, "tags": get_split_tags(picture.tags)}
-            for picture in pictures
-        ],
+        "pictures": pictures,
         "grid_placeholders": [1] * (18 - len(pictures[: settings.PAGE_SIZE])),
         "render_next_button": render_next_button,
         "render_previous_button": render_previous_button,
@@ -117,16 +111,8 @@ def search(request):
 
 
 def gallery(request):
+    context = get_shared_search_gallery_context(request)
 
-    # context = get_baseline_context(request, True)
-    # before_picture = request.GET.get("before")
-
-    # if request.user.is_authenticated:
-    #     user = request.user
-    # else:
-    #     user = None
-
-    # Get the gallery picture id query
     picture_id = request.GET.get("p", "")
     current_picture = None
     current_picture_index = 0
@@ -139,7 +125,7 @@ def gallery(request):
             could_not_find_picture = True
         else:
             for i, picture in enumerate(context["pictures"]):
-                if picture["public_id"] == picture_id:
+                if picture["picture"]["public_id"] == picture_id:
                     current_picture_index = i
                     break
 
