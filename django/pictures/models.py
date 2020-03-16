@@ -33,6 +33,7 @@ class Picture(models.Model):
             )
             thumbnail_creator.start()
 
+    # TODO: Will get called multiple times in template. Maybe persist when it is created?
     @property
     def split_tags(self):
         tags = str(self.tags).split()
