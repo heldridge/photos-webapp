@@ -107,10 +107,7 @@ function setImage(index: number, stateAction: string = '') {
             // Remove previous tags
             removeChildren(imageTags);
             // Add the new tags
-            pictures[index].above_tags.forEach((tag: string) => {
-                addTag(imageTags, tag);
-            });
-            pictures[index].below_tags.forEach((tag: string) => {
+            pictures[index].tags.forEach((tag: string) => {
                 addTag(imageTags, tag);
             });
         }
