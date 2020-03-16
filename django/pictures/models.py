@@ -6,7 +6,8 @@ from django.db import models
 from django.conf import settings
 from django.core import exceptions
 from django.contrib.postgres.fields import ArrayField
-from django.contrib.postgres.search import SearchQuery
+from django.contrib.postgres.indexes import GinIndex
+from django.contrib.postgres.search import SearchQuery, SearchVectorField
 from sorl.thumbnail import get_thumbnail
 
 
@@ -20,8 +21,16 @@ class Picture(models.Model):
     updated_at = models.DateTimeField()
     public_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
 
+    # Note: be sure to update how this is done (trigger in postgres)
+    # once django releases a good way to do Stored Generated Columns
+    # https://stackoverflow.com/questions/59675402/django-full-text-searchvectorfield-obsolete-in-postgresql
+    indexed_tags_search = SearchVectorField(null=True)
+
     # uploaded_by = ForeignKey
     # galleries = ForeignKey (many to many???)
+
+    class Meta:
+        indexes = [GinIndex(fields=["indexed_tags_search"])]
 
     def __str__(self):
         return self.title
@@ -112,7 +121,7 @@ def get_pictures(amount, before=None, after=None, tags=[]):
     if len(tags) > 0:
         # These are both the same
         # query_set = query_set.filter(tags__search=" ".join(tags))
-        query_set = query_set.filter(tags__search=SearchQuery(" ".join(tags)))
+        query_set = query_set.filter(indexed_tags_search=SearchQuery(" ".join(tags)))
 
     if before is not None:
         # For before we want to go "backwards," to get the pictures
