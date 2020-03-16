@@ -3,15 +3,13 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from . import forms
 
-from pictures.models import Picture
+from pictures.models import Picture, get_pictures
 
 
 def profile(request):
     context = {}
     if request.user.is_authenticated:
-        pictures = Picture.objects.filter(favorite__user=request.user).order_by("-id")[
-            : project_settings.PAGE_SIZE + 1
-        ]
+        pictures = list(get_pictures(project_settings.PAGE_SIZE + 1, user=request.user))
         context["pictures"] = pictures[: project_settings.PAGE_SIZE]
         context["more_left"] = len(pictures) >= project_settings.PAGE_SIZE + 1
 
