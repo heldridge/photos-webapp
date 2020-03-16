@@ -136,19 +136,18 @@ def gallery(request):
     original_picture_index = current_picture_index
 
     context["original_picture_index"] = original_picture_index
-    # context["pictures"] = list(
-    #     map(
-    #         lambda item: {
-    #             "photo": item["photo"],
-    #             "title": item["title"],
-    #             "public_id": item["public_id"],
-    #             "above_tags": item["above_tags"],
-    #             "below_tags": item["below_tags"],
-    #             "favorite": item["favorite"],
-    #         },
-    #         context["pictures"],
-    #     )
-    # )
+    # Need to make it json serializable
+    context["pictures"] = list(
+        map(
+            lambda picture: {
+                "photo": str(picture.photo),
+                "title": picture.title,
+                "public_id": picture.public_id,
+                "tags": str(picture.tags).split(),
+            },
+            context["pictures"],
+        )
+    )
     context["picture"] = current_picture
 
     return render(request, "pages/gallery.html.j2", context)
