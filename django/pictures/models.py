@@ -6,6 +6,7 @@ from django.db import models
 from django.conf import settings
 from django.core import exceptions
 from django.contrib.postgres.fields import ArrayField
+from django.contrib.postgres.search import SearchQuery
 from sorl.thumbnail import get_thumbnail
 
 
@@ -109,7 +110,9 @@ def get_pictures(amount, before=None, after=None, tags=[]):
     query_set = Picture.objects
 
     if len(tags) > 0:
-        query_set = query_set.filter(tags__search=" ".join(tags))
+        # These are both the same
+        # query_set = query_set.filter(tags__search=" ".join(tags))
+        query_set = query_set.filter(tags__search=SearchQuery(" ".join(tags)))
 
     if before is not None:
         # For before we want to go "backwards," to get the pictures
