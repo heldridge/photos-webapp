@@ -84,16 +84,22 @@ def get_pictures(amount, before=None, after=None, tags=[]):
     Raises:
         ``ValueError``: If both before and after are specified
     """
+    # Normalize the values of before and after
+    if before == "":
+        before = None
+    if after == "":
+        after = None
+
     if before is not None and after is not None:
         raise ValueError("Only one of before and after can be specified")
 
     # Fetch the correct before or after picture
-    if before is not None and before != "":
+    if before is not None:
         try:
             before_picture = Picture.objects.get(public_id=before)
         except (exceptions.ValidationError, Picture.DoesNotExist):
             before = None
-    if after is not None and after != "":
+    if after is not None:
         try:
             after_picture = Picture.objects.get(public_id=after)
         except (exceptions.ValidationError, Picture.DoesNotExist):
