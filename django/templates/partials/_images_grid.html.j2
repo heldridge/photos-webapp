@@ -4,26 +4,26 @@
 <li class="mt-5 px-3">
     <div class="w-picture-card">
 
-        <a href="{% url 'gallery' %}?p={{ picture.picture.public_id }}&q={{ current_full_query }}">
+        <a href="{% url 'gallery' %}?p={{ picture.public_id }}&q={{ current_full_query }}">
             <!-- old: "h-picture-card bg-white border rounded-lg overflow-hidden shadow link-image" -->
             <div class="h-picture-card bg-surface-1 border-image-card rounded-lg overflow-hidden shadow link-image">
-                {% thumbnail picture.picture.photo "272" as im %}
+                {% thumbnail picture.photo "272" as im %}
                     <img class="object-cover" src="{{ im.url }}" alt="">
                 {% endthumbnail %}
             </div>
         </a>
 
-        <h3 class="text-2xl font-semibold py-2 opacity-high-emphasis">{{ picture.picture.title }}</h3>
+        <h3 class="text-2xl font-semibold py-2 opacity-high-emphasis">{{ picture.title }}</h3>
 
         <div class="card-tags flex flex-row flex-wrap">
-            {% for tag in picture.tags.above_tags %}
+            {% for tag in picture.split_tags.above_tags %}
             <!-- old: "tag bg-gray-300 hover:bg-gray-400 rounded py-1 px-2 text-xs mr-2 font-medium mb-2 text-gray-600 hover:text-black"-->
             <a href="{% url 'search'%}?q={{ tag.title }}" class="tag rounded py-1 px-2 text-xs mr-2 font-medium mb-2 bg-tag hover:bg-tag-hover text-tag hover:text-tag-hover">
                 <span class="opacity-medium-emphasis">{{ tag }}</span>
             </a>
             {% endfor %}
-            {% if picture.tags.below_tags %}
-            {% for tag in picture.tags.below_tags %}
+            {% if picture.split_tags.below_tags %}
+            {% for tag in picture.split_tags.below_tags %}
             <!-- old: tag bg-gray-300 hover:bg-gray-400 rounded py-1 px-2 text-xs mr-2 font-medium mb-2 text-gray-600 hover:text-black collapsed-tag hidden" -->
             <a href="{% url 'search'%}?q={{ tag.title }}" class="tag rounded py-1 px-2 text-xs mr-2 font-medium mb-2 collapsed-tag bg-tag hover:bg-tag-hover text-tag hover:text-tag-hover hidden">
                 <span class="opacity-medium-emphasis">{{ tag }}</span>
