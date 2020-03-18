@@ -127,6 +127,7 @@ function setImage(index: number, stateAction: string = '') {
         let query = getUrlParameter('q');
         let after = getUrlParameter('after');
         let before = getUrlParameter('before');
+        let favorites = getUrlParameter('favorites');
 
         if (stateAction) {
             let newState = `?p=${pictures[index].public_id}`;
@@ -139,6 +140,12 @@ function setImage(index: number, stateAction: string = '') {
             if (before) {
                 newState += `&before=${before}`;
             }
+            if (favorites) {
+                newState += `&favorites=${favorites}`;
+            }
+
+            console.log('HERE!!!!');
+            console.log(newState);
 
             if (stateAction === 'push') {
                 history.pushState({ index: index }, '', newState);
