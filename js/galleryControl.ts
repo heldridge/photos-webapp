@@ -124,6 +124,7 @@ function setImage(index: number, stateAction: string = '') {
 
         currentIndex = index;
 
+        // TODO: Iterate over url params instead of building individually
         let query = getUrlParameter('q');
         let after = getUrlParameter('after');
         let before = getUrlParameter('before');
