@@ -96,7 +96,7 @@ def get_shared_search_gallery_context(request):
     render_next_button, render_previous_button = get_render_next_prev(
         before_id, after_id, more_left
     )
-    
+
     return {
         "max_tag_length": settings.MAX_TAG_LENGTH,
         "min_tag_length": settings.MIN_TAG_LENGTH,
