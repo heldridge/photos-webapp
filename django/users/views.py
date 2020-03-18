@@ -4,13 +4,19 @@ from django.shortcuts import render, redirect
 from . import forms
 
 from pictures.models import Picture, get_pictures
+from sorl.thumbnail import get_thumbnail
 
 
 def profile(request):
     context = {}
     if request.user.is_authenticated:
         pictures = list(get_pictures(project_settings.PAGE_SIZE + 1, user=request.user))
-        context["pictures"] = pictures[: project_settings.PAGE_SIZE]
+        context["pictures"] = [{
+            'public_id': picture.public_id,
+            'thumbnail': str(get_thumbnail(picture.photo, '272')),
+            'title': picture.title,
+            'split_tags': picture.split_tags
+        } for picture in pictures[:project_settings.PAGE_SIZE]]
         context["more_left"] = len(pictures) >= project_settings.PAGE_SIZE + 1
         context["grid_placeholders"] = [1] * (
             18 - len(pictures[: project_settings.PAGE_SIZE])
