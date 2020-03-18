@@ -7,7 +7,6 @@
         <a 
             href="{% url 'gallery' %}?p={{ picture.public_id }}&q={{ q }}{% if before_id %}&before={{ before_id }}{% endif %}{% if after_id %}&after={{ after_id }}{% endif %}{% if favorites %}&favorites=true{% endif %}"
         >
-            <!-- old: "h-picture-card bg-white border rounded-lg overflow-hidden shadow link-image" -->
             <div class="h-picture-card bg-surface-1 border-image-card rounded-lg overflow-hidden shadow link-image">
                 {% thumbnail picture.photo "272" as im %}
                     <img class="object-cover" src="{{ im.url }}" alt="">
@@ -19,19 +18,17 @@
 
         <div class="card-tags flex flex-row flex-wrap">
             {% for tag in picture.split_tags.above_tags %}
-            <!-- old: "tag bg-gray-300 hover:bg-gray-400 rounded py-1 px-2 text-xs mr-2 font-medium mb-2 text-gray-600 hover:text-black"-->
             <a href="{% url 'search'%}?q={{ tag }}" class="tag rounded py-1 px-2 text-xs mr-2 font-medium mb-2 bg-tag hover:bg-tag-hover text-tag hover:text-tag-hover">
                 <span class="opacity-medium-emphasis">{{ tag }}</span>
             </a>
             {% endfor %}
             {% if picture.split_tags.below_tags %}
             {% for tag in picture.split_tags.below_tags %}
-            <!-- old: tag bg-gray-300 hover:bg-gray-400 rounded py-1 px-2 text-xs mr-2 font-medium mb-2 text-gray-600 hover:text-black collapsed-tag hidden" -->
+
             <a href="{% url 'search'%}?q={{ tag }}" class="tag rounded py-1 px-2 text-xs mr-2 font-medium mb-2 collapsed-tag bg-tag hover:bg-tag-hover text-tag hover:text-tag-hover hidden">
                 <span class="opacity-medium-emphasis">{{ tag }}</span>
             </a>
             {% endfor %}
-            <!-- old: "tag bg-gray-300 hover:bg-gray-400 rounded py-1 px-3 text-xs mr-2 mb-2 text-black tag-expander" -->
             <button class="tag rounded py-1 px-3 text-xs mr-2 mb-2 tag-expander bg-tag hover:bg-tag-hover hover:text-tag-hover" onclick="expandTags(this)">
                 <i class="fas fa-level-down-alt opacity-medium-emphasis"></i>
             </button>
