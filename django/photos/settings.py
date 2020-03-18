@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "sorl.thumbnail",
     "users",
     "debug_toolbar",
+    'template_timings_panel'
 ]
 
 MIDDLEWARE = [
@@ -206,4 +207,5 @@ DEBUG_TOOLBAR_PANELS = [
     "debug_toolbar.panels.logging.LoggingPanel",
     "debug_toolbar.panels.redirects.RedirectsPanel",
     "debug_toolbar.panels.profiling.ProfilingPanel",
+    'template_timings_panel.panels.TemplateTimings.TemplateTimings'
 ]
