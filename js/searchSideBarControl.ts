@@ -134,3 +134,11 @@ function addTagsInputUpdated() {
         addClass(addTagsIcon, addTagsIconDisabledClass);
     }
 }
+
+function updateFavoritesSearch(e: HTMLInputElement) {
+    if (e.checked) {
+        document.location.href = `/search?q=${currentQuery}&favorites=true`;
+    } else {
+        document.location.href = `/search?q=${currentQuery}`;
+    }
+}
