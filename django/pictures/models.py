@@ -46,29 +46,25 @@ class Picture(models.Model):
     # TODO: Will get called multiple times in template. Maybe persist when it is created?
     @property
     def split_tags(self):
-        # tags = str(self.tags).split()
-        # data = {"above_tags": [], "below_tags": []}
+        tags = str(self.tags).split()
+        data = {"above_tags": [], "below_tags": []}
 
-        # max_width = 85  # Max width of the theoretical tag bar
-        # expander_length = 5  # Width of the "click to expand" symbol
-        # static_width_addition = 4  # How much to add in addition to each letter
-        # current_width = 0
-        # above = True
-        # # TODO: Minor optimization, stop adding once above is hit
-        # for tag in tags:
-        #     current_width += static_width_addition + len(tag)
-        #     if current_width + expander_length > max_width:
-        #         above = False
+        max_width = 85  # Max width of the theoretical tag bar
+        expander_length = 5  # Width of the "click to expand" symbol
+        static_width_addition = 4  # How much to add in addition to each letter
+        current_width = 0
+        above = True
+        # TODO: Minor optimization, stop adding once above is hit
+        for tag in tags:
+            current_width += static_width_addition + len(tag)
+            if current_width + expander_length > max_width:
+                above = False
 
-        #     if above:
-        #         data["above_tags"].append(tag)
-        #     else:
-        #         data["below_tags"].append(tag)
-        # return data
-        return {
-            'above_tags': ['a'],
-            'below_tags': []
-        }
+            if above:
+                data["above_tags"].append(tag)
+            else:
+                data["below_tags"].append(tag)
+        return data
 
 
 class Favorite(models.Model):
