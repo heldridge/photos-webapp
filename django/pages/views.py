@@ -50,12 +50,15 @@ def index(request):
     # print(thumbs)
 
     context = {
-        "pictures": [{
-            'public_id': picture.public_id,
-            'thumbnail': str(get_thumbnail(picture.photo, '272')),
-            'title': picture.title,
-            'split_tags': picture.split_tags
-        } for picture in pictures[:settings.PAGE_SIZE]],
+        "pictures": [
+            {
+                "public_id": picture.public_id,
+                "thumbnail": str(get_thumbnail(picture.photo, "272")),
+                "title": picture.title,
+                "split_tags": picture.split_tags,
+            }
+            for picture in pictures[: settings.PAGE_SIZE]
+        ],
         "grid_placeholders": [1] * (18 - len(pictures[: settings.PAGE_SIZE])),
         "more_left": len(pictures) >= settings.PAGE_SIZE + 1,
         "max_tag_length": settings.MAX_TAG_LENGTH,
@@ -128,12 +131,18 @@ def get_shared_search_gallery_context(request):
 
 def search(request):
     context = get_shared_search_gallery_context(request)
-    context['pictures'] = [{
-        'public_id': picture.public_id,
-        'thumbnail': str(get_thumbnail(picture.photo, '272')),
-        'title': picture.title,
-        'split_tags': picture.split_tags
-    } for picture in context['pictures'][:settings.PAGE_SIZE]]
+    context["pictures"] = [
+        {
+            "public_id": picture.public_id,
+            "thumbnail": str(get_thumbnail(picture.photo, "272")),
+            "title": picture.title,
+            "split_tags": picture.split_tags,
+        }
+        for picture in context["pictures"][: settings.PAGE_SIZE]
+    ]
+
+    print(context["searched_tags_data"])
+
     return render(request, "pages/search.html.j2", context)
 
 
@@ -187,7 +196,7 @@ def gallery(request):
                 "public_id": picture.public_id,
                 "tags": str(picture.tags).split(),
                 "favorite": picture.public_id in favorite_ids,
-                'thumbnail': str(get_thumbnail(picture.photo, '272'))
+                "thumbnail": str(get_thumbnail(picture.photo, "272")),
             },
             context["pictures"],
         )
