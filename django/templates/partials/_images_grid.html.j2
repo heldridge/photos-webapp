@@ -8,9 +8,7 @@
             href="{% url 'gallery' %}?p={{ picture.public_id }}&q={{ q }}{% if before_id %}&before={{ before_id }}{% endif %}{% if after_id %}&after={{ after_id }}{% endif %}{% if favorites %}&favorites=true{% endif %}"
         >
             <div class="h-picture-card bg-surface-1 border-image-card rounded-lg overflow-hidden shadow link-image">
-                {% thumbnail picture.photo "272" as im %}
-                    <img class="object-cover" src="{{ im.url }}" alt="">
-                {% endthumbnail %}
+                <img class="object-cover" src="media/{{ picture.thumbnail }}" alt="">
             </div>
         </a>
 

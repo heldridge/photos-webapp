@@ -9,6 +9,7 @@ from django.shortcuts import render
 
 
 from pictures.models import Picture, Favorite, get_pictures
+from sorl.thumbnail import get_thumbnail
 
 
 def is_valid_tag(tag):
@@ -45,8 +46,16 @@ def index(request):
 
     # Note: Bad performance is due to calling thumbnailer in template
 
+    # thumbs = [str(get_thumbnail(picture.photo, '272')) for picture in pictures]
+    # print(thumbs)
+
     context = {
-        "pictures": pictures[: settings.PAGE_SIZE],
+        "pictures": [{
+            'public_id': picture.public_id,
+            'thumbnail': str(get_thumbnail(picture.photo, '272')),
+            'title': picture.title,
+            'split_tags': picture.split_tags
+        } for picture in pictures[:settings.PAGE_SIZE]],
         "grid_placeholders": [1] * (18 - len(pictures[: settings.PAGE_SIZE])),
         "more_left": len(pictures) >= settings.PAGE_SIZE + 1,
         "max_tag_length": settings.MAX_TAG_LENGTH,
