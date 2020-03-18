@@ -187,6 +187,7 @@ def gallery(request):
                 "public_id": picture.public_id,
                 "tags": str(picture.tags).split(),
                 "favorite": picture.public_id in favorite_ids,
+                'thumbnail': str(get_thumbnail(picture.photo, '272'))
             },
             context["pictures"],
         )
