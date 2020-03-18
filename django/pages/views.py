@@ -128,6 +128,12 @@ def get_shared_search_gallery_context(request):
 
 def search(request):
     context = get_shared_search_gallery_context(request)
+    context['pictures'] = [{
+        'public_id': picture.public_id,
+        'thumbnail': str(get_thumbnail(picture.photo, '272')),
+        'title': picture.title,
+        'split_tags': picture.split_tags
+    } for picture in context['pictures'][:settings.PAGE_SIZE]]
     return render(request, "pages/search.html.j2", context)
 
 
