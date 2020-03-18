@@ -144,9 +144,6 @@ function setImage(index: number, stateAction: string = '') {
                 newState += `&favorites=${favorites}`;
             }
 
-            console.log('HERE!!!!');
-            console.log(newState);
-
             if (stateAction === 'push') {
                 history.pushState({ index: index }, '', newState);
             } else if (stateAction === 'replace') {
