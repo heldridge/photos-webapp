@@ -141,8 +141,6 @@ def search(request):
         for picture in context["pictures"][: settings.PAGE_SIZE]
     ]
 
-    print(context["searched_tags_data"])
-
     return render(request, "pages/search.html.j2", context)
 
 
