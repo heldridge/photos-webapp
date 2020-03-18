@@ -43,6 +43,8 @@ def index(request):
     # a reverse to get the last element, after doing a slice
     pictures = list(get_pictures(settings.PAGE_SIZE + 1))
 
+    # Note: Bad performance is due to calling thumbnailer in template
+
     context = {
         "pictures": pictures[: settings.PAGE_SIZE],
         "grid_placeholders": [1] * (18 - len(pictures[: settings.PAGE_SIZE])),
