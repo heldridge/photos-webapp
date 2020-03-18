@@ -122,7 +122,9 @@ def get_pictures(amount, before=None, after=None, tags=[], user=None):
         query_set = query_set.filter(favorite__user=user)
 
     if len(tags) > 0:
-        query_set = query_set.filter(indexed_tags_search=SearchQuery(" ".join(tags)))
+        query_set = query_set.filter(
+            indexed_tags_search=SearchQuery(" ".join(tags), config="simple")
+        )
 
     if before is not None:
         # For before we want to go "backwards," to get the pictures
