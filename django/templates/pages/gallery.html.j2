@@ -200,7 +200,7 @@
 
             <div class="hidden md:flex justify-center mt-4">
                 <a 
-                    href="{% url 'search' %}?q={{ current_full_query }}"
+                    href="{% url 'search' %}?q={{ q }}{% if before_id %}&before={{ before_id }}{% endif %}{% if after_id %}&after={{ after_id }}{% endif %}{% if favorites %}&favorites=true{% endif %}"
                     class="rounded mx-6 py-2 pl-3 pr-3 lg:text-xl flex bg-basic hover:bg-basic-hover text-black"
                 >
                     <div class="hidden lg:inline-block">
