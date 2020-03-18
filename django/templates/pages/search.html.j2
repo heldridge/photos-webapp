@@ -43,13 +43,15 @@
                 </div>
             {% endif %}
 
+            {% if user.is_authenticated %}
             <div class="flex mt-4 items-center">
                 <h1 class="text-xl font-semibold opacity-high-emphasis mr-4">
                     Favorites Only
                 </h1>
 
-                <input type="checkbox" class="text-2xl rounded search-checkbox" onclick=updateFavoritesSearch(this)>
+                <input type="checkbox" {% if favorites %}checked="checked"{% endif %}class="text-2xl rounded search-checkbox" onclick=updateFavoritesSearch(this)>
             </div>
+            {% endif %}
             
         </div>
 
