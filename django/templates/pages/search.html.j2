@@ -17,7 +17,7 @@
                             oninput="addTagsInputUpdated()"
                             onkeyup="addTagsInputOnKeyUp(event)"">
                     </div>
-                    <a href="{% url 'search'%}?q={{ q }}" class="bg-button-disabled pointer-events-none px-3 py-2 disable-transition-on-theme-change" id="addTagsButton">
+                    <a href="{% url 'search'%}?{% if favorites %}&favorites=true{% endif %}&q={{ q }}" class="bg-button-disabled pointer-events-none px-3 py-2 disable-transition-on-theme-change" id="addTagsButton">
                         <i class="fas fa-plus opacity-disabled" id="addTagsIcon"></i>
                     </a>
                 </div>
