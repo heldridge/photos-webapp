@@ -46,7 +46,7 @@ let emptyHeartIcon = document.createElement('i');
 emptyHeartIcon.className = 'far fa-heart';
 
 let fullHeartIcon = document.createElement('i');
-fullHeartIcon.className = 'fas fa-heart';
+fullHeartIcon.className = 'fas fa-heart text-error';
 
 setImage(originalPictureIndex, 'replace');
 
