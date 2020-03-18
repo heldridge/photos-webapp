@@ -8,7 +8,7 @@ from sorl.thumbnail import get_thumbnail
 
 
 def profile(request):
-    context = {}
+    context = {'favorites': True}
     if request.user.is_authenticated:
         pictures = list(get_pictures(project_settings.PAGE_SIZE + 1, user=request.user))
         context["pictures"] = [{
@@ -21,7 +21,6 @@ def profile(request):
         context["grid_placeholders"] = [1] * (
             18 - len(pictures[: project_settings.PAGE_SIZE])
         )
-
     return render(request, "users/profile.html.j2", context=context)
 
 
