@@ -10,7 +10,7 @@ class Migration(migrations.Migration):
     migration = """
         CREATE TRIGGER tagsearchupdate BEFORE INSERT OR UPDATE
         ON pictures_picture FOR EACH ROW EXECUTE PROCEDURE
-        tsvector_update_trigger(indexed_tags_search, 'pg_catalog.english', tags);
+        tsvector_update_trigger(indexed_tags_search, 'pg_catalog.simple', tags);
 
         -- Force triggers to run and populate the text_search column.
         UPDATE pictures_picture set ID = ID;
