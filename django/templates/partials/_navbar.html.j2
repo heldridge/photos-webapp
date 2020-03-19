@@ -33,7 +33,10 @@
     </button>
 
     {% if user.is_authenticated %}
-    <a href="{% url 'profile' %}" class="bg-primary hover:bg-primary-hover rounded text-black px-2 md:px-3 py-1 md:py-2 text-black opacity-high-emphasis md:text-lg ml-1 mr-3 md:mx-8">
+    <a href="{% url 'upload' %}" class="bg-primary hover:bg-primary-hover rounded text-black px-2 md:px-3 py-1 md:py-2 text-black opacity-high-emphasis md:text-lg ml-1 mr-3">
+      Upload
+    </a>
+    <a href="{% url 'profile' %}" class="bg-primary hover:bg-primary-hover rounded text-black px-2 md:px-3 py-1 md:py-2 text-black opacity-high-emphasis md:text-lg ml-1 mr-3 md:mr-8 md:ml-4">
       Profile
     </a>
     {% else %}
