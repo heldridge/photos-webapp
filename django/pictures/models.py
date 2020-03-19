@@ -19,8 +19,8 @@ class Picture(models.Model):
     description = models.TextField(blank=True)
     photo = models.ImageField(upload_to="pictures/%Y/%m/%d/")
     tags = models.TextField(blank=True)
-    uploaded_at = models.DateTimeField()
-    updated_at = models.DateTimeField()
+    uploaded_at = models.DateTimeField(default=datetime.datetime.now)
+    updated_at = models.DateTimeField(default=datetime.datetime.now)
     public_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
 
     # Note: be sure to update how this is done (trigger in postgres)
