@@ -10,6 +10,8 @@ from django.contrib.postgres.indexes import GinIndex
 from django.contrib.postgres.search import SearchQuery, SearchVectorField
 from sorl.thumbnail import get_thumbnail
 
+from users.models import CustomUser
+
 
 # Create your models here.
 class Picture(models.Model):
@@ -26,8 +28,7 @@ class Picture(models.Model):
     # https://stackoverflow.com/questions/59675402/django-full-text-searchvectorfield-obsolete-in-postgresql
     indexed_tags_search = SearchVectorField(null=True)
 
-    # uploaded_by = ForeignKey
-    # galleries = ForeignKey (many to many???)
+    uploaded_by = models.ForeignKey(CustomUser, models.SET_NULL, blank=True, null=True)
 
     class Meta:
         indexes = [GinIndex(fields=["indexed_tags_search"])]
