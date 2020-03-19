@@ -56,13 +56,18 @@ class Upload(View):
         return render(request, "upload.html.j2", {"form": form})
 
     def post(self, request):
-        form = PictureUploadForm(request.POST, request.FILES)
-        if form.is_valid():
-            picture = form.save(commit=False)
-            picture.user = request.user
-            picture.save()
+        if request.user.is_authenticated:
+            form = PictureUploadForm(request.POST, request.FILES)
+            if form.is_valid():
+                new_picture = form.save(commit=False)
+                new_picture.user = request.user
+                new_picture.save()
 
-            messages.success(request, "Upload Complete!")
-            return redirect("upload")
+                messages.success(request, "Upload Complete!")
+                return redirect("upload")
+            else:
+                return render(request, "upload.html.j2", {"form": form})
         else:
+            form = PictureUploadForm()
+            messages.error(request, "You must be logged in to upload images")
             return render(request, "upload.html.j2", {"form": form})
