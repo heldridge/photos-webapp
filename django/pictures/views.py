@@ -45,3 +45,8 @@ class Favorites(View):
         else:
             pass
         return HttpResponse("OK")
+
+
+def upload(request):
+    return render(request, "upload.html.j2")
+
