@@ -9,6 +9,8 @@ from django.core.validators import RegexValidator
 from django.contrib.postgres.fields import ArrayField
 from django.contrib.postgres.indexes import GinIndex
 from django.contrib.postgres.search import SearchQuery, SearchVectorField
+from django.utils.timezone import now
+
 from sorl.thumbnail import get_thumbnail
 
 from users.models import CustomUser
@@ -29,8 +31,8 @@ class Picture(models.Model):
             )
         ],
     )
-    uploaded_at = models.DateTimeField()
-    updated_at = models.DateTimeField()
+    uploaded_at = models.DateTimeField(default=now)
+    updated_at = models.DateTimeField(default=now)
     public_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
 
     # Note: be sure to update how this is done (trigger in postgres)
