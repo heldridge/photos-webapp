@@ -14,7 +14,11 @@
 </div>
 {% endif %}
 
-<h1>Upload</h1>
+<form method = "post" enctype="multipart/form-data" class='text-black'> 
+    {% csrf_token %} 
+    {{ form.as_p }} 
+    <button type="submit">Upload</button> 
+</form> 
 
 <script type="text/javascript" src="{% static 'js/basic.js' %}"></script>
 {% endblock %}

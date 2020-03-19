@@ -3,8 +3,11 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.views import View
 from psycopg2.errors import UniqueViolation
+from django.contrib import messages
+from django.shortcuts import render, redirect
 
 from pictures.models import Picture, Favorite
+from .forms import PictureUploadForm
 
 
 # Create your views here.
@@ -47,6 +50,19 @@ class Favorites(View):
         return HttpResponse("OK")
 
 
-def upload(request):
-    return render(request, "upload.html.j2")
+class Upload(View):
+    def get(self, request):
+        form = PictureUploadForm()
+        return render(request, "upload.html.j2", {"form": form})
 
+    def post(self, request):
+        form = PictureUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            picture = form.save(commit=False)
+            picture.user = request.user
+            picture.save()
+
+            messages.success(request, "Upload Complete!")
+            return redirect("upload")
+        else:
+            return render(request, "upload.html.j2", {"form": form})
