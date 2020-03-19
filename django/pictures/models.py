@@ -5,6 +5,7 @@ import uuid
 from django.db import models
 from django.conf import settings
 from django.core import exceptions
+from django.core.validators import RegexValidator
 from django.contrib.postgres.fields import ArrayField
 from django.contrib.postgres.indexes import GinIndex
 from django.contrib.postgres.search import SearchQuery, SearchVectorField
@@ -18,9 +19,18 @@ class Picture(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField(blank=True)
     photo = models.ImageField(upload_to="pictures/%Y/%m/%d/")
-    tags = models.TextField(blank=True)
-    uploaded_at = models.DateTimeField(default=datetime.datetime.now)
-    updated_at = models.DateTimeField(default=datetime.datetime.now)
+    tags = models.TextField(
+        blank=True,
+        validators=[
+            RegexValidator(
+                r"[a-zA-Z0-9- ]*",
+                "Tags must only contain characters lowercase a-z, numbers, and dashes (-)",
+                code="invalid",
+            )
+        ],
+    )
+    uploaded_at = models.DateTimeField()
+    updated_at = models.DateTimeField()
     public_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
 
     # Note: be sure to update how this is done (trigger in postgres)
