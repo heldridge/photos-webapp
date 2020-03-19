@@ -60,7 +60,7 @@ class Upload(View):
             form = PictureUploadForm(request.POST, request.FILES)
             if form.is_valid():
                 new_picture = form.save(commit=False)
-                new_picture.user = request.user
+                new_picture.uploaded_by = request.user
                 new_picture.save()
 
                 messages.success(request, "Upload Complete!")
