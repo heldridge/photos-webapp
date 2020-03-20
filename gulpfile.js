@@ -77,8 +77,16 @@ function processJavascript(cb) {
             outputFileName: 'register.js',
             files: [
                 'js/navbarControl.ts',
-                'js/registerControl.ts',
-                'js/classUtils.ts'
+                'js/classUtils.ts',
+                'js/formsControl.ts'
+            ]
+        },
+        {
+            outputFileName: 'upload.js',
+            files: [
+                'js/navBarControl.ts',
+                'js/classUtils.ts',
+                'js/formsControl.ts'
             ]
         }
     ];
