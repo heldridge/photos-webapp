@@ -4,26 +4,9 @@ from django.contrib.auth.forms import (
     UserChangeForm,
 )
 from django import forms
+from django.conf import settings
 from django.utils.translation import ugettext, ugettext_lazy as _
 from .models import CustomUser
-
-_FORM_FIELD_CLASSES = [
-    "focus:outline-none",
-    "focus:border-input-selected",
-    "appearance-none",
-    "py-3",
-    "bg-surface-1",
-    "opacity-high-emphasis",
-    "rounded",
-    "border-2",
-    "border-default",
-    "text-indent",
-    "shadow-none",
-    "border-color-transition",
-    "disable-transition-on-theme-change",
-]
-
-_FORM_FIELD_ERROR_CLASSES = ["border-error"]
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -33,19 +16,19 @@ class CustomUserCreationForm(UserCreationForm):
         super().__init__(*args, **kwargs)
 
         self.fields["display_name"].widget.attrs.update(
-            {"class": " ".join(_FORM_FIELD_CLASSES), "autofocus": ""}
+            {"class": " ".join(settings.FORM_FIELD_CLASSES), "autofocus": ""}
         )
 
         self.fields["email"].widget.attrs.update(
-            {"class": " ".join(_FORM_FIELD_CLASSES)}
+            {"class": " ".join(settings.FORM_FIELD_CLASSES)}
         )
 
         self.fields["password1"].widget.attrs.update(
-            {"class": " ".join(_FORM_FIELD_CLASSES)}
+            {"class": " ".join(settings.FORM_FIELD_CLASSES)}
         )
 
         self.fields["password2"].widget.attrs.update(
-            {"class": " ".join(_FORM_FIELD_CLASSES)}
+            {"class": " ".join(settings.FORM_FIELD_CLASSES)}
         )
 
         self.fields["display_name"].initial = None
@@ -59,9 +42,9 @@ class CustomUserCreationForm(UserCreationForm):
         for f in self.errors:
             self.fields[f].widget.attrs.update(
                 {
-                    "class": " ".join(_FORM_FIELD_CLASSES)
+                    "class": " ".join(settings.FORM_FIELD_CLASSES)
                     + " "
-                    + " ".join(_FORM_FIELD_ERROR_CLASSES),
+                    + " ".join(settings.FORM_FIELD_ERROR_CLASSES),
                     "onfocus": "removeErrorBorder(this)",
                 }
             )
@@ -80,13 +63,13 @@ class CustomAuthenticationForm(AuthenticationForm):
 
         self.fields["username"].widget.attrs.update(
             {
-                "class": " ".join(_FORM_FIELD_CLASSES),
+                "class": " ".join(settings.FORM_FIELD_CLASSES),
                 "onfocusout": "addInvalidBorder(this)",
             }
         )
         self.fields["password"].widget.attrs.update(
             {
-                "class": " ".join(_FORM_FIELD_CLASSES),
+                "class": " ".join(settings.FORM_FIELD_CLASSES),
                 "onfocusout": "addInvalidBorder(this)",
             }
         )
@@ -103,5 +86,5 @@ class UpdateDisplayNameForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
 
         self.fields["display_name"].widget.attrs.update(
-            {"class": " ".join(_FORM_FIELD_CLASSES),}
+            {"class": " ".join(settings.FORM_FIELD_CLASSES),}
         )
