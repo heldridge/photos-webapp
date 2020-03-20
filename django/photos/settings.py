@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     "sorl.thumbnail",
     "users",
     "debug_toolbar",
-    'template_timings_panel'
+    "template_timings_panel",
 ]
 
 MIDDLEWARE = [
@@ -207,5 +207,24 @@ DEBUG_TOOLBAR_PANELS = [
     "debug_toolbar.panels.logging.LoggingPanel",
     "debug_toolbar.panels.redirects.RedirectsPanel",
     "debug_toolbar.panels.profiling.ProfilingPanel",
-    'template_timings_panel.panels.TemplateTimings.TemplateTimings'
+    "template_timings_panel.panels.TemplateTimings.TemplateTimings",
 ]
+
+FORM_FIELD_CLASSES = [
+    "focus:outline-none",
+    "focus:border-input-selected",
+    "appearance-none",
+    "py-3",
+    "my-3",
+    "bg-surface-1",
+    "opacity-high-emphasis",
+    "rounded",
+    "border-2",
+    "border-default",
+    "text-indent",
+    "shadow-none",
+    "border-color-transition",
+    "disable-transition-on-theme-change",
+]
+
+FORM_FIELD_ERROR_CLASSES = ["border-error"]
