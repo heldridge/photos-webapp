@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views import View
@@ -13,15 +14,21 @@ from .forms import PictureUploadForm
 # Create your views here.
 def picture(request, picture_public_id):
 
-    target_picture = Picture.objects.get(public_id=picture_public_id)
-
-    context = {
-        "photo": str(target_picture.photo),
-        "title": target_picture.title,
-        "tags": str(target_picture.tags).split(),
-        "max_tag_length": settings.MAX_TAG_LENGTH,
-        "invalid_tag_char_regex": settings.INVALID_TAG_CHAR_REGEX,
-    }
+    try:
+        target_picture = Picture.objects.get(public_id=picture_public_id)
+    except (ObjectDoesNotExist, ValidationError):
+        # ObjectDoesNotExist for a uuid not in pictures
+        # ValidationError for a bad uuid
+        print("HERE!!!!")
+        context = {}
+    else:
+        context = {
+            "photo": str(target_picture.photo),
+            "title": target_picture.title,
+            "tags": str(target_picture.tags).split(),
+            "max_tag_length": settings.MAX_TAG_LENGTH,
+            "invalid_tag_char_regex": settings.INVALID_TAG_CHAR_REGEX,
+        }
     return render(request, "picture.html.j2", context)
 
 
