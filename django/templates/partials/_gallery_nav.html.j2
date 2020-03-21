@@ -57,7 +57,7 @@
             <i class="fas fa-chevron-right"></i>
         </button>
         <a 
-            href="{% url 'gallery' %}?q={{ current_query }}&after={{ last_picture.public_id }}{% if favorites %}&favorites=true{% if search_uploaded_by %}&uploaded_by={{ search_uploaded_by }}{% endif %}"
+            href="{% url 'gallery' %}?q={{ current_query }}&after={{ last_picture.public_id }}{% if favorites %}&favorites=true{% endif %}{% if search_uploaded_by %}&uploaded_by={{ search_uploaded_by }}{% endif %}"
 
             {% if render_next_button %}
             class="hidden shadow md:shadow-none rounded md:rounded-none md:rounded-t h-10 md:h-8 lg:h-10 xl:h-12 text-lg md:text-md lg:text-xl px-6 md:px-2 lg:px-3 xl:px-4 flex items-center justify-center mr-2 next-link bg-basic hover:bg-basic-hover text-black"
