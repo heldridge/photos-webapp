@@ -34,7 +34,7 @@
 
                     <a 
                         {% with first_picture=pictures|first %}
-                        href="{% url 'gallery' %}?q={{ current_query }}&before={{ first_picture.public_id }}{% if favorites %}&favorites=true{% endif %}"
+                        href="{% url 'gallery' %}?q={{ current_query }}&before={{ first_picture.public_id }}{% if favorites %}&favorites=true{% endif %}{% if search_uploaded_by %}&uploaded_by={{ search_uploaded_by }}{% endif %}"
                         {% endwith %}
                         {% if render_previous_button %}
                         class="hidden flex flex-col justify-center text-lg px-6 rounded h-16 mr-1 ml-2 previous-link bg-basic hover:bg-basic-hover text-black"
@@ -65,7 +65,7 @@
                 
                     <a 
                         {% with last_picture=pictures|last %}
-                        href="{% url 'gallery' %}?q={{ current_query }}&after={{ last_picture.public_id }}{% if favorites %}&favorites=true{% endif %}"
+                        href="{% url 'gallery' %}?q={{ current_query }}&after={{ last_picture.public_id }}{% if favorites %}&favorites=true{% endif %}{% if search_uploaded_by %}&uploaded_by={{ search_uploaded_by }}{% endif %}"
                         {% endwith %}
                         {% if render_next_button %}
                         class="hidden flex flex-col justify-center text-lg px-6 rounded h-16 mr-2 ml-1 next-link bg-basic hover:bg-basic-hover text-black"
@@ -144,7 +144,7 @@
         <div> 
             <div class="flex md:hidden justify-center mb-6">
                 <a 
-                    href="{% url 'search' %}?q={{ q }}{% if before_id %}&before={{ before_id }}{% endif %}{% if after_id %}&after={{ after_id }}{% endif %}{% if favorites %}&favorites=true{% endif %}
+                    href="{% url 'search' %}?q={{ q }}{% if before_id %}&before={{ before_id }}{% endif %}{% if after_id %}&after={{ after_id }}{% endif %}{% if favorites %}&favorites=true{% endif %}{% if search_uploaded_by %}&uploaded_by={{ search_uploaded_by }}{% endif %}
                     class="rounded mx-6 py-2 pl-3 pr-3 bg-basic hover:bg-basic-hover text-black"
                 >
                     <i class="fas fa-undo pr-1"></i>
@@ -155,7 +155,7 @@
             <div class="hidden md:flex justify-between mx-6">
                 <a 
                     {% with first_picture=pictures|first %}
-                    href="{% url 'gallery' %}?q={{ current_query }}&before={{ first_picture.public_id }}{% if favorites %}&favorites=true{% endif %}"
+                    href="{% url 'gallery' %}?q={{ current_query }}&before={{ first_picture.public_id }}{% if favorites %}&favorites=true{% endif %}{% if search_uploaded_by %}&uploaded_by={{ search_uploaded_by }}{% endif %}"
                     {% endwith %}
 
                     {% if render_previous_button %}
@@ -175,7 +175,7 @@
 
                 <a 
                     {% with last_picture=pictures|last %}
-                    href="{% url 'gallery' %}?q={{ current_query }}&after={{ last_picture.public_id }}{% if favorites %}&favorites=true{% endif %}"
+                    href="{% url 'gallery' %}?q={{ current_query }}&after={{ last_picture.public_id }}{% if favorites %}&favorites=true{% endif %}{% if search_uploaded_by %}&uploaded_by={{ search_uploaded_by }}{% endif %}"
                     {% endwith %}
 
                     {% if render_next_button %}
@@ -212,7 +212,7 @@
 
             <div class="hidden md:flex justify-center mt-4">
                 <a 
-                    href="{% url 'search' %}?q={{ q }}{% if before_id %}&before={{ before_id }}{% endif %}{% if after_id %}&after={{ after_id }}{% endif %}{% if favorites %}&favorites=true{% endif %}"
+                    href="{% url 'search' %}?q={{ q }}{% if before_id %}&before={{ before_id }}{% endif %}{% if after_id %}&after={{ after_id }}{% endif %}{% if favorites %}&favorites=true{% endif %}{% if search_uploaded_by %}&uploaded_by={{ search_uploaded_by }}{% endif %}"
                     class="rounded mx-6 py-2 pl-3 pr-3 lg:text-xl flex bg-basic hover:bg-basic-hover text-black"
                 >
                     <div class="hidden lg:inline-block">
