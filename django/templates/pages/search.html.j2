@@ -7,12 +7,14 @@
     <div class="search-sidebar md:w-1/5 max-w-xl ml-3 mr-3 md:mr-0">
         <div class="tags-bar border-2 border-default rounded px-5 flex flex-col py-3">
 
+            {% if search_uploaded_by %}
             <h1 class="text-2xl font-semibold pb-3 pt-1 opacity-high-emphasis flex items-center">
                 {{ search_uploaded_by_display_name }}'s uploads
                 <a href="{% url 'search'%}?q={{ q }}{% if favorites %}&favorites=true{% endif %}" class="ml-3">
                     <i class="fas fa-times pr-1 opacity-medium-emphasis hover:opacity-high-emphasis hover:text-tag-item-hover"></i>
                 </a>
             </h1>
+            {% endif %}
 
             <div class="flex flex-col align">
                 <div class="flex border border-default justify-between bg-surface-1 w-4/5 rounded overflow-hidden border-color-transition disable-transition-on-theme-change" id="addTagsInputContainer">
