@@ -1,22 +1,25 @@
 from django.conf import settings as project_settings
 from django.contrib import messages
 from django.shortcuts import render, redirect
-from . import forms
+from . import forms, models
 
 from pictures.models import Picture, get_pictures
 from sorl.thumbnail import get_thumbnail
 
 
 def profile(request):
-    context = {'favorites': True}
+    context = {"favorites": True}
     if request.user.is_authenticated:
         pictures = list(get_pictures(project_settings.PAGE_SIZE + 1, user=request.user))
-        context["pictures"] = [{
-            'public_id': picture.public_id,
-            'thumbnail': str(get_thumbnail(picture.photo, '272')),
-            'title': picture.title,
-            'split_tags': picture.split_tags
-        } for picture in pictures[:project_settings.PAGE_SIZE]]
+        context["pictures"] = [
+            {
+                "public_id": picture.public_id,
+                "thumbnail": str(get_thumbnail(picture.photo, "272")),
+                "title": picture.title,
+                "split_tags": picture.split_tags,
+            }
+            for picture in pictures[: project_settings.PAGE_SIZE]
+        ]
         context["more_left"] = len(pictures) >= project_settings.PAGE_SIZE + 1
         context["grid_placeholders"] = [1] * (
             18 - len(pictures[: project_settings.PAGE_SIZE])
@@ -50,3 +53,10 @@ def settings(request):
         else:
             return render(request, "users/settings.html.j2")
     return render(request, "users/settings.html.j2", {"form": f})
+
+
+def user(request, user_public_id):
+
+    target = models.CustomUser.objects.get(public_id=user_public_id)
+    return render(request, "users/user.html.j2")
+
