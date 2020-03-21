@@ -93,7 +93,15 @@
                 <div class="mb-1 md:mb-0 flex w-full">
                     <div class="w-2/12">
                         {% if picture.uploaded_by %}
-                        <a href="{% url 'users' user_public_id=picture.uploaded_by.public_id %}" class='opacity-medium-emphasis hover:opacity-50'>{{ picture.uploaded_by.display_name }}</a>
+                        <a 
+                            href="{% url 'users' user_public_id=picture.uploaded_by.public_id %}" 
+                            class='opacity-medium-emphasis hover:opacity-50'
+                            id='uploaded-by-link'
+                        >
+                            {{ picture.uploaded_by.display_name }}
+                        </a>
+                        {% else %}
+                        <a href="/" id='uploaded-by-link'></a>
                         {% endif %}
                     </div>
                     <div class="flex justify-center w-10/12">
