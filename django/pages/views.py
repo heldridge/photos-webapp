@@ -101,7 +101,7 @@ def get_shared_search_gallery_context(request):
     try:
         search_uploaded_by = CustomUser.objects.get(public_id=search_uploaded_by)
     except (exceptions.ObjectDoesNotExist, exceptions.ValidationError):
-        pass
+        search_uploaded_by = None
 
     pictures = list(
         get_pictures(
