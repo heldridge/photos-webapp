@@ -5,6 +5,9 @@ let originalPictureIndex = JSON.parse(
 
 let galleryNextImages = document.getElementById('gallery-next-images');
 let imagesInfo = document.getElementById('images-info');
+let uploadedByLink = <HTMLAnchorElement>(
+    document.getElementById('uploaded-by-link')
+);
 
 let galleryImageContainer = <HTMLDivElement>(
     document.getElementById('gallery-image-container')
@@ -120,6 +123,17 @@ function setImage(index: number, stateAction: string = '') {
             setToDeleteFavoriteMode(favoriteButton);
         } else {
             setToAddFavoriteMode(favoriteButton);
+        }
+
+        // Set the uploaded by link
+        if (uploadedByLink) {
+            removeChildren(uploadedByLink);
+            console.log(pictures[index]);
+            if (pictures[index].uploaded_by_public_id) {
+                uploadedByLink.href = `/accounts/users/${pictures[index].uploaded_by_public_id}`;
+                uploadedByLink.innerHTML =
+                    pictures[index].uploaded_by_display_name;
+            }
         }
 
         currentIndex = index;

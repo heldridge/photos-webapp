@@ -199,7 +199,10 @@ def gallery(request):
                 "tags": str(picture.tags).split(),
                 "favorite": picture.public_id in favorite_ids,
                 "thumbnail": str(get_thumbnail(picture.photo, "272")),
-                "uploaded_by": str(picture.uploaded_by.public_id)
+                "uploaded_by_public_id": str(picture.uploaded_by.public_id)
+                if picture.uploaded_by is not None
+                else None,
+                "uploaded_by_display_name": str(picture.uploaded_by.display_name)
                 if picture.uploaded_by is not None
                 else None,
             },
