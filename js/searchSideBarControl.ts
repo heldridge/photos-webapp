@@ -136,9 +136,17 @@ function addTagsInputUpdated() {
 }
 
 function updateFavoritesSearch(e: HTMLInputElement) {
+    let newHREF = `/search?q=${currentQuery}`;
+
     if (e.checked) {
-        document.location.href = `/search?q=${currentQuery}&favorites=true`;
-    } else {
-        document.location.href = `/search?q=${currentQuery}`;
+        newHREF = `${newHREF}&favorites=true`;
     }
+
+    let uploadedBy = getUrlParameter('uploaded_by');
+
+    if (uploadedBy) {
+        newHREF += `&uploaded_by=${uploadedBy}`;
+    }
+
+    document.location.href = newHREF;
 }

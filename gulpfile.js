@@ -48,7 +48,8 @@ function processJavascript(cb) {
                 'js/navbarControl.ts',
                 'js/tagsControl.ts',
                 'js/searchSideBarControl.ts',
-                'js/classUtils.ts'
+                'js/classUtils.ts',
+                'js/getUrlParameter.ts'
             ]
         },
         {
