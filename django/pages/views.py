@@ -97,23 +97,28 @@ def get_shared_search_gallery_context(request):
     else:
         user = None
 
+    fetch_pictures = True
     search_uploaded_by = request.GET.get("uploaded_by")
-    try:
-        search_uploaded_by = CustomUser.objects.get(public_id=search_uploaded_by)
-    except (exceptions.ObjectDoesNotExist, exceptions.ValidationError):
-        search_uploaded_by = None
+    if search_uploaded_by:
+        try:
+            search_uploaded_by = CustomUser.objects.get(public_id=search_uploaded_by)
+        except (exceptions.ObjectDoesNotExist, exceptions.ValidationError):
+            search_uploaded_by = None
+            fetch_pictures = False
+            pictures = Picture.objects.none()
 
-    pictures = list(
-        get_pictures(
-            settings.PAGE_SIZE + 1,
-            before_id,
-            after_id,
-            searched_tags,
-            favorited_by=user,
-            uploaded_by=search_uploaded_by,
-            get_uploaded_by=True,
+    if fetch_pictures:
+        pictures = list(
+            get_pictures(
+                settings.PAGE_SIZE + 1,
+                before_id,
+                after_id,
+                searched_tags,
+                favorited_by=user,
+                uploaded_by=search_uploaded_by,
+                get_uploaded_by=True,
+            )
         )
-    )
 
     # Truncate before the reverse so the correct image gets truncated
     more_left = len(pictures) >= settings.PAGE_SIZE + 1
