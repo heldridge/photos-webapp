@@ -98,7 +98,12 @@ def get_shared_search_gallery_context(request):
 
     pictures = list(
         get_pictures(
-            settings.PAGE_SIZE + 1, before_id, after_id, searched_tags, user, True
+            settings.PAGE_SIZE + 1,
+            before_id,
+            after_id,
+            searched_tags,
+            favorited_by=user,
+            get_uploaded_by=True,
         )
     )
 
