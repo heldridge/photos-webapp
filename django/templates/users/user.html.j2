@@ -13,6 +13,17 @@
         <ul class="flex flex-wrap max-w-7xl justify-center" id="cardsHolder">
             {% include "partials/_images_grid.html.j2" with pictures=pictures %}
         </ul>
+
+        <div class="flex justify-center w-4/5 max-w-7xl mt-8 text-lg mb-20">
+            {% if more_left and pictures|length > 0 %}
+            {% with last_picture=pictures|last %}
+            <a href="{% url 'search' %}?after={{ last_picture.public_id }}&uploaded_by={{ search_uploaded_by }}" class="rounded shadow py-2 pl-3 pr-4 bg-basic hover:bg-basic-hover text-black">
+                Continue Browsing Uploads
+                <i class="fas fa-arrow-right pl-2"></i>
+            </a>
+            {% endwith %}
+            {% endif %}
+        </div>
     </div>
 </div>
 
