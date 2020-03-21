@@ -143,6 +143,7 @@ function setImage(index: number, stateAction: string = '') {
         let after = getUrlParameter('after');
         let before = getUrlParameter('before');
         let favorites = getUrlParameter('favorites');
+        let uploadedBy = getUrlParameter('uploaded_by');
 
         if (stateAction) {
             let newState = `?p=${pictures[index].public_id}`;
@@ -157,6 +158,9 @@ function setImage(index: number, stateAction: string = '') {
             }
             if (favorites) {
                 newState += `&favorites=${favorites}`;
+            }
+            if (uploadedBy) {
+                newState += `&uploaded_by=${uploadedBy}`;
             }
 
             if (stateAction === 'push') {

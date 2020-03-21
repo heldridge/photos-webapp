@@ -9,6 +9,7 @@ from django.shortcuts import render
 
 
 from pictures.models import Picture, Favorite, get_pictures
+from users.models import CustomUser
 from sorl.thumbnail import get_thumbnail
 
 
@@ -96,6 +97,12 @@ def get_shared_search_gallery_context(request):
     else:
         user = None
 
+    search_uploaded_by = request.GET.get("uploaded_by")
+    try:
+        search_uploaded_by = CustomUser.objects.get(public_id=search_uploaded_by)
+    except (exceptions.ObjectDoesNotExist, exceptions.ValidationError):
+        pass
+
     pictures = list(
         get_pictures(
             settings.PAGE_SIZE + 1,
@@ -103,6 +110,7 @@ def get_shared_search_gallery_context(request):
             after_id,
             searched_tags,
             favorited_by=user,
+            uploaded_by=search_uploaded_by,
             get_uploaded_by=True,
         )
     )
@@ -133,6 +141,7 @@ def get_shared_search_gallery_context(request):
         "before_id": before_id,
         "after_id": after_id,
         "favorites": search_favorites == "true",
+        "search_uploaded_by": search_uploaded_by,
     }
 
 
