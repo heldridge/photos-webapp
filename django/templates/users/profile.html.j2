@@ -38,8 +38,8 @@
             {% if more_left and pictures|length > 0 %}
             {% with last_picture=pictures|last %}
             <a href="{% url 'search' %}?after={{ last_picture.public_id }}&favorites=true" class="rounded shadow py-2 pl-3 pr-4 bg-basic hover:bg-basic-hover text-black">
-            Continue Browsing
-            <i class="fas fa-arrow-right pl-2"></i>
+                Continue Browsing
+                <i class="fas fa-arrow-right pl-2"></i>
             </a>
             {% endwith %}
             {% endif %}
