@@ -91,7 +91,9 @@ class Favorite(models.Model):
 ###################
 # UTILITY METHODS #
 ###################
-def get_pictures(amount, before=None, after=None, tags=[], user=None):
+def get_pictures(
+    amount, before=None, after=None, tags=[], user=None, get_uploaded_by=False
+):
     """Queries the database or elasticsearch for pictures
     Args:
         amount (``int``): The number of pictures to return
@@ -130,6 +132,9 @@ def get_pictures(amount, before=None, after=None, tags=[], user=None):
             after = None
 
     query_set = Picture.objects
+
+    if get_uploaded_by:
+        query_set = query_set.select_related("uploaded_by")
 
     if user is not None:
         query_set = query_set.filter(favorite__user=user)
