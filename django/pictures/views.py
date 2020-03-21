@@ -19,7 +19,6 @@ def picture(request, picture_public_id):
     except (ObjectDoesNotExist, ValidationError):
         # ObjectDoesNotExist for a uuid not in pictures
         # ValidationError for a bad uuid
-        print("HERE!!!!")
         context = {}
     else:
         context = {
