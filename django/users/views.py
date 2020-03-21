@@ -1,5 +1,6 @@
 from django.conf import settings as project_settings
 from django.contrib import messages
+from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.shortcuts import render, redirect
 from . import forms, models
 
@@ -58,7 +59,32 @@ def settings(request):
 
 
 def user(request, user_public_id):
-    target = models.CustomUser.objects.get(public_id=user_public_id)
 
-    return render(request, "users/user.html.j2")
+    context = {}
+    try:
+        target = models.CustomUser.objects.get(public_id=user_public_id)
+    except (ObjectDoesNotExist, ValidationError):
+        pass
+    else:
+        context["display_name"] = target.display_name
+
+        pictures = get_pictures(project_settings.PAGE_SIZE + 1, uploaded_by=target)
+
+        context["pictures"] = [
+            {
+                "public_id": picture.public_id,
+                "thumbnail": str(get_thumbnail(picture.photo, "272")),
+                "title": picture.title,
+                "split_tags": picture.split_tags,
+            }
+            for picture in pictures[: project_settings.PAGE_SIZE]
+        ]
+        context["more_left"] = len(pictures) >= project_settings.PAGE_SIZE + 1
+        context["grid_placeholders"] = [1] * (
+            18 - len(pictures[: project_settings.PAGE_SIZE])
+        )
+
+    print(context)
+
+    return render(request, "users/user.html.j2", context)
 
