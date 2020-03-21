@@ -10,7 +10,9 @@ from sorl.thumbnail import get_thumbnail
 def profile(request):
     context = {"favorites": True}
     if request.user.is_authenticated:
-        pictures = list(get_pictures(project_settings.PAGE_SIZE + 1, user=request.user))
+        pictures = list(
+            get_pictures(project_settings.PAGE_SIZE + 1, favorited_by=request.user)
+        )
         context["pictures"] = [
             {
                 "public_id": picture.public_id,
@@ -56,7 +58,7 @@ def settings(request):
 
 
 def user(request, user_public_id):
-
     target = models.CustomUser.objects.get(public_id=user_public_id)
+
     return render(request, "users/user.html.j2")
 

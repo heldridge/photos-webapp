@@ -92,7 +92,7 @@ class Favorite(models.Model):
 # UTILITY METHODS #
 ###################
 def get_pictures(
-    amount, before=None, after=None, tags=[], user=None, get_uploaded_by=False
+    amount, before=None, after=None, tags=[], favorited_by=None, get_uploaded_by=False
 ):
     """Queries the database or elasticsearch for pictures
     Args:
@@ -100,7 +100,7 @@ def get_pictures(
         before (``str``): The id of the photo to fetch photos before
         after (``str``): The id of the photo to fetch photos after
         tags (``list`` of ``str``): The list of tags to search for
-        user (``user``):
+        favorited_by (``user``):
             Limits pictures to only those favorited by the user
 
     Returns:
@@ -136,8 +136,8 @@ def get_pictures(
     if get_uploaded_by:
         query_set = query_set.select_related("uploaded_by")
 
-    if user is not None:
-        query_set = query_set.filter(favorite__user=user)
+    if favorited_by is not None:
+        query_set = query_set.filter(favorite__user=favorited_by)
 
     if len(tags) > 0:
         query_set = query_set.filter(
