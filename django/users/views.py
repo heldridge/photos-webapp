@@ -67,6 +67,7 @@ def user(request, user_public_id):
         pass
     else:
         context["display_name"] = target.display_name
+        context["search_uploaded_by"] = target.public_id
 
         pictures = get_pictures(project_settings.PAGE_SIZE + 1, uploaded_by=target)
 
