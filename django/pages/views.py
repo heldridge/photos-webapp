@@ -141,8 +141,12 @@ def get_shared_search_gallery_context(request):
         "before_id": before_id,
         "after_id": after_id,
         "favorites": search_favorites == "true",
-        "search_uploaded_by": str(search_uploaded_by.public_id),
-        "search_uploaded_by_display_name": str(search_uploaded_by.display_name),
+        "search_uploaded_by": str(search_uploaded_by.public_id)
+        if search_uploaded_by
+        else None,
+        "search_uploaded_by_display_name": str(search_uploaded_by.display_name)
+        if search_uploaded_by
+        else None,
     }
 
 
