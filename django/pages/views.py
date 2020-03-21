@@ -97,7 +97,9 @@ def get_shared_search_gallery_context(request):
         user = None
 
     pictures = list(
-        get_pictures(settings.PAGE_SIZE + 1, before_id, after_id, searched_tags, user)
+        get_pictures(
+            settings.PAGE_SIZE + 1, before_id, after_id, searched_tags, user, True
+        )
     )
 
     # Truncate before the reverse so the correct image gets truncated
@@ -185,6 +187,8 @@ def gallery(request):
         for favorite in favorites:
             favorite_ids.append(favorite.picture.public_id)
 
+    print(context["pictures"][0].uploaded_by.public_id)
+
     # Need to make it json serializable
     context["pictures"] = list(
         map(
@@ -195,6 +199,9 @@ def gallery(request):
                 "tags": str(picture.tags).split(),
                 "favorite": picture.public_id in favorite_ids,
                 "thumbnail": str(get_thumbnail(picture.photo, "272")),
+                "uploaded_by": str(picture.uploaded_by.public_id)
+                if picture.uploaded_by is not None
+                else None,
             },
             context["pictures"],
         )
