@@ -187,8 +187,6 @@ def gallery(request):
         for favorite in favorites:
             favorite_ids.append(favorite.picture.public_id)
 
-    print(context["pictures"][0].uploaded_by.public_id)
-
     # Need to make it json serializable
     context["pictures"] = list(
         map(
