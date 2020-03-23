@@ -4,6 +4,7 @@
 
 {% block content %}
 
+{% if user.is_authenticated %}
 {% if messages %}
 <div class="flex justify-center z-10">
     <ul class="messages absolute z-10">
@@ -43,6 +44,13 @@
     {% endfor %}
     <button type="submit" class="rounded shadow py-2 pl-3 pr-4 bg-basic hover:bg-basic-hover text-black">Upload Image</button> 
 </form> 
+{% else %}
+<div class="flex justify-center">
+    <h1 class="text-3xl font-semibold py-4 opacity-medium-emphasis">Must be logged in to upload</h1>
+</div>
+{% endif %}
+
+
 
 <script type="text/javascript" src="{% static 'js/upload.js' %}"></script>
 {% endblock %}
