@@ -62,7 +62,7 @@ def index(request):
     return render(request, "pages/index.html.j2", context)
 
 
-def get_shared_search_gallery_context(request):
+def get_shared_search_gallery_context(request, get_uploaded_by=False):
     # Filter out invalid tags
     # Use SET to make all unique
     # cast as a list because easier to use
@@ -108,7 +108,7 @@ def get_shared_search_gallery_context(request):
                 searched_tags,
                 favorited_by=user,
                 uploaded_by=search_uploaded_by,
-                get_uploaded_by=True,
+                get_uploaded_by=get_uploaded_by,
             )
         )
 
@@ -156,7 +156,7 @@ def search(request):
 
 
 def gallery(request):
-    context = get_shared_search_gallery_context(request)
+    context = get_shared_search_gallery_context(request, get_uploaded_by=True)
 
     picture_id = request.GET.get("p", "")
     current_picture = None
