@@ -40,12 +40,12 @@
       Profile
     </a>
     {% else %}
-    <a href="{% url 'login' %}" class="border-basic border-2 bg-alternate hover:bg-basic rounded text-black px-2 md:px-3 py-1 md:py-2 text-primary hover:text-black hover:opacity-100 md:text-lg ml-1 mr-3 md:mx-8">
-      Login
+    <a href="{% url 'login' %}" class="border-basic border-2 bg-alternate hover:bg-basic rounded text-black px-2 md:px-3 py-1 md:py-2 text-primary hover:text-black hover:opacity-100 md:text-lg ml-1 mr-3 md:mx-8 outline-button">
+      <span class='opacity-high-emphasis'>Login</span>
     </a>
     
-    <a href="{% url 'register' %}" class="border-basic border-2 bg-alternate hover:bg-basic rounded text-black px-2 md:px-3 py-1 md:py-2 text-primary hover:text-black hover:opacity-100 md:text-lg mr-0 md:mr-8 whitespace-no-wrap">
-      Sign up
+    <a href="{% url 'register' %}" class="border-basic border-2 bg-alternate hover:bg-basic rounded text-black px-2 md:px-3 py-1 md:py-2 text-primary hover:text-black hover:opacity-100 md:text-lg mr-0 md:mr-8 whitespace-no-wrap outline-button">
+      <span class='opacity-high-emphasis'>Sign up</span>
     </a>
     {% endif %}
     

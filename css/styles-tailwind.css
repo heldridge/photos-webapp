@@ -129,6 +129,10 @@
     --color-bg-error: #cf6679;
 }
 
+.outline-button:hover span {
+    opacity: 100%;
+}
+
 .search-checkbox {
     transform: scale(1.5);
 }
