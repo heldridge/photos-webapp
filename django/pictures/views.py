@@ -15,19 +15,37 @@ from .forms import PictureUploadForm
 def picture(request, picture_public_id):
 
     try:
-        target_picture = Picture.objects.get(public_id=picture_public_id)
+        target_picture = Picture.objects.select_related("uploaded_by").get(
+            public_id=picture_public_id
+        )
     except (ObjectDoesNotExist, ValidationError):
         # ObjectDoesNotExist for a uuid not in pictures
         # ValidationError for a bad uuid
         context = {}
     else:
+        favorite = False
+        if request.user.is_authenticated:
+            favorites = Favorite.objects.select_related("picture").filter(
+                user=request.user
+            )
+            if favorites.count() > 0:
+                favorite = True
+
         context = {
             "photo": str(target_picture.photo),
             "title": target_picture.title,
             "tags": str(target_picture.tags).split(),
+            "favorite": favorite,
             "max_tag_length": settings.MAX_TAG_LENGTH,
             "invalid_tag_char_regex": settings.INVALID_TAG_CHAR_REGEX,
+            "uploaded_by_public_id": str(target_picture.uploaded_by.public_id)
+            if target_picture.uploaded_by is not None
+            else None,
+            "uploaded_by_display_name": str(target_picture.uploaded_by.display_name)
+            if target_picture.uploaded_by is not None
+            else None,
         }
+        print(context)
     return render(request, "picture.html.j2", context)
 
 
