@@ -69,7 +69,5 @@ def user(request, user_public_id):
             18 - len(pictures[: project_settings.PAGE_SIZE])
         )
 
-    print(context)
-
     return render(request, "users/user.html.j2", context)
 
