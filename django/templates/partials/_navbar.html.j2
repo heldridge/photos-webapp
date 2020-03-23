@@ -33,18 +33,18 @@
     </button>
 
     {% if user.is_authenticated %}
-    <a href="{% url 'upload' %}" class="bg-basic hover:bg-basic-hover rounded text-black px-2 md:px-3 py-1 md:py-2 text-black opacity-high-emphasis md:text-lg ml-1 mr-3">
+    <a href="{% url 'upload' %}" class="bg-basic hover:bg-basic-hover rounded text-black px-2 md:px-3 py-1 md:py-2 text-black md:text-lg ml-1 mr-3">
       Upload
     </a>
-    <a href="{% url 'profile' %}" class="bg-primary hover:bg-primary-hover rounded text-black px-2 md:px-3 py-1 md:py-2 text-black opacity-high-emphasis md:text-lg ml-1 mr-2 md:mr-8 md:ml-4">
+    <a href="{% url 'profile' %}" class="bg-primary hover:bg-primary-hover rounded text-black px-2 md:px-3 py-1 md:py-2 text-black md:text-lg ml-1 mr-2 md:mr-8 md:ml-4">
       Profile
     </a>
     {% else %}
-    <a href="{% url 'login' %}" class="border-basic border-2 bg-alternate hover:bg-basic rounded text-black px-2 md:px-3 py-1 md:py-2 text-primary opacity-high-emphasis hover:text-black hover:opacity-100 md:text-lg ml-1 mr-3 md:mx-8">
+    <a href="{% url 'login' %}" class="border-basic border-2 bg-alternate hover:bg-basic rounded text-black px-2 md:px-3 py-1 md:py-2 text-primary hover:text-black hover:opacity-100 md:text-lg ml-1 mr-3 md:mx-8">
       Login
     </a>
     
-    <a href="{% url 'register' %}" class="border-basic border-2 bg-alternate hover:bg-basic rounded text-black px-2 md:px-3 py-1 md:py-2 text-primary opacity-high-emphasis hover:text-black hover:opacity-100 md:text-lg mr-0 md:mr-8 whitespace-no-wrap">
+    <a href="{% url 'register' %}" class="border-basic border-2 bg-alternate hover:bg-basic rounded text-black px-2 md:px-3 py-1 md:py-2 text-primary hover:text-black hover:opacity-100 md:text-lg mr-0 md:mr-8 whitespace-no-wrap">
       Sign up
     </a>
     {% endif %}
