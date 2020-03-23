@@ -17,7 +17,10 @@ class Command(BaseCommand):
         with open(kwargs["data_file"], "r") as infile:
             data = json.load(infile)
 
-        for image in data[: int(kwargs["limit"])]:
+        if kwargs["limit"]:
+            data = data[: kwargs["limit"]]
+
+        for image in data:
             picture = Picture.objects.create(
                 title=image["title"],
                 description="description",

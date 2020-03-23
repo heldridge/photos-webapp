@@ -54,7 +54,7 @@ def index(request):
         "pictures": [
             {
                 "public_id": picture.public_id,
-                "thumbnail": str(get_thumbnail(picture.photo, "272")),
+                "thumbnail": picture.thumbnail_w_272.url,
                 "title": picture.title,
                 "split_tags": picture.split_tags,
             }
@@ -157,10 +157,16 @@ def get_shared_search_gallery_context(request):
 
 def search(request):
     context = get_shared_search_gallery_context(request)
+
+    for picture in context["pictures"]:
+        print(picture)
+        print(picture.thumbnail_w_272)
+        print(picture.thumbnail_w_272.url)
+
     context["pictures"] = [
         {
             "public_id": picture.public_id,
-            "thumbnail": str(get_thumbnail(picture.photo, "272")),
+            "thumbnail": picture.thumbnail_w_272.url,
             "title": picture.title,
             "split_tags": picture.split_tags,
         }
@@ -220,7 +226,7 @@ def gallery(request):
                 "public_id": picture.public_id,
                 "tags": str(picture.tags).split(),
                 "favorite": picture.public_id in favorite_ids,
-                "thumbnail": str(get_thumbnail(picture.photo, "272")),
+                "thumbnail": picture.thumbnail_w_272.url,
                 "uploaded_by_public_id": str(picture.uploaded_by.public_id)
                 if picture.uploaded_by is not None
                 else None,
