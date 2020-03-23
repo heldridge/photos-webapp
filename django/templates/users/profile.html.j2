@@ -44,6 +44,10 @@
             {% endwith %}
             {% endif %}
         </div>
+        {% if pictures|length == 0 %}
+        <p class='text-xl md:text-3xl opacity-medium-emphasis'>You have no favorites! Press the heart button below an image to add one.</p>
+        {% else %}
+        {% endif %}
     </div>
 </div>
 
