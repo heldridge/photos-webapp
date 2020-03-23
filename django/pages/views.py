@@ -158,11 +158,6 @@ def get_shared_search_gallery_context(request):
 def search(request):
     context = get_shared_search_gallery_context(request)
 
-    for picture in context["pictures"]:
-        print(picture)
-        print(picture.thumbnail_w_272)
-        print(picture.thumbnail_w_272.url)
-
     context["pictures"] = [
         {
             "public_id": picture.public_id,
