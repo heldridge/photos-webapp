@@ -29,7 +29,12 @@
         {% endif %}
 
 
-        <h1 class="text-5xl font-semibold py-4 opacity-high-emphasis mt-10">Favorites</h1>
+        <a href="{% url 'users' user_public_id=user.public_id %}" class="bg-basic hover:bg-basic-hover rounded text-black px-3 py-1 sm:py-2 text-black opacity-high-emphasis text-lg flex items-center mt-4">
+            View Public Profile
+        </a>
+
+
+        <h1 class="text-5xl font-semibold py-4 opacity-high-emphasis mt-4">Favorites</h1>
 
         <ul class="flex flex-wrap max-w-7xl justify-center" id="cardsHolder">
             {% include "partials/_images_grid.html.j2" with pictures=pictures %}
