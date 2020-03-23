@@ -24,6 +24,11 @@
             {% endwith %}
             {% endif %}
         </div>
+
+        {% if pictures|length == 0 %}
+        <p class='text-3xl opacity-medium-emphasis'>This user has no uploads!</p>
+        {% else %}
+        {% endif %}
     </div>
 </div>
 
