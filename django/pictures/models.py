@@ -1,10 +1,16 @@
 import datetime
+import io
 import threading
+import os
+import pathlib
 import uuid
 
 from django.db import models
 from django.conf import settings
 from django.core import exceptions
+from django.core.files import File
+from django.core.files.storage import default_storage as storage
+from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.core.validators import RegexValidator
 from django.contrib.postgres.fields import ArrayField
 from django.contrib.postgres.indexes import GinIndex
@@ -12,6 +18,7 @@ from django.contrib.postgres.search import SearchQuery, SearchVectorField
 from django.utils.timezone import now
 
 from sorl.thumbnail import get_thumbnail
+from PIL import Image
 
 from users.models import CustomUser
 
@@ -35,6 +42,11 @@ class Picture(models.Model):
     updated_at = models.DateTimeField(default=now)
     public_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
 
+    # Thumbnails
+    thumbnail_w_272 = models.ImageField(
+        upload_to="thumbnails/w272/%Y/%m/%d/", blank=True
+    )
+
     # Note: be sure to update how this is done (trigger in postgres)
     # once django releases a good way to do Stored Generated Columns
     # https://stackoverflow.com/questions/59675402/django-full-text-searchvectorfield-obsolete-in-postgresql
@@ -50,11 +62,34 @@ class Picture(models.Model):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        for size in settings.THUMBNAIL_SIZES:
-            thumbnail_creator = threading.Thread(
-                target=get_thumbnail, args=(self.photo, size)
+        if not self.thumbnail_w_272:
+            self.thumbnail_w_272 = self.make_thumbnail(
+                self.photo, (272, self.photo.height)
             )
-            thumbnail_creator.start()
+
+    def make_thumbnail(self, image, size):
+        """Makes thumbnails of given size from given image
+        
+        Args:
+            image (``django.ImageField``): The image to generate a thumbnail for
+            size (``tuple`` of ``int``): The width and height to generate
+
+        Returns:
+            ``django.File``: The resized image
+        """
+        image.open()
+        im = Image.open(image)
+        im.thumbnail(size)  # resize image
+
+        thumb_io = io.BytesIO()  # create a BytesIO object
+
+        im.save(thumb_io, "JPEG", quality=85)  # save image to BytesIO object
+
+        thumbnail = File(
+            thumb_io, name=image.name
+        )  # create a django friendly File object
+
+        return thumbnail
 
     # TODO: Will get called multiple times in template. Maybe persist when it is created?
     @property
