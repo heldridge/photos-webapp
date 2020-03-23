@@ -33,10 +33,18 @@ function processJavascript(cb) {
             ]
         },
         {
+            outputFileName: 'basic_grid.js',
+            files: [
+                'js/navbarControl.ts',
+                'js/classUtils.ts',
+                'js/messagesControl.ts',
+                'js/tagsControl.ts'
+            ]
+        },
+        {
             outputFileName: 'index.js',
             files: [
                 'js/navbarControl.ts',
-                'js/imagesGridFooterControl.ts',
                 'js/tagsControl.ts',
                 'js/classUtils.ts'
             ]
