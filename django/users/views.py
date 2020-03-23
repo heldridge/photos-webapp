@@ -4,7 +4,7 @@ from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.shortcuts import render, redirect
 from . import forms, models
 
-from pictures.models import Picture, get_pictures
+from pictures.models import Picture, get_pictures, get_images_grid_context
 from sorl.thumbnail import get_thumbnail
 
 
@@ -14,15 +14,7 @@ def profile(request):
         pictures = list(
             get_pictures(project_settings.PAGE_SIZE + 1, favorited_by=request.user)
         )
-        context["pictures"] = [
-            {
-                "public_id": picture.public_id,
-                "thumbnail": str(get_thumbnail(picture.photo, "272")),
-                "title": picture.title,
-                "split_tags": picture.split_tags,
-            }
-            for picture in pictures[: project_settings.PAGE_SIZE]
-        ]
+        context["pictures"] = get_images_grid_context(pictures)
         context["more_left"] = len(pictures) >= project_settings.PAGE_SIZE + 1
         context["grid_placeholders"] = [1] * (
             18 - len(pictures[: project_settings.PAGE_SIZE])
@@ -71,15 +63,7 @@ def user(request, user_public_id):
 
         pictures = get_pictures(project_settings.PAGE_SIZE + 1, uploaded_by=target)
 
-        context["pictures"] = [
-            {
-                "public_id": picture.public_id,
-                "thumbnail": str(get_thumbnail(picture.photo, "272")),
-                "title": picture.title,
-                "split_tags": picture.split_tags,
-            }
-            for picture in pictures[: project_settings.PAGE_SIZE]
-        ]
+        context["pictures"] = get_images_grid_context(pictures)
         context["more_left"] = len(pictures) >= project_settings.PAGE_SIZE + 1
         context["grid_placeholders"] = [1] * (
             18 - len(pictures[: project_settings.PAGE_SIZE])

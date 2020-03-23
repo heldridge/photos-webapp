@@ -2,6 +2,7 @@ import io
 import uuid
 
 from django.db import models
+from django.conf import settings
 from django.contrib.postgres.indexes import GinIndex
 from django.contrib.postgres.search import SearchQuery, SearchVectorField
 from django.core import exceptions
@@ -192,3 +193,25 @@ def get_pictures(
         query_set = query_set.order_by("-id")
 
     return query_set[:amount]
+
+
+def get_images_grid_context(pictures):
+    """Returns a context object fit for _images_grid
+
+    Args:
+        pictures ``list`` of ``Picture``:
+            The pictures to list to turn into an _images_grid context
+    
+    Returns:
+        ``list`` of ``dict``: The context required for _images_grid
+    """
+
+    return [
+        {
+            "public_id": picture.public_id,
+            "thumbnail": picture.thumbnail_w_272.url,
+            "title": picture.title,
+            "split_tags": picture.split_tags,
+        }
+        for picture in pictures[: settings.PAGE_SIZE]
+    ]
