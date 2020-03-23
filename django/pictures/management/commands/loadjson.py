@@ -11,12 +11,13 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         parser.add_argument("data_file", help="The path to the json file to load")
+        parser.add_argument("--limit", help="Limit the number of images loaded")
 
     def handle(self, *args, **kwargs):
         with open(kwargs["data_file"], "r") as infile:
             data = json.load(infile)
 
-        for image in data:
+        for image in data[: int(kwargs["limit"])]:
             picture = Picture.objects.create(
                 title=image["title"],
                 description="description",
