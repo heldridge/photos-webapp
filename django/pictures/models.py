@@ -1,23 +1,14 @@
-import datetime
 import io
-import threading
-import os
-import pathlib
 import uuid
 
 from django.db import models
-from django.conf import settings
 from django.core import exceptions
 from django.core.files import File
-from django.core.files.storage import default_storage as storage
-from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.core.validators import RegexValidator
-from django.contrib.postgres.fields import ArrayField
 from django.contrib.postgres.indexes import GinIndex
 from django.contrib.postgres.search import SearchQuery, SearchVectorField
 from django.utils.timezone import now
 
-from sorl.thumbnail import get_thumbnail
 from PIL import Image
 
 from users.models import CustomUser
