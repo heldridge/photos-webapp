@@ -8,9 +8,22 @@
 <div class="px-8 pt-4 pb-20 flex justify-center">
     <div class="flex flex-col">
         <img src="/media/{{ photo }}" alt="{{ title }}" title="{{ title }}">
-        <h3 class="text-5xl font-semibold opacity-high-emphasis">
-            {{ title }}
-        </h3>
+        <div class="flex justify-between items-center">
+            {% if uploaded_by_public_id %}
+            <a 
+                href="{% url 'users' user_public_id=uploaded_by_public_id %}" 
+                class='opacity-medium-emphasis hover:opacity-50 text-3xl'
+                id='uploaded-by-link'
+            >
+                {{ uploaded_by_display_name }}
+            </a>
+            {% else %}
+            <a href="/" id='uploaded-by-link'></a>
+            {% endif %}
+            <h3 class="text-5xl font-semibold opacity-high-emphasis">
+                {{ title }}
+            </h3>
+        </div>
         <div class="flex flex-wrap mt-2">
             {% for tag in tags %}
             <!-- old: "tag bg-gray-300 hover:bg-gray-400 rounded py-2 px-3 text mr-3 font-medium mb-3 text-gray-600 hover:text-black"> -->
