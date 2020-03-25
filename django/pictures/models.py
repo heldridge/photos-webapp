@@ -54,12 +54,11 @@ class Picture(models.Model):
         return self.title
 
     def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
         if not self.thumbnail_w_272:
             self.thumbnail_w_272 = self.make_thumbnail(
                 self.photo, (272, self.photo.height)
             )
-            super().save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     def make_thumbnail(self, image, size):
         """Makes thumbnails of given size from given image
