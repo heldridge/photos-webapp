@@ -275,7 +275,7 @@ function addTag(parent: HTMLDivElement, tag: string) {
 }
 
 function addFavoriteWrapper(source: HTMLButtonElement) {
-    let status = addFavorite(source, pictures[currentIndex].public_id, () => {
+    addFavorite(source, pictures[currentIndex].public_id, () => {
         pictures[currentIndex].favorite = true;
     });
 }
