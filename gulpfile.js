@@ -54,12 +54,19 @@ function processJavascript(cb) {
             files: [
                 ...default_files,
                 'js/galleryControl.ts',
-                'js/getUrlParameter.ts'
+                'js/getUrlParameter.ts',
+                'js/removeChildren.ts',
+                'js/favoriteButton.ts'
             ]
         },
         {
             outputFileName: 'picture.js',
-            files: [...default_files]
+            files: [
+                ...default_files,
+                'js/picture.ts',
+                'js/removeChildren.ts',
+                'js/favoriteButton.ts'
+            ]
         },
         {
             outputFileName: 'login.js',

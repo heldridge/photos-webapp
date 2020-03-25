@@ -25,13 +25,14 @@ def picture(request, picture_public_id):
     else:
         favorite = False
         if request.user.is_authenticated:
-            favorites = Favorite.objects.select_related("picture").filter(
-                user=request.user
+            favorites = Favorite.objects.filter(user=request.user).filter(
+                picture=target_picture
             )
             if favorites.count() > 0:
                 favorite = True
 
         context = {
+            "public_id": str(target_picture.public_id),
             "photo": str(target_picture.photo),
             "title": target_picture.title,
             "tags": str(target_picture.tags).split(),

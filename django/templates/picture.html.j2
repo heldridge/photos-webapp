@@ -28,7 +28,7 @@
             {% if favorite %}
             <button 
                 class="shadow text-black bg-basic hover:bg-basic-hover md:text-lg rounded flex items-center justify-center justify-self-end w-10 h-10"
-                onclick="deleteFavorite(this)"
+                onclick="removeFavoriteWrapper(this)"
                 id="favoriteButton"
             >
                 <i class="fas fa-heart text-error"></i>
@@ -36,7 +36,7 @@
             {% else %}
             <button 
                 class="shadow text-black bg-basic hover:bg-basic-hover md:text-lg rounded flex items-center justify-center justify-self-end w-10 h-10"
-                onclick="addFavorite(this)"
+                onclick="addFavoriteWrapper(this)"
                 id="favoriteButton"
             >
                 <i class="far fa-heart"></i>
@@ -62,6 +62,8 @@
     </a>
 </div>
 {% endif %}
+{% csrf_token %}
 
+{{public_id|json_script:"publicId"}}
 <script type="text/javascript" src="{% static 'js/picture.js' %}"></script>
 {% endblock %}
