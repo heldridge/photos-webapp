@@ -322,7 +322,17 @@ function addFavorite(
     });
 }
 
-function removeFavorite(source: HTMLButtonElement) {
+function removeFavoriteWrapper(source: HTMLButtonElement) {
+    removeFavorite(source, pictures[currentIndex].public_id, () => {
+        pictures[currentIndex].favorite = false;
+    });
+}
+
+function removeFavorite(
+    source: HTMLButtonElement,
+    picturePublicId: string,
+    successCallback: Function
+) {
     removeChildren(source);
     source.appendChild(favoriteLoader);
     addClass(source, 'pointer-events-none');
@@ -331,12 +341,9 @@ function removeFavorite(source: HTMLButtonElement) {
         document.querySelector('[name=csrfmiddlewaretoken]')
     )).value;
 
-    let request = new Request(
-        `/pictures/${pictures[currentIndex].public_id}/favorites/`,
-        {
-            headers: { 'X-CSRFToken': csrftoken }
-        }
-    );
+    let request = new Request(`/pictures/${picturePublicId}/favorites/`, {
+        headers: { 'X-CSRFToken': csrftoken }
+    });
 
     fetch(request, {
         method: 'DELETE',
@@ -345,7 +352,7 @@ function removeFavorite(source: HTMLButtonElement) {
         removeChildren(source);
         removeClass(source, 'pointer-events-none');
         if (response.status >= 200 && response.status < 300) {
-            pictures[currentIndex].favorite = false;
+            successCallback();
             setToAddFavoriteMode(source);
         } else if (response.status === 401) {
             source.appendChild(fullHeartIcon);
@@ -427,7 +434,7 @@ function setToAddFavoriteMode(favoriteButton: HTMLButtonElement) {
 function setToDeleteFavoriteMode(favoriteButton: HTMLButtonElement) {
     removeChildren(favoriteButton);
     favoriteButton.appendChild(fullHeartIcon);
-    favoriteButton.onclick = () => removeFavorite(favoriteButton);
+    favoriteButton.onclick = () => removeFavoriteWrapper(favoriteButton);
 }
 
 function removeChildren(e: HTMLElement) {
