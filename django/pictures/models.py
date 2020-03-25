@@ -1,4 +1,5 @@
 import io
+import pathlib
 import uuid
 
 from django.db import models
@@ -58,6 +59,7 @@ class Picture(models.Model):
             self.thumbnail_w_272 = self.make_thumbnail(
                 self.photo, (272, self.photo.height)
             )
+            super().save(*args, **kwargs)
 
     def make_thumbnail(self, image, size):
         """Makes thumbnails of given size from given image
@@ -78,7 +80,7 @@ class Picture(models.Model):
         im.save(thumb_io, "JPEG", quality=85)  # save image to BytesIO object
 
         thumbnail = File(
-            thumb_io, name=image.name
+            thumb_io, name=pathlib.Path(image.name).name
         )  # create a django friendly File object
 
         return thumbnail
