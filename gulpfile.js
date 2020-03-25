@@ -37,7 +37,7 @@ function processJavascript(cb) {
         },
         {
             outputFileName: 'basic_grid.js',
-            files: [...default_files, 'tagsControl.ts']
+            files: [...default_files, 'js/tagsControl.ts']
         },
         {
             outputFileName: 'search.js',
