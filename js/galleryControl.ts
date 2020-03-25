@@ -128,7 +128,6 @@ function setImage(index: number, stateAction: string = '') {
         // Set the uploaded by link
         if (uploadedByLink) {
             removeChildren(uploadedByLink);
-            console.log(pictures[index]);
             if (pictures[index].uploaded_by_public_id) {
                 uploadedByLink.href = `/accounts/users/${pictures[index].uploaded_by_public_id}`;
                 uploadedByLink.innerHTML =
