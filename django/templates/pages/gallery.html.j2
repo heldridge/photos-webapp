@@ -100,24 +100,13 @@
                     </div>
                     
                     <div class="sm:w-2/12 flex items-center">
-
-                        {% if user.is_authenticated and not picture.favorite %}
                         <button 
                             class="shadow text-black bg-basic hover:bg-basic-hover md:text-lg rounded flex items-center justify-center justify-self-end w-10 h-10"
-                            onclick="addFavorite(this)"
+                            onclick="addFavoriteWrapper(this)"
                             id="favoriteButton"
                         >
                             <i class="far fa-heart"></i>
                         </button>
-                        {% else %}
-                        <button 
-                            class="shadow text-black bg-basic hover:bg-basic-hover md:text-lg rounded flex items-center justify-center justify-self-end w-10 h-10"
-                            onclick="deleteFavorite(this)"
-                            id="favoriteButton"
-                        >
-                            <i class="fas fa-heart text-error"></i>
-                        </button>
-                        {% endif %}
                     </div>
                 </div>
                 <div class="flex flex-wrap" id="image-tags">
