@@ -13,6 +13,13 @@
 <body class="bg-main theme-dark text-primary" id="body">
     {# Top Bar #}
     {% include "partials/_navbar.html.j2" %}
+    <div class="flex justify-center z-10">
+        <ul class="messages absolute z-10" id='messages'>
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    </div>
 
     {% block content %} {% endblock %}
 </body>

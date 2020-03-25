@@ -23,80 +23,55 @@ function processJavascript(cb) {
     const concat = require('gulp-concat');
     const ts = require('gulp-typescript');
     const merge = require('merge-stream');
+
+    default_files = [
+        'js/navbarControl.ts',
+        'js/classUtils.ts',
+        'js/messagesControl.ts'
+    ];
+
     const jsFiles = [
         {
             outputFileName: 'basic.js',
-            files: [
-                'js/navbarControl.ts',
-                'js/classUtils.ts',
-                'js/messagesControl.ts'
-            ]
+            files: default_files
         },
         {
             outputFileName: 'basic_grid.js',
-            files: [
-                'js/navbarControl.ts',
-                'js/classUtils.ts',
-                'js/messagesControl.ts',
-                'js/tagsControl.ts'
-            ]
-        },
-        {
-            outputFileName: 'index.js',
-            files: [
-                'js/navbarControl.ts',
-                'js/tagsControl.ts',
-                'js/classUtils.ts'
-            ]
+            files: [...default_files, 'tagsControl.ts']
         },
         {
             outputFileName: 'search.js',
             files: [
+                ...default_files,
                 'js/imagesGridFooterControl.ts',
-                'js/navbarControl.ts',
                 'js/tagsControl.ts',
                 'js/searchSideBarControl.ts',
-                'js/classUtils.ts',
                 'js/getUrlParameter.ts'
             ]
         },
         {
             outputFileName: 'gallery.js',
             files: [
-                'js/navbarControl.ts',
+                ...default_files,
                 'js/galleryControl.ts',
-                'js/getUrlParameter.ts',
-                'js/classUtils.ts'
+                'js/getUrlParameter.ts'
             ]
         },
         {
             outputFileName: 'picture.js',
-            files: ['js/navbarControl.ts', 'js/classUtils.ts']
+            files: [...default_files]
         },
         {
             outputFileName: 'login.js',
-            files: [
-                'js/navbarControl.ts',
-                'js/loginControl.ts',
-                'js/classUtils.ts',
-                'js/messagesControl.ts'
-            ]
+            files: [...default_files, 'js/loginControl.ts']
         },
         {
             outputFileName: 'register.js',
-            files: [
-                'js/navbarControl.ts',
-                'js/classUtils.ts',
-                'js/formsControl.ts'
-            ]
+            files: [...default_files, 'js/formsControl.ts']
         },
         {
             outputFileName: 'upload.js',
-            files: [
-                'js/navBarControl.ts',
-                'js/classUtils.ts',
-                'js/formsControl.ts'
-            ]
+            files: [...default_files, 'js/formsControl.ts']
         }
     ];
 

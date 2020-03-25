@@ -5,15 +5,6 @@
 {% block content %}
 
 {% if user.is_authenticated %}
-{% if messages %}
-<div class="flex justify-center z-10">
-    <ul class="messages absolute z-10">
-        {% for message in messages %}
-        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
-    </ul>
-</div>
-{% endif %}
 
 <div class="flex justify-center">
     <h1 class="text-5xl font-semibold py-4 opacity-high-emphasis">Upload</h1>
