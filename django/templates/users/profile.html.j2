@@ -8,6 +8,15 @@
 
     <div class="flex flex-col w-4/5 max-w-7xl items-center">   
         {% if user.is_authenticated %}
+
+        {% if not user.email_confirmed %}
+        <div class="flex justify-center mb-4">
+            <span class="text-xl text-error">Your email is not confirmed!</span>
+            <button class="bg-primary hover:bg-primary-hover text-black px-2 py-1 rounded ml-10">
+                Send confirmation email
+            </button>
+        </div>
+        {% endif %}
         <div class="flex flex-col sm:flex-row items-center sm:justify-between w-4/5">
             <p class="opacity-high-emphasis text-4xl">
                 Hi {{ user.display_name }}!
