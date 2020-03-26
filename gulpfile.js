@@ -78,7 +78,11 @@ function processJavascript(cb) {
         },
         {
             outputFileName: 'upload.js',
-            files: [...default_files, 'js/formsControl.ts']
+            files: [
+                ...default_files,
+                'js/formsControl.ts',
+                'js/emailConfirmationButton.ts'
+            ]
         },
         {
             outputFileName: 'profile.js',
