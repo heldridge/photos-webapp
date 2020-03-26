@@ -87,6 +87,10 @@ function processJavascript(cb) {
                 'js/tagsControl.ts',
                 'js/emailConfirmationButton.ts'
             ]
+        },
+        {
+            outputFileName: 'settings.js',
+            files: [...default_files, 'js/emailConfirmationButton.ts']
         }
     ];
 
