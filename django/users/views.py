@@ -123,14 +123,28 @@ def confirm_email(request, user_public_id, token):
 class PasswordResetRequest(View):
     def get(self, request):
         form = PasswordResetForm()
+        form.fields["email"].widget.attrs.update(
+            {"class": " ".join(project_settings.FORM_FIELD_CLASSES)}
+        )
+
         return render(request, "users/password_reset_request.html.j2", {"form": form})
 
     def post(self, request):
         form = PasswordResetForm(request.POST)
+        form.fields["email"].widget.attrs.update(
+            {"class": " ".join(project_settings.FORM_FIELD_CLASSES)}
+        )
 
         if form.is_valid():
-            form.save(domain_override='localhost:8000', subject_template_name='users/password_reset_subject.txt', email_template_name='users/password_reset_email.html.j2')
-            return redirect('index')
+            form.save(
+                domain_override="localhost:8000",
+                subject_template_name="users/password_reset_subject.txt",
+                email_template_name="users/password_reset_email.html.j2",
+            )
+            messages.success(request, "Reset link sent!")
+            return redirect("index")
         else:
-            return render(request, 'users/password_reset_request.html.j2', {'form': form})
+            return render(
+                request, "users/password_reset_request.html.j2", {"form": form}
+            )
 
