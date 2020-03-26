@@ -101,4 +101,17 @@ def send_confirmation_email(request):
 
 
 def confirm_email(request, user_public_id, token):
-    return HttpResponse(200)
+    try:
+        target_user = models.CustomUser.objects.get(public_id=user_public_id)
+    except (ObjectDoesNotExist, ValidationError):
+        target_user = None
+
+    if target_user is not None and tokens.ACCOUNT_ACTIVATION_TOKEN.check_token(
+        target_user, token
+    ):
+        target_user.email_confirmed = True
+        target_user.save()
+        messages.success(request, "Email Confirmed!")
+        return redirect("index")
+
+    return render(request, "invalid_email_confirmation.html.j2")
