@@ -95,6 +95,7 @@ class Upload(View):
         else:
             form = PictureUploadForm()
             messages.error(
-                request, "You must be logged in with a confirmed email to upload images"
+                request,
+                "You must be logged in with a confirmed email to upload content",
             )
             return render(request, "upload.html.j2", {"form": form})
