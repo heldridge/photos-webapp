@@ -1,6 +1,7 @@
 from django.conf import settings as project_settings
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from . import forms, models
 
@@ -70,4 +71,12 @@ def user(request, user_public_id):
         )
 
     return render(request, "users/user.html.j2", context)
+
+
+def send_confirmation_email(request):
+    if request.method == "POST":
+        print("received")
+        return HttpResponse(status=200)
+    else:
+        return redirect("index")
 
