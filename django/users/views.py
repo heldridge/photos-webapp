@@ -1,11 +1,11 @@
 from django.conf import settings as project_settings
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
+from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
-from . import forms, models
-import time
+from . import forms, models, tokens
 
 from pictures.models import Picture, get_pictures, get_images_grid_context
 from sorl.thumbnail import get_thumbnail
@@ -78,12 +78,27 @@ def user(request, user_public_id):
 def send_confirmation_email(request):
     if request.method == "POST":
         if request.user.is_authenticated:
+            send_mail(
+                "Lewdix Email Confirmation",
+                render_to_string(
+                    "confirm_email.html.j2",
+                    {
+                        "domain": "localhost:8000",
+                        "user_public_id": request.user.public_id,
+                        "user_display_name": request.user.display_name,
+                        "token": tokens.ACCOUNT_ACTIVATION_TOKEN.make_token(
+                            request.user
+                        ),
+                    },
+                ),
+                project_settings.EMAIL_HOST_USER,
+                [request.user.email],
+            )
             return HttpResponse(status=200)
-
         return HttpResponse(status=401)
     else:
         return redirect("index")
 
 
-def confirm_email(request):
+def confirm_email(request, user_public_id, token):
     return HttpResponse(200)
