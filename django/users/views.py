@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from django.template.loader import render_to_string
 from . import forms, models
 import time
 
@@ -76,7 +77,13 @@ def user(request, user_public_id):
 
 def send_confirmation_email(request):
     if request.method == "POST":
-        print("received")
-        return HttpResponse(status=200)
+        if request.user.is_authenticated:
+            return HttpResponse(status=200)
+
+        return HttpResponse(status=401)
     else:
         return redirect("index")
+
+
+def confirm_email(request):
+    return HttpResponse(200)

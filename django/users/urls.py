@@ -11,4 +11,9 @@ urlpatterns = [
         views.send_confirmation_email,
         name="send_confirmation_email",
     ),
+    path(
+        "confirm-email/<str:user_public_id>/<str:token>",
+        views.confirm_email,
+        name="confirm_email",
+    ),
 ]

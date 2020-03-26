@@ -1,0 +1,4 @@
+{% autoescape off %}
+Hi {{ user.display_name }},
+Please click on the link to confirm your email, http://{{ domain }}{% url 'activate' user_public_id=user_public_id token=token %}
+{% endautoescape %}
