@@ -16,4 +16,9 @@ urlpatterns = [
         views.confirm_email,
         name="confirm_email",
     ),
+    path(
+        "password-reset-request",
+        views.PasswordResetRequest.as_view(),
+        name="password_reset_request",
+    ),
 ]
