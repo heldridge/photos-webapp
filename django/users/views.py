@@ -4,6 +4,7 @@ from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from . import forms, models
+import time
 
 from pictures.models import Picture, get_pictures, get_images_grid_context
 from sorl.thumbnail import get_thumbnail
