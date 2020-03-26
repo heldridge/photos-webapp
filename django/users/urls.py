@@ -6,4 +6,9 @@ urlpatterns = [
     path("register", views.register, name="register"),
     path("profile/settings", views.settings, name="settings"),
     path("users/<str:user_public_id>", views.user, name="users"),
+    path(
+        "users/send-confirmation-email",
+        views.send_confirmation_email,
+        name="send_confirmation_email",
+    ),
 ]
