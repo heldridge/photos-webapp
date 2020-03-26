@@ -79,4 +79,3 @@ def send_confirmation_email(request):
         return HttpResponse(status=200)
     else:
         return redirect("index")
-
