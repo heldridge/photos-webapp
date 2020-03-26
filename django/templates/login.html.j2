@@ -28,8 +28,9 @@
             
             <button type="submit" class="text-lg rounded mt-5 py-2 px-4 bg-primary hover:bg-primary-hover text-black">Login</button>
         </div> 
-        
     </form>
+
+    <a href="{% url 'password_reset_request' %}" class='opacity-medium-emphasis hover:opacity-50 mt-4'>Forgot your password?</a>
 </div>
 
 <script type="text/javascript" src="{% static 'js/login.js' %}"></script>

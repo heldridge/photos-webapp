@@ -1,10 +1,13 @@
 from django.conf import settings as project_settings
 from django.contrib import messages
+from django.contrib.auth.forms import PasswordResetForm
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
+from django.views import View
+
 from . import forms, models, tokens
 
 from pictures.models import Picture, get_pictures, get_images_grid_context
@@ -115,3 +118,19 @@ def confirm_email(request, user_public_id, token):
         return redirect("index")
 
     return render(request, "invalid_email_confirmation.html.j2")
+
+
+class PasswordResetRequest(View):
+    def get(self, request):
+        form = PasswordResetForm()
+        return render(request, "users/password_reset_request.html.j2", {"form": form})
+
+    def post(self, request):
+        form = PasswordResetForm(request.POST)
+
+        if form.is_valid():
+            form.save(domain_override='localhost:8000', subject_template_name='users/password_reset_subject.txt', email_template_name='users/password_reset_email.html.j2')
+            return redirect('index')
+        else:
+            return render(request, 'users/password_reset_request.html.j2', {'form': form})
+
