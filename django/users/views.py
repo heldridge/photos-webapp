@@ -6,6 +6,7 @@ from django.contrib.auth.views import (
     PasswordResetConfirmView,
     PasswordResetCompleteView,
     PasswordChangeView,
+    PasswordChangeDoneView,
 )
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.core.mail import send_mail
@@ -198,3 +199,8 @@ class CustomPasswordChangeView(PasswordChangeView):
                 {"class": " ".join(project_settings.FORM_FIELD_CLASSES)}
             )
         return form
+
+
+class CustomPasswordChangeDoneView(PasswordChangeDoneView):
+    template_name = "users/password_change_done.html.j2"
+
