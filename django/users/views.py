@@ -5,6 +5,7 @@ from django.contrib.auth.views import (
     PasswordResetView,
     PasswordResetConfirmView,
     PasswordResetCompleteView,
+    PasswordChangeView,
 )
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.core.mail import send_mail
@@ -175,7 +176,7 @@ class CustomPasswordResetConfirmView(PasswordResetConfirmView):
     template_name = "users/password_reset_confirm.html.j2"
 
     def get_form(self, form_class=None):
-        form = self.get_form(form_class)
+        form = super().get_form(form_class)
         for field in form.fields.values():
             field.widget.attrs.update(
                 {"class": " ".join(project_settings.FORM_FIELD_CLASSES)}
@@ -185,3 +186,15 @@ class CustomPasswordResetConfirmView(PasswordResetConfirmView):
 
 class CustomPasswordResetCompleteView(PasswordResetCompleteView):
     template_name = "users/password_reset_complete.html.j2"
+
+
+class CustomPasswordChangeView(PasswordChangeView):
+    template_name = "users/password_change.html.j2"
+
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        for field in form.fields.values():
+            field.widget.attrs.update(
+                {"class": " ".join(project_settings.FORM_FIELD_CLASSES)}
+            )
+        return form
