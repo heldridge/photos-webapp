@@ -175,10 +175,7 @@ class CustomPasswordResetConfirmView(PasswordResetConfirmView):
     template_name = "users/password_reset_confirm.html.j2"
 
     def get_form(self, form_class=None):
-        form = super().get_form(form_class)
-        # form.fields["email"].widget.attrs.update(
-        #     {"class": " ".join(project_settings.FORM_FIELD_CLASSES)}
-        # )
+        form = self.get_form(form_class)
         for field in form.fields.values():
             field.widget.attrs.update(
                 {"class": " ".join(project_settings.FORM_FIELD_CLASSES)}
