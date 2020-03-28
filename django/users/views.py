@@ -127,35 +127,6 @@ def confirm_email(request, user_public_id, token):
     return render(request, "invalid_email_confirmation.html.j2")
 
 
-# class PasswordResetRequest(View):
-#     def get(self, request):
-#         form = PasswordResetForm()
-#         form.fields["email"].widget.attrs.update(
-#             {"class": " ".join(project_settings.FORM_FIELD_CLASSES)}
-#         )
-
-#         return render(request, "users/password_reset_request.html.j2", {"form": form})
-
-#     def post(self, request):
-#         form = PasswordResetForm(request.POST)
-#         form.fields["email"].widget.attrs.update(
-#             {"class": " ".join(project_settings.FORM_FIELD_CLASSES)}
-#         )
-
-#         if form.is_valid():
-#             form.save(
-#                 domain_override="localhost:8000",
-#                 subject_template_name="users/password_reset_subject.txt",
-#                 email_template_name="users/password_reset_email.html.j2",
-#             )
-#             messages.success(request, "Reset link sent!")
-#             return redirect("index")
-#         else:
-#             return render(
-#                 request, "users/password_reset_request.html.j2", {"form": form}
-#             )
-
-
 class CustomPasswordResetView(PasswordResetView):
     email_template_name = "users/password_reset_email.html.j2"
     subject_template_name = "users/password_reset_subject.txt"
@@ -203,4 +174,3 @@ class CustomPasswordChangeView(PasswordChangeView):
 
 class CustomPasswordChangeDoneView(PasswordChangeDoneView):
     template_name = "users/password_change_done.html.j2"
-
