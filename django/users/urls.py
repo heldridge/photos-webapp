@@ -30,4 +30,9 @@ urlpatterns = [
         views.CustomPasswordResetCompleteView.as_view(),
         name="password_reset_complete",
     ),
+    path(
+        "password-change",
+        views.CustomPasswordChangeView.as_view(),
+        name="password_change",
+    ),
 ]
