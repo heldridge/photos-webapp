@@ -25,8 +25,8 @@ class Picture(models.Model):
         blank=True,
         validators=[
             RegexValidator(
-                r"^[a-zA-Z0-9- ]*$",
-                "Tags must only contain characters lowercase a-z, numbers, and dashes (-)",
+                r"^[a-z0-9- ]*$",
+                "Tags must only contain lowercase characters a-z, numbers, and dashes (-)",
                 code="invalid",
             )
         ],
