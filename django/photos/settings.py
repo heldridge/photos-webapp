@@ -173,6 +173,9 @@ MIN_TAG_LENGTH = 1
 VALID_TAG_REGEX = r"^[a-zA-Z0-9\-]*$"
 INVALID_TAG_CHAR_REGEX = r"[^a-zA-Z0-9\-]"
 
+# How many tags you are allowed to have
+MAX_TAG_NUM = 5
+
 # How many pictures to put on a page
 PAGE_SIZE = 16
 MAX_THEORETICAL_PAGE_SIZE_FOR_PLACEHOLDERS = 18
