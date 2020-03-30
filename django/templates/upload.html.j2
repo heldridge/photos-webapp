@@ -43,6 +43,28 @@
                 {% endfor %}
             </ul>
         </div>
+
+        {% if field.name == 'tags' %}
+            <div class="flex flex-row flex-wrap mb-5 mt-3 px-4">
+                {% for tag in top_tags %}
+                {% if forloop.counter0 == 0 %}
+                <span class="mr-2">Popular Tags:</span>
+                {% else %}
+                {% endif %}
+                <button 
+                    class="tag bg-gray-300 rounded py-2 px-3 mr-3 font-medium text-sm mb-3 bg-tag text-tag hover:text-tag-hover flex items-center"
+                    onclick="addPopularTag(this)"
+                    type="button"
+                >
+                    <span>{{ tag.title }}</span>
+                    <div class="ml-2">
+                        <i class="fas fa-plus" id="addTagsIcon"></i>
+                    </div>
+                </button>
+                {% endfor %}
+            </div>
+        {% else %}
+        {% endif %}
     </div>
     
     {% endfor %}
@@ -55,7 +77,6 @@
     <h1 class="text-3xl font-semibold py-4 opacity-medium-emphasis">Must be logged in to upload</h1>
 </div>
 {% endif %}
-
 
 
 <script type="text/javascript" src="{% static 'js/upload.js' %}"></script>

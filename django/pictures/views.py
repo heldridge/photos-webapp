@@ -7,7 +7,7 @@ from psycopg2.errors import UniqueViolation
 from django.contrib import messages
 from django.shortcuts import render, redirect
 
-from pictures.models import Picture, Favorite
+from pictures.models import Picture, Favorite, Tag
 from .forms import PictureUploadForm
 
 
@@ -78,7 +78,16 @@ class Favorites(View):
 class Upload(View):
     def get(self, request):
         form = PictureUploadForm()
-        return render(request, "upload.html.j2", {"form": form})
+
+        for field in form:
+            print(field.name)
+            print(type(field.name))
+
+        return render(
+            request,
+            "upload.html.j2",
+            {"form": form, "top_tags": Tag.objects.order_by("-count")[:6]},
+        )
 
     def post(self, request):
         if request.user.is_authenticated and request.user.email_confirmed:
