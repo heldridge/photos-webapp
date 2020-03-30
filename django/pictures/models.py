@@ -68,6 +68,7 @@ class Picture(models.Model):
             self.thumbnail_w_272 = self.make_thumbnail(
                 self.photo, (272, self.photo.height)
             )
+        self.tags = " ".join(self.tags.split())
         super().save(*args, **kwargs)
 
     def make_thumbnail(self, image, size):
