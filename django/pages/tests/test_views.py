@@ -57,3 +57,12 @@ class TestPagesLoad(TestCase):
     def test_search_uploaded_by(self):
         response = self.client.get(f"/search?uploaded_by={self.user.public_id}")
         self.assertEqual(response.status_code, 200)
+
+    def test_search_uploaded_by_bad_id(self):
+        response = self.client.get(f"/search?uploaded_by={uuid.uuid4()}")
+        self.assertEqual(response.status_code, 200)
+
+    def test_search_with_favorites(self):
+        self.client.force_login(self.user)
+        response = self.client.get(f"/search?favorites=true")
+        self.assertEqual(response.status_code, 200)
