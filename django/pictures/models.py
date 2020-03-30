@@ -25,6 +25,13 @@ def validate_tags_under_max_length(value):
             )
 
 
+def validate_not_too_many_tags(value):
+    if len(value.split()) > settings.MAX_TAG_NUM:
+        raise exceptions.ValidationError(
+            "Cannot have more than %(num)i tags", params={"num": settings.MAX_TAG_NUM}
+        )
+
+
 # Create your models here.
 class Picture(models.Model):
     title = models.CharField(max_length=100)
@@ -39,6 +46,7 @@ class Picture(models.Model):
                 code="invalid",
             ),
             validate_tags_under_max_length,
+            validate_not_too_many_tags,
         ],
     )
     uploaded_at = models.DateTimeField(default=now)
