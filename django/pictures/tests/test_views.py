@@ -71,3 +71,9 @@ class TestFavorites(TestCase):
         response = self.client.post(f"/pictures/{self.picture.public_id}/favorites/")
         self.assertEqual(response.status_code, 401)
         self.assertTrue(len(Favorite.objects.all()) == 0)
+
+    def test_delete_favorite(self):
+        self.client.force_login(self.user)
+        self.client.post(f"/pictures/{self.picture.public_id}/favorites/")
+        self.client.delete(f"/pictures/{self.picture.public_id}/favorites/")
+        self.assertTrue(len(Favorite.objects.all()) == 0)
