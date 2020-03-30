@@ -8,7 +8,7 @@ class TestPagesLoad(TestCase):
     @classmethod
     def setUpTestData(cls):
         num_pictures = 32
-        for i in range(num_pictures):
+        for _ in range(num_pictures):
             Picture.objects.create(
                 title="Test Title",
                 description="Desc",
@@ -19,5 +19,14 @@ class TestPagesLoad(TestCase):
                 ),
             )
 
-    def test_my_worky(self):
-        self.assertTrue(True)
+    def test_index(self):
+        response = self.client.get("/")
+        self.assertEqual(response.status_code, 200)
+
+    def test_gallery(self):
+        response = self.client.get("/gallery")
+        self.assertEqual(response.status_code, 200)
+
+    def test_search(self):
+        response = self.client.get("/search")
+        self.assertEqual(response.status_code, 200)
