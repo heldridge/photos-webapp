@@ -24,6 +24,8 @@ class PictureUploadForm(forms.ModelForm):
             {"class": " ".join(settings.FORM_FIELD_CLASSES),}
         )
 
+        self.fields["tags"].label = "Tags (separated by spaces)"
+
     def is_valid(self):
         ret = super().is_valid()
         for f in self.errors:
