@@ -30,3 +30,20 @@ class TestPagesLoad(TestCase):
     def test_profile_not_logged_in(self):
         response = self.client.get("/accounts/profile")
         self.assertEqual(response.status_code, 200)
+
+    def test_register(self):
+        response = self.client.get("/accounts/register")
+        self.assertEqual(response.status_code, 200)
+
+    def test_settings(self):
+        self.client.force_login(self.user)
+        response = self.client.get("/accounts/profile/settings")
+        self.assertEqual(response.status_code, 200)
+
+    def test_settings_not_logged_in(self):
+        response = self.client.get("/accounts/profile/settings")
+        self.assertEqual(response.status_code, 200)
+
+    def test_user(self):
+        response = self.client.get(f"/accounts/users/{self.user.public_id}")
+        self.assertEqual(response.status_code, 200)
