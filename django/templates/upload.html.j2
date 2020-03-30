@@ -21,11 +21,14 @@
 
 <form method = "post" enctype="multipart/form-data" class='text-primary flex flex-col items-center text-lg'> 
     {% csrf_token %} 
+    <div class="">
     {% for field in form %}
     
-    <div class="flex flex-col {% if forloop.last %}py-5{% elif not forloop.first %}pt-5{% endif %} items-center">
-        <div class="flex items-center">
-            <span class="text-lg opacity-high-emphasis {% if forloop.last %}ml-20{% endif %} mr-5">{{ field.label_tag }}</span>
+    <div class="flex flex-col {% if forloop.last %}py-5{% elif not forloop.first %}pt-5{% endif %} items-center w-full">
+        <div class="flex flex-col sm:flex-row items-center justify-between w-full">
+            <span class="text-lg opacity-high-emphasis {% if forloop.last %}ml-20{% endif %} mr-5">
+                {{ field.label_tag }}
+            </span>
             {{ field }}
         </div> 
         
@@ -41,7 +44,9 @@
             </ul>
         </div>
     </div>
+    
     {% endfor %}
+    </div>
     <button type="submit" class="rounded shadow py-2 pl-3 pr-4 bg-basic hover:bg-basic-hover text-black">Upload Image</button> 
 </form> 
 {% endif %}
