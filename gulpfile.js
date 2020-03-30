@@ -81,7 +81,8 @@ function processJavascript(cb) {
             files: [
                 ...default_files,
                 'js/formsControl.ts',
-                'js/emailConfirmationButton.ts'
+                'js/emailConfirmationButton.ts',
+                'js/upload.ts'
             ]
         },
         {
