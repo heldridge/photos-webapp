@@ -129,6 +129,11 @@
     --color-bg-error: #cf6679;
 }
 
+.upload-add-tag:hover span,
+.upload-add-tag:hover div i {
+    opacity: var(--opacity-text-high-emphasis);
+}
+
 .outline-button:hover span {
     opacity: 100%;
 }
