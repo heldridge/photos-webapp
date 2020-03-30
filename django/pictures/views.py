@@ -46,7 +46,6 @@ def picture(request, picture_public_id):
             if target_picture.uploaded_by is not None
             else None,
         }
-        print(context)
     return render(request, "picture.html.j2", context)
 
 
@@ -78,10 +77,6 @@ class Favorites(View):
 class Upload(View):
     def get(self, request):
         form = PictureUploadForm()
-
-        for field in form:
-            print(field.name)
-            print(type(field.name))
 
         return render(
             request,
