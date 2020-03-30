@@ -8,7 +8,13 @@ from django.db.models import Q
 from django.shortcuts import render
 
 
-from pictures.models import Picture, Favorite, get_pictures, get_images_grid_context
+from pictures.models import (
+    Picture,
+    Favorite,
+    get_pictures,
+    get_images_grid_context,
+    Tag,
+)
 from users.models import CustomUser
 from sorl.thumbnail import get_thumbnail
 
@@ -58,6 +64,7 @@ def index(request):
         "min_tag_length": settings.MIN_TAG_LENGTH,
         "valid_tag_regex": settings.VALID_TAG_REGEX,
         "invalid_tag_char_regex": settings.INVALID_TAG_CHAR_REGEX,
+        "top_tags": Tag.objects.order_by("-count")[:10],
     }
     return render(request, "pages/index.html.j2", context)
 
