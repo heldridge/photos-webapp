@@ -100,11 +100,19 @@ class Upload(View):
                 messages.success(request, "Upload Complete!")
                 return redirect("upload")
             else:
-                return render(request, "upload.html.j2", {"form": form})
+                return render(
+                    request,
+                    "upload.html.j2",
+                    {"form": form, "top_tags": Tag.objects.order_by("-count")[:6]},
+                )
         else:
             form = PictureUploadForm()
             messages.error(
                 request,
                 "You must be logged in with a confirmed email to upload content",
             )
-            return render(request, "upload.html.j2", {"form": form})
+            return render(
+                request,
+                "upload.html.j2",
+                {"form": form, "top_tags": Tag.objects.order_by("-count")[:6]},
+            )
