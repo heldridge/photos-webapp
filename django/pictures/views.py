@@ -69,8 +69,7 @@ class Favorites(View):
             Favorite.objects.filter(
                 user=request.user, picture__public_id=picture_public_id
             ).delete()
-        else:
-            pass
+
         return HttpResponse("OK")
 
 
