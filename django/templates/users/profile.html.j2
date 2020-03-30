@@ -33,11 +33,7 @@
                 </a>
             </div>
         </div>
-        {% else %}
-        <p class="opacity-high-emphasis text-4xl">
-            You are not logged in
-        </p>
-        {% endif %}
+        
 
 
         <a href="{% url 'users' user_public_id=user.public_id %}" class="bg-basic hover:bg-basic-hover rounded text-black px-3 py-1 sm:py-2 text-black opacity-high-emphasis text-lg flex items-center mt-4">
@@ -63,6 +59,11 @@
         {% if pictures|length == 0 %}
         <p class='text-xl md:text-3xl opacity-medium-emphasis'>You have no favorites! Press the heart button below an image to add one.</p>
         {% else %}
+        {% endif %}
+        {% else %}
+        <p class="opacity-high-emphasis text-4xl">
+            You are not logged in
+        </p>
         {% endif %}
     </div>
 </div>
