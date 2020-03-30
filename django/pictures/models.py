@@ -131,7 +131,7 @@ class Tag(models.Model):
     """Holds the tags table populated by the daily task."""
 
     title = models.CharField(max_length=settings.MAX_TAG_LENGTH)
-    count = models.IntegerField()
+    count = models.IntegerField(default=0)
 
 
 ###################
