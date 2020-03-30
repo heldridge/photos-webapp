@@ -64,7 +64,6 @@ def settings(request):
 
 
 def user(request, user_public_id):
-
     context = {}
     try:
         target = models.CustomUser.objects.get(public_id=user_public_id)
