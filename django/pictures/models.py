@@ -16,6 +16,15 @@ from PIL import Image
 from users.models import CustomUser
 
 
+def validate_tags_under_max_length(value):
+    tags = value.split()
+    for tag in tags:
+        if len(tag) > settings.MAX_TAG_LENGTH:
+            raise exceptions.ValidationError(
+                "%(tag)s must be 20 or fewer characters", params={"tag": tag}
+            )
+
+
 # Create your models here.
 class Picture(models.Model):
     title = models.CharField(max_length=100)
@@ -28,7 +37,8 @@ class Picture(models.Model):
                 r"^[a-z0-9- ]*$",
                 "Tags must only contain lowercase characters a-z, numbers, and dashes (-)",
                 code="invalid",
-            )
+            ),
+            validate_tags_under_max_length,
         ],
     )
     uploaded_at = models.DateTimeField(default=now)
@@ -114,6 +124,13 @@ class Favorite(models.Model):
 
     user = models.ForeignKey("users.CustomUser", on_delete=models.CASCADE)
     picture = models.ForeignKey("Picture", on_delete=models.CASCADE)
+
+
+class Tag(models.Model):
+    """Holds the tags table populated by the daily task."""
+
+    title = models.CharField(max_length=settings.MAX_TAG_LENGTH)
+    count = models.IntegerField()
 
 
 ###################
