@@ -7,7 +7,7 @@
 {% if photo %}
 <div class="px-8 pt-4 pb-20 flex justify-center">
     <div class="flex flex-col">
-        <img src="/media/{{ photo }}" alt="{{ title }}" title="{{ title }}">
+        <img src="{{ photo.url }}" alt="{{ title }}" title="{{ title }}">
         <div class="flex justify-between items-center">
             {% if uploaded_by_public_id %}
             <a 

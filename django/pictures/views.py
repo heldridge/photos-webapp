@@ -33,7 +33,7 @@ def picture(request, picture_public_id):
 
         context = {
             "public_id": str(target_picture.public_id),
-            "photo": str(target_picture.photo),
+            "photo": target_picture.photo,
             "title": target_picture.title,
             "tags": str(target_picture.tags).split(),
             "favorite": favorite,
