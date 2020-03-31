@@ -3,7 +3,7 @@ import uuid
 from django.test import TestCase
 from django.core.files.uploadedfile import SimpleUploadedFile
 
-from pictures.models import Picture
+from pictures.models import Picture, Favorite
 from users.models import CustomUser
 
 
@@ -25,12 +25,40 @@ class TestPagesLoad(TestCase):
                 uploaded_by=cls.user,
             )
 
+        Favorite.objects.create(
+            user=cls.user, picture=Picture.objects.order_by("-id")[0]
+        )
+
     def test_index(self):
         response = self.client.get("/")
         self.assertEqual(response.status_code, 200)
 
     def test_gallery(self):
         response = self.client.get("/gallery")
+        self.assertEqual(response.status_code, 200)
+
+    def test_gallery_logged_in(self):
+
+        self.client.force_login(self.user)
+
+        response = self.client.get("/gallery")
+        self.assertEqual(response.status_code, 200)
+
+    def test_gallery_picture_id(self):
+        response = self.client.get(
+            f"/gallery?p={Picture.objects.all().order_by('-id')[0].public_id}"
+        )
+        self.assertEqual(response.status_code, 200)
+
+    def test_gallery_bad_picture_id(self):
+        response = self.client.get(f"/gallery?p={uuid.uuid4()}")
+        self.assertEqual(response.status_code, 200)
+
+    def test_gallery_bad_picture_id_with_before(self):
+        response = self.client.get(
+            f"/gallery?p={uuid.uuid4()}&"
+            f"before={Picture.objects.all().order_by('-id')[3]}"
+        )
         self.assertEqual(response.status_code, 200)
 
     def test_search(self):
