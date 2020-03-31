@@ -225,4 +225,9 @@ def gallery(request):
     )
     context["picture"] = current_picture
 
+    if settings.USE_S3:
+        context["media_prefix"] = f"https://{settings.AWS_S3_CUSTOM_DOMAIN}"
+    else:
+        context["media_prefix"] = ""
+
     return render(request, "pages/gallery.html.j2", context)

@@ -45,6 +45,10 @@ if (
     previousLinkHREF = previousLinks[0].href;
 }
 
+let mediaPrefix = JSON.parse(
+    document.getElementById('media-prefix').textContent
+);
+
 setImage(originalPictureIndex, 'replace');
 
 let preloadedImages = {};
@@ -59,7 +63,7 @@ function setImage(index: number, stateAction: string = '') {
             // Add new child
             let image = document.createElement('img');
             addClass(image, 'max-h-80-screen');
-            image.src = `/media/${pictures[index].photo}`;
+            image.src = `${mediaPrefix}/media/${pictures[index].photo}`;
             galleryImageContainer.appendChild(image);
         }
         if (modalImageContainer) {
@@ -68,7 +72,7 @@ function setImage(index: number, stateAction: string = '') {
 
             // Add child to modal image
             let modalImage = document.createElement('img');
-            modalImage.src = `/media/${pictures[index].photo}`;
+            modalImage.src = `${mediaPrefix}/media/${pictures[index].photo}`;
             modalImageContainer.appendChild(modalImage);
         }
 
@@ -245,7 +249,7 @@ document.onkeyup = function(event) {
 function preloadImages() {
     pictures.forEach(picture => {
         let newImg = new Image();
-        newImg.src = `/media/${picture.photo}`;
+        newImg.src = `${mediaPrefix}/media/${picture.photo}`;
         preloadedImages[picture.public_id] = newImg;
     });
 }

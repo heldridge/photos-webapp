@@ -206,6 +206,7 @@
 
 {{ pictures|json_script:"pictures"}}
 {{ original_picture_index|json_script:"original-picture-index"}}
+{{ media_prefix|json_script:"media-prefix" }}
 <script type="text/javascript" src="{% static 'js/gallery.js' %}"></script>
 
 {% endblock %}
