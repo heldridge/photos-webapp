@@ -1,6 +1,6 @@
 server {
     listen 80;
-    server_name django-local;
+    server_name 3.89.61.10;
 
     location = /favicon.ico { access_log off; log_not_found off; }
 
