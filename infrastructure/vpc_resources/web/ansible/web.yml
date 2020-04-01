@@ -109,29 +109,24 @@
     #     enabled: yes
     #     name: gunicorn
 
-    # - name: upload nginx config
-    #   copy: 
-    #     src: photos
-    #     dest: /etc/nginx/sites-available/photos
-    #     owner: root
-    #     group: root
-    #     mode: '0644'
+    - name: upload nginx config
+      copy: 
+        src: photos
+        dest: /etc/nginx/sites-available/photos
+        owner: root
+        group: root
+        mode: '0644'
     
-    # - name: symlink site to sites-enabled
-    #   file:
-    #     state: link
-    #     path: /etc/nginx/sites-enabled/photos
-    #     src: /etc/nginx/sites-available/photos
+    - name: symlink site to sites-enabled
+      file:
+        state: link
+        path: /etc/nginx/sites-enabled/photos
+        src: /etc/nginx/sites-available/photos
 
-    # - name: restart nginx
-    #   systemd:
-    #     state: restarted
-    #     name: nginx
-
-    # - name: open nginx to world
-    #   ufw:
-    #     rule: allow
-    #     name: "Nginx Full"
+    - name: restart nginx
+      systemd:
+        state: restarted
+        name: nginx
 
   # DATABSE
     - name: add postgres repository
