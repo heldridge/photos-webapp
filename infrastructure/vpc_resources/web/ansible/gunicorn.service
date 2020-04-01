@@ -7,7 +7,7 @@ User=django
 Group=www-data
 # symlink to the "django" directory in the latest repository clone
 WorkingDirectory=/home/django/current_deployment
-ExecStart=/home/django/current_deployment/venv/bin/gunicorn --access-logfile - --workers 3 --bind unix:/home/django/current_deployment/photos.sock photos.wsgi:application
+ExecStart=/home/django/current_deployment/venv/bin/gunicorn --access-logfile - --workers 3 --bind unix:/home/django/photos.sock photos.wsgi:application
 EnvironmentFile=/home/django/gunicorn_env
 
 [Install]
