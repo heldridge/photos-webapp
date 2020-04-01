@@ -39,6 +39,7 @@ ALLOWED_HOSTS = [
     "localhost",
     "localhost:8000",
     "3.89.61.10",
+    "qlbhmmvpym.club",
 ]
 
 
