@@ -1,0 +1,61 @@
+---
+    - hosts: web
+      become: yes
+    
+      vars_prompt:
+        - name: GitCheckout
+          description: What to checkout in the repository when deploying
+          default: master
+          
+      tasks:
+        - name: get timestamp from the system
+          shell: "date --utc +%F_%H-%M-%S-%Z"
+          register: timestamp
+    
+        - name: clone repository
+          become_user: django
+          git:
+            name: git@github.com:heldridge/photos-webapp.git
+            dest: "/home/django/checkouts/{{ timestamp.stdout }}"
+        
+        - name: Checkout correct version
+          become_user: django
+          command:
+            cmd: "git checkout {{ GitCheckout }}"
+            chdir: /home/django/checkouts/{{ timestamp.stdout }}
+        
+        - name: install virtualenv requirements
+          pip:
+            name:
+              - virtualenv
+              - setuptools
+    
+        - name: install application requirements
+          become_user: django
+          pip:
+            virtualenv: "/home/django/checkouts/{{ timestamp.stdout }}/django/venv"
+            virtualenv_command: "/usr/bin/python3 -m virtualenv"
+            virtualenv_python: python3.8
+            requirements: "/home/django/checkouts/{{ timestamp.stdout }}/requirements.txt"
+    
+        - name: create deployment symlink
+          file:
+            state: link
+            path: /home/django/current_deployment
+            src: "/home/django/checkouts/{{ timestamp.stdout }}/django"
+            follow: false
+
+        - name: Load environment secrets
+          include_vars:
+            file: env.yml
+          
+        - name: start gunicorn service
+          systemd:
+            state: restarted
+            enabled: yes
+            name: gunicorn
+    
+        - name: restart nginx
+          systemd:
+            state: restarted
+            name: nginx
