@@ -1,5 +1,6 @@
 # Django
 export DJANGO_SECRET_KEY=''
+export DJANGO_DEBUG=''
 
 # Postgres
 export DJANGO_POSTGRES_PASSWORD=''
