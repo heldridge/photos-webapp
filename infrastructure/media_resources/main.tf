@@ -51,4 +51,3 @@ resource "aws_iam_user_policy" "django_s3_access" {
 
   policy = data.aws_iam_policy_document.django_user.json
 }
-
