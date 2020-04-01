@@ -7,3 +7,5 @@ Pillow~=6.2.1
 psycopg2~=2.8.4
 python-memcached<2.0
 sorl-thumbnail<13.0.0
+django-debug-toolbar
+django-debug-toolbar-template-timings
