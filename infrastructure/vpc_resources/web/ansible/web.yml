@@ -153,10 +153,11 @@
       apt:
         upgrade: full
   
-
-    - name: Install psycopg
+    - name: Install python requirements
       pip:
-        name: psycopg2
+        name:
+          - psycopg2
+          - virtualenv
 
     - name: ensure database is created
       become_user: postgres
