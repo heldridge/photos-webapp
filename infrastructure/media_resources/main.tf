@@ -1,20 +1,3 @@
-# Static and media storage bucket
-resource "aws_s3_bucket" "static_media_storage" {
-  bucket_prefix = "lewdix-media-stage-"
-  acl           = "private"
-
-  tags = {
-    Name = "Bucket for media files -stage"
-  }
-
-  cors_rule {
-    allowed_origins = ["http://localhost:8000"]
-    allowed_methods = ["GET"]
-    max_age_seconds = 3000
-    allowed_headers = ["Content-*", "Host"]
-  }
-}
-
 resource "aws_s3_bucket" "qlbhmmvpym" {
   bucket = "media.qlbhmmvpym.club"
   acl    = "private"
