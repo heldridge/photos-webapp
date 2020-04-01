@@ -1,0 +1,14 @@
+server {
+    listen 80;
+    server_name django-local;
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location /static/ {
+        root /home/django/checkouts/2019-10-28_17-56-28-UTC/photos;
+    }
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/home/django/current_deployment/photos.sock;
+    }
+}
