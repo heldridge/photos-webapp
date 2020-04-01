@@ -19,22 +19,24 @@ resource "aws_security_group_rule" "main_allow_ssh" {
   description = "Allow ssh from my home IP"
 }
 
-resource "aws_security_group_rule" "gitlab_main_allow_https" {
+resource "aws_security_group_rule" "main_allow_https" {
   type              = "ingress"
   from_port         = 443
   to_port           = 443
   protocol          = "tcp"
   security_group_id = aws_security_group.main.id
+  cidr_blocks       = ["96.255.57.191/32"]
 
   description = "Allow https from anywhere"
 }
 
-resource "aws_security_group_rule" "gitlab_main_allow_http" {
+resource "aws_security_group_rule" "main_allow_http" {
   type              = "ingress"
   from_port         = 80
   to_port           = 80
   protocol          = "tcp"
   security_group_id = aws_security_group.main.id
+  cidr_blocks       = ["96.255.57.191/32"]
 
   description = "Allow http from anywhere"
 }
@@ -61,7 +63,7 @@ resource "aws_key_pair" "main" {
 }
 
 resource aws_instance "main" {
-  ami           = data.aws_ami.ubuntu_18_04
+  ami           = data.aws_ami.ubuntu_18_04.id
   instance_type = "t2.micro"
 
   tags = {
@@ -69,5 +71,5 @@ resource aws_instance "main" {
   }
 
   security_groups = [aws_security_group.main.name]
-  key_name        = aws_key_pair.main.name
+  key_name        = aws_key_pair.main.key_name
 }
