@@ -24,6 +24,8 @@
           - nginx
           - python3-pip
           - python3
+          - libpq-dev 
+          - python-dev
         state: latest
         update_cache: yes
 
