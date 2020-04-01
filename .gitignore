@@ -10,6 +10,7 @@ django/photos/static/css/styles-tailwind.css
 django/photos/user_uploads/*
 django/media/**/*
 django/media_nsfw/**/*
+gunicorn_env
 
 
 ###########
