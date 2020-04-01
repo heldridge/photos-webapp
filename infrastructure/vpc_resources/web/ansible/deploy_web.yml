@@ -44,10 +44,6 @@
             path: /home/django/current_deployment
             src: "/home/django/checkouts/{{ timestamp.stdout }}/django"
             follow: false
-
-        - name: Load environment secrets
-          include_vars:
-            file: env.yml
           
         - name: start gunicorn service
           systemd:
