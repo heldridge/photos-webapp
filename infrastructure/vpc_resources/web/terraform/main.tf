@@ -41,6 +41,17 @@ resource "aws_security_group_rule" "main_allow_http" {
   description = "Allow http from anywhere"
 }
 
+resource "aws_security_group_rule" "main_allow_outbound" {
+  type        = "egress"
+  from_port   = 0
+  to_port     = 0
+  protocol    = "-1"
+  cidr_blocks = ["0.0.0.0/0"]
+
+  security_group_id = aws_security_group.main.id
+  description       = "Allow all outbound"
+}
+
 data "aws_ami" "ubuntu_18_04" {
   most_recent = true
 
