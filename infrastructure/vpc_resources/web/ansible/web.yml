@@ -11,6 +11,7 @@
   vars_prompt:
     - name: dbpassword
       description: "The password to the database"
+      private: yes
 
   handlers:
     - name: restart postgres
