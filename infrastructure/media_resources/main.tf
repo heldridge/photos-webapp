@@ -39,8 +39,6 @@ data "aws_iam_policy_document" "django_user" {
     ]
 
     resources = [
-      "arn:aws:s3:::${aws_s3_bucket.static_media_storage.id}/*",
-      "arn:aws:s3:::${aws_s3_bucket.static_media_storage.id}",
       "arn:aws:s3:::${aws_s3_bucket.qlbhmmvpym.id}/*",
       "arn:aws:s3:::${aws_s3_bucket.qlbhmmvpym.id}"
     ]
