@@ -4,6 +4,19 @@
 
   vars:
     python_version: 3.8
+    dbname: photos
+    dbuser: django
+    postgresql_version: 12
+  
+  vars_prompt:
+    - name: dbpassword
+      description: "The password to the database"
+
+  handlers:
+    - name: restart postgres
+      service:
+        name: postgresql
+        state: restarted
 
   tasks:
     - name: Set hostname
@@ -75,6 +88,13 @@
         group: django
         state: directory
 
+    - name: Upload env file (not tracked in git)
+      copy:
+        src: gunicorn_env
+        dest: /home/django/gunicorn_env
+        owner: django
+        group: django
+
     - name: upload gunicorn service config
       copy:
         src: gunicorn.service
@@ -83,32 +103,91 @@
         group: root
         mode: '0644'
 
-    - name: start gunicorn service
-      systemd:
-        state: restarted
-        enabled: yes
-        name: gunicorn
+    # - name: start gunicorn service
+    #   systemd:
+    #     state: restarted
+    #     enabled: yes
+    #     name: gunicorn
 
-    - name: upload nginx config
-      copy: 
-        src: photos
-        dest: /etc/nginx/sites-available/photos
-        owner: root
-        group: root
-        mode: '0644'
+    # - name: upload nginx config
+    #   copy: 
+    #     src: photos
+    #     dest: /etc/nginx/sites-available/photos
+    #     owner: root
+    #     group: root
+    #     mode: '0644'
     
-    - name: symlink site to sites-enabled
-      file:
-        state: link
-        path: /etc/nginx/sites-enabled/photos
-        src: /etc/nginx/sites-available/photos
+    # - name: symlink site to sites-enabled
+    #   file:
+    #     state: link
+    #     path: /etc/nginx/sites-enabled/photos
+    #     src: /etc/nginx/sites-available/photos
 
-    - name: restart nginx
-      systemd:
-        state: restarted
-        name: nginx
+    # - name: restart nginx
+    #   systemd:
+    #     state: restarted
+    #     name: nginx
 
-    - name: open nginx to world
-      ufw:
-        rule: allow
-        name: "Nginx Full"
+    # - name: open nginx to world
+    #   ufw:
+    #     rule: allow
+    #     name: "Nginx Full"
+
+  # DATABSE
+    - name: add postgres repository
+      lineinfile:
+          path: /etc/apt/sources.list.d/pgdg.list
+          line: deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main
+          create: yes
+  
+    - name: add postgres signing key
+      apt_key:
+        url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
+        state: present
+  
+    - name: install postgres and requirements
+      apt:
+        name: 
+          - "postgresql-{{ postgresql_version }}"
+          - postgresql-contrib
+          - python-psycopg2
+        state: latest
+        update_cache: yes
+  
+    - name: upgrade packages
+      apt:
+        upgrade: full
+  
+
+    - name: Install psycopg
+      pip:
+        name: psycopg2
+
+    - name: ensure database is created
+      become_user: postgres
+      postgresql_db: 
+        name: "{{ dbname }}"
+
+    - name: ensure user has access to database
+      become_user: postgres
+      postgresql_user: 
+        db: "{{ dbname }}"
+        name: "{{ dbuser }}"
+        password: "{{ dbpassword }}"
+        priv: ALL
+
+    - name: ensure user does not have unnecessary privilege
+      become_user: postgres
+      postgresql_user: 
+        name: "{{ dbuser }}"
+        role_attr_flags: NOSUPERUSER,NOCREATEDB
+    
+    - name: ensure no other user can access the database
+      become_user: postgres
+      postgresql_privs: 
+        db: "{{ dbname }}"
+        role: PUBLIC
+        type: database 
+        priv: ALL
+        state: absent
+  
