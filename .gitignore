@@ -11,7 +11,7 @@ django/photos/user_uploads/*
 django/media/**/*
 django/media_nsfw/**/*
 gunicorn_env
-
+env.yml
 
 ###########
 # VAGRANT #
