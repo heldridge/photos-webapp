@@ -1,0 +1,13 @@
+[Unit]
+Description=gunicorn daemon
+After=network.target
+
+[Service]
+User=django
+Group=www-data
+# symlink to the "django" directory in the latest repository clone
+WorkingDirectory=/home/django/current_deployment
+ExecStart=/home/django/current_deployment/venv/bin/gunicorn --access-logfile - --workers 3 --bind unix:/home/django/current_deployment/photos.sock photos.wsgi:application
+
+[Install]
+WantedBy=multi-user.target

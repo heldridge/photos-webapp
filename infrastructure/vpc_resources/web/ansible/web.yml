@@ -74,3 +74,41 @@
         owner: django
         group: django
         state: directory
+
+    - name: upload gunicorn service config
+      copy:
+        src: gunicorn.service
+        dest: /etc/systemd/system/gunicorn.service
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: start gunicorn service
+      systemd:
+        state: restarted
+        enabled: yes
+        name: gunicorn
+
+    - name: upload nginx config
+      copy: 
+        src: photos
+        dest: /etc/nginx/sites-available/photos
+        owner: root
+        group: root
+        mode: '0644'
+    
+    - name: symlink site to sites-enabled
+      file:
+        state: link
+        path: /etc/nginx/sites-enabled/photos
+        src: /etc/nginx/sites-available/photos
+
+    - name: restart nginx
+      systemd:
+        state: restarted
+        name: nginx
+
+    - name: open nginx to world
+      ufw:
+        rule: allow
+        name: "Nginx Full"
