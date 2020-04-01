@@ -40,8 +40,12 @@
           - python3
           - libpq-dev 
           - python3.8-dev
+          - memcached
         state: latest
         update_cache: yes
+
+    - name: start memcached
+      command: /etc/init.d/memcached start
 
     - name: upgrade packages
       apt:
