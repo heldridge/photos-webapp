@@ -2,7 +2,7 @@ all:
     children:
         web:
             hosts:
-                3.89.61.10
+                34.196.195.136
             vars:
                 ansible_user: ubuntu
                 ansible_connection: ssh
