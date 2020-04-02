@@ -41,7 +41,19 @@
           - libpq-dev 
           - python3.8-dev
           - memcached
+          - software-properties-common
         state: latest
+        update_cache: yes
+    
+    - name: add certbot repository
+      apt_repository:
+        repo: ppa:certbot/certbot
+    
+    - name: install certbot
+      apt:
+        name: 
+          - certbot
+          - python-certbot-nginx
         update_cache: yes
 
     - name: start memcached
