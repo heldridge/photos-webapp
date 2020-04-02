@@ -88,3 +88,37 @@ resource aws_instance "main" {
 resource aws_eip "main" {
   instance = aws_instance.main.id
 }
+
+##################################
+# Give Django user access to ses #
+##################################
+data "terraform_remote_state" "media" {
+  backend = "s3"
+
+  config = {
+    bucket = "terraform-remote-state-prod-20200131000633966100000001"
+    key    = "media/terraform.tfstate"
+    region = "us-east-1"
+  }
+}
+
+data "aws_iam_policy_document" "django_ses" {
+  statement {
+    sid = "djangoUserS3"
+
+    actions = [
+      "ses:SendRawEmail"
+    ]
+
+    resources = [
+      "arn:aws:ses:us-east-1:453433582457:identity/lewdix.com"
+    ]
+  }
+}
+
+resource "aws_iam_user_policy" "django_ses" {
+  name = "django-ses-access"
+  user = data.terraform_remote_state.media.outputs.django_user_name
+
+  policy = data.aws_iam_policy_document.django_ses.json
+}
