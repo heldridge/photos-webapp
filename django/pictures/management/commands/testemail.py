@@ -7,11 +7,11 @@ from django.core.mail import send_mail
 class Command(BaseCommand):
     help = "Sandbox used for testing"
 
+    def add_arguments(self, parser):
+        parser.add_argument("destination", help="The address to send the mail to")
+
     def handle(self, *args, **kwargs):
         send_mail(
-            "Dinner?",
-            "Hi Harry, was just wondering if you wanted to do dinner tonight",
-            settings.EMAIL_HOST_USER,
-            ["zirapa@gmail.com"],
+            "Test", "This is a test!!!", "noreply@lewdix.com", [kwargs["destination"]],
         )
         print("DONE!")

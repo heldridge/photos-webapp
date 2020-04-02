@@ -100,7 +100,7 @@ def send_confirmation_email(request):
                         ),
                     },
                 ),
-                project_settings.EMAIL_HOST_USER,
+                "noreply@lewdix.com",
                 [request.user.email],
             )
             return HttpResponse(status=200)
