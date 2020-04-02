@@ -38,8 +38,8 @@ ALLOWED_HOSTS = [
     "django-local:8080",
     "localhost",
     "localhost:8000",
-    "3.89.61.10",
-    "qlbhmmvpym.club",
+    "34.196.195.136",
+    "lewdix.com",
 ]
 
 

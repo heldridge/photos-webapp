@@ -1,6 +1,6 @@
 server {
     listen 80;
-    server_name 3.89.61.10 qlbhmmvpym.club www.qlbhmmvpym.club;
+    server_name 34.196.195.136 lewdix.com www.lewdix.com;
 
     location = /favicon.ico { access_log off; log_not_found off; }
 
