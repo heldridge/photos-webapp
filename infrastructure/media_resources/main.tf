@@ -8,7 +8,7 @@ resource "aws_s3_bucket" "qlbhmmvpym" {
   }
 
   cors_rule {
-    allowed_origins = ["http://localhost:8000", "http://3.89.61.10", "https://qlbhmmvpym.club"]
+    allowed_origins = ["http://localhost:8000", "http://34.196.195.136", "https://lewdix.com"]
     allowed_methods = ["GET"]
     max_age_seconds = 3000
     allowed_headers = ["Content-*", "Host"]

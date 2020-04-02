@@ -84,3 +84,7 @@ resource aws_instance "main" {
   security_groups = [aws_security_group.main.name]
   key_name        = aws_key_pair.main.key_name
 }
+
+resource aws_eip "main" {
+  instance = aws_instance.main.id
+}
