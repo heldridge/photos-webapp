@@ -111,7 +111,7 @@ data "aws_iam_policy_document" "django_ses" {
     ]
 
     resources = [
-      "arn:aws:ses:us-east-1:453433582457:identity/lewdix.com"
+      "*"
     ]
   }
 }
