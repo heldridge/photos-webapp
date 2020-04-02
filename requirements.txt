@@ -9,3 +9,4 @@ python-memcached<2.0
 sorl-thumbnail<13.0.0
 django-debug-toolbar
 django-debug-toolbar-template-timings
+django-amazon-ses
