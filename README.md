@@ -56,5 +56,7 @@ Note, prompts beginning with `=#` indicate they should be done in psql
 1. Run tf
 2. run web playbook
 3. install certbot and certbot --nginx to get certy
-4. update cors config
-5. Done!
+4. run deploy web
+5. manually run migrations
+6. update cors config
+7. Done!
