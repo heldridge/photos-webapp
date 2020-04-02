@@ -50,3 +50,11 @@ Note, prompts beginning with `=#` indicate they should be done in psql
 # Other dependencies
 
 -   memcached
+
+# Deployment Guide
+
+1. Run tf
+2. run web playbook
+3. install certbot and certbot --nginx to get certy
+4. update cors config
+5. Done!
