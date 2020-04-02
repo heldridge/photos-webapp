@@ -92,7 +92,7 @@ def send_confirmation_email(request):
                 render_to_string(
                     "confirm_email.html.j2",
                     {
-                        "domain": "localhost:8000",
+                        "domain": "lewdix.com",
                         "user_public_id": request.user.public_id,
                         "user_display_name": request.user.display_name,
                         "token": tokens.ACCOUNT_ACTIVATION_TOKEN.make_token(
