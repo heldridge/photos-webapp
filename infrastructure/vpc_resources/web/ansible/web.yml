@@ -19,6 +19,18 @@
         name: postgresql
         state: restarted
 
+    - name: restart opendkim
+      become: yes
+      service:
+        name: opendkim
+        state: restarted
+
+    - name: restart postfix
+      become: yes
+      service:
+        name: postfix
+        state: restarted
+
   tasks:
     - name: Set hostname
       hostname:
@@ -42,6 +54,9 @@
           - python3.8-dev
           - memcached
           - software-properties-common
+          - postfix
+          - opendkim
+          - opendkim-tools
         state: latest
         update_cache: yes
     
@@ -120,11 +135,11 @@
         group: root
         mode: '0644'
 
-    # - name: start gunicorn service
-    #   systemd:
-    #     state: restarted
-    #     enabled: yes
-    #     name: gunicorn
+    - name: start gunicorn service
+      systemd:
+        state: restarted
+        enabled: yes
+        name: gunicorn
 
     - name: upload nginx config
       copy: 
@@ -204,3 +219,113 @@
         priv: ALL
         state: absent
   
+    - name: Update opendkim conf
+      blockinfile:
+        path: /etc/opendkim.conf
+        insertafter: EOF
+        block: |
+          AutoRestart             Yes
+          AutoRestartRate         10/1h
+          UMask                   002
+          Syslog                  yes
+          SyslogSuccess           Yes
+          LogWhy                  Yes
+
+          Canonicalization        relaxed/simple
+
+          ExternalIgnoreList      refile:/etc/opendkim/TrustedHosts
+          InternalHosts           refile:/etc/opendkim/TrustedHosts
+          KeyTable                refile:/etc/opendkim/KeyTable
+          SigningTable            refile:/etc/opendkim/SigningTable
+
+          Mode                    sv
+          PidFile                 /var/run/opendkim/opendkim.pid
+          SignatureAlgorithm      rsa-sha256
+
+          UserID                  opendkim:opendkim
+
+          Socket                  inet:12301@localhost
+      notify: restart opendkim
+
+    - name: Update opendkim default
+      lineinfile:
+        path: /etc/default/opendkim
+        insertafter: EOF
+        line: SOCKET="inet:12301@localhost"
+      notify: restart opendkim
+
+    - name: Update postfix conf
+      blockinfile:
+        path: /etc/postfix/main.cf
+        insertafter: EOF
+        block: |
+          milter_protocol = 2
+          milter_default_action = accept
+
+          smtpd_milters = inet:localhost:12301
+          non_smtpd_milters = inet:localhost:12301
+      notify: restart postfix
+
+    - name: Make opendkim directory
+      file:
+        path: /etc/opendkim
+        state: directory
+        mode: '0755'
+        owner: root
+        group: root
+
+    - name: Make the opendkim keys directory
+      file:
+        path: /etc/opendkim/keys
+        state: directory
+        mode: '0755'
+        owner: root
+        group: root
+
+    - name: Copy over TrustedHosts file
+      copy:
+        src: dkim/TrustedHosts
+        dest: /etc/opendkim/TrustedHosts
+        mode: '0644'
+        owner: root
+        group: root
+      notify: restart opendkim
+
+    - name: Copy over KeyTable file
+      copy:
+        src: dkim/KeyTable
+        dest: /etc/opendkim/KeyTable
+        mode: '0644'
+        owner: root
+        group: root
+      notify: restart opendkim
+
+    - name: Copy over SigningTable file
+      copy:
+        src: dkim/SigningTable
+        dest: /etc/opendkim/SigningTable
+        mode: '0644'
+        owner: root
+        group: root
+      notify: restart opendkim
+
+    - name: Make domain directory
+      file:
+        path: /etc/opendkim/keys/lewdix.com
+        state: directory
+        mode: '0755'
+        owner: root
+        group: root
+
+    - name: Generate domain keys
+      command:
+        chdir: /etc/opendkim/keys/lewdix.com
+        cmd: opendkim-genkey -s mail -d lewdix.com
+        creates: /etc/opendkim/keys/lewdix.com/mail.private
+      notify: restart opendkim
+
+    - name: Chown private key to opendkim
+      file:
+        path: /etc/opendkim/keys/lewdix.com/mail.private
+        owner: opendkim
+        group: opendkim
