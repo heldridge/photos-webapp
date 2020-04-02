@@ -21,17 +21,18 @@ function sendConfirmationEmail(source: HTMLButtonElement) {
         source.removeChild(source.lastChild);
         removeClass(source, 'pointer-events-none');
         if (response.status >= 200 && response.status < 300) {
-            addMessage('Email Sent!', 'email-sent');
+            addMessage('Email Sent!', 'email-sent', 'bg-success');
         } else {
             addMessage(
                 'Something went wrong sending the confirmation email. Please try again later.',
-                'something-went-wrong'
+                'something-went-wrong',
+                'bg-error'
             );
         }
     });
 }
 
-function addMessage(text: string, classIdentifier: string) {
+function addMessage(text: string, classIdentifier: string, bgClass: string) {
     /*
     Build message:
     <li class="rounded bg-error text-black pl-4 min-w-64 text-center mt-2 ml-2 z-10 md:text-lg message sm:h-10 ~*~Identifier~*~"> 
@@ -44,7 +45,7 @@ function addMessage(text: string, classIdentifier: string) {
     if (document.getElementsByClassName(classIdentifier).length === 0) {
         // Only add the message if there isn't one already
         let message = document.createElement('li');
-        message.className = `rounded bg-error text-black pl-4 min-w-64 flex items-center justify-between mt-2 ml-2 z-10 md:text-lg message sm:h-10 ${classIdentifier}`;
+        message.className = `rounded ${bgClass} text-black pl-4 min-w-64 flex items-center justify-between mt-2 ml-2 z-10 md:text-lg message sm:h-10 ${classIdentifier}`;
 
         let placeholder = document.createElement('div');
         message.appendChild(placeholder);
