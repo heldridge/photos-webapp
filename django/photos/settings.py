@@ -28,7 +28,7 @@ SECRET_KEY = os.environ["DJANGO_SECRET_KEY"]
 DEBUG = os.environ["DJANGO_DEBUG"] == "TRUE"
 
 # Prod vars
-CSRF_COOKIE_SECURE = not DEBUG
+CSRF_COOKIE_SECURE = False  # note: change to "not DEBUG" when running over https
 SESSION_COOKIE_SECURE = not DEBUG
 SECURE_REFERRER_POLICY = "same-origin"
 
