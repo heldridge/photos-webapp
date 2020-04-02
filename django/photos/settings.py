@@ -29,7 +29,7 @@ DEBUG = os.environ["DJANGO_DEBUG"] == "TRUE"
 
 # Prod vars
 CSRF_COOKIE_SECURE = False  # note: change to "not DEBUG" when running over https
-SESSION_COOKIE_SECURE = not DEBUG
+SESSION_COOKIE_SECURE = False  # see above not
 SECURE_REFERRER_POLICY = "same-origin"
 
 
