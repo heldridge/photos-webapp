@@ -34,7 +34,7 @@
   tasks:
     - name: Set hostname
       hostname:
-        name: web
+        name: lewdix.com
   
     - name: add nginx repository
       apt_repository:
@@ -141,24 +141,24 @@
         enabled: yes
         name: gunicorn
 
-    - name: upload nginx config
-      copy: 
-        src: photos
-        dest: /etc/nginx/sites-available/photos
-        owner: root
-        group: root
-        mode: '0644'
+    # - name: upload nginx config
+    #   copy: 
+    #     src: photos
+    #     dest: /etc/nginx/sites-available/photos
+    #     owner: root
+    #     group: root
+    #     mode: '0644'
     
-    - name: symlink site to sites-enabled
-      file:
-        state: link
-        path: /etc/nginx/sites-enabled/photos
-        src: /etc/nginx/sites-available/photos
+    # - name: symlink site to sites-enabled
+    #   file:
+    #     state: link
+    #     path: /etc/nginx/sites-enabled/photos
+    #     src: /etc/nginx/sites-available/photos
 
-    - name: restart nginx
-      systemd:
-        state: restarted
-        name: nginx
+    # - name: restart nginx
+    #   systemd:
+    #     state: restarted
+    #     name: nginx
 
   # DATABSE
     - name: add postgres repository
@@ -329,3 +329,10 @@
         path: /etc/opendkim/keys/lewdix.com/mail.private
         owner: opendkim
         group: opendkim
+
+    - name: Update postfix hostname
+      lineinfile:
+        path: /etc/postfix/main.cf
+        regexp: '^myhostname ='
+        line: "myhostname = lewdix.com"
+      notify: restart postfix
