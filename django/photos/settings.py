@@ -40,6 +40,7 @@ ALLOWED_HOSTS = [
     "localhost:8000",
     "34.196.195.136",
     "lewdix.com",
+    "www.lewdix.com",
 ]
 
 
