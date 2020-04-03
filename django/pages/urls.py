@@ -5,4 +5,5 @@ urlpatterns = [
     path("", views.index, name="index"),
     path("search", views.search, name="search"),
     path("gallery", views.gallery, name="gallery"),
+    path("feedback", views.feedback, name="feedback"),
 ]

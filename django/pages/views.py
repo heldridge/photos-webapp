@@ -234,3 +234,7 @@ def gallery(request):
         context["media_prefix"] = ""
 
     return render(request, "pages/gallery.html.j2", context)
+
+
+def feedback(request):
+    return render(request, "pages/feedback.html.j2")
