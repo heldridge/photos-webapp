@@ -24,7 +24,12 @@ class PictureUploadForm(forms.ModelForm):
             {"class": " ".join(settings.FORM_FIELD_CLASSES),}
         )
 
-        self.fields["tags"].label = "Tags (separated by spaces)"
+        self.fields["tags"].label = (
+            "Tags (separated by spaces, only alphanumeric characters and dashes "
+            "allowed)"
+        )
+
+        self.fields["photo"].label = "Photo (max 2MB)"
 
     def is_valid(self):
         ret = super().is_valid()
