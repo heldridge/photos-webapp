@@ -25,7 +25,7 @@
     {% for field in form %}
     
     <div class="flex flex-col {% if forloop.last %}py-5{% elif not forloop.first %}pt-5{% endif %} items-center w-full">
-        <div class="flex flex-col sm:flex-row items-center justify-between w-full">
+        <div class="flex flex-col items-center justify-between w-full">
             <span class="text-lg opacity-high-emphasis {% if forloop.last %}ml-20{% endif %} mr-5">
                 {{ field.label_tag }}
             </span>
