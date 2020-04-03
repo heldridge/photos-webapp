@@ -6,6 +6,7 @@ from django.conf import settings
 from django.core import exceptions
 from django.db.models import Q
 from django.shortcuts import render
+from django.utils.html import escape
 
 
 from pictures.models import (
@@ -208,15 +209,17 @@ def gallery(request):
         map(
             lambda picture: {
                 "photo": str(picture.photo),
-                "title": picture.title,
+                "title": escape(picture.title),
                 "public_id": picture.public_id,
-                "tags": str(picture.tags).split(),
+                "tags": escape(str(picture.tags)).split(),
                 "favorite": picture.public_id in favorite_ids,
                 "thumbnail": picture.thumbnail_w_272.url,
                 "uploaded_by_public_id": str(picture.uploaded_by.public_id)
                 if picture.uploaded_by is not None
                 else None,
-                "uploaded_by_display_name": str(picture.uploaded_by.display_name)
+                "uploaded_by_display_name": escape(
+                    str(picture.uploaded_by.display_name)
+                )
                 if picture.uploaded_by is not None
                 else None,
             },
