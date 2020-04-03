@@ -25,7 +25,7 @@
     {% for field in form %}
     
     <div class="flex flex-col {% if forloop.last %}py-5{% elif not forloop.first %}pt-5{% endif %} items-center w-full">
-        <div class="flex flex-col items-center justify-between w-full">
+        <div class="flex {% if field.name != 'photo' %}flex-col w-64{% endif %} items-center justify-between  sm:w-full">
             <span class="text-lg opacity-high-emphasis {% if forloop.last %}ml-20{% endif %} mr-5">
                 {{ field.label_tag }}
             </span>
@@ -45,7 +45,7 @@
         </div>
 
         {% if field.name == 'tags' %}
-            <div class="flex flex-row flex-wrap mb-5 mt-3 px-4">
+            <div class="flex flex-row flex-wrap mb-5 mt-3 px-4 w-64 sm:w-full">
                 {% for tag in top_tags %}
                 {% if forloop.counter0 == 0 %}
                 <span class="mr-2">Popular Tags:</span>
@@ -69,7 +69,7 @@
     
     {% endfor %}
     </div>
-    <button type="submit" class="rounded shadow py-2 pl-3 pr-4 bg-basic hover:bg-basic-hover text-black">Upload Image</button> 
+    <button type="submit" class="rounded shadow py-2 pl-3 pr-4 bg-basic hover:bg-basic-hover text-black mb-10">Upload Image</button> 
 </form> 
 {% endif %}
 {% else %}
