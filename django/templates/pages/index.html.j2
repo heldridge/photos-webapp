@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block content %}
-<div class="flex items-center flex-col">
+<div class="flex items-center flex-col mb-20">
 
   <h1 class="text-5xl font-semibold py-4 opacity-high-emphasis">Popular Tags</h1>
 
@@ -22,7 +22,7 @@
   </ul>
 
 
-  <div class="flex justify-center w-4/5 max-w-7xl mt-3 text-lg mb-20">
+  <div class="flex justify-center w-4/5 max-w-7xl mt-3 text-lg mb-10">
     {% if more_left and pictures|length > 0 %}
     {% with last_picture=pictures|last %}
     <a href="{% url 'search' %}?after={{ last_picture.public_id }}" class="rounded shadow py-2 pl-3 pr-4 bg-basic hover:bg-basic-hover text-black">
@@ -32,6 +32,13 @@
     {% endwith %}
     {% endif %}
   </div>
+
+  <a href="{% url 'feedback' %}" class="opacity-medium-emphasis hover:opacity-50">Feedback?</a>
+
+  
+  
 </div>
+
+
 <script type="text/javascript" src="{% static 'js/basic_grid.js' %}"></script>
 {% endblock %}
