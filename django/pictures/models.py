@@ -1,4 +1,6 @@
+import datetime
 import io
+import os
 import pathlib
 import uuid
 
@@ -32,11 +34,18 @@ def validate_not_too_many_tags(value):
         )
 
 
+def get_photo_upload_path(instance, filename):
+    return (
+        f"pictures/{datetime.datetime.utcnow().strftime('%Y/%m/%d/')}"
+        f"{instance.public_id}{os.path.splitext(filename)[1]}"
+    )
+
+
 # Create your models here.
 class Picture(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField(blank=True)
-    photo = models.ImageField(upload_to="pictures/%Y/%m/%d/")
+    photo = models.ImageField(upload_to=get_photo_upload_path)
     tags = models.TextField(
         blank=True,
         validators=[
