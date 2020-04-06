@@ -1,3 +1,5 @@
+import datetime
+
 from django.conf import settings as project_settings
 from django.contrib import messages
 from django.contrib.auth.forms import PasswordResetForm
@@ -87,6 +89,20 @@ def user(request, user_public_id):
 def send_confirmation_email(request):
     if request.method == "POST":
         if request.user.is_authenticated:
+
+            request.user.last_email_dates.insert(0, datetime.datetime.utcnow())
+            request.user.save()
+            if len(request.user.last_email_dates) > 5:
+                # The user has made at least 5 email requests
+
+                # We need to pop off the oldest request and insert the latest one
+                oldest_request = request.user.last_email_dates.pop()
+                request.user.save()
+
+                if (datetime.datetime.utcnow().date() - oldest_request).days == 0:
+                    # The oldest email request is less than 24 hours old
+                    return HttpResponse(status=429)
+
             send_mail(
                 "Lewdix Email Confirmation",
                 render_to_string(
@@ -103,6 +119,7 @@ def send_confirmation_email(request):
                 "noreply@lewdix.com",
                 [request.user.email],
             )
+            print("Debug send mail")
             return HttpResponse(status=200)
         return HttpResponse(status=401)
     else:
