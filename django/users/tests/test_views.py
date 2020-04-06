@@ -111,3 +111,25 @@ class TestPagesLoad(TestCase):
                 datetime.date(2000, 2, 2),
             ],
         )
+
+    def test_does_not_pop_if_under_5_dates(self):
+        users.views.send_mail = mock.Mock()
+        self.user.last_email_dates = [
+            datetime.date(2000, 5, 5),
+            datetime.date(2000, 4, 4),
+            datetime.date(2000, 3, 3),
+        ]
+        self.user.save()
+
+        self.client.force_login(self.user)
+        self.client.post("/accounts/send-confirmation-email")
+
+        self.assertEqual(
+            CustomUser.objects.all()[0].last_email_dates,
+            [
+                datetime.datetime.utcnow().date(),
+                datetime.date(2000, 5, 5),
+                datetime.date(2000, 4, 4),
+                datetime.date(2000, 3, 3),
+            ],
+        )

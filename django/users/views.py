@@ -90,14 +90,15 @@ def send_confirmation_email(request):
     if request.method == "POST":
         if request.user.is_authenticated:
 
-            # We need to pop off the oldest request and insert the latest one
-            if len(request.user.last_email_dates) > 0:
-                oldest_request = request.user.last_email_dates.pop()
-
             request.user.last_email_dates.insert(0, datetime.datetime.utcnow().date())
             request.user.save()
-            if len(request.user.last_email_dates) >= 5:
-                # The user has made at least 5 email requests
+
+            if len(request.user.last_email_dates) > 5:
+                # The user has made at least 5 previous email requests
+
+                # We need to pop off the oldest request
+                oldest_request = request.user.last_email_dates.pop()
+                request.user.save()
 
                 if (datetime.datetime.utcnow().date() - oldest_request).days == 0:
                     # The oldest email request is less than 24 hours old
