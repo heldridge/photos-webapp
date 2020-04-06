@@ -6,6 +6,7 @@
         - name: GitCheckout
           description: What to checkout in the repository when deploying
           default: master
+          private: false
           
       tasks:
         - name: get timestamp from the system
