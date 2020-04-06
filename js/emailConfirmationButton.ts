@@ -11,17 +11,23 @@ function sendConfirmationEmail(source: HTMLButtonElement) {
     )).value;
 
     let request = new Request(`/accounts/send-confirmation-email`, {
-        headers: { 'X-CSRFToken': csrftoken }
+        headers: { 'X-CSRFToken': csrftoken },
     });
 
     fetch(request, {
         method: 'POST',
-        mode: 'same-origin'
-    }).then(response => {
+        mode: 'same-origin',
+    }).then((response) => {
         source.removeChild(source.lastChild);
         removeClass(source, 'pointer-events-none');
         if (response.status >= 200 && response.status < 300) {
             addMessage('Email Sent!', 'email-sent', 'bg-success');
+        } else if (response.status === 429) {
+            addMessage(
+                'You have requested too many emails, please try again later.',
+                'too-many-emails',
+                'bg-error'
+            );
         } else {
             addMessage(
                 'Something went wrong sending the confirmation email. Please try again later.',
