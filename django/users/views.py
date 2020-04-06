@@ -90,36 +90,38 @@ def send_confirmation_email(request):
     if request.method == "POST":
         if request.user.is_authenticated:
 
-            request.user.last_email_dates.insert(0, datetime.datetime.utcnow())
-            request.user.save()
-            if len(request.user.last_email_dates) > 5:
-                # The user has made at least 5 email requests
-
-                # We need to pop off the oldest request and insert the latest one
+            # We need to pop off the oldest request and insert the latest one
+            if len(request.user.last_email_dates) > 0:
                 oldest_request = request.user.last_email_dates.pop()
-                request.user.save()
+
+            request.user.last_email_dates.insert(0, datetime.datetime.utcnow().date())
+            request.user.save()
+            if len(request.user.last_email_dates) >= 5:
+                # The user has made at least 5 email requests
 
                 if (datetime.datetime.utcnow().date() - oldest_request).days == 0:
                     # The oldest email request is less than 24 hours old
                     return HttpResponse(status=429)
 
-            send_mail(
-                "Lewdix Email Confirmation",
-                render_to_string(
-                    "confirm_email.html.j2",
-                    {
-                        "domain": "lewdix.com",
-                        "user_public_id": request.user.public_id,
-                        "user_display_name": request.user.display_name,
-                        "token": tokens.ACCOUNT_ACTIVATION_TOKEN.make_token(
-                            request.user
-                        ),
-                    },
-                ),
-                "noreply@lewdix.com",
-                [request.user.email],
-            )
-            print("Debug send mail")
+            if project_settings.DEBUG:
+                print("Debug send mail")
+            else:
+                send_mail(
+                    "Lewdix Email Confirmation",
+                    render_to_string(
+                        "confirm_email.html.j2",
+                        {
+                            "domain": "lewdix.com",
+                            "user_public_id": request.user.public_id,
+                            "user_display_name": request.user.display_name,
+                            "token": tokens.ACCOUNT_ACTIVATION_TOKEN.make_token(
+                                request.user
+                            ),
+                        },
+                    ),
+                    "noreply@lewdix.com",
+                    [request.user.email],
+                )
             return HttpResponse(status=200)
         return HttpResponse(status=401)
     else:
