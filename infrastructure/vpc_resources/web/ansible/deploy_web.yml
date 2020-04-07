@@ -73,11 +73,18 @@
             hour: "0"
             job: "/home/django/current_deployment/venv/bin/python /home/django/current_deployment/manage.py clearsessions"
 
+        - name: Copy over clear checkouts script
+          copy:
+            src: clear_checkouts.py
+            dest: /home/django/clear_checkouts.py
+            owner: root
+            group: root
+            mode: '0555'
 
-
-  #     - name: Ensure a job that runs at 2 and 5 exists. Creates an entry like "0 5,2 * * ls -alh > /dev/null"
-  # cron:
-  #   name: "check dirs"
-  #   minute: "0"
-  #   hour: "5,2"
-  #   job: "ls -alh > /dev/null"
+        - name: Add clear checkouts cronjob
+          cron:
+            user: django
+            name: "Clear checkouts"
+            minute: "0"
+            hour: "0"
+            job: "/home/django/current_deployment/venv/bin/python /home/django/clear_checkouts.py"
