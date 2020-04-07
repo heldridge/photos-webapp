@@ -24,7 +24,7 @@ import users
 urlpatterns = [
     path("", include("pages.urls")),
     path("pictures/", include("pictures.urls")),
-    path("admin/", admin.site.urls),
+    path("7be8xoo4gccbxerztt8zgpc7iqtfv4/", admin.site.urls),
     path(
         "login/",
         views.LoginView.as_view(
