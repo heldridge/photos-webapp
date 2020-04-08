@@ -7,6 +7,7 @@ import uuid
 import boto3
 
 from django.conf import settings
+from django.core.management.base import BaseCommand
 from pictures.models import Picture
 from users.models import CustomUser
 
@@ -30,10 +31,10 @@ class Command(BaseCommand):
             data = json.load(infile)
 
         if kwargs["limit"]:
-            data = data[: kwargs["limit"]]
+            data = data[: int(kwargs["limit"])]
 
         s3 = boto3.resource("s3")
-        bucket = s3.bucket("media.qlbhmmvpym.club")
+        bucket = s3.Bucket("media.qlbhmmvpym.club")
 
         for index, image in enumerate(data):
             public_id = str(uuid.uuid4())
@@ -41,6 +42,11 @@ class Command(BaseCommand):
             extension = os.path.splitext(image["filename"])[1]
 
             path_start = "pictures/" + datetime.datetime.utcnow().strftime("%Y/%m/%d/")
+
+            bucket.upload_file(
+                str(pathlib.Path(kwargs["images_dir"], image["filename"])),
+                "media/" + path_start + public_id + extension,
+            )
 
             picture = Picture.objects.create(
                 public_id=public_id,
@@ -51,11 +57,6 @@ class Command(BaseCommand):
                 uploaded_by=uploaded_by_user,
             )
             picture.save()
-
-            bucket.upload_file(
-                str(pathlib.Path(kwargs["images_dir"], image["filename"])),
-                "media/" + path_start + public_id + extension,
-            )
 
             if index % 50 == 0:
                 print(index)
