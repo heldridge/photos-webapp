@@ -25,7 +25,8 @@ resource "aws_security_group_rule" "main_allow_https" {
   to_port           = 443
   protocol          = "tcp"
   security_group_id = aws_security_group.main.id
-  cidr_blocks       = ["96.255.57.191/32"]
+  # cidr_blocks       = ["96.255.57.191/32"]
+  cidr_blocks = ["0.0.0.0/0"]
 
   description = "Allow https from anywhere"
 }
@@ -36,7 +37,8 @@ resource "aws_security_group_rule" "main_allow_http" {
   to_port           = 80
   protocol          = "tcp"
   security_group_id = aws_security_group.main.id
-  cidr_blocks       = ["96.255.57.191/32"]
+  # cidr_blocks       = ["96.255.57.191/32"]
+  cidr_blocks = ["0.0.0.0/0"]
 
   description = "Allow http from anywhere"
 }
