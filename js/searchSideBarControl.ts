@@ -13,7 +13,7 @@ let addTagsIconDisabledClass = 'opacity-disabled';
 let addTagsButtonEnabledClasses = ['bg-primary', 'hover:bg-primary-hover'];
 let addTagsButtonDisabledClasses = [
     'bg-button-disabled',
-    'pointer-events-none'
+    'pointer-events-none',
 ];
 
 let addTagsInputContainerDefaultClass = 'border-default';
@@ -68,14 +68,14 @@ function addTagsInputUpdated() {
 
     // Disable link if tag is empty
     if (value === '') {
-        addTagsButtonEnabledClasses.forEach(className => {
+        addTagsButtonEnabledClasses.forEach((className) => {
             removeClass(addTagsButton, className);
         });
-        addTagsButtonDisabledClasses.forEach(className => {
+        addTagsButtonDisabledClasses.forEach((className) => {
             addClass(addTagsButton, className);
         });
 
-        addTagsIconEnabledClasses.forEach(className => {
+        addTagsIconEnabledClasses.forEach((className) => {
             removeClass(addTagsIcon, className);
         });
         addClass(addTagsIcon, addTagsIconDisabledClass);
@@ -100,17 +100,17 @@ function addTagsInputUpdated() {
         addTagsButton.href = newHREF;
 
         if (value !== '') {
-            addTagsButtonDisabledClasses.forEach(className => {
+            addTagsButtonDisabledClasses.forEach((className) => {
                 removeClass(addTagsButton, className);
             });
 
-            addTagsButtonEnabledClasses.forEach(className => {
+            addTagsButtonEnabledClasses.forEach((className) => {
                 addClass(addTagsButton, className);
             });
 
             removeClass(addTagsIcon, addTagsIconDisabledClass);
 
-            addTagsIconEnabledClasses.forEach(className => {
+            addTagsIconEnabledClasses.forEach((className) => {
                 addClass(addTagsIcon, className);
             });
         }
@@ -121,14 +121,14 @@ function addTagsInputUpdated() {
 
         removeClass(addTagsErrorMessage, 'hidden');
 
-        addTagsButtonEnabledClasses.forEach(className => {
+        addTagsButtonEnabledClasses.forEach((className) => {
             removeClass(addTagsButton, className);
         });
-        addTagsButtonDisabledClasses.forEach(className => {
+        addTagsButtonDisabledClasses.forEach((className) => {
             addClass(addTagsButton, className);
         });
 
-        addTagsIconEnabledClasses.forEach(className => {
+        addTagsIconEnabledClasses.forEach((className) => {
             removeClass(addTagsIcon, className);
         });
         addClass(addTagsIcon, addTagsIconDisabledClass);
@@ -149,4 +149,14 @@ function updateFavoritesSearch(e: HTMLInputElement) {
     }
 
     document.location.href = newHREF;
+}
+
+function toggleSortOrderVisible(source: HTMLButtonElement) {
+    let sortOrderBox = source.lastElementChild;
+
+    if (hasClass(sortOrderBox, 'hidden')) {
+        removeClass(sortOrderBox, 'hidden');
+    } else {
+        addClass(sortOrderBox, 'hidden');
+    }
 }

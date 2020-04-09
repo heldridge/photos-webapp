@@ -8,7 +8,7 @@ module.exports = {
                     '200': '#ffa28a',
                     '300': '#ff795b',
                     '400': '#ff5436',
-                    '500': '#ff200c'
+                    '500': '#ff200c',
                 },
                 secondary: {
                     '50': '#d7fcfb',
@@ -20,7 +20,7 @@ module.exports = {
                     '600': '#00c8d5',
                     '700': '#00b2b9',
                     '800': '#009da0',
-                    '900': '#007870'
+                    '900': '#007870',
                 },
                 // basic: {
                 //   "200": "#e9eeee",
@@ -40,27 +40,28 @@ module.exports = {
                     '6': '#2F2F2F',
                     '7': '#343434',
                     '8': '#363636',
-                    '9': '#383838'
-                }
+                    '9': '#383838',
+                },
             },
             textColor: {
                 error: 'var(--color-error-text)',
                 primary: 'var(--color-text)',
                 tag: 'var(--color-tag)',
                 'tag-hover': 'var(--color-tag-hover)',
-                'tag-item-hover': 'var(--color-tag-item-hover)'
+                'tag-item-hover': 'var(--color-tag-item-hover)',
             },
             opacity: {
                 'high-emphasis': 'var(--opacity-text-high-emphasis)',
                 'medium-emphasis': 'var(--opacity-text-medium-emphasis)',
                 disabled: 'var(--opacity-text-disabled)',
                 'message-close': 'var(--opacity-message-close)',
-                'message-close-hover': 'var(--opacity-message-close-hover)'
+                'message-close-hover': 'var(--opacity-message-close-hover)',
             },
             backgroundColor: {
                 main: 'var(--color-bg-main)',
                 'surface-1': 'var(--color-bg-surface-1)',
                 'surface-2': 'var(--color-bg-surface-2)',
+                'surface-4': 'var(--color-bg-surface-4)',
                 tag: 'var(--color-bg-tag)',
                 'tag-hover': 'var(--color-bg-tag-hover)',
                 basic: 'var(--color-bg-basic)',
@@ -71,38 +72,38 @@ module.exports = {
                 'nav-link-hover': 'var(--color-bg-nav-link-hover)',
                 alternate: 'var(--color-bg-alternate)',
                 success: 'var(--color-bg-success)',
-                error: 'var(--color-bg-error)'
+                error: 'var(--color-bg-error)',
             },
             borderColor: {
                 default: 'var(--color-border-default)',
                 'input-selected': 'var(--color-border-input-selected)',
                 error: 'var(--color-border-error)',
-                basic: 'var(--color-bg-basic)'
+                basic: 'var(--color-bg-basic)',
             },
             borderWidth: {
-                'image-card': 'var(--width-border-image-card)'
+                'image-card': 'var(--width-border-image-card)',
             },
             minHeight: {
-                'double-screen': '200vh'
+                'double-screen': '200vh',
             },
             minWidth: {
-                '64': '16rem'
+                '64': '16rem',
             },
             padding: {
-                'nav-perf': '1.3rem'
+                'nav-perf': '1.3rem',
             },
             width: {
                 '77': '19.25rem',
-                '96': '24rem'
+                '96': '24rem',
             },
             inset: {
                 '8': '2rem',
                 '6': '1.5rem',
                 '17p': '17%',
-                '28n': '-7rem'
-            }
-        }
+                '28n': '-7rem',
+            },
+        },
     },
     variants: {},
-    plugins: []
+    plugins: [],
 };

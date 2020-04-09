@@ -42,6 +42,7 @@
     --color-bg-nav-link-hover: #edf2f7; /* Navbar links on hover */
     --border-width-nav-item: 1px;
     --color-bg-surface-2: #ffffff;
+    --color-bg-surface-4: #ffffff;
 
     --color-placeholder-nav-search-focus: #718096; /* Nav search placeholder text on focus */
     --color-nav-search-icon: #000000; /* Text color of the search icon */
@@ -94,6 +95,7 @@
     --color-bg-nav-link-hover: #2c2c2c; /* Navbar links on hover */
     --border-width-nav-item: 2px;
     --color-bg-surface-2: #232323;
+    --color-bg-surface-4: #282828;
 
     /* --color-placeholder-nav-search-focus: #718096; Nav search placeholder text on focus */
     --color-nav-search-icon: #ffffff; /* Text color of the search icon */
@@ -127,6 +129,25 @@
     /* Messages */
     --color-bg-success: #c6f68d;
     --color-bg-error: #cf6679;
+}
+
+.sort-order-container {
+    border-color: transparent;
+}
+
+.sort-order-container:hover {
+    border-color: var(--color-border-default);
+}
+
+.sort-order-container > h1 {
+    opacity: var(--opacity-text-medium-emphasis);
+}
+.sort-order-container:hover > h1 {
+    opacity: var(--opacity-text-high-emphasis);
+}
+
+.sort-order-box {
+    top: 2.2rem;
 }
 
 .upload-add-tag:hover span,
