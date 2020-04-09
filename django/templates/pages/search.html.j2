@@ -54,7 +54,7 @@
             {% endif %}
 
             {% if user.is_authenticated %}
-            <div class="flex mt-4 items-center">
+            <div class="flex mt-4 items-center mb-4">
                 <h1 class="text-xl font-semibold opacity-high-emphasis mr-4">
                     Favorites Only
                 </h1>
@@ -62,6 +62,18 @@
                 <input type="checkbox" {% if favorites %}checked="checked"{% endif %}class="text-2xl rounded search-checkbox" onclick=updateFavoritesSearch(this)>
             </div>
             {% endif %}
+
+            <button class="flex justify-center rounded border-2 w-40 sort-order-container relative" onclick="toggleSortOrderVisible(this)">
+                <h1 class="text-xl">
+                    <span class="">Most Recent</span>
+                    <i class="fas fa-caret-down"></i>
+                </h1>
+
+                <div class="hidden absolute w-40 rounded sort-order-box flex flex-col bg-surface-4 shadow-lg py-4">
+                    <span><a href="{% url 'search'%}?q={{ q }}{% if favorites %}&favorites=true{% endif %}{% if search_uploaded_by %}&uploaded_by={{ search_uploaded_by }}{% endif %}&order=most_recent" class="opacity-medium-emphasis hover:opacity-high-emphasis font-normal hover:font-medium">Most Recent</a></span>
+                    <span><a href="{% url 'search'%}?q={{ q }}{% if favorites %}&favorites=true{% endif %}{% if search_uploaded_by %}&uploaded_by={{ search_uploaded_by }}{% endif %}&order=most_favorites" class="opacity-medium-emphasis hover:opacity-high-emphasis font-normal hover:font-medium">Most Favorites</a></span>
+                </div>
+            </button>
             
         </div>
 
