@@ -5,7 +5,7 @@
     <div class="w-picture-card">
 
         <a 
-            href="{% url 'gallery' %}?p={{ picture.public_id }}&tags={{ tags }}{% if before_id %}&before={{ before_id }}{% endif %}{% if after_id %}&after={{ after_id }}{% endif %}{% if favorites %}&favorites=true{% endif %}{% if search_uploaded_by %}&uploaded_by={{ search_uploaded_by }}{% endif %}"
+            href="{% url 'gallery' %}?p={{ picture.public_id }}{% for name, value in main_qsp.items %}{% if value %}&{{ name }}={{ value }}{% endif %}{% endfor %}"
         >
             <div class="h-picture-card bg-surface-1 border-image-card rounded-lg overflow-hidden shadow link-image">
                 <img class="object-cover" src="{{ picture.thumbnail }}" alt="">
