@@ -28,7 +28,7 @@ class TestGetPictures(TestCase):
             )
 
         test_users = [
-            {"email": "a@x.com", "favorites": ["1", "4", "3", "5",]},
+            {"email": "a@x.com", "favorites": ["1", "4", "3", "5"]},
             {"email": "b@x.com", "favorites": ["1", "3", "5"]},
             {"email": "c@x.com", "favorites": ["3", "4"]},
             {"email": "d@x.com", "favorites": ["3", "5"]},
@@ -63,7 +63,7 @@ class TestGetPictures(TestCase):
         )
 
     def test_favorites_order_before(self):
-        public_id = Picture.objects.get(title="2").public_id
+        public_id = Picture.objects.get(title="1").public_id
         result = list(get_pictures(5, order="most_favorites", before=public_id))
         result.reverse()
         self.assertEqual([picture.title for picture in result], ["3", "5", "4"])
@@ -71,4 +71,11 @@ class TestGetPictures(TestCase):
     def test_favorites_order_after(self):
         public_id = Picture.objects.get(title="4").public_id
         result = list(get_pictures(5, order="most_favorites", after=public_id))
-        self.assertEqual([picture.title for picture in result], ["3", "1", "2"])
+        self.assertEqual([picture.title for picture in result], ["1", "2"])
+
+
+"""
+get the after picture's number of favs
+fetch everything with favs leq than its number of favs
+filter out anything with an id geq than its id
+"""
