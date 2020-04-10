@@ -63,9 +63,15 @@
             </div>
             {% endif %}
 
-            <button class="flex justify-center rounded border-2 w-40 sort-order-container relative" onclick="toggleSortOrderVisible(this)">
+            <button class="flex justify-center rounded border-2 w-40 sort-order-container relative" onclick="toggleSortOrderVisible(this)" id="order-dropdown">
                 <h1 class="text-xl">
-                    <span class="">Most Recent</span>
+                    <span class="">
+                        {% if main_qsp.order == 'most_favorites' %}
+                            Most Favorites
+                        {% else %}
+                            Most Recent
+                        {% endif %}
+                    </span>
                     <i class="fas fa-caret-down"></i>
                 </h1>
 
