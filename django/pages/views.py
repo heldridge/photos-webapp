@@ -238,6 +238,13 @@ def gallery(request):
     )
     context["picture"] = current_picture
 
+    context["change_page_base_query"] = "&".join(
+        [
+            f"{name}={value}"
+            for name, value in filter(lambda item: item[1], context["main_qsp"].items())
+        ]
+    )
+
     if settings.USE_S3:
         context["media_prefix"] = f"https://{settings.AWS_S3_CUSTOM_DOMAIN}"
     else:
