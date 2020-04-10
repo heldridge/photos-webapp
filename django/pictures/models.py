@@ -209,6 +209,9 @@ def get_pictures(
 
     query_set = Picture.objects
 
+    if order == "most_favorites":
+        query_set = query_set.annotate(models.Count("favorite"))
+
     if get_uploaded_by:
         query_set = query_set.select_related("uploaded_by")
 
@@ -226,30 +229,43 @@ def get_pictures(
     if before is not None:
         # For before we want to go "backwards," to get the pictures
         # closest in id to before_picture, so order by id (increasing)
-        query_set = query_set.filter(id__gt=before_picture.id)
         if order == "most_favorites":
-            query_set = query_set.annotate(models.Count("favorite")).order_by(
-                "favorite__count", "id"
-            )
+            favorite_count = before_picture.favorite_set.count()
+            query_set = query_set.filter(
+                models.Q(favorite__count__gt=favorite_count)
+                | (
+                    models.Q(favorite__count=favorite_count)
+                    & models.Q(id__gt=before_picture.id)
+                )
+            ).order_by("favorite__count", "id")
         else:
-            query_set = query_set.order_by("id")
+            query_set = query_set.filter(id__gt=before_picture.id).order_by("id")
     elif after is not None:
-        query_set = query_set.filter(id__lt=after_picture.id)
         if order == "most_favorites":
-            query_set = query_set.annotate(models.Count("favorite")).order_by(
-                "-favorite__count", "-id"
-            )
+            favorite_count = after_picture.favorite_set.count()
+            query_set = query_set.filter(
+                models.Q(favorite__count__lt=favorite_count)
+                | (
+                    models.Q(favorite__count=favorite_count)
+                    & models.Q(id__lt=after_picture.id)
+                )
+            ).order_by("-favorite__count", "-id")
         else:
-            query_set = query_set.order_by("-id")
+            query_set = query_set.filter(id__lt=after_picture.id).order_by("-id")
     else:
         if order == "most_favorites":
-            query_set = query_set.annotate(models.Count("favorite")).order_by(
-                "-favorite__count", "-id"
-            )
+            query_set = query_set.order_by("-favorite__count", "-id")
         else:
             query_set = query_set.order_by("-id")
 
     return query_set[:amount]
+
+
+"""
+get the after picture's number of favs
+fetch everything with favs leq than its number of favs
+filter out anything with an id geq than its id
+"""
 
 
 def get_images_grid_context(pictures):
