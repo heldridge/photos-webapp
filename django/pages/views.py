@@ -156,8 +156,8 @@ def get_shared_search_gallery_context(request, get_uploaded_by=False):
         else None,
         "main_qsp": {
             "tags": "+".join(searched_tags),
-            "favorites": search_favorites == "true",
-            "search_uploaded_by": str(search_uploaded_by.public_id)
+            "favorites": "true" if search_favorites == "true" else False,
+            "uploaded_by": str(search_uploaded_by.public_id)
             if search_uploaded_by
             else None,
             "order": search_order,

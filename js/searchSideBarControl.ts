@@ -7,6 +7,10 @@ let minTagLength = minTagLengthOutside;
 // @ts-ignore
 let validTagRegex = validTagRegexOutside;
 
+// @ts-ignore
+let baseFavoritesQuery = baseFavoritesQueryOutside;
+console.log(baseFavoritesQuery);
+
 let addTagsIconEnabledClasses = ['text-black'];
 let addTagsIconDisabledClass = 'opacity-disabled';
 
@@ -136,18 +140,11 @@ function addTagsInputUpdated() {
 }
 
 function updateFavoritesSearch(e: HTMLInputElement) {
-    let newHREF = `/search?q=${currentQuery}`;
+    let newHREF = `/search?${baseFavoritesQuery}`;
 
     if (e.checked) {
         newHREF = `${newHREF}&favorites=true`;
     }
-
-    let uploadedBy = getUrlParameter('uploaded_by');
-
-    if (uploadedBy) {
-        newHREF += `&uploaded_by=${uploadedBy}`;
-    }
-
     document.location.href = newHREF;
 }
 
