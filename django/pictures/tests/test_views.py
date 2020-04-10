@@ -115,3 +115,26 @@ class TestPictureViewContent(TestCase):
         public_id = Picture.objects.all()[0].public_id
         response = self.client.get(f"/pictures/{public_id}")
         self.assertNotContains(response, "deleteButton")
+
+    def test_non_logged_in_delete_returns_401(self):
+        public_id = Picture.objects.all()[0].public_id
+        response = self.client.delete(f"/pictures/{public_id}")
+        self.assertEqual(response.status_code, 401)
+
+    def test_bad_id_not_found(self):
+        self.client.force_login(self.user2)
+        response = self.client.delete(f"/pictures/{uuid.uuid4()}")
+        self.assertEqual(response.status_code, 404)
+
+    def test_wrong_user_delete_returns_403(self):
+        self.client.force_login(self.user2)
+        public_id = Picture.objects.all()[0].public_id
+        response = self.client.delete(f"/pictures/{public_id}")
+        self.assertEqual(response.status_code, 403)
+
+    def test_delete_picture(self):
+        self.client.force_login(self.user)
+        public_id = Picture.objects.all()[0].public_id
+        response = self.client.delete(f"/pictures/{public_id}")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(Picture.objects.all()), 0)

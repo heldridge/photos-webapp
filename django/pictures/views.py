@@ -52,6 +52,22 @@ class PictureView(View):
             }
         return render(request, "picture.html.j2", context)
 
+    def delete(self, request, picture_public_id):
+        if request.user.is_authenticated:
+            try:
+                target_picture = Picture.objects.select_related("uploaded_by").get(
+                    public_id=picture_public_id
+                )
+            except (ObjectDoesNotExist, ValidationError):
+                return HttpResponse(status=404)
+            else:
+                if target_picture.uploaded_by == request.user:
+                    target_picture.delete()
+                    return HttpResponse("OK")
+                else:
+                    return HttpResponse(status=403)
+        return HttpResponse(status=401)
+
 
 class Favorites(View):
     def post(self, request, picture_public_id):
