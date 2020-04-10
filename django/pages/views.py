@@ -87,6 +87,8 @@ def get_shared_search_gallery_context(request, get_uploaded_by=False):
             }
         )
 
+    search_order = request.GET.get("order")
+
     before_id = request.GET.get("before")
     after_id = request.GET.get("after")
 
@@ -152,6 +154,14 @@ def get_shared_search_gallery_context(request, get_uploaded_by=False):
         "search_uploaded_by_display_name": str(search_uploaded_by.display_name)
         if search_uploaded_by
         else None,
+        "main_qsp": {
+            "tags": "+".join(searched_tags),
+            "favorites": search_favorites == "true",
+            "search_uploaded_by": str(search_uploaded_by.public_id)
+            if search_uploaded_by
+            else None,
+            "order": search_order,
+        },
     }
 
 
