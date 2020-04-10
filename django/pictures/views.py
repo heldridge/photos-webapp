@@ -69,6 +69,10 @@ class PictureView(View):
         return HttpResponse(status=401)
 
 
+def delete_success(request):
+    return render(request, "picture_delete_success.html.j2")
+
+
 class Favorites(View):
     def post(self, request, picture_public_id):
         if request.user.is_authenticated:
