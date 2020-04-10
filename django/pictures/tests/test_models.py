@@ -73,9 +73,8 @@ class TestGetPictures(TestCase):
         result = list(get_pictures(5, order="most_favorites", after=public_id))
         self.assertEqual([picture.title for picture in result], ["1", "2"])
 
+    def test_only_favs_favorites_order(self):
+        faved_by = CustomUser.objects.get(email="a@x.com")
+        result = list(get_pictures(16, favorited_by=faved_by, order="most_favorites"))
+        self.assertEqual([picture.title for picture in result], ["3", "5", "4", "1"])
 
-"""
-get the after picture's number of favs
-fetch everything with favs leq than its number of favs
-filter out anything with an id geq than its id
-"""
