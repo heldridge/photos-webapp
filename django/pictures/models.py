@@ -162,6 +162,7 @@ def get_pictures(
     favorited_by=None,
     uploaded_by=None,
     get_uploaded_by=False,
+    order=None,
 ):
     """Queries the database or elasticsearch for pictures
     Args:
@@ -174,6 +175,9 @@ def get_pictures(
             Limits pictures to only those favorited by the user
         get_uploaded_by (``bool``):
             Whether to pre-fetch the user that uploaded the image
+        order (``str``):
+            How to order the images returned. 
+            Possible values: 'most_recent', 'most_favorites'
 
     Returns:
         a ``QuerySet`` of pictures objects
