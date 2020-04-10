@@ -72,6 +72,7 @@
     --color-bg-alternate: #f7fafc;
     --opacity-message-close: 50%;
     --opacity-message-close-hover: 100%;
+    --color-bg-error-hover: #e25d5d;
 
     /* Messages */
     --color-bg-success: #aaf255;
@@ -125,6 +126,7 @@
     --color-bg-alternate: #1e1e1e;
     --opacity-message-close: 87%;
     --opacity-message-close-hover: 38%;
+    --color-bg-error-hover: #d87a8f;
 
     /* Messages */
     --color-bg-success: #c6f68d;
@@ -148,6 +150,16 @@
 
 .sort-order-box {
     top: 2.2rem;
+}
+
+.confirm-delete-box {
+    bottom: 2.5rem;
+    right: -7rem;
+}
+@media (min-width: 640px) {
+    .confirm-delete-box {
+        right: 0rem;
+    }
 }
 
 .upload-add-tag:hover span,
