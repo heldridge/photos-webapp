@@ -119,6 +119,7 @@ def get_shared_search_gallery_context(request, get_uploaded_by=False):
                 favorited_by=user,
                 uploaded_by=search_uploaded_by,
                 get_uploaded_by=get_uploaded_by,
+                order=search_order,
             )
         )
 
