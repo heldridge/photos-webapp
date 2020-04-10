@@ -36,6 +36,17 @@ if (addTagsButton !== null) {
     originalHREF = addTagsButton.href;
 }
 
+let orderDropdown = document.getElementById('order-dropdown');
+document.addEventListener('click', (event) => {
+    if (
+        //@ts-ignore
+        !orderDropdown.contains(event.target) &&
+        !hasClass(orderDropdown.lastElementChild, 'hidden')
+    ) {
+        addClass(orderDropdown.lastElementChild, 'hidden');
+    }
+});
+
 addTagsInputUpdated();
 
 function addTagsInputOnKeyUp(e: onKeyUpEvent) {
