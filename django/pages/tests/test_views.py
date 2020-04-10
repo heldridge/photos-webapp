@@ -66,7 +66,7 @@ class TestPagesLoad(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_search_with_tags(self):
-        response = self.client.get("/search?q=b")
+        response = self.client.get("/search?tags=b")
         self.assertEqual(response.status_code, 200)
 
     def test_search_with_before_after(self):

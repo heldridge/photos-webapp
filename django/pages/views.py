@@ -74,7 +74,7 @@ def get_shared_search_gallery_context(request, get_uploaded_by=False):
     # Filter out invalid tags
     # Use SET to make all unique
     # cast as a list because easier to use
-    searched_tags = list(set(filter(is_valid_tag, request.GET.get("q", "").split())))
+    searched_tags = list(set(filter(is_valid_tag, request.GET.get("tags", "").split())))
 
     searched_tags_data = []
     for tag in searched_tags:
@@ -144,7 +144,7 @@ def get_shared_search_gallery_context(request, get_uploaded_by=False):
         "grid_placeholders": [1] * (18 - len(pictures[: settings.PAGE_SIZE])),
         "render_next_button": render_next_button,
         "render_previous_button": render_previous_button,
-        "q": "+".join(searched_tags),
+        "tags": "+".join(searched_tags),
         "before_id": before_id,
         "after_id": after_id,
         "favorites": search_favorites == "true",
