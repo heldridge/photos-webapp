@@ -9,7 +9,6 @@ let validTagRegex = validTagRegexOutside;
 
 // @ts-ignore
 let baseFavoritesQuery = baseFavoritesQueryOutside;
-console.log(baseFavoritesQuery);
 
 let addTagsIconEnabledClasses = ['text-black'];
 let addTagsIconDisabledClass = 'opacity-disabled';
