@@ -5,7 +5,7 @@
     <div class="w-picture-card">
 
         <a 
-            href="{% url 'gallery' %}?p={{ picture.public_id }}&q={{ q }}{% if before_id %}&before={{ before_id }}{% endif %}{% if after_id %}&after={{ after_id }}{% endif %}{% if favorites %}&favorites=true{% endif %}{% if search_uploaded_by %}&uploaded_by={{ search_uploaded_by }}{% endif %}"
+            href="{% url 'gallery' %}?p={{ picture.public_id }}&tags={{ tags }}{% if before_id %}&before={{ before_id }}{% endif %}{% if after_id %}&after={{ after_id }}{% endif %}{% if favorites %}&favorites=true{% endif %}{% if search_uploaded_by %}&uploaded_by={{ search_uploaded_by }}{% endif %}"
         >
             <div class="h-picture-card bg-surface-1 border-image-card rounded-lg overflow-hidden shadow link-image">
                 <img class="object-cover" src="{{ picture.thumbnail }}" alt="">
@@ -20,14 +20,14 @@
             {% with split_tags=picture.split_tags %}
 
             {% for tag in split_tags.above_tags %}
-            <a href="{% url 'search'%}?q={{ tag }}" class="tag rounded py-1 px-2 text-xs mr-2 font-medium mb-2 bg-tag hover:bg-tag-hover text-tag hover:text-tag-hover">
+            <a href="{% url 'search'%}?tags={{ tag }}" class="tag rounded py-1 px-2 text-xs mr-2 font-medium mb-2 bg-tag hover:bg-tag-hover text-tag hover:text-tag-hover">
                 <span class="opacity-medium-emphasis">{{ tag }}</span>
             </a>
             {% endfor %}
             {% if picture.split_tags.below_tags %}
             {% for tag in split_tags.below_tags %}
 
-            <a href="{% url 'search'%}?q={{ tag }}" class="tag rounded py-1 px-2 text-xs mr-2 font-medium mb-2 collapsed-tag bg-tag hover:bg-tag-hover text-tag hover:text-tag-hover hidden">
+            <a href="{% url 'search'%}?tags={{ tag }}" class="tag rounded py-1 px-2 text-xs mr-2 font-medium mb-2 collapsed-tag bg-tag hover:bg-tag-hover text-tag hover:text-tag-hover hidden">
                 <span class="opacity-medium-emphasis">{{ tag }}</span>
             </a>
             {% endfor %}

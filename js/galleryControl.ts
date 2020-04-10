@@ -132,7 +132,7 @@ function setImage(index: number, stateAction: string = '') {
         currentIndex = index;
 
         // TODO: Iterate over url params instead of building individually
-        let query = getUrlParameter('q');
+        let tags = getUrlParameter('tags');
         let after = getUrlParameter('after');
         let before = getUrlParameter('before');
         let favorites = getUrlParameter('favorites');
@@ -140,8 +140,8 @@ function setImage(index: number, stateAction: string = '') {
 
         if (stateAction) {
             let newState = `?p=${pictures[index].public_id}`;
-            if (query) {
-                newState += `&q=${query}`;
+            if (tags) {
+                newState += `&tags=${tags}`;
             }
             if (after) {
                 newState += `&after=${after}`;
@@ -218,7 +218,7 @@ function updateNextPrevActions(index: number): void {
     }
 }
 
-window.onpopstate = function(event: PopStateEvent) {
+window.onpopstate = function (event: PopStateEvent) {
     if (event.state) {
         setImage(event.state.index);
     }
@@ -232,7 +232,7 @@ function hideModalImage() {
     addClass(modalImage, 'hidden');
 }
 
-document.onkeyup = function(event) {
+document.onkeyup = function (event) {
     if (event.code === 'ArrowLeft') {
         previousPicture();
     } else if (event.code === 'ArrowRight') {
@@ -247,7 +247,7 @@ document.onkeyup = function(event) {
 };
 
 function preloadImages() {
-    pictures.forEach(picture => {
+    pictures.forEach((picture) => {
         let newImg = new Image();
         newImg.src = `${mediaPrefix}/media/${picture.photo}`;
         preloadedImages[picture.public_id] = newImg;
@@ -258,7 +258,7 @@ function addTag(parent: HTMLDivElement, tag: string) {
     let tagAnchor = document.createElement('a');
     tagAnchor.className =
         'tag rounded py-1 md:py-2 px-2 md:px-3 mr-3 font-medium mb-3 text-xs md:text-md bg-tag hover:bg-tag-hover text-tag hover:text-tag-hover';
-    tagAnchor.href = `/search?q=${tag}`;
+    tagAnchor.href = `/search?tags=${tag}`;
 
     let tagSpan = document.createElement('span');
     tagSpan.className = 'opacity-medium-emphasis';
