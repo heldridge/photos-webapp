@@ -1,5 +1,5 @@
 // @ts-ignore
-let currentQuery = currentQueryOutside;
+let searchedTags = searchedTagsOutside;
 // @ts-ignore
 let maxTagLength = maxTagLengthOutside;
 // @ts-ignore
@@ -56,7 +56,7 @@ function addTagsInputOnKeyUp(e: onKeyUpEvent) {
             if (valid.isValid) {
                 // Only change pages if tag is valid
                 let newHREF = originalHREF;
-                if (currentQuery !== '') {
+                if (searchedTags !== '') {
                     newHREF += '+';
                 }
                 newHREF += value;
@@ -97,7 +97,7 @@ function addTagsInputUpdated() {
         addClass(addTagsErrorMessage, 'hidden');
 
         let newHREF = originalHREF;
-        if (currentQuery !== '' && value !== '') {
+        if (searchedTags !== '' && value !== '') {
             newHREF += '+';
         }
         newHREF += value;
