@@ -13,7 +13,7 @@ from .forms import PictureUploadForm
 
 # Create your views here.
 def picture(request, picture_public_id):
-
+    render_delete_button = False
     try:
         target_picture = Picture.objects.select_related("uploaded_by").get(
             public_id=picture_public_id
@@ -31,6 +31,9 @@ def picture(request, picture_public_id):
             if favorites.count() > 0:
                 favorite = True
 
+            if target_picture.uploaded_by == request.user:
+                render_delete_button = True
+
         context = {
             "public_id": str(target_picture.public_id),
             "photo": target_picture.photo,
@@ -45,6 +48,7 @@ def picture(request, picture_public_id):
             "uploaded_by_display_name": str(target_picture.uploaded_by.display_name)
             if target_picture.uploaded_by is not None
             else None,
+            "render_delete_button": render_delete_button,
         }
     return render(request, "picture.html.j2", context)
 
