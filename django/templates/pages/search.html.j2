@@ -76,8 +76,8 @@
                 </h1>
 
                 <div class="hidden absolute w-40 rounded sort-order-box flex flex-col bg-surface-4 shadow-lg py-4">
-                    <span><a href="{% url 'search' %}?order=most_recent{% for name, value in main_qsp.items %}{% if name != 'order' and value %}&{{ name }}={{ value }}{% endif %}{% endfor %}" class="opacity-medium-emphasis hover:opacity-high-emphasis font-normal hover:font-medium">Most Recent</a></span>
-                    <span><a href="{% url 'search' %}?order=most_favorites{% for name, value in main_qsp.items %}{% if name != 'order' and value %}&{{ name }}={{ value }}{% endif %}{% endfor %}" class="opacity-medium-emphasis hover:opacity-high-emphasis font-normal hover:font-medium">Most Favorites</a></span>
+                    <a href="{% url 'search' %}?order=most_recent{% for name, value in main_qsp.items %}{% if name != 'order' and value %}&{{ name }}={{ value }}{% endif %}{% endfor %}" class="opacity-medium-emphasis hover:opacity-high-emphasis font-normal hover:font-medium">Most Recent</a>
+                    <a href="{% url 'search' %}?order=most_favorites{% for name, value in main_qsp.items %}{% if name != 'order' and value %}&{{ name }}={{ value }}{% endif %}{% endfor %}" class="opacity-medium-emphasis hover:opacity-high-emphasis font-normal hover:font-medium">Most Favorites</a>
                 </div>
             </button>
             
