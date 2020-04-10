@@ -73,6 +73,7 @@ module.exports = {
                 alternate: 'var(--color-bg-alternate)',
                 success: 'var(--color-bg-success)',
                 error: 'var(--color-bg-error)',
+                'error-hover': 'var(--color-bg-error-hover)',
             },
             borderColor: {
                 default: 'var(--color-border-default)',
