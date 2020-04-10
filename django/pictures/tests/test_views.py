@@ -77,3 +77,41 @@ class TestFavorites(TestCase):
         self.client.post(f"/pictures/{self.picture.public_id}/favorites/")
         self.client.delete(f"/pictures/{self.picture.public_id}/favorites/")
         self.assertTrue(len(Favorite.objects.all()) == 0)
+
+
+class TestPictureViewContent(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        cls.user = CustomUser.objects.create(email="test@example.com", password="test")
+        cls.user2 = CustomUser.objects.create(
+            email="test2@example.com", password="test2"
+        )
+        num_pictures = 1
+        for _ in range(num_pictures):
+            Picture.objects.create(
+                title="Test Title",
+                description="Desc",
+                tags="a b c d",
+                photo=SimpleUploadedFile(
+                    name="picture1.jpg",
+                    content=open("test_data/picture1.jpg", "rb").read(),
+                ),
+                uploaded_by=cls.user,
+            )
+
+    def test_no_delete_button_if_not_logged_in(self):
+        public_id = Picture.objects.all()[0].public_id
+        response = self.client.get(f"/pictures/{public_id}")
+        self.assertNotContains(response, "deleteButton")
+
+    def test_has_delete_when_logged_in(self):
+        self.client.force_login(self.user)
+        public_id = Picture.objects.all()[0].public_id
+        response = self.client.get(f"/pictures/{public_id}")
+        self.assertContains(response, "deleteButton")
+
+    def test_no_delete_if_not_uploader(self):
+        self.client.force_login(self.user2)
+        public_id = Picture.objects.all()[0].public_id
+        response = self.client.get(f"/pictures/{public_id}")
+        self.assertNotContains(response, "deleteButton")
