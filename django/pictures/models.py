@@ -226,11 +226,28 @@ def get_pictures(
     if before is not None:
         # For before we want to go "backwards," to get the pictures
         # closest in id to before_picture, so order by id (increasing)
-        query_set = list(query_set.filter(id__gt=before_picture.id).order_by("id"))
+        query_set = query_set.filter(id__gt=before_picture.id)
+        if order == "most_favorites":
+            query_set = query_set.annotate(models.Count("favorite")).order_by(
+                "favorite__count", "id"
+            )
+        else:
+            query_set = query_set.order_by("id")
     elif after is not None:
-        query_set = query_set.filter(id__lt=after_picture.id).order_by("-id")
+        query_set = query_set.filter(id__lt=after_picture.id)
+        if order == "most_favorites":
+            query_set = query_set.annotate(models.Count("favorite")).order_by(
+                "-favorite__count", "-id"
+            )
+        else:
+            query_set = query_set.order_by("-id")
     else:
-        query_set = query_set.order_by("-id")
+        if order == "most_favorites":
+            query_set = query_set.annotate(models.Count("favorite")).order_by(
+                "-favorite__count", "-id"
+            )
+        else:
+            query_set = query_set.order_by("-id")
 
     return query_set[:amount]
 
