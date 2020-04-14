@@ -15,6 +15,7 @@ class CustomUser(AbstractUser):
     public_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     email_confirmed = models.BooleanField(default=False)
     last_email_dates = ArrayField(models.DateField(blank=True), size=5, default=list)
+    last_upload_dates = ArrayField(models.DateField(blank=True), size=50, default=list)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
