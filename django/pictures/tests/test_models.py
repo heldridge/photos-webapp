@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.core.files.uploadedfile import SimpleUploadedFile
 
-from pictures.models import Picture, Favorite, get_pictures
+from pictures.models import Picture, Favorite, get_pictures, shorten_number
 from users.models import CustomUser
 
 
@@ -78,3 +78,39 @@ class TestGetPictures(TestCase):
         result = list(get_pictures(16, favorited_by=faved_by, order="most_favorites"))
         self.assertEqual([picture.title for picture in result], ["3", "5", "4", "1"])
 
+
+class TestShortenNumber(TestCase):
+    def test_no_change(self):
+        self.assertEqual(shorten_number(0), "0")
+        self.assertEqual(shorten_number(1), "1")
+        self.assertEqual(shorten_number(7), "7")
+        self.assertEqual(shorten_number(23), "23")
+        self.assertEqual(shorten_number(105), "105")
+        self.assertEqual(shorten_number(500), "500")
+        self.assertEqual(shorten_number(999), "999")
+
+    def test_four_digit(self):
+        self.assertEqual(shorten_number(1000), "1k")
+
+        self.assertEqual(shorten_number(1001), "1k")
+        self.assertEqual(shorten_number(1099), "1k")
+        self.assertEqual(shorten_number(1100), "1.1k")
+        self.assertEqual(shorten_number(1999), "1.9k")
+        self.assertEqual(shorten_number(2358), "2.3k")
+        self.assertEqual(shorten_number(7006), "7k")
+        self.assertEqual(shorten_number(9999), "9.9k")
+
+    def test_five_digit(self):
+        self.assertEqual(shorten_number(10000), "10k")
+        self.assertEqual(shorten_number(10050), "10k")
+        self.assertEqual(shorten_number(10099), "10k")
+        self.assertEqual(shorten_number(10100), "10.1k")
+        self.assertEqual(shorten_number(15699), "15.6k")
+        self.assertEqual(shorten_number(99999), "99.9k")
+
+    def test_larger_digits(self):
+        self.assertEqual(shorten_number(474621), "474k")
+        self.assertEqual(shorten_number(1875639), "1.8m")
+        self.assertEqual(shorten_number(74637299), "74.6m")
+        self.assertEqual(shorten_number(643029278), "643m")
+        self.assertEqual(shorten_number(76487439440), ">1b")

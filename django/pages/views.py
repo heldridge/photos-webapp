@@ -4,6 +4,7 @@ import json
 
 from django.conf import settings
 from django.core import exceptions
+from django.db import models
 from django.db.models import Q
 from django.shortcuts import render
 from django.utils.html import escape
@@ -50,12 +51,16 @@ def get_render_next_prev(before_picture, after_picture, more_left):
 def index(request):
     # Force query set evaluation because we do
     # a reverse to get the last element, after doing a slice
-    pictures = list(get_pictures(settings.PAGE_SIZE + 1))
+    pictures = list(
+        get_pictures(settings.PAGE_SIZE + 1).annotate(models.Count("favorite"))
+    )
 
     # Note: Bad performance is due to calling thumbnailer in template
 
     # thumbs = [str(get_thumbnail(picture.photo, '272')) for picture in pictures]
     # print(thumbs)
+
+    print([pic.favorite__count for pic in pictures])
 
     context = {
         "pictures": get_images_grid_context(pictures),
@@ -70,7 +75,9 @@ def index(request):
     return render(request, "pages/index.html.j2", context)
 
 
-def get_shared_search_gallery_context(request, get_uploaded_by=False):
+def get_shared_search_gallery_context(
+    request, get_uploaded_by=False, get_num_favs=False
+):
     # Filter out invalid tags
     # Use SET to make all unique
     # cast as a list because easier to use
@@ -120,6 +127,7 @@ def get_shared_search_gallery_context(request, get_uploaded_by=False):
                 uploaded_by=search_uploaded_by,
                 get_uploaded_by=get_uploaded_by,
                 order=search_order,
+                get_num_favs=get_num_favs,
             )
         )
 
@@ -167,7 +175,7 @@ def get_shared_search_gallery_context(request, get_uploaded_by=False):
 
 
 def search(request):
-    context = get_shared_search_gallery_context(request)
+    context = get_shared_search_gallery_context(request, get_num_favs=True)
 
     context["pictures"] = get_images_grid_context(context["pictures"])
 
