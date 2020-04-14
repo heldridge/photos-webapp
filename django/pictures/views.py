@@ -112,7 +112,6 @@ class Upload(View):
                 == 0
             ):
                 too_many_uploads = True
-        print(too_many_uploads)
         form = PictureUploadForm()
 
         return render(
