@@ -163,6 +163,7 @@ def get_pictures(
     uploaded_by=None,
     get_uploaded_by=False,
     order=None,
+    get_num_favs=False,
 ):
     """Queries the database or elasticsearch for pictures
     Args:
@@ -176,8 +177,10 @@ def get_pictures(
         get_uploaded_by (``bool``):
             Whether to pre-fetch the user that uploaded the image
         order (``str``):
-            How to order the images returned. 
+            How to order the images returned.
             Possible values: 'most_recent', 'most_favorites'
+        get_num_favs (``bool``):
+            Whether to annotate each picture with the number of favorites it has
 
     Returns:
         a ``QuerySet`` of pictures objects
@@ -209,7 +212,7 @@ def get_pictures(
 
     query_set = Picture.objects
 
-    if order == "most_favorites":
+    if order == "most_favorites" or get_num_favs:
         query_set = query_set.annotate(models.Count("favorite"))
 
     if get_uploaded_by:
@@ -285,6 +288,53 @@ def get_images_grid_context(pictures):
             "thumbnail": picture.thumbnail_w_272.url,
             "title": picture.title,
             "split_tags": picture.split_tags,
+            "num_favs": picture.favorite__count,
+            "shortened_favs": shorten_number(picture.favorite__count),
         }
         for picture in pictures[: settings.PAGE_SIZE]
     ]
+
+
+def shorten_number(number):
+    """Takes a large number and shortens it to a max of 4 characters.
+
+    e.g. 1 -> 1, 105 -> 105, 1000 -> 1k, 1099 -> 1k, 1400 -> 1.4k, etc.
+
+    Args:
+        number ``int``: The number to shorten
+
+    Returns:
+        ``str``: The shortened number
+    """
+    if number < 1000:
+        return str(number)
+    elif number < 10000:
+        number = str(number)
+        if number[1] == "0":
+            return f"{number[0]}k"
+        else:
+            return f"{number[0]}.{number[1]}k"
+    elif number < 100000:
+        number = str(number)
+        if number[2] == "0":
+            return f"{number[:2]}k"
+        else:
+            return f"{number[:2]}.{number[2]}k"
+    elif number < 1000000:
+        return f"{str(number)[:3]}k"
+    elif number < 10000000:
+        number = str(number)
+        if number[1] == "0":
+            return f"{number[0]}m"
+        else:
+            return f"{number[0]}.{number[1]}m"
+    elif number < 100000000:
+        number = str(number)
+        if number[2] == "0":
+            return f"{number[:2]}m"
+        else:
+            return f"{number[:2]}.{number[2]}m"
+    elif number < 1000000000:
+        return f"{str(number)[:3]}m"
+    else:
+        return ">1b"
