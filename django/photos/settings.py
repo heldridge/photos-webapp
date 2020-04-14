@@ -204,6 +204,7 @@ LOGOUT_REDIRECT_URL = "/"
 # Message Tags
 MESSAGE_TAGS = {
     messages.SUCCESS: "rounded bg-success text-black py-1 px-4 min-w-64 text-center mt-2 ml-2 z-10 text-lg original-message",
+    messages.ERROR: "rounded bg-error text-black py-1 px-4 min-w-64 text-center mt-2 ml-2 z-10 text-lg original-message",
 }
 
 INTERNAL_IPS = [
