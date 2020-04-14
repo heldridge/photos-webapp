@@ -27,7 +27,11 @@ def profile(request):
     context = {"favorites": True}
     if request.user.is_authenticated:
         pictures = list(
-            get_pictures(project_settings.PAGE_SIZE + 1, favorited_by=request.user)
+            get_pictures(
+                project_settings.PAGE_SIZE + 1,
+                favorited_by=request.user,
+                get_num_favs=True,
+            )
         )
         context["pictures"] = get_images_grid_context(pictures)
         context["more_left"] = len(pictures) >= project_settings.PAGE_SIZE + 1
@@ -75,7 +79,9 @@ def user(request, user_public_id):
         context["display_name"] = target.display_name
         context["search_uploaded_by"] = target.public_id
 
-        pictures = get_pictures(project_settings.PAGE_SIZE + 1, uploaded_by=target)
+        pictures = get_pictures(
+            project_settings.PAGE_SIZE + 1, uploaded_by=target, get_num_favs=True
+        )
 
         context["pictures"] = get_images_grid_context(pictures)
         context["more_left"] = len(pictures) >= project_settings.PAGE_SIZE + 1
