@@ -13,6 +13,13 @@
     </button>
 </div>
 {% csrf_token %}
+{% elif too_many_uploads %}
+<div class="flex flex-col items-center justify-center mt-10">
+    <span class="text-3xl text-primary opacity-high-emphasis">
+        You have reached the daily upload limit. Please wait 24 hours before attempting further uploads.
+    </span>
+
+</div>
 {% else %}
 
 <div class="flex justify-center">
