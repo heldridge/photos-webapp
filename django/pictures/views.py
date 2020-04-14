@@ -125,7 +125,10 @@ class Upload(View):
                     # The oldest upload is less than 24 hours old
                     messages.error(
                         request,
-                        "You have reached the daily upload limit, please wait 24 hours before attempting further uploads.",
+                        (
+                            "You have reached the daily upload limit. Please wait 24 "
+                            "hours before attempting further uploads."
+                        ),
                     )
                     return redirect("upload")
 
