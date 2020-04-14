@@ -1,3 +1,5 @@
+import datetime
+
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.http import HttpResponse
@@ -109,6 +111,24 @@ class Upload(View):
 
     def post(self, request):
         if request.user.is_authenticated and request.user.email_confirmed:
+            request.user.last_email_dates.insert(0, datetime.datetime.utcnow().date())
+            request.user.save()
+
+            if len(request.user.last_email_dates) > 50:
+                # The user has made at least 50 previous uploads
+
+                # We need to pop off the oldest request
+                oldest_upload = request.user.last_email_dates.pop()
+                request.user.save()
+
+                if (datetime.datetime.utcnow().date() - oldest_upload).days == 0:
+                    # The oldest upload is less than 24 hours old
+                    messages.error(
+                        request,
+                        "You have reached the daily upload limit, please wait 24 hours before attempting further uploads.",
+                    )
+                    return redirect("upload")
+
             form = PictureUploadForm(request.POST, request.FILES)
             if form.is_valid():
                 new_picture = form.save(commit=False)
