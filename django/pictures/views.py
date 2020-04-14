@@ -101,24 +101,40 @@ class Favorites(View):
 
 class Upload(View):
     def get(self, request):
+        too_many_uploads = False
+        if request.user.is_authenticated:
+            if (
+                len(request.user.last_upload_dates) >= settings.DAILY_UPLOAD_LIMIT
+                and (
+                    datetime.datetime.utcnow().date()
+                    - request.user.last_upload_dates[-1]
+                ).days
+                == 0
+            ):
+                too_many_uploads = True
+        print(too_many_uploads)
         form = PictureUploadForm()
 
         return render(
             request,
             "upload.html.j2",
-            {"form": form, "top_tags": Tag.objects.order_by("-count")[:6]},
+            {
+                "form": form,
+                "top_tags": Tag.objects.order_by("-count")[:6],
+                "too_many_uploads": too_many_uploads,
+            },
         )
 
     def post(self, request):
         if request.user.is_authenticated and request.user.email_confirmed:
-            request.user.last_email_dates.insert(0, datetime.datetime.utcnow().date())
+            request.user.last_upload_dates.insert(0, datetime.datetime.utcnow().date())
             request.user.save()
 
-            if len(request.user.last_email_dates) > 50:
-                # The user has made at least 50 previous uploads
+            if len(request.user.last_upload_dates) > settings.DAILY_UPLOAD_LIMIT:
+                # The user has made too many previous uploads
 
                 # We need to pop off the oldest request
-                oldest_upload = request.user.last_email_dates.pop()
+                oldest_upload = request.user.last_upload_dates.pop()
                 request.user.save()
 
                 if (datetime.datetime.utcnow().date() - oldest_upload).days == 0:

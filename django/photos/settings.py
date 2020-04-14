@@ -255,3 +255,5 @@ FORM_FIELD_ERROR_CLASSES = ["border-error"]
 # EMAIL_HOST_USER = ""
 # EMAIL_HOST_PASSWORD = ""
 EMAIL_BACKEND = "django_amazon_ses.EmailBackend"
+
+DAILY_UPLOAD_LIMIT = 50
