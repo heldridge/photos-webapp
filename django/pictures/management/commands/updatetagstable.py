@@ -9,9 +9,12 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
 
+        tags = set()
+
         counter = collections.Counter()
         for tags in [picture.tags for picture in Picture.objects.all()]:
             counter.update(tags.split())
+            tags.update(tags.split())
 
         progress = 0
         for title, count in dict(counter).items():
@@ -21,3 +24,7 @@ class Command(BaseCommand):
             progress += 1
             if progress % 50 == 0:
                 print(progress)
+
+        for tag in Tag.objects.all():
+            if tag.title not in tags:
+                tag.delete()
