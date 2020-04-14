@@ -60,8 +60,6 @@ def index(request):
     # thumbs = [str(get_thumbnail(picture.photo, '272')) for picture in pictures]
     # print(thumbs)
 
-    print([pic.favorite__count for pic in pictures])
-
     context = {
         "pictures": get_images_grid_context(pictures),
         "grid_placeholders": [1] * (18 - len(pictures[: settings.PAGE_SIZE])),
