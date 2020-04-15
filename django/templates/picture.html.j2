@@ -6,13 +6,13 @@
 
 {% if photo %}
 <div class="px-8 pt-4 pb-20 flex justify-center">
-    <div class="flex flex-col">
+    <div class="flex flex-col max-w-full">
         <img src="{{ photo.url }}" alt="{{ title }}" title="{{ title }}">
-        <div class="flex flex-col sm:flex-row sm:justify-between items-center">
+        <div class="flex flex-col sm:flex-row sm:justify-between items-center max-w-full">
             {% if uploaded_by_public_id %}
             <a 
                 href="{% url 'users' user_public_id=uploaded_by_public_id %}" 
-                class='opacity-medium-emphasis hover:opacity-50 text-xl sm:text-3xl'
+                class='opacity-medium-emphasis hover:opacity-50 text-xl sm:text-3xl break-words sm:w-1/5'
                 id='uploaded-by-link'
             >
                 {{ uploaded_by_display_name }}
@@ -21,12 +21,12 @@
             <a href="/" id='uploaded-by-link'></a>
             {% endif %}
 
-            <p class="text-3xl sm:text-5xl font-semibold opacity-high-emphasis break-all">
-                {{ title }}
-            </p>
+            <div class="text-3xl sm:text-5xl font-semibold opacity-high-emphasis sm:w-3/5 w-full flex justify-center">
+                <p class="break-words max-w-full">{{ title }}<p>
+            </div>
 
             
-            <div class="flex justify-between">
+            <div class="flex justify-end sm:w-1/5">
                 {% if render_delete_button %}
                 <div class="relative">
                 
