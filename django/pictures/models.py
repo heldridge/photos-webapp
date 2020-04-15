@@ -104,6 +104,7 @@ class Picture(models.Model):
 
         thumb_io = io.BytesIO()  # create a BytesIO object
 
+        im = im.convert("RGB")
         im.save(thumb_io, "JPEG", quality=85)  # save image to BytesIO object
 
         thumbnail = File(
