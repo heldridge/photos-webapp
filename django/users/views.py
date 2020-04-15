@@ -38,6 +38,7 @@ def profile(request):
         context["grid_placeholders"] = [1] * (
             18 - len(pictures[: project_settings.PAGE_SIZE])
         )
+        context["main_qsp"] = {"favorites": "true"}
     return render(request, "users/profile.html.j2", context=context)
 
 
@@ -69,6 +70,16 @@ def settings(request):
     return render(request, "users/settings.html.j2", {"form": f})
 
 
+# "main_qsp": {
+#             "tags": "+".join(searched_tags),
+#             "favorites": "true" if search_favorites == "true" else False,
+#             "uploaded_by": str(search_uploaded_by.public_id)
+#             if search_uploaded_by
+#             else None,
+#             "order": search_order,
+#         },
+
+
 def user(request, user_public_id):
     context = {}
     try:
@@ -88,6 +99,7 @@ def user(request, user_public_id):
         context["grid_placeholders"] = [1] * (
             18 - len(pictures[: project_settings.PAGE_SIZE])
         )
+        context["main_qsp"] = {"uploaded_by": str(target.public_id)}
 
     return render(request, "users/user.html.j2", context)
 
