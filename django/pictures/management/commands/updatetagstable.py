@@ -12,9 +12,9 @@ class Command(BaseCommand):
         tags = set()
 
         counter = collections.Counter()
-        for tags in [picture.tags for picture in Picture.objects.all()]:
-            counter.update(tags.split())
-            tags.update(tags.split())
+        for current_tags in [picture.tags for picture in Picture.objects.all()]:
+            counter.update(current_tags.split())
+            tags.update(current_tags.split())
 
         progress = 0
         for title, count in dict(counter).items():
