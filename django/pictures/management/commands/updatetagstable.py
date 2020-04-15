@@ -18,9 +18,10 @@ class Command(BaseCommand):
 
         progress = 0
         for title, count in dict(counter).items():
-            tag, _ = Tag.objects.get_or_create(title=title)
-            tag.count = count
-            tag.save()
+            if len(title) <= 20:
+                tag, _ = Tag.objects.get_or_create(title=title)
+                tag.count = count
+                tag.save()
             progress += 1
             if progress % 50 == 0:
                 print(progress)
