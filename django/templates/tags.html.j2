@@ -8,7 +8,16 @@
 
     <div class="flex justify-between w-full max-w-7xl px-10">
         <div class="w-2/12 border-2 border-default rounded px-5 flex flex-col py-3">
-            <h1 class="text-3xl text-primary">Tags!</h1>
+            <a href="{% url 'tags' %}" class="bg-tag hover:bg-tag-hover rounded py-2 px-3 text-primary opacity-high-emphasis text-xl mb-2 flex justify-center">All</a>
+
+            <div class="flex flex-wrap">
+            {% for char in 'abcdefghijklmnopqrstuvwxyz' %}
+                <a 
+                    href="{% url 'tags' %}?letter={{ char }}"
+                    class="bg-tag hover:bg-tag-hover rounded py-2 px-3 text-primary opacity-high-emphasis text-lg mr-2 mb-2">{{ char }}
+                </a>
+            {% endfor %}
+            </div>
         </div>
         <div class="w-9/12">
             <div class="flex flex-wrap">
