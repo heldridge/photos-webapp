@@ -177,14 +177,14 @@ class Upload(View):
 def tags(request):
     # order = request.GET.get("order", "most_used")
     # page = request.GET.get("page", 0)
-    letter = request.GET.get("letter")
+    letter = request.GET.get("letter", "")
 
     loaded_tags = Tag.objects.all().order_by("-count")
 
-    if letter is not None:
+    if letter:
         loaded_tags = loaded_tags.filter(title__startswith=letter)
     return render(
         request,
         "tags.html.j2",
-        context={"tags": loaded_tags[: settings.TAGS_PAGE_SIZE]},
+        context={"tags": loaded_tags[: settings.TAGS_PAGE_SIZE], "letter": letter},
     )

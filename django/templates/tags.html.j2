@@ -8,14 +8,25 @@
 
     <div class="flex justify-between w-full max-w-7xl px-10">
         <div class="w-2/12 border-2 border-default rounded px-5 flex flex-col py-3">
-            <a href="{% url 'tags' %}" class="bg-tag hover:bg-tag-hover rounded py-2 px-3 text-primary opacity-high-emphasis text-xl mb-2 flex justify-center">All</a>
+            <a 
+                href="{% url 'tags' %}" 
+                class="{% if letter != '' %}bg-tag hover:{% else %}font-semibold {% endif %}bg-tag-hover rounded py-2 px-3 text-primary opacity-high-emphasis text-xl mb-2 flex justify-center">
+                All
+            </a>
 
             <div class="flex flex-wrap">
             {% for char in 'abcdefghijklmnopqrstuvwxyz' %}
-                <a 
-                    href="{% url 'tags' %}?letter={{ char }}"
-                    class="bg-tag hover:bg-tag-hover rounded py-2 px-3 text-primary opacity-high-emphasis text-lg mr-2 mb-2">{{ char }}
-                </a>
+                {% if char == letter %}
+                    <a 
+                        href="{% url 'tags' %}?letter={{ char }}"
+                        class="bg-tag-hover rounded py-2 px-3 text-primary opacity-high-emphasis text-lg mr-2 mb-2 font-semibold">{{ char }}
+                    </a>
+                {% else %}
+                    <a 
+                        href="{% url 'tags' %}?letter={{ char }}"
+                        class="bg-tag hover:bg-tag-hover rounded py-2 px-3 text-primary opacity-high-emphasis text-lg mr-2 mb-2">{{ char }}
+                    </a>
+                {% endif %}
             {% endfor %}
             </div>
         </div>
@@ -26,6 +37,11 @@
                     <span class="opacity-medium-emphasis">{{ tag.title }}: {{ tag.count }}</span>
                 </a>
                 {% endfor %}
+
+                {% if not tags %}
+                    <p class='text-2xl md:text-3xl opacity-medium-emphasis ml-4 mt-10 md:mt-20'>No tags match the given criteria, try a different seach</p>
+                {% else %}
+                {% endif %}
             </div>
 
         </div>
