@@ -1,6 +1,7 @@
 # Django
 export DJANGO_SECRET_KEY=''
 export DJANGO_DEBUG=''
+export DJANGO_USE_SENTRY=''
 
 # Postgres
 export DJANGO_POSTGRES_PASSWORD=''
@@ -21,3 +22,4 @@ export DJANGO_AWS_S3_CUSTOM_DOMAIN=''
 # Email
 export DJANGO_EMAIL_HOST_USER=''
 export DJANGO_EMAIL_HOST_PASSWORD=''
+
