@@ -18,7 +18,6 @@ from pictures.models import (
     Tag,
 )
 from users.models import CustomUser
-from sorl.thumbnail import get_thumbnail
 
 
 def is_valid_tag(tag):
