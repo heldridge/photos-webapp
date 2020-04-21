@@ -39,6 +39,14 @@ class TestPagesLoad(TestCase):
         response = self.client.get(f"/pictures/bad")
         self.assertEqual(response.status_code, 200)
 
+    def test_tags(self):
+        response = self.client.get("/pictures/tags/")
+        self.assertEqual(response.status_code, 200)
+
+    def test_tags_letter(self):
+        response = self.client.get("/pictures/tags?letter=b")
+        self.assertEqual(response.status_code, 200)
+
 
 class TestFavorites(TestCase):
     @classmethod
