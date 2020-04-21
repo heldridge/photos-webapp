@@ -196,6 +196,9 @@ MAX_TAG_NUM = 50
 PAGE_SIZE = 16
 MAX_THEORETICAL_PAGE_SIZE_FOR_PLACEHOLDERS = 18
 
+# How many tags to put on a page
+TAGS_PAGE_SIZE = 50
+
 THUMBNAIL_SIZES = ["272"]
 
 # Custom User / Authentication
@@ -261,7 +264,8 @@ EMAIL_BACKEND = "django_amazon_ses.EmailBackend"
 DAILY_UPLOAD_LIMIT = 50
 
 # Sentry
-if os.environ["DJANGO_USE_SENTRY"]:
+if os.environ["DJANGO_USE_SENTRY"] == "TRUE":
+    print("wowee")
     sentry_sdk.init(
         dsn="https://ce30631eab1a498ba418df5ae7eca7ec@o381358.ingest.sentry.io/5208572",
         integrations=[DjangoIntegration()],
