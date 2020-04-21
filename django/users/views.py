@@ -20,7 +20,6 @@ from django.views import View
 from . import forms, models, tokens
 
 from pictures.models import Picture, get_pictures, get_images_grid_context
-from sorl.thumbnail import get_thumbnail
 
 
 def profile(request):

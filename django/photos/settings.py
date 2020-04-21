@@ -60,7 +60,6 @@ INSTALLED_APPS = [
     "django.contrib.postgres",
     "django.contrib.staticfiles",
     "storages",
-    "sorl.thumbnail",
     "users",
     "debug_toolbar",
     "template_timings_panel",
