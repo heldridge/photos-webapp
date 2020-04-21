@@ -9,6 +9,13 @@
           private: false
           
       tasks:
+        - name: Upload env file (not tracked in git)
+          copy:
+            src: gunicorn_env
+            dest: /home/django/gunicorn_env
+            owner: django
+            group: django
+
         - name: get timestamp from the system
           shell: "date --utc +%F_%H-%M-%S-%Z"
           register: timestamp
