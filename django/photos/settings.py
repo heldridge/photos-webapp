@@ -14,6 +14,9 @@ import os
 
 from django.contrib.messages import constants as messages
 
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -257,3 +260,13 @@ FORM_FIELD_ERROR_CLASSES = ["border-error"]
 EMAIL_BACKEND = "django_amazon_ses.EmailBackend"
 
 DAILY_UPLOAD_LIMIT = 50
+
+# Sentry
+if os.environ["DJANGO_USE_SENTRY"]:
+    sentry_sdk.init(
+        dsn="https://ce30631eab1a498ba418df5ae7eca7ec@o381358.ingest.sentry.io/5208572",
+        integrations=[DjangoIntegration()],
+        # If you wish to associate users to errors (assuming you are using
+        # django.contrib.auth) you may enable sending PII data.
+        send_default_pii=True,
+    )
