@@ -22,12 +22,6 @@ from django.contrib.auth import views
 import users
 
 
-def trigger_error(request):
-    import asdfjitne
-
-    return "abad"
-
-
 urlpatterns = [
     path("", include("pages.urls")),
     path("pictures/", include("pictures.urls")),
@@ -42,7 +36,6 @@ urlpatterns = [
     ),
     path("logout/", views.LogoutView.as_view(), name="logout"),
     path("accounts/", include("users.urls")),
-    path("sentry-debug/", trigger_error),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
