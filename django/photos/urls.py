@@ -38,7 +38,7 @@ urlpatterns = [
     path("logout/", views.LogoutView.as_view(), name="logout"),
     path("accounts/", include("users.urls")),
     path(
-        "g4coe94jrokt64o2avss46gp9uhjsv",
+        "g4coe94jrokt64o2avss46gp9uhjsv/",
         exports.ExportToDjangoView,
         name="prometheus-django-metrics",
     ),
