@@ -1,9 +1,10 @@
+import json
 import uuid
 
 from django.test import TestCase
 from django.core.files.uploadedfile import SimpleUploadedFile
 
-from pictures.models import Picture, Favorite
+from pictures.models import Picture, Favorite, Tag
 from users.models import CustomUser
 
 
@@ -45,6 +46,10 @@ class TestPagesLoad(TestCase):
 
     def test_tags_letter(self):
         response = self.client.get("/pictures/tags?letter=b")
+        self.assertEqual(response.status_code, 200)
+
+    def test_tags_page(self):
+        response = self.client.get("/pictures/tags?page=2")
         self.assertEqual(response.status_code, 200)
 
 
@@ -146,3 +151,38 @@ class TestPictureViewContent(TestCase):
         response = self.client.delete(f"/pictures/{public_id}")
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(Picture.objects.all()), 0)
+
+
+class TestTags(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        for i in range(201):
+            Tag.objects.create(title=str(i), count=-1 * i)
+
+    def test_tags_bad_page(self):
+        response = self.client.get("/pictures/tags?page=bad")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(json.loads(response.content)["tags"], [])
+        self.assertFalse(json.loads(response.content)["more_left"])
+
+    def test_offset(self):
+        response = self.client.get("/pictures/tags?page=2")
+        data = json.loads(response.content)
+        self.assertEqual(data["tags"][0]["title"], "50")
+        self.assertEqual(data["tags"][-1]["title"], "99")
+        self.assertTrue(data["more_left"])
+
+    def test_small_amount(self):
+        response = self.client.get("/pictures/tags?page=5")
+        self.assertEqual(json.loads(response.content)["tags"][0]["title"], "200")
+        self.assertFalse(json.loads(response.content)["more_left"])
+
+    def test_too_large(self):
+        response = self.client.get("/pictures/tags?page=10")
+        self.assertEqual(len(json.loads(response.content)["tags"]), 0)
+        self.assertFalse(json.loads(response.content)["more_left"])
+
+    def test_negative_page(self):
+        response = self.client.get("/pictures/tags?page=-1")
+        self.assertEqual(len(json.loads(response.content)["tags"]), 0)
+        self.assertFalse(json.loads(response.content)["more_left"])

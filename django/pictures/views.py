@@ -2,8 +2,9 @@ import datetime
 
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
+from django.utils.html import escape
 from django.views import View
 from psycopg2.errors import UniqueViolation
 from django.contrib import messages
@@ -178,22 +179,41 @@ def tags(request):
     # order = request.GET.get("order", "most_used")
     # page = request.GET.get("page", 0)
     letter = request.GET.get("letter", "")
-
     loaded_tags = Tag.objects.all().order_by("-count")
+
+    page = request.GET.get("page", 1)
+    try:
+        # Subtract 1 to work with 0 indexing
+        offset = (int(page) - 1) * settings.TAGS_PAGE_SIZE
+    except ValueError:
+        return JsonResponse({"tags": [], "more_left": False})
+
+    if offset < 0:
+        return JsonResponse({"tags": [], "more_left": False})
 
     if letter:
         loaded_tags = loaded_tags.filter(title__startswith=letter)
 
-    loaded_tags = list(loaded_tags[: settings.TAGS_PAGE_SIZE + 1])
-
+    loaded_tags = list(loaded_tags[offset : offset + settings.TAGS_PAGE_SIZE + 1])
     more_left = len(loaded_tags) == settings.TAGS_PAGE_SIZE + 1
 
-    return render(
-        request,
-        "tags.html.j2",
-        context={
-            "tags": loaded_tags[: settings.TAGS_PAGE_SIZE],
-            "letter": letter,
-            "more_left": more_left,
-        },
-    )
+    if offset > 0:
+        return JsonResponse(
+            {
+                "tags": [
+                    {"title": escape(tag.title), "count": tag.count}
+                    for tag in loaded_tags[: settings.TAGS_PAGE_SIZE]
+                ],
+                "more_left": more_left,
+            }
+        )
+    else:
+        return render(
+            request,
+            "tags.html.j2",
+            context={
+                "tags": loaded_tags[: settings.TAGS_PAGE_SIZE],
+                "letter": letter,
+                "more_left": more_left,
+            },
+        )
