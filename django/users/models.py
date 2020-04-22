@@ -7,8 +7,10 @@ from django.utils.translation import ugettext_lazy as _
 
 from .managers import CustomUserManager
 
+from django_prometheus.models import ExportModelOperationsMixin
 
-class CustomUser(AbstractUser):
+
+class CustomUser(ExportModelOperationsMixin("user"), AbstractUser):
     username = None
     email = models.EmailField(_("email address"), unique=True)
     display_name = models.CharField(max_length=30, default="Unknown")

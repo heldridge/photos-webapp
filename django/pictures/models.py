@@ -13,6 +13,7 @@ from django.core.files import File
 from django.core.validators import RegexValidator
 from django.utils.timezone import now
 
+from django_prometheus.models import ExportModelOperationsMixin
 from PIL import Image
 
 from users.models import CustomUser
@@ -42,7 +43,7 @@ def get_photo_upload_path(instance, filename):
 
 
 # Create your models here.
-class Picture(models.Model):
+class Picture(ExportModelOperationsMixin("picture"), models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField(blank=True)
     photo = models.ImageField(upload_to=get_photo_upload_path)
