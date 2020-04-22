@@ -29,6 +29,12 @@ dev_environment/.vagrant/
 
 secrets/*
 
+##############
+# Prometheus #
+##############
+
+**/prometheus/data/*
+
 ##########
 # PYTHON #
 ##########
