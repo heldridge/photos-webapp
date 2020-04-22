@@ -183,8 +183,17 @@ def tags(request):
 
     if letter:
         loaded_tags = loaded_tags.filter(title__startswith=letter)
+
+    loaded_tags = list(loaded_tags[: settings.TAGS_PAGE_SIZE + 1])
+
+    more_left = len(loaded_tags) == settings.TAGS_PAGE_SIZE + 1
+
     return render(
         request,
         "tags.html.j2",
-        context={"tags": loaded_tags[: settings.TAGS_PAGE_SIZE], "letter": letter},
+        context={
+            "tags": loaded_tags[: settings.TAGS_PAGE_SIZE],
+            "letter": letter,
+            "more_left": more_left,
+        },
     )
