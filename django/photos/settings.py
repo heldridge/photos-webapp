@@ -105,7 +105,7 @@ WSGI_APPLICATION = "photos.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
+        "ENGINE": "django_prometheus.db.backends.postgresql",
         "NAME": os.environ["DJANGO_DATABASE_NAME"],
         "USER": "django",
         "PASSWORD": os.environ["DJANGO_POSTGRES_PASSWORD"],
