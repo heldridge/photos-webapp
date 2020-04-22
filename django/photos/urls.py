@@ -19,8 +19,9 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views
 
-import users
+from django_prometheus import exports
 
+import users
 
 urlpatterns = [
     path("", include("pages.urls")),
@@ -36,6 +37,11 @@ urlpatterns = [
     ),
     path("logout/", views.LogoutView.as_view(), name="logout"),
     path("accounts/", include("users.urls")),
+    path(
+        "g4coe94jrokt64o2avss46gp9uhjsv",
+        exports.ExportToDjangoView,
+        name="prometheus-django-metrics",
+    ),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
