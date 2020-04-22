@@ -11,7 +11,7 @@ function processTailwind(cb) {
         .pipe(
             postcss([
                 tailwindcss('./tailwind.config.js'),
-                require('autoprefixer')
+                require('autoprefixer'),
             ])
         )
         .pipe(cleanCSS())
@@ -27,17 +27,17 @@ function processJavascript(cb) {
     default_files = [
         'js/navbarControl.ts',
         'js/classUtils.ts',
-        'js/messagesControl.ts'
+        'js/messagesControl.ts',
     ];
 
     const jsFiles = [
         {
             outputFileName: 'basic.js',
-            files: default_files
+            files: default_files,
         },
         {
             outputFileName: 'basic_grid.js',
-            files: [...default_files, 'js/tagsControl.ts']
+            files: [...default_files, 'js/tagsControl.ts'],
         },
         {
             outputFileName: 'search.js',
@@ -46,8 +46,8 @@ function processJavascript(cb) {
                 'js/imagesGridFooterControl.ts',
                 'js/tagsControl.ts',
                 'js/searchSideBarControl.ts',
-                'js/getUrlParameter.ts'
-            ]
+                'js/getUrlParameter.ts',
+            ],
         },
         {
             outputFileName: 'gallery.js',
@@ -56,8 +56,8 @@ function processJavascript(cb) {
                 'js/galleryControl.ts',
                 'js/getUrlParameter.ts',
                 'js/removeChildren.ts',
-                'js/favoriteButton.ts'
-            ]
+                'js/favoriteButton.ts',
+            ],
         },
         {
             outputFileName: 'picture.js',
@@ -65,16 +65,16 @@ function processJavascript(cb) {
                 ...default_files,
                 'js/picture.ts',
                 'js/removeChildren.ts',
-                'js/favoriteButton.ts'
-            ]
+                'js/favoriteButton.ts',
+            ],
         },
         {
             outputFileName: 'login.js',
-            files: [...default_files, 'js/loginControl.ts']
+            files: [...default_files, 'js/loginControl.ts'],
         },
         {
             outputFileName: 'register.js',
-            files: [...default_files, 'js/formsControl.ts']
+            files: [...default_files, 'js/formsControl.ts'],
         },
         {
             outputFileName: 'upload.js',
@@ -82,24 +82,28 @@ function processJavascript(cb) {
                 ...default_files,
                 'js/formsControl.ts',
                 'js/emailConfirmationButton.ts',
-                'js/upload.ts'
-            ]
+                'js/upload.ts',
+            ],
         },
         {
             outputFileName: 'profile.js',
             files: [
                 ...default_files,
                 'js/tagsControl.ts',
-                'js/emailConfirmationButton.ts'
-            ]
+                'js/emailConfirmationButton.ts',
+            ],
         },
         {
             outputFileName: 'settings.js',
-            files: [...default_files, 'js/emailConfirmationButton.ts']
-        }
+            files: [...default_files, 'js/emailConfirmationButton.ts'],
+        },
+        {
+            outputFileName: 'tagsPage.js',
+            files: [...default_files, 'js/tagsPage.ts'],
+        },
     ];
 
-    let tasks = jsFiles.map(data =>
+    let tasks = jsFiles.map((data) =>
         gulp
             .src(data.files)
             .pipe(ts())
@@ -113,7 +117,7 @@ function processJavascript(cb) {
 
 // exports.default = series(processTailwind, processJavascript);
 
-exports.default = function() {
+exports.default = function () {
     watch('css/*.css', processTailwind);
     watch('tailwind.config.js', processTailwind);
     watch('js/*.ts', processJavascript);
