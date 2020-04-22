@@ -13,6 +13,12 @@
         <span class="opacity-medium-emphasis">{{ tag.title }}: {{ tag.count }}</span>
       </a>
     {% endfor %}
+    {% if top_tags %}
+    <a href="{% url 'tags' %}" class="bg-basic hover:bg-basic-hover rounded py-2 pl-3 pr-4 text mr-3 text-lg mb-3 text-black">
+      See More
+      <i class="fas fa-arrow-right pl-2"></i>
+    </a>
+    {% endif %}
   </div>
 
   <h1 class="text-5xl font-semibold py-4 opacity-high-emphasis">Latest Uploads</h1>
