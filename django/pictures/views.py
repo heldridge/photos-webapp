@@ -13,6 +13,8 @@ from django.shortcuts import render, redirect
 from pictures.models import Picture, Favorite, Tag
 from .forms import PictureUploadForm
 
+import time
+
 
 class PictureView(View):
     def get(self, request, picture_public_id):
@@ -198,6 +200,7 @@ def tags(request):
     more_left = len(loaded_tags) == settings.TAGS_PAGE_SIZE + 1
 
     if offset > 0:
+        time.sleep(2)
         return JsonResponse(
             {
                 "tags": [

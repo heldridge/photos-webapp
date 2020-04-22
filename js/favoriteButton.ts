@@ -16,13 +16,13 @@ function addFavorite(
     )).value;
 
     let request = new Request(`/pictures/${picturePublicId}/favorites/`, {
-        headers: { 'X-CSRFToken': csrftoken }
+        headers: { 'X-CSRFToken': csrftoken },
     });
 
     fetch(request, {
         method: 'POST',
-        mode: 'same-origin'
-    }).then(response => {
+        mode: 'same-origin',
+    }).then((response) => {
         removeChildren(source);
         removeClass(source, 'pointer-events-none');
         let emptyHeartIcon = document.createElement('i');
@@ -60,13 +60,13 @@ function removeFavorite(
     )).value;
 
     let request = new Request(`/pictures/${picturePublicId}/favorites/`, {
-        headers: { 'X-CSRFToken': csrftoken }
+        headers: { 'X-CSRFToken': csrftoken },
     });
 
     fetch(request, {
         method: 'DELETE',
-        mode: 'same-origin'
-    }).then(response => {
+        mode: 'same-origin',
+    }).then((response) => {
         removeChildren(source);
         removeClass(source, 'pointer-events-none');
         let fullHeartIcon = document.createElement('i');
