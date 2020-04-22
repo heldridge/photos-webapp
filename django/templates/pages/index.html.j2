@@ -7,7 +7,7 @@
 
   <h1 class="text-5xl font-semibold py-4 opacity-high-emphasis">Popular Tags</h1>
 
-  <div class="flex flex-row flex-wrap mb-5 mt-3 px-4">
+  <div class="flex flex-row flex-wrap mb-5 mt-3 px-4 mx-20">
     {% for tag in top_tags %}
       <a href="{% url 'search' %}?tags={{ tag.title }}" class="tag bg-gray-300 hover:bg-gray-400 rounded py-2 px-3 text mr-3 font-medium text-lg mb-3 bg-tag hover:bg-tag-hover text-tag hover:text-tag-hover">
         <span class="opacity-medium-emphasis">{{ tag.title }}: {{ tag.count }}</span>
