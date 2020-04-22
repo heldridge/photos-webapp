@@ -12,4 +12,4 @@ scrape_configs:
   - job_name: "django"
     metrics_path: "/g4coe94jrokt64o2avss46gp9uhjsv"
     static_configs:
-    - targets: ["localhost:8000"]
+    - targets: ["lewdix.com"]
