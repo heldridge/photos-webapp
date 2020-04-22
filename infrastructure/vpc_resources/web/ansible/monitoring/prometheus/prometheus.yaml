@@ -13,4 +13,4 @@ scrape_configs:
     metrics_path: "/g4coe94jrokt64o2avss46gp9uhjsv"
     static_configs:
     - targets:
-      - host.docker.internal
+      - lewdix.com
