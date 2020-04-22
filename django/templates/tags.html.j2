@@ -7,27 +7,29 @@
 <div class="flex flex-col items-center my-10">
 
     <div class="flex justify-between w-full max-w-7xl px-10">
-        <div class="w-2/12 border-2 border-default rounded px-5 flex flex-col py-3">
-            <a 
-                href="{% url 'tags' %}" 
-                class="{% if letter != '' %}bg-tag hover:{% else %}font-semibold {% endif %}bg-tag-hover rounded py-2 px-3 text-primary opacity-high-emphasis text-xl mb-2 flex justify-center">
-                All
-            </a>
+        <div class="w-2/12">
+            <div class="border-2 border-default rounded px-5 flex flex-col py-3">
+                <a 
+                    href="{% url 'tags' %}" 
+                    class="{% if letter != '' %}bg-tag hover:{% else %}font-semibold {% endif %}bg-tag-hover rounded py-2 px-3 text-primary opacity-high-emphasis text-xl mb-2 flex justify-center">
+                    All
+                </a>
 
-            <div class="flex flex-wrap">
-                {% for char in 'abcdefghijklmnopqrstuvwxyz' %}
-                {% if char == letter %}
-                <a 
-                    href="{% url 'tags' %}?letter={{ char }}"
-                    class="bg-tag-hover rounded py-2 px-3 text-primary opacity-high-emphasis text-lg mr-2 mb-2 font-semibold">{{ char }}
-                </a>
-                {% else %}
-                <a 
-                    href="{% url 'tags' %}?letter={{ char }}"
-                    class="bg-tag hover:bg-tag-hover rounded py-2 px-3 text-primary opacity-high-emphasis text-lg mr-2 mb-2">{{ char }}
-                </a>
-                {% endif %}
-                {% endfor %}
+                <div class="flex flex-wrap">
+                    {% for char in 'abcdefghijklmnopqrstuvwxyz' %}
+                    {% if char == letter %}
+                    <a 
+                        href="{% url 'tags' %}?letter={{ char }}"
+                        class="bg-tag-hover rounded py-2 px-3 text-primary opacity-high-emphasis text-lg mr-2 mb-2 font-semibold">{{ char }}
+                    </a>
+                    {% else %}
+                    <a 
+                        href="{% url 'tags' %}?letter={{ char }}"
+                        class="bg-tag hover:bg-tag-hover rounded py-2 px-3 text-primary opacity-high-emphasis text-lg mr-2 mb-2">{{ char }}
+                    </a>
+                    {% endif %}
+                    {% endfor %}
+                </div>
             </div>
         </div>
         <div class="w-9/12 flex flex-col">
