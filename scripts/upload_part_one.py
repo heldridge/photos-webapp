@@ -21,6 +21,11 @@ parser.add_argument(
     default="out.json",
     help="Where to output the json for upload_part_two",
 )
+parser.add_argument(
+    "--filename_attr",
+    default="filename",
+    help="The json attribute with the picture's filename",
+)
 args = parser.parse_args()
 
 
@@ -46,9 +51,9 @@ for index, picture in enumerate(data):
         print(index)
 
     public_id = str(uuid.uuid4())
-    extension = os.path.splitext(picture["filename"])[1]
+    extension = os.path.splitext(picture[args.filename_att])[1]
 
-    im = Image.open(os.path.join(args.images_dir, picture["filename"]))
+    im = Image.open(os.path.join(args.images_dir, picture[args.filename_att]))
     _, original_height = im.size
 
     im.thumbnail((272, original_height))
@@ -60,7 +65,7 @@ for index, picture in enumerate(data):
 
     if not args.dry_run:
         bucket.upload_file(
-            os.path.join(args.images_dir, picture["filename"]),
+            os.path.join(args.images_dir, picture[args.filename_att]),
             "media/" + path_start + public_id + extension,
         )
         bucket.upload_file(
@@ -71,7 +76,7 @@ for index, picture in enumerate(data):
     picture["public_id"] = public_id
     picture["photo"] = path_start + public_id + extension
     picture["thumbnail_w_272"] = path_start_thumb + public_id + extension
-    del picture["filename"]
+    del picture[args.filename_att]
 
 with open(args.output_file, "w+") as outfile:
     json.dump(data, outfile, indent=2)
