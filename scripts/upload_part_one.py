@@ -51,9 +51,9 @@ for index, picture in enumerate(data):
         print(index)
 
     public_id = str(uuid.uuid4())
-    extension = os.path.splitext(picture[args.filename_att])[1]
+    extension = os.path.splitext(picture[args.filename_attr])[1]
 
-    im = Image.open(os.path.join(args.images_dir, picture[args.filename_att]))
+    im = Image.open(os.path.join(args.images_dir, picture[args.filename_attr]))
     _, original_height = im.size
 
     im.thumbnail((272, original_height))
@@ -65,7 +65,7 @@ for index, picture in enumerate(data):
 
     if not args.dry_run:
         bucket.upload_file(
-            os.path.join(args.images_dir, picture[args.filename_att]),
+            os.path.join(args.images_dir, picture[args.filename_attr]),
             "media/" + path_start + public_id + extension,
         )
         bucket.upload_file(
@@ -76,7 +76,7 @@ for index, picture in enumerate(data):
     picture["public_id"] = public_id
     picture["photo"] = path_start + public_id + extension
     picture["thumbnail_w_272"] = path_start_thumb + public_id + extension
-    del picture[args.filename_att]
+    del picture[args.filename_attr]
 
 with open(args.output_file, "w+") as outfile:
     json.dump(data, outfile, indent=2)
